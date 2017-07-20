@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.wnd.iml" filepath="$PROJECT_DIR$/.wnd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WindowFun.API/WindowFun.API.iml" filepath="$PROJECT_DIR$/WindowFun.API/WindowFun.API.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WindowFun.Anim/WindowFun.Anim.iml" filepath="$PROJECT_DIR$/WindowFun.Anim/WindowFun.Anim.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WindowFun.App/WindowFun.App.iml" filepath="$PROJECT_DIR$/WindowFun.App/WindowFun.App.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WindowFun.Demo/WindowFun.Demo.iml" filepath="$PROJECT_DIR$/WindowFun.Demo/WindowFun.Demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WindowFun.Player/WindowFun.Player.iml" filepath="$PROJECT_DIR$/WindowFun.Player/WindowFun.Player.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WindowFun.Widget/WindowFun.Widget.iml" filepath="$PROJECT_DIR$/WindowFun.Widget/WindowFun.Widget.iml" />
+    </modules>
+  </component>
+</project>

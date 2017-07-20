@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ScrollView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <!--line-->
+            <!--<com.hanks.htextview.line.LineTextView-->
+            <!--android:id="@+id/text_line"-->
+            <!--style="@style/text_banner_layout"-->
+            <!--android:layout_width="200dp"-->
+            <!--android:layout_height="80dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_margin="8dp"-->
+            <!--android:background="#2f00"-->
+            <!--android:gravity="right|center_vertical"-->
+            <!--android:paddingRight="10dp"-->
+            <!--android:text="This is LineTextView\nToday is Monday"-->
+            <!--android:textSize="16sp"-->
+            <!--app:animationDuration="3000"-->
+            <!--app:lineColor="#fff"-->
+            <!--app:lineWidth="4dp"/>-->
+            <com.hanks.htextview.line.LineTextView
+                android:id="@+id/text_line"
+                style="@style/text_banner_layout"
+                android:text="This is line"
+                app:animationDuration="3000"
+                app:lineColor="#fff"
+                app:lineWidth="4dp"/>
+
+            <!--fade-->
+            <com.hanks.htextview.fade.FadeTextView
+                android:id="@+id/text_fade"
+                style="@style/text_banner_layout"
+                android:text="This is fade"
+                app:animationDuration="1500"/>
+
+            <!--typer-->
+            <com.hanks.htextview.typer.TyperTextView
+                android:id="@+id/text_typer"
+                style="@style/text_banner_layout"
+                android:text="This is typer"
+                app:charIncrease="3"
+                app:typerSpeed="80"/>
+
+            <!--rainbow-->
+            <com.hanks.htextview.rainbow.RainbowTextView
+                android:id="@+id/text_rainbow"
+                style="@style/text_banner_layout"
+                android:text="This is rainbow"
+                app:colorSpace="150dp"
+                app:colorSpeed="4dp"/>
+
+            <!--scale (single line)-->
+            <com.hanks.htextview.scale.ScaleTextView
+                android:id="@+id/text_scale"
+                style="@style/text_banner_layout"
+                android:text="This is scale (single line)"/>
+
+            <!--evaporate (single line)-->
+            <com.hanks.htextview.evaporate.EvaporateTextView
+                android:id="@+id/text_evaporate"
+                style="@style/text_banner_layout"
+                android:text="This is evaporate (single line)"/>
+
+            <!--fall (single line)-->
+            <com.hanks.htextview.fall.FallTextView
+                android:id="@+id/text_fall"
+                style="@style/text_banner_layout"
+                android:layout_height="240dp"
+                android:text="This is fall (single line)"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/close"
+        style="@style/action_button_layout"
+        android:layout_above="@+id/banner"
+        android:layout_margin="@dimen/floating_action_button_margin_small"
+        android:clickable="true"
+        android:tint="@android:color/white"
+        app:backgroundTint="@android:color/holo_red_dark"
+        app:fabSize="auto"
+        app:layout_anchor="@id/text"
+        app:layout_anchorGravity="top|right|end"
+        app:srcCompat="@drawable/ic_close"/>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,19 @@
+package kr.co.windowfun.widget;
+
+import android.net.Uri;
+
+/**
+ * Created by isyoon on 2017-07-19.
+ */
+
+interface _Content {
+    void open(Uri uri);
+    //void open();
+    void play();
+    void stop();
+    void rand();
+    void next();
+    void prev();
+    void pause();
+    void resume();
+}
