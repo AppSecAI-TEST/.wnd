@@ -218,7 +218,7 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Log.e(__CLASSNAME__, getMethodName() + ":" + VideoView2.this.index);
+            //Log.e(__CLASSNAME__, getMethodName() + ":" + VideoView2.this.index);
             open();
             play();
         }

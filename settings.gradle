@@ -1,1 +1,6 @@
-include ':WindowFun.Demo', ':WindowFun.Widget', ':WindowFun.App', ':WindowFun.Anim', ':WindowFun.API', ':WindowFun.Player'
+include ':WindowFun.API'
+include ':WindowFun.Anim'
+include ':WindowFun.App'
+include ':WindowFun.Widget'
+include ':WindowFun.Player'
+//include ':WindowFun.Demo'

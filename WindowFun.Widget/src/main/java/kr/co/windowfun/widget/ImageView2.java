@@ -5,6 +5,11 @@ import android.net.Uri;
 import android.util.AttributeSet;
 import android.util.Log;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.DownsampleStrategy;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -69,44 +74,61 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
     public void open(Uri uri) {
         //Log.e(__CLASSNAME__, getMethodName() + ":" + index + "(" + "w:" + getMeasuredWidth() + ", h:" + getMeasuredHeight() + ")" + uri);
         try {
-            //setDimensions(getWidth(), getHeight());
+            int w = getMeasuredWidth();
+            int h = getMeasuredHeight();
+            //square/picasso
+            //Picasso.with(getContext())
+            //        .load(uri)
+            //        .resize(getMeasuredWidth(), getMeasuredHeight())
+            //        .into(this);
+            //test
+            //Glide.get(getContext()).clearDiskCache();
+            //option
+            RequestOptions options = new RequestOptions()
+                    //.diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                    .override(getMeasuredWidth(), getMeasuredHeight())
+                    .lock();
             //if (uri.toString().contains((".gif"))) {
-            //    //bumptech/glide
-            //    GlideApp.with(getContext())
-            //            .load(uri)
-            //            .override(getMeasuredWidth(), getMeasuredHeight())
-            //            .into(this);
-            //} else {
-            //    //square/picasso
-            //    Picasso.with(getContext())
-            //            .load(uri)
-            //            .resize(getMeasuredWidth(), getMeasuredHeight())
-            //            .into(this);
+            //    Log.wtf(__CLASSNAME__, getMethodName() + ":" + index + "(" + "w:" + w + ", h:" + h + ")" + uri);
+            //    uri = Uri.parse(uri.toString() + "?w=" + w + "&h=" + h);
+            //    options.downsample(DownsampleStrategy.FIT_CENTER);
             //}
             //bumptech/glide
             GlideApp.with(getContext())
+                    .applyDefaultRequestOptions(options)
                     .load(uri)
-                    .override(getMeasuredWidth(), getMeasuredHeight())
                     .into(this);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void open() {
+        //Log.e(__CLASSNAME__, getMethodName() + ":" + this.index + ":" + this.path);
+        try {
+            if (ImageView2.this.index < ImageView2.this.path.size()) {
+                Uri uri = Uri.parse(path.get(index));
+                Log.w(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
+                open(uri);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private Runnable play = new Runnable() {
         @Override
         public void run() {
-            Uri uri = Uri.parse(path.get(index).toString());
-            //Log.w(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
-            open(uri);
             mHandler.removeCallbacks(rand);
-            int r = ImageView2.this.r.nextInt(5000 - 3000 + 1) + 3000;
-            if (uri.toString().contains((".gif"))) {
-                Log.wtf(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
-                r = 10000;
+            int r = ImageView2.this.r.nextInt(TIMER_JPG_LONG - TIMER_JPG_SHORT + 1) + TIMER_JPG_SHORT;
+            if (ImageView2.this.index < ImageView2.this.path.size()) {
+                Uri uri = Uri.parse(path.get(index));
+                if (uri.toString().contains((".gif"))) {
+                    //Log.wtf(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
+                    r = TIMER_GIF_SHORT;
+                    r = TIMER_GIF_LONG;
+                }
             }
             mHandler.postDelayed(rand, r);
         }
@@ -135,11 +157,16 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
             int min = 0;
             int max = path.size() - 1;
             int index = -1;
-            do {
-                index = r.nextInt(max - min) + min;
-            } while (index == ImageView2.this.index);
-            ImageView2.this.index = index;
-            ////Log.e(__CLASSNAME__, getMethodName() + ":" + index);
+            try {
+                if (ImageView2.this.index < ImageView2.this.path.size()) {
+                    index = r.nextInt(max - min) + min;
+                    ImageView2.this.index = index;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            //Log.e(__CLASSNAME__, getMethodName() + ":" + index);
+            open();
             play();
         }
     };
@@ -157,6 +184,7 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
                 index = path.size() - 1;
             }
             //Log.w(__CLASSNAME__, getMethodName() + ":" + index);
+            open();
             play();
         }
     };
@@ -174,6 +202,7 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
                 index = 0;
             }
             //Log.w(__CLASSNAME__, getMethodName() + ":" + index);
+            open();
             play();
         }
     };

@@ -12,6 +12,10 @@ public interface _TAG {
     //TIMER
     int TIMER_OPEN_SHORT = 100;
     int TIMER_OPEN_LONG = 1000;
+    int TIMER_JPG_SHORT = 3000;
+    int TIMER_JPG_LONG = 5000;
+    int TIMER_GIF_SHORT = 10000;
+    int TIMER_GIF_LONG = 30000;
 
     //JSON
     String _error_code = "error_code";

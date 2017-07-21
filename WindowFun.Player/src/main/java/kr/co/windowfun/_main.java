@@ -179,7 +179,7 @@ public class _main extends _Activity {
 
         menu.setMainMenu(ContextCompat.getColor(this, android.R.color.holo_red_dark),
                 R.drawable.wf_icon_menu,
-                R.drawable.ic_close_white_48dp)
+                R.drawable.wf_icon_close)
                 .setOnMenuSelectedListener(new OnMenuSelectedListener() {
 
                     @Override
