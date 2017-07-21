@@ -13,10 +13,6 @@ import android.widget.RelativeLayout;
  */
 
 public class ContentLayout extends RelativeLayout implements _Content, _TAG {
-    protected final int DELAY_TIME_OPEN = 100;
-
-    private Handler mHandler = new Handler();
-
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
 
