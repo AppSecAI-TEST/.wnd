@@ -1,16 +1,15 @@
 package kr.co.windowfun.widget;
 
 import android.content.Context;
-import android.os.Build;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
+import android.widget.RelativeLayout;
 
 /**
  * Created by isyoon on 2017-07-19.
  */
 
-class TextView extends android.support.v7.widget.AppCompatTextView {
+class TextView extends RelativeLayout implements _Listener {
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
 
@@ -45,5 +44,12 @@ class TextView extends android.support.v7.widget.AppCompatTextView {
         super(context, attrs, defStyleAttr);
         _CLASSNAME_ = this.getClass().getName();
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
+    }
+
+    ContentListener mContentListener;
+
+    @Override
+    public void set(ContentListener l) {
+        mContentListener = l;
     }
 }

@@ -7,7 +7,7 @@ import android.util.AttributeSet;
  * Created by isyoon on 2017-07-19.
  */
 
-class ImageView extends android.support.v7.widget.AppCompatImageView {
+class ImageView extends android.support.v7.widget.AppCompatImageView implements _Listener {
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
 
@@ -42,5 +42,11 @@ class ImageView extends android.support.v7.widget.AppCompatImageView {
         super(context, attrs, defStyleAttr);
         _CLASSNAME_ = this.getClass().getName();
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
+    }
+
+    ContentListener mContentListener;
+    @Override
+    public void set(ContentListener l) {
+        mContentListener = l;
     }
 }

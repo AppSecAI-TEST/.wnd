@@ -9,7 +9,7 @@ import android.util.AttributeSet;
  * Created by isyoon on 2017-07-19.
  */
 
-class VideoView extends android.widget.VideoView {
+class VideoView extends android.widget.VideoView implements _Listener {
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
 
@@ -52,5 +52,11 @@ class VideoView extends android.widget.VideoView {
         super(context, attrs, defStyleAttr, defStyleRes);
         _CLASSNAME_ = this.getClass().getName();
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
+    }
+
+    ContentListener mContentListener;
+    @Override
+    public void set(ContentListener l) {
+        mContentListener = l;
     }
 }

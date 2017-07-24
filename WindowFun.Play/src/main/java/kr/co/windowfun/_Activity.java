@@ -1,10 +1,10 @@
 package kr.co.windowfun;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.text.TextUtils;
+import android.os.Bundle;
+import android.os.Environment;
+import android.support.annotation.Nullable;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -17,11 +17,12 @@ import kr.co.windowfun.widget._TAG;
  */
 
 class _Activity extends Activity2 implements _TAG {
+    final String root = Environment.getExternalStorageDirectory().getAbsolutePath();
+    String root_mp4 = root + "/.mp4";
+
     String error_message;
     String error_code;
     String result_code;
-    String token;
-    String userid;
 
     @Override
     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -35,9 +36,9 @@ class _Activity extends Activity2 implements _TAG {
         error_code = getString(response, _error_code);
         result_code = getString(response, _result_code);
         //login data
-        token = getString(getJSONObject(response, _result_data), result_data.token);
-        userid = getString(getJSONObject(response, _result_data), result_data.userid);
-        //Toast.makeText(this, userid + ":" + token, Toast.LENGTH_SHORT).show();
+        getApp().token = getString(getJSONObject(response, _result_data), result_data.token);
+        getApp().userid = getString(getJSONObject(response, _result_data), result_data.userid);
+        //Toast.makeText(this, getApp().userid + ":" + getApp().token, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -54,25 +55,31 @@ class _Activity extends Activity2 implements _TAG {
         return (_Application) getApplication();
     }
 
-    private Runnable getToken = new Runnable() {
-        @Override
-        public void run() {
-            if (!isACTIONMAIN()) {
-                return;
-            }
-            SharedPreferences sharedPref = getSharedPreferences(getPackageName(), MODE_PRIVATE);
-            getApp().token = sharedPref.getString("token", null);
-            Log.d(__CLASSNAME__, getMethodName() + ":" + getApp().token);
-            if (TextUtils.isEmpty(getApp().token)) {
-                Log.wtf(__CLASSNAME__, getMethodName() + ":" + getApp().token);
-                login();
-            }
-        }
-    };
+    //private Runnable getLoginInfo = new Runnable() {
+    //    @Override
+    //    public void run() {
+    //        if (!isACTIONMAIN()) {
+    //            return;
+    //        }
+    //        getApp().getLoginInfo();
+    //        Log.d(__CLASSNAME__, getMethodName() + ":" + getApp().userid + ":" + getApp().token);
+    //        if (!getApp().isLogin()) {
+    //            Log.wtf(__CLASSNAME__, getMethodName() + ":" + getApp().token);
+    //            login();
+    //        }
+    //    }
+    //};
+    //
+    //protected void getLoginInfo() {
+    //    mHandler.removeCallbacks(getLoginInfo);
+    //    mHandler.postDelayed(getLoginInfo, TIMER_OPEN_LONG);
+    //}
 
-    protected void getToken() {
-        mHandler.removeCallbacks(getToken);
-        mHandler.postDelayed(getToken, TIMER_OPEN_LONG);
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getApp().getLoginInfo();
     }
 
     private Runnable login = new Runnable() {
@@ -86,40 +93,23 @@ class _Activity extends Activity2 implements _TAG {
 
     protected void login() {
         mHandler.removeCallbacks(login);
-        mHandler.postDelayed(login, TIMER_OPEN_SHORT);
+        mHandler.post(login);
     }
 
-
-    private Runnable setToken = new Runnable() {
+    private Runnable logout = new Runnable() {
         @Override
         public void run() {
             Log.d(__CLASSNAME__, getMethodName() + ":" + getApp().token);
-            SharedPreferences.Editor editor = getSharedPreferences(getPackageName(), MODE_PRIVATE).edit();
-            editor.putString("token", getApp().token);
-            editor.apply();
+            getApp().clearUserInfo();
+            showLogIn();
         }
     };
 
-    protected void setToken(String token) {
-        getApp().token = token;
-        mHandler.removeCallbacks(setToken);
-        mHandler.postDelayed(setToken, TIMER_OPEN_SHORT);
+    protected void logout() {
+        mHandler.removeCallbacks(logout);
+        mHandler.post(logout);
     }
 
-    protected void clearToken() {
-        setToken(null);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //test
-        getToken();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mHandler.removeCallbacks(getToken);
+    protected void showLogIn() {
     }
 }

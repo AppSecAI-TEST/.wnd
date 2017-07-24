@@ -9,7 +9,7 @@ import android.util.AttributeSet;
  * Created by isyoon on 2017-07-19.
  */
 
-class WebView extends android.webkit.WebView {
+class HtmlView extends android.webkit.WebView implements _Listener {
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
 
@@ -28,28 +28,35 @@ class WebView extends android.webkit.WebView {
         return ste[idx].toString();
     }
 
-    public WebView(Context context) {
+    public HtmlView(Context context) {
         super(context);
         _CLASSNAME_ = this.getClass().getName();
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
     }
 
-    public WebView(Context context, AttributeSet attrs) {
+    public HtmlView(Context context, AttributeSet attrs) {
         super(context, attrs);
         _CLASSNAME_ = this.getClass().getName();
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
     }
 
-    public WebView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public HtmlView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         _CLASSNAME_ = this.getClass().getName();
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public WebView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public HtmlView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         _CLASSNAME_ = this.getClass().getName();
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
+    }
+
+    ContentListener mContentListener;
+
+    @Override
+    public void set(ContentListener l) {
+        mContentListener = l;
     }
 }

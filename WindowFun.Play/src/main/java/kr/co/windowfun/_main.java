@@ -3,10 +3,8 @@ package kr.co.windowfun;
 import android.animation.Animator;
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
@@ -27,14 +25,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import kr.co.windowfun.widget.ContentLayout;
 import kr.co.windowfun.widget.ImageView2;
 import kr.co.windowfun.widget.TextView2;
 import kr.co.windowfun.widget.VideoView2;
 
 public class _main extends _Activity {
-    final String root = Environment.getExternalStorageDirectory().getAbsolutePath();
-    String root_mp4 = root + "/.mp4";
-
     protected ArrayList<TextView2> texts = new ArrayList<>();
     protected ArrayList<String> txt = new ArrayList<>();
     protected ArrayList<ImageView2> images = new ArrayList<>();
@@ -139,30 +135,57 @@ public class _main extends _Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        manus();
-    }
-
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
+        menus();
+        path();
         mHandler.postDelayed(init, TIMER_OPEN_SHORT);
     }
 
     private Runnable init = new Runnable() {
         @Override
         public void run() {
-            path();
             init();
         }
     };
 
     protected void init() {
+        content();
         videos();
         images();
         banner();
     }
 
-    private void manus() {
+    private void content() {
+        ((ContentLayout) findViewById(R.id.c1)).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                mHandler.post(showMenu);
+                return false;
+            }
+        });
+        ((ContentLayout) findViewById(R.id.c2)).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                mHandler.post(showMenu);
+                return false;
+            }
+        });
+        ((ContentLayout) findViewById(R.id.c3)).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                mHandler.post(showMenu);
+                return false;
+            }
+        });
+        ((ContentLayout) findViewById(R.id.c4)).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                mHandler.post(showMenu);
+                return false;
+            }
+        });
+    }
+
+    private void menus() {
         //isyoon:Hitomis/CircleMenu
         menu = (CircleMenu) findViewById(R.id.menu);
         ////Log.w(__CLASSNAME__, getMethodName() + "\t" + circleMenu);
@@ -243,59 +266,32 @@ public class _main extends _Activity {
         });
     }
 
+    protected void rand() {
+        for (final ImageView2 i : images) {
+            i.rand();
+        }
+        for (final VideoView2 v : videos) {
+            v.rand();
+        }
+    }
+
     private void images() {
         for (final ImageView2 i : images) {
             i.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View i, MotionEvent event) {
-                    //////Log.e(__CLASSNAME__, getMethodName() + ":" + i + "," + event);
-                    float w = i.getWidth();
-                    //float h = i.getHeight();
-                    float x = event.getX();
-                    //float y = event.getY();
-                    if (x < w / 2) {
-                        ((ImageView2) i).prev();
-                    } else if (x > w / 2) {
-                        ((ImageView2) i).next();
-                    }
-                    for (VideoView2 video : videos) {
-                        if (i == video) {
-                            video.mute(false);
-                        } else {
-                            video.mute(true);
-                        }
-                    }
                     mHandler.post(showMenu);
                     return false;
                 }
             });
-
-            i.rand();
         }
     }
 
     private void videos() {
         for (final VideoView2 v : videos) {
-            //리스너 등록
-            v.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    v.next();
-                }
-            });
             v.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    //////Log.e(__CLASSNAME__, getMethodName() + ":" + v + "," + event);
-                    float w = v.getWidth();
-                    //float h = v.getHeight();
-                    float x = event.getX();
-                    //float y = event.getY();
-                    if (x < w / 2) {
-                        ((VideoView2) v).prev();
-                    } else if (x > w / 2) {
-                        ((VideoView2) v).next();
-                    }
                     for (VideoView2 video : videos) {
                         if (v == video) {
                             video.mute(false);
@@ -307,8 +303,6 @@ public class _main extends _Activity {
                     return false;
                 }
             });
-
-            v.rand();
         }
     }
 

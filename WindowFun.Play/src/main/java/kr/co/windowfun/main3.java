@@ -48,5 +48,6 @@ public class main3 extends _main {
         images.add(((ImageView2) findViewById(R.id.c4).findViewById(R.id.image)).path(jpg));
 
         super.init();
+        rand();
     }
 }

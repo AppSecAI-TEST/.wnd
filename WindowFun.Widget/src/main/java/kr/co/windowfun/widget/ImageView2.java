@@ -4,10 +4,9 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.bitmap.DownsampleStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
@@ -70,6 +69,14 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
         return this;
     }
 
+    OnTouchListener mOnTouchListener;
+
+    @Override
+    public void setOnTouchListener(OnTouchListener l) {
+        super.setOnTouchListener(l);
+        mOnTouchListener = l;
+    }
+
     @Override
     public void open(Uri uri) {
         //Log.e(__CLASSNAME__, getMethodName() + ":" + index + "(" + "w:" + getMeasuredWidth() + ", h:" + getMeasuredHeight() + ")" + uri);
@@ -81,8 +88,7 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
             //        .load(uri)
             //        .resize(getMeasuredWidth(), getMeasuredHeight())
             //        .into(this);
-            //test
-            //Glide.get(getContext()).clearDiskCache();
+            //Glide.get(getContext()).clearDiskCache(); //test
             //option
             RequestOptions options = new RequestOptions()
                     //.diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
@@ -98,13 +104,33 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
                     .applyDefaultRequestOptions(options)
                     .load(uri)
                     .into(this);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
+        super.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                //Log.e(__CLASSNAME__, getMethodName() + ":" + v + "," + event);
+                float w = v.getWidth();
+                //float h = v.getHeight();
+                float x = event.getX();
+                //float y = event.getY();
+                if (x < w / 2) {
+                    /*((VideoView2) v).*/
+                    prev();
+                } else if (x > w / 2) {
+                    /*((VideoView2) v).*/
+                    next();
+                }
+                if (mOnTouchListener != null) {
+                    mOnTouchListener.onTouch(v, event);
+                }
+                return false;
+            }
+        });
     }
 
-    public void open() {
+    private void open() {
         //Log.e(__CLASSNAME__, getMethodName() + ":" + this.index + ":" + this.path);
         try {
             if (ImageView2.this.index < ImageView2.this.path.size()) {
@@ -117,10 +143,11 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
         }
     }
 
+    int length = -1;
     private Runnable play = new Runnable() {
         @Override
         public void run() {
-            mHandler.removeCallbacks(rand);
+            mHandler.removeCallbacks(call);
             int r = ImageView2.this.r.nextInt(TIMER_JPG_LONG - TIMER_JPG_SHORT + 1) + TIMER_JPG_SHORT;
             if (ImageView2.this.index < ImageView2.this.path.size()) {
                 Uri uri = Uri.parse(path.get(index));
@@ -130,13 +157,30 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
                     r = TIMER_GIF_LONG;
                 }
             }
-            mHandler.postDelayed(rand, r);
+            if (length < 0) {
+                length = r;
+            }
+            mHandler.postDelayed(call, length);
         }
     };
 
 
+    private Runnable call = new Runnable() {
+        @Override
+        public void run() {
+            if (mContentListener != null) mContentListener.onCompletion();
+        }
+    };
+
     @Override
     public void play() {
+        mHandler.removeCallbacks(play);
+        mHandler.postDelayed(play, TIMER_OPEN_SHORT);
+    }
+
+    @Override
+    public void play(int length) {
+        this.length = length;
         mHandler.removeCallbacks(play);
         mHandler.postDelayed(play, TIMER_OPEN_SHORT);
     }
@@ -171,6 +215,7 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
         }
     };
 
+    @Override
     public void rand() {
         mHandler.removeCallbacks(rand);
         mHandler.postDelayed(rand, TIMER_OPEN_SHORT);

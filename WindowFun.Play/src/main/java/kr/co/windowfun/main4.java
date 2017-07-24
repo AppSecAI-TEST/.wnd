@@ -1,18 +1,20 @@
 package kr.co.windowfun;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
-import kr.co.windowfun.widget.VideoView2;
+import kr.co.windowfun.widget.ContentLayout;
 
 /**
  * Created by isyoon on 2017-07-12.
  */
 
-public class main2 extends _main {
+public class main4 extends _main {
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        //Log.e(__CLASSNAME__, getMethodName());
         super.onCreate(savedInstanceState);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -22,11 +24,11 @@ public class main2 extends _main {
 
     @Override
     protected void init() {
-        videos.add(((VideoView2)findViewById(R.id.c1).findViewById(R.id.video)).path(mp4).mute(false));
-        videos.add(((VideoView2)findViewById(R.id.c2).findViewById(R.id.video)).path(mp4));
-        videos.add(((VideoView2)findViewById(R.id.c3).findViewById(R.id.video)).path(mp4));
-        videos.add(((VideoView2)findViewById(R.id.c4).findViewById(R.id.video)).path(mp4));
+        //Log.e(__CLASSNAME__, getMethodName());
         super.init();
-        rand();
+        ((ContentLayout)findViewById(R.id.c1)).setContents(getApp().result_c1);
+        ((ContentLayout)findViewById(R.id.c2)).setContents(getApp().result_c2);
+        ((ContentLayout)findViewById(R.id.c3)).setContents(getApp().result_c3);
+        ((ContentLayout)findViewById(R.id.c4)).setContents(getApp().result_c4);
     }
 }

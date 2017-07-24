@@ -10,6 +10,7 @@ interface _Content {
     void open(Uri uri);
     //void open();
     void play();
+    void play(int length);
     void stop();
     void rand();
     void next();

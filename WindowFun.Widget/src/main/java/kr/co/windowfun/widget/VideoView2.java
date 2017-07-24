@@ -7,6 +7,8 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -43,7 +45,7 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
 
     @Override
     public void setOnPreparedListener(MediaPlayer.OnPreparedListener l) {
-        super.setOnPreparedListener(l);
+        //super.setOnPreparedListener(l);
         mOnPreparedListener = l;
     }
 
@@ -51,7 +53,7 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
 
     @Override
     public void setOnCompletionListener(MediaPlayer.OnCompletionListener l) {
-        super.setOnCompletionListener(l);
+        //super.setOnCompletionListener(l);
         mOnCompletionListener = l;
     }
 
@@ -59,14 +61,16 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
 
     @Override
     public void setOnErrorListener(MediaPlayer.OnErrorListener l) {
-        //isyoon:기본ERROR처리
         //super.setOnErrorListener(l);
         mOnErrorListener = l;
     }
 
+    OnTouchListener mOnTouchListener;
+
     @Override
     public void setOnTouchListener(OnTouchListener l) {
         super.setOnTouchListener(l);
+        mOnTouchListener = l;
     }
 
     public boolean mute = true;
@@ -137,27 +141,61 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
 
     @Override
     public void open(final Uri uri) {
-        Log.e(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
+        //Log.e(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
         super.setVideoURI(uri);
         super.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
-                Log.e(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri + "\t" + VideoView2.this + ":" + what + "," + extra);
-                //Toast.makeText(getContext(), getMethodName() + ":" + mp + "," + what + "," + extra, Toast.LENGTH_SHORT).show();
+                Log.e(__CLASSNAME__, getMethodName() + "(" + what + "," + extra + ")" + ":" + index + ":" + uri + "\t" + VideoView2.this);
+                //Toast.makeText(getContext(), getMethodName() + "(" + what + "," + extra + ")" + extra, Toast.LENGTH_SHORT).show();
                 if (mOnErrorListener != null) {
                     mOnErrorListener.onError(mp, what, extra);
                 }
-                rand();
+                if (mContentListener != null) mContentListener.onError();
                 return true;
             }
         });
-        setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+        super.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
                 //Log.w(__CLASSNAME__, getMethodName() + ":" + ",w:" + getWidth() + ",h:" + getHeight());
                 setDimensions(getWidth(), getHeight());
                 VideoView2.this.mp = mp;
                 VideoView2.this.mute(VideoView2.this.mute);
+                if (mOnPreparedListener != null) {
+                    mOnPreparedListener.onPrepared(mp);
+                }
+                if (mContentListener != null) mContentListener.onPrepared();
+            }
+        });
+        super.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                if (mOnCompletionListener != null) {
+                    mOnCompletionListener.onCompletion(mp);
+                }
+                if (mContentListener != null) mContentListener.onCompletion();
+            }
+        });
+        super.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                //Log.e(__CLASSNAME__, getMethodName() + ":" + v + "," + event);
+                float w = v.getWidth();
+                //float h = v.getHeight();
+                float x = event.getX();
+                //float y = event.getY();
+                if (x < w / 2) {
+                    /*((VideoView2) v).*/
+                    prev();
+                } else if (x > w / 2) {
+                    /*((VideoView2) v).*/
+                    next();
+                }
+                if (mOnTouchListener != null) {
+                    mOnTouchListener.onTouch(v, event);
+                }
+                return false;
             }
         });
     }
@@ -167,7 +205,7 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
         try {
             if (VideoView2.this.index < VideoView2.this.path.size()) {
                 Uri uri = Uri.parse(path.get(index).toString());
-                Log.w(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
+                //Log.w(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
                 open(uri);
             }
         } catch (Exception e) {
@@ -190,6 +228,11 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
     public void play() {
         mHandler.removeCallbacks(play);
         mHandler.postDelayed(play, TIMER_OPEN_SHORT);
+    }
+
+    @Override
+    public void play(int length) {
+
     }
 
     @Override

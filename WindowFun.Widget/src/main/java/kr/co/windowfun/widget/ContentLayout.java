@@ -3,18 +3,27 @@ package kr.co.windowfun.widget;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Handler;
 import android.support.annotation.RequiresApi;
+import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.RelativeLayout;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.Random;
 
 /**
  * Created by isyoon on 2017-07-19.
  */
 
-public class ContentLayout extends RelativeLayout implements _Content, _TAG {
+public class ContentLayout extends RelativeLayout implements _Content, _TAG, ContentListener, View.OnTouchListener {
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
+    private JSONArray contents;
 
     protected String getMethodName() {
         ////Log.wtf(__CLASSNAME__, "[[getMethodName()]]");
@@ -56,46 +65,310 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG {
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
     }
 
-    @Override
-    public void open(Uri uri) {
+    private void showVideo() {
+        //Log.e(__CLASSNAME__,getMethodName());
+        ((VideoView2) findViewById(R.id.video)).setVisibility(View.VISIBLE);
+        ((ImageView2) findViewById(R.id.image)).setVisibility(View.INVISIBLE);
+        ((TextView2) findViewById(R.id.text)).setVisibility(View.INVISIBLE);
+        ((HtmlView2) findViewById(R.id.html)).setVisibility(View.INVISIBLE);
+    }
 
+    private void showImage() {
+        //Log.e(__CLASSNAME__,getMethodName());
+        ((VideoView2) findViewById(R.id.video)).setVisibility(View.INVISIBLE);
+        ((ImageView2) findViewById(R.id.image)).setVisibility(View.VISIBLE);
+        ((TextView2) findViewById(R.id.text)).setVisibility(View.INVISIBLE);
+        ((HtmlView2) findViewById(R.id.html)).setVisibility(View.INVISIBLE);
+    }
+
+    private void showText() {
+        //Log.e(__CLASSNAME__,getMethodName());
+        ((VideoView2) findViewById(R.id.video)).setVisibility(View.INVISIBLE);
+        ((ImageView2) findViewById(R.id.image)).setVisibility(View.INVISIBLE);
+        ((TextView2) findViewById(R.id.text)).setVisibility(View.VISIBLE);
+        ((HtmlView2) findViewById(R.id.html)).setVisibility(View.INVISIBLE);
+    }
+
+    private void showHtml() {
+        //Log.e(__CLASSNAME__,getMethodName());
+        ((VideoView2) findViewById(R.id.video)).setVisibility(View.INVISIBLE);
+        ((ImageView2) findViewById(R.id.image)).setVisibility(View.INVISIBLE);
+        ((TextView2) findViewById(R.id.text)).setVisibility(View.INVISIBLE);
+        ((HtmlView2) findViewById(R.id.html)).setVisibility(View.VISIBLE);
+    }
+
+    private void open() {
+        try {
+            Log.w(__CLASSNAME__, getMethodName() + ":" + this.index + "\n" + ((JSONObject) this.contents.get(index)).toString(2));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            if (ContentLayout.this.index < ContentLayout.this.contents.length()) {
+                String division = ((JSONObject) contents.get(index)).getString(result_c.division);
+                String title = ((JSONObject) contents.get(index)).getString(result_c.title);
+                String filename = ((JSONObject) contents.get(index)).getString(result_c.filename);
+                String contents_order = ((JSONObject) contents.get(index)).getString(result_c.contents_order);
+                Uri uri = Uri.parse(!TextUtils.isEmpty(filename) ? filename : title);
+                //Log.e(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri + "<-" + division + ":" + title + ":" + filename + ":" + contents_order);
+                open(uri);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void play() {
+    public void open(Uri uri) {
+        String url = uri.toString();
+        ((android.widget.TextView)findViewById(R.id.label)).setText(url);
+        try {
+            Log.wtf(__CLASSNAME__,getMethodName() + "[BF]" + url);
+            url = url.substring(0, url.lastIndexOf("/") + 1) + Uri.encode(url.substring(url.lastIndexOf("/") + 1)/*, "UTF-8"*/);
+            Log.wtf(__CLASSNAME__, getMethodName() + "[AF]" + url);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            String division = ((JSONObject) contents.get(index)).getString(result_c.division);
+            //Log.w(__CLASSNAME__,getMethodName() + ":" + division + ":" + url);
+            switch (division) {
+                case "T":
+                    showText();
+                    ((TextView2) findViewById(R.id.text)).open(uri);
+                    break;
+                case "I":
+                    showImage();
+                    ((ImageView2) findViewById(R.id.image)).open(Uri.parse(url));
+                    break;
+                case "M":
+                    showVideo();
+                    ((VideoView2) findViewById(R.id.video)).open(Uri.parse(url));
+                    break;
+                case "H":
+                    showHtml();
+                    ((HtmlView2) findViewById(R.id.html)).open(Uri.parse(url));
+                    break;
+                default:
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    private Runnable play = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                String division = ((JSONObject) contents.get(index)).getString(result_c.division);
+                String contents_order = ((JSONObject) contents.get(index)).getString(result_c.contents_order);
+                int length = Integer.parseInt(contents_order) * 1000;
+                //length /= 10; //test
+                //Log.e(__CLASSNAME__,getMethodName() + ":" + division);
+                switch (division) {
+                    case "T":
+                        showText();
+                        ((TextView2) findViewById(R.id.text)).play(length);
+                        break;
+                    case "I":
+                        showImage();
+                        ((ImageView2) findViewById(R.id.image)).play(length);
+                        break;
+                    case "M":
+                        showVideo();
+                        ((VideoView2) findViewById(R.id.video)).play();
+                        break;
+                    case "H":
+                        showHtml();
+                        ((HtmlView2) findViewById(R.id.html)).play();
+                        break;
+                    default:
+                        break;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+    @Override
+    public void play() {
+        mHandler.removeCallbacks(play);
+        mHandler.postDelayed(play, TIMER_OPEN_SHORT);
+    }
+
+    @Override
+    public void play(int length) {
     }
 
     @Override
     public void stop() {
-        //mHandler.removeCallbacks(play);
-        //mHandler.removeCallbacks(prev);
-        //mHandler.removeCallbacks(next);
-        //mHandler.removeCallbacks(rand);
+        mHandler.removeCallbacks(play);
+        mHandler.removeCallbacks(prev);
+        mHandler.removeCallbacks(next);
+        mHandler.removeCallbacks(rand);
     }
+
+    Random r = new Random();
+
+    private Runnable rand = new Runnable() {
+
+        @Override
+        public void run() {
+            int min = 0;
+            int max = contents.length() - 1;
+            int index = -1;
+            try {
+                if (ContentLayout.this.index < ContentLayout.this.contents.length()) {
+                    index = r.nextInt(max - min) + min;
+                    ContentLayout.this.index = index;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            //Log.e(__CLASSNAME__, getMethodName() + ":" + VideoView2.this.index);
+            open();
+            play();
+        }
+    };
 
     @Override
     public void rand() {
-
+        mHandler.removeCallbacks(rand);
+        mHandler.postDelayed(rand, TIMER_OPEN_SHORT);
     }
 
-    @Override
-    public void next() {
-
-    }
+    private Runnable prev = new Runnable() {
+        @Override
+        public void run() {
+            index--;
+            if (index < 0) {
+                index = contents.length() - 1;
+            }
+            //Log.w(__CLASSNAME__, getMethodName() + ":" + index);
+            open();
+            play();
+        }
+    };
 
     @Override
     public void prev() {
+        mHandler.removeCallbacks(prev);
+        mHandler.postDelayed(prev, TIMER_OPEN_SHORT);
+    }
 
+    private Runnable next = new Runnable() {
+        @Override
+        public void run() {
+            index++;
+            if (index > contents.length() - 1) {
+                index = 0;
+            }
+            //Log.w(__CLASSNAME__, getMethodName() + ":" + index);
+            open();
+            play();
+        }
+    };
+
+    @Override
+    public void next() {
+        mHandler.removeCallbacks(next);
+        mHandler.postDelayed(next, TIMER_OPEN_SHORT);
     }
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
+    }
 
+    protected String toString(JSONObject response, int indentSpaces) {
+        try {
+            return response.toString(indentSpaces);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    protected String toString(JSONArray response, int indentSpaces) {
+        try {
+            return response.toString(indentSpaces);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    int index = -1;
+
+    public void setContents(JSONArray contents) {
+        //Log.w(__CLASSNAME__, getMethodName() + "\n[contents]\n" + toString(contents, 2));
+        this.contents = contents;
+        index = 0;
+        //ContentListener
+        ((VideoView2) findViewById(R.id.video)).set(this);
+        ((ImageView2) findViewById(R.id.image)).set(this);
+        ((TextView2) findViewById(R.id.text)).set(this);
+        ((HtmlView2) findViewById(R.id.html)).set(this);
+        //OnTouchListener
+        ((VideoView2) findViewById(R.id.video)).setOnTouchListener(this);
+        ((ImageView2) findViewById(R.id.image)).setOnTouchListener(this);
+        ((TextView2) findViewById(R.id.text)).setOnTouchListener(this);
+        ((HtmlView2) findViewById(R.id.html)).setOnTouchListener(this);
+        //open();
+        //play();
+        rand(); //test
+    }
+
+
+    @Override
+    public void onPrepared() {
+        Log.e(__CLASSNAME__, getMethodName());
+    }
+
+    @Override
+    public void onError() {
+        Log.e(__CLASSNAME__, getMethodName());
+        //next();
+        rand(); //test
+    }
+
+    @Override
+    public void onCompletion() {
+        Log.e(__CLASSNAME__, getMethodName());
+        //next();
+        rand(); //test
+    }
+
+    OnTouchListener mOnTouchListener;
+
+    @Override
+    public void setOnTouchListener(OnTouchListener l) {
+        super.setOnTouchListener(l);
+        mOnTouchListener = l;
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        //Log.e(__CLASSNAME__, getMethodName() + ":" + v + "," + event);
+        float w = v.getWidth();
+        //float h = v.getHeight();
+        float x = event.getX();
+        //float y = event.getY();
+        if (x < w / 2) {
+                    /*((VideoView2) v).*/
+            prev();
+        } else if (x > w / 2) {
+                    /*((VideoView2) v).*/
+            next();
+        }
+        if (mOnTouchListener != null) {
+            mOnTouchListener.onTouch(v, event);
+        }
+        return false;
     }
 }

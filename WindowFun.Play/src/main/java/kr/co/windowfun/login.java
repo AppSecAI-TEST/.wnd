@@ -2,7 +2,6 @@ package kr.co.windowfun;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -15,7 +14,6 @@ import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
@@ -34,10 +32,9 @@ public class login extends _Activity {
         setContentView(R.layout.login);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        //test
-        ((EditText) findViewById(R.id.id)).setText("windowfun4");
-        //test
-        ((EditText) findViewById(R.id.pw)).setText("4321");
+
+        ((EditText) findViewById(R.id.id)).setText("windowfun4"); //test
+        ((EditText) findViewById(R.id.pw)).setText("4321"); //test
 
         //출처: http://202psj.tistory.com/251 [알레폰드의 IT 이모저모]
         //((EditText)findViewById(R.id.id)).setPrivateImeOptions("defaultInputmode=english;");
@@ -72,11 +69,11 @@ public class login extends _Activity {
         findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clear();
+                logout();
             }
         });
 
-        if (TextUtils.isEmpty(getApp().token)) {
+        if (!getApp().isLogin()) {
             showLogIn();
         } else {
             hideLogin();
@@ -94,7 +91,7 @@ public class login extends _Activity {
     };
 
     protected void showLogIn() {
-        Log.d(__CLASSNAME__, getMethodName());
+        //Log.d(__CLASSNAME__, getMethodName());
         mHandler.removeCallbacks(showLogin);
         mHandler.postDelayed(showLogin, 0);
     }
@@ -110,7 +107,7 @@ public class login extends _Activity {
     };
 
     protected void hideLogin() {
-        Log.d(__CLASSNAME__, getMethodName());
+        //Log.d(__CLASSNAME__, getMethodName());
         mHandler.removeCallbacks(hideLogin);
         mHandler.postDelayed(hideLogin, 0);
     }
@@ -121,25 +118,20 @@ public class login extends _Activity {
         String url = "http://windowfun.co.kr/Manager/API/W_login.html?userid=windowfun4&password=4321";
         //url = "http://windowfun.co.kr/Manager/API/W_login.html?userid=" + id + "&password=" + pw;
         //send(url);
+        url = "http://windowfun.co.kr/Manager/API/W_login.html";
         RequestParams params = new RequestParams();
         params.put("userid", id);
         params.put("password", pw);
-        url = "http://windowfun.co.kr/Manager/API/W_login.html";
         send(url, params);
-    }
-
-    private void clear() {
-        clearToken();
-        showLogIn();
     }
 
     @Override
     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
         super.onSuccess(statusCode, headers, response);
-        Toast.makeText(this, userid + ":" + error_message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getApp().userid + ":" + error_message, Toast.LENGTH_SHORT).show();
         if ("0".equalsIgnoreCase(error_code) && "0".equalsIgnoreCase(result_code)) {
-            Log.e(__CLASSNAME__, getMethodName() + ":" + "[[" + token + "]]");
-            setToken(token);
+            Log.e(__CLASSNAME__, getMethodName() + ":" + "[[" + getApp().token + "]]");
+            getApp().setUserInfo();
             finish();
         } else {
             Log.e(__CLASSNAME__, getMethodName() + ":" + "[[" + error_message + "]]");
