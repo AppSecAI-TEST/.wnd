@@ -162,7 +162,7 @@ public class _main extends Activity2 {
     private void manus() {
         //isyoon:Hitomis/CircleMenu
         menu = (CircleMenu) findViewById(R.id.menu);
-        ////Log.w(__CLASSNAME__, getMethodName() + "\t" + circleMenu);
+        ////Log.i(__CLASSNAME__, getMethodName() + "\t" + circleMenu);
 
         menus.add(new HashMap<Integer, Object[]>() {{put(R.mipmap.wf_icon_event, new Object[]{"#258CFF", "html", "http://windowfun.co.kr/type/typea/"});}});
         menus.add(new HashMap<Integer, Object[]>() {{put(R.mipmap.wf_icon_member, new Object[]{"#30A400", "html", "http://windowfun.co.kr/type/typeb/"});}});
@@ -194,20 +194,20 @@ public class _main extends Activity2 {
 
                     @Override
                     public void onMenuOpened() {
-                        ////Log.w(__CLASSNAME__, getMethodName());
+                        ////Log.i(__CLASSNAME__, getMethodName());
                         mHandler.removeCallbacks(hideMenu);
                     }
 
                     @Override
                     public void onMenuClosed() {
-                        ////Log.w(__CLASSNAME__, getMethodName());
+                        ////Log.i(__CLASSNAME__, getMethodName());
                         mHandler.postDelayed(hideMenu, 5000);
                     }
 
                 });
 
         for (int i = 0; i < menus.size(); i++) {
-            ////Log.e(__CLASSNAME__, "" + menus.get(i));
+            ////Log.w(__CLASSNAME__, "" + menus.get(i));
             HashMap<Integer, Object[]> map = (HashMap<Integer, Object[]>) menus.get(i);
             for (Map.Entry<Integer, Object[]> entry : map.entrySet()) {
                 menu.addSubMenu(Color.parseColor((String) entry.getValue()[0]), entry.getKey());
@@ -243,7 +243,7 @@ public class _main extends Activity2 {
             i.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View i, MotionEvent event) {
-                    //////Log.e(__CLASSNAME__, getMethodName() + ":" + i + "," + event);
+                    //////Log.w(__CLASSNAME__, getMethodName() + ":" + i + "," + event);
                     float w = i.getWidth();
                     //float h = i.getHeight();
                     float x = event.getX();
@@ -281,7 +281,7 @@ public class _main extends Activity2 {
             v.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    //////Log.e(__CLASSNAME__, getMethodName() + ":" + v + "," + event);
+                    //////Log.w(__CLASSNAME__, getMethodName() + ":" + v + "," + event);
                     float w = v.getWidth();
                     //float h = v.getHeight();
                     float x = event.getX();
@@ -353,7 +353,7 @@ public class _main extends Activity2 {
     }
 
     private void openHTML(String url) {
-        //Log.e(__CLASSNAME__, getMethodName() + ":" + url);
+        //Log.w(__CLASSNAME__, getMethodName() + ":" + url);
         if (!TextUtils.isEmpty(url)) {
             Intent intent = new Intent(_main.this, html.class);
             intent.putExtra("url", url);
@@ -375,7 +375,7 @@ public class _main extends Activity2 {
     }
 
     private void openVIDEO(String url) {
-        //Log.e(__CLASSNAME__, getMethodName() + ":" + url);
+        //Log.w(__CLASSNAME__, getMethodName() + ":" + url);
         if (!TextUtils.isEmpty(url)) {
             Intent intent = new Intent(_main.this, video.class);
             intent.putExtra("url", url);

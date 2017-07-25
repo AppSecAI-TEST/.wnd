@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.Random;
 
 /**
@@ -31,7 +32,7 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG, Con
         int idx = 0;
         for (int i = 0; i < ste.length; i++) {
             StackTraceElement item = ste[i];
-            ////Log.w(_CLASSNAME_, "" + item.getClassName());
+            ////Log.i(_CLASSNAME_, "" + item.getClassName());
             if (item.getClassName().contains(_CLASSNAME_)) {
                 idx = i;
                 //Log.v(__CLASSNAME__, "" + item);
@@ -66,7 +67,7 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG, Con
     }
 
     private void showVideo() {
-        //Log.e(__CLASSNAME__,getMethodName());
+        //Log.w(__CLASSNAME__,getMethodName());
         ((VideoView2) findViewById(R.id.video)).setVisibility(View.VISIBLE);
         ((ImageView2) findViewById(R.id.image)).setVisibility(View.INVISIBLE);
         ((TextView2) findViewById(R.id.text)).setVisibility(View.INVISIBLE);
@@ -74,7 +75,7 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG, Con
     }
 
     private void showImage() {
-        //Log.e(__CLASSNAME__,getMethodName());
+        //Log.w(__CLASSNAME__,getMethodName());
         ((VideoView2) findViewById(R.id.video)).setVisibility(View.INVISIBLE);
         ((ImageView2) findViewById(R.id.image)).setVisibility(View.VISIBLE);
         ((TextView2) findViewById(R.id.text)).setVisibility(View.INVISIBLE);
@@ -82,7 +83,7 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG, Con
     }
 
     private void showText() {
-        //Log.e(__CLASSNAME__,getMethodName());
+        //Log.w(__CLASSNAME__,getMethodName());
         ((VideoView2) findViewById(R.id.video)).setVisibility(View.INVISIBLE);
         ((ImageView2) findViewById(R.id.image)).setVisibility(View.INVISIBLE);
         ((TextView2) findViewById(R.id.text)).setVisibility(View.VISIBLE);
@@ -90,7 +91,7 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG, Con
     }
 
     private void showHtml() {
-        //Log.e(__CLASSNAME__,getMethodName());
+        //Log.w(__CLASSNAME__,getMethodName());
         ((VideoView2) findViewById(R.id.video)).setVisibility(View.INVISIBLE);
         ((ImageView2) findViewById(R.id.image)).setVisibility(View.INVISIBLE);
         ((TextView2) findViewById(R.id.text)).setVisibility(View.INVISIBLE);
@@ -99,7 +100,7 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG, Con
 
     private void open() {
         try {
-            Log.w(__CLASSNAME__, getMethodName() + ":" + this.index + "\n" + ((JSONObject) this.contents.get(index)).toString(2));
+            Log.i(__CLASSNAME__, getMethodName() + ":" + this.index + "\n" + ((JSONObject) this.contents.get(index)).toString(2));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -110,7 +111,7 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG, Con
                 String filename = ((JSONObject) contents.get(index)).getString(result_c.filename);
                 String contents_order = ((JSONObject) contents.get(index)).getString(result_c.contents_order);
                 Uri uri = Uri.parse(!TextUtils.isEmpty(filename) ? filename : title);
-                //Log.e(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri + "<-" + division + ":" + title + ":" + filename + ":" + contents_order);
+                //Log.w(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri + "<-" + division + ":" + title + ":" + filename + ":" + contents_order);
                 open(uri);
             }
         } catch (Exception e) {
@@ -123,15 +124,22 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG, Con
         String url = uri.toString();
         ((android.widget.TextView)findViewById(R.id.label)).setText(url);
         try {
-            Log.wtf(__CLASSNAME__,getMethodName() + "[BF]" + url);
-            url = url.substring(0, url.lastIndexOf("/") + 1) + Uri.encode(url.substring(url.lastIndexOf("/") + 1)/*, "UTF-8"*/);
-            Log.wtf(__CLASSNAME__, getMethodName() + "[AF]" + url);
+            //Log.wtf(__CLASSNAME__,getMethodName() + "[BF]" + url);
+            url = _TextUtil.getFileUrl(url);
+            //Log.wtf(__CLASSNAME__, getMethodName() + "[AF]" + url);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        String path = _TextUtil.getFilePath(url);
+        if (new File(path) == null) {
+            path = url;
+        }
+
+        stop();
+
         try {
             String division = ((JSONObject) contents.get(index)).getString(result_c.division);
-            //Log.w(__CLASSNAME__,getMethodName() + ":" + division + ":" + url);
+            //Log.i(__CLASSNAME__,getMethodName() + ":" + division + ":" + url);
             switch (division) {
                 case "T":
                     showText();
@@ -139,11 +147,13 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG, Con
                     break;
                 case "I":
                     showImage();
-                    ((ImageView2) findViewById(R.id.image)).open(Uri.parse(url));
+                    ((android.widget.TextView)findViewById(R.id.label)).setText(Uri.decode(path));
+                    ((ImageView2) findViewById(R.id.image)).open(Uri.parse(path));
                     break;
                 case "M":
                     showVideo();
-                    ((VideoView2) findViewById(R.id.video)).open(Uri.parse(url));
+                    ((android.widget.TextView)findViewById(R.id.label)).setText(Uri.decode(path));
+                    ((VideoView2) findViewById(R.id.video)).open(Uri.parse(path));
                     break;
                 case "H":
                     showHtml();
@@ -165,7 +175,7 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG, Con
                 String contents_order = ((JSONObject) contents.get(index)).getString(result_c.contents_order);
                 int length = Integer.parseInt(contents_order) * 1000;
                 //length /= 10; //test
-                //Log.e(__CLASSNAME__,getMethodName() + ":" + division);
+                //Log.w(__CLASSNAME__,getMethodName() + ":" + division);
                 switch (division) {
                     case "T":
                         showText();
@@ -204,10 +214,15 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG, Con
 
     @Override
     public void stop() {
+        Log.w(__CLASSNAME__,getMethodName());
         mHandler.removeCallbacks(play);
         mHandler.removeCallbacks(prev);
         mHandler.removeCallbacks(next);
         mHandler.removeCallbacks(rand);
+        ((TextView2) findViewById(R.id.text)).stop();
+        ((ImageView2) findViewById(R.id.image)).stop();
+        ((VideoView2) findViewById(R.id.video)).stop();
+        ((HtmlView2) findViewById(R.id.html)).stop();
     }
 
     Random r = new Random();
@@ -227,7 +242,7 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG, Con
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            //Log.e(__CLASSNAME__, getMethodName() + ":" + VideoView2.this.index);
+            //Log.w(__CLASSNAME__, getMethodName() + ":" + VideoView2.this.index);
             open();
             play();
         }
@@ -246,7 +261,7 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG, Con
             if (index < 0) {
                 index = contents.length() - 1;
             }
-            //Log.w(__CLASSNAME__, getMethodName() + ":" + index);
+            //Log.i(__CLASSNAME__, getMethodName() + ":" + index);
             open();
             play();
         }
@@ -265,7 +280,7 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG, Con
             if (index > contents.length() - 1) {
                 index = 0;
             }
-            //Log.w(__CLASSNAME__, getMethodName() + ":" + index);
+            //Log.i(__CLASSNAME__, getMethodName() + ":" + index);
             open();
             play();
         }
@@ -306,7 +321,7 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG, Con
     int index = -1;
 
     public void setContents(JSONArray contents) {
-        //Log.w(__CLASSNAME__, getMethodName() + "\n[contents]\n" + toString(contents, 2));
+        //Log.i(__CLASSNAME__, getMethodName() + "\n[contents]\n" + toString(contents, 2));
         this.contents = contents;
         index = 0;
         //ContentListener
@@ -319,29 +334,29 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG, Con
         ((ImageView2) findViewById(R.id.image)).setOnTouchListener(this);
         ((TextView2) findViewById(R.id.text)).setOnTouchListener(this);
         ((HtmlView2) findViewById(R.id.html)).setOnTouchListener(this);
-        //open();
-        //play();
-        rand(); //test
+        open();
+        play();
+        //rand(); //test
     }
 
 
     @Override
     public void onPrepared() {
-        Log.e(__CLASSNAME__, getMethodName());
+        Log.w(__CLASSNAME__, getMethodName());
     }
 
     @Override
     public void onError() {
-        Log.e(__CLASSNAME__, getMethodName());
-        //next();
-        rand(); //test
+        Log.w(__CLASSNAME__, getMethodName());
+        next();
+        //rand(); //test
     }
 
     @Override
     public void onCompletion() {
-        Log.e(__CLASSNAME__, getMethodName());
-        //next();
-        rand(); //test
+        Log.w(__CLASSNAME__, getMethodName());
+        next();
+        //rand(); //test
     }
 
     OnTouchListener mOnTouchListener;
@@ -354,7 +369,7 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG, Con
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        //Log.e(__CLASSNAME__, getMethodName() + ":" + v + "," + event);
+        //Log.w(__CLASSNAME__, getMethodName() + ":" + v + "," + event);
         float w = v.getWidth();
         //float h = v.getHeight();
         float x = event.getX();

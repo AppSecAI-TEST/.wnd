@@ -6,6 +6,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import kr.co.windowfun.widget.ContentLayout;
+import kr.co.windowfun.widget.VideoView2;
 
 /**
  * Created by isyoon on 2017-07-12.
@@ -14,7 +15,7 @@ import kr.co.windowfun.widget.ContentLayout;
 public class main4 extends _main {
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        //Log.e(__CLASSNAME__, getMethodName());
+        //Log.w(__CLASSNAME__, getMethodName());
         super.onCreate(savedInstanceState);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -24,11 +25,18 @@ public class main4 extends _main {
 
     @Override
     protected void init() {
-        //Log.e(__CLASSNAME__, getMethodName());
+        //Log.w(__CLASSNAME__, getMethodName());
+        ((VideoView2)findViewById(R.id.c1).findViewById(R.id.video)).mute(false);
         super.init();
         ((ContentLayout)findViewById(R.id.c1)).setContents(getApp().result_c1);
         ((ContentLayout)findViewById(R.id.c2)).setContents(getApp().result_c2);
         ((ContentLayout)findViewById(R.id.c3)).setContents(getApp().result_c3);
         ((ContentLayout)findViewById(R.id.c4)).setContents(getApp().result_c4);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

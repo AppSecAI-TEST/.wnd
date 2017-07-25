@@ -48,7 +48,7 @@ public class text extends Activity2 {
     class ClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            //Log.w(__CLASSNAME__, getMethodName() + ":" + v);
+            //Log.i(__CLASSNAME__, getMethodName() + ":" + v);
             if (v instanceof HTextView) {
                 if (index > sentences.length - 1) {
                     index = 0;
@@ -138,7 +138,7 @@ public class text extends Activity2 {
                 index = 0;
             }
             for (View v : text.this.vs) {
-                ////Log.w(__CLASSNAME__, getMethodName() + ":" + v);
+                ////Log.i(__CLASSNAME__, getMethodName() + ":" + v);
                 if (v instanceof HTextView) {
                     ((HTextView) v).animateText(sentences[index]);
                 }
@@ -177,7 +177,7 @@ public class text extends Activity2 {
                 progress = 0;
             }
             for (View v : text.this.vs) {
-                ////Log.w(__CLASSNAME__, getMethodName() + ":" + v);
+                ////Log.i(__CLASSNAME__, getMethodName() + ":" + v);
                 if (v instanceof HTextView) {
                     ((HTextView) v).setProgress(progress / 100f);
                 }

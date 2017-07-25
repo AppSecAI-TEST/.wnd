@@ -44,7 +44,7 @@ public class TextView2 extends TextView implements _Content, _TAG {
 
     @Override
     public void open(Uri uri) {
-        //Log.e(__CLASSNAME__, getMethodName() + ":" + uri);
+        //Log.w(__CLASSNAME__, getMethodName() + ":" + uri);
         setText(uri.toString());
     }
 
@@ -53,11 +53,11 @@ public class TextView2 extends TextView implements _Content, _TAG {
     }
 
     private void open() {
-        //Log.e(__CLASSNAME__, getMethodName() + ":" + this.index + ":" + this.path);
+        //Log.w(__CLASSNAME__, getMethodName() + ":" + this.index + ":" + this.path);
         try {
             if (TextView2.this.index < TextView2.this.path.size()) {
                 Uri uri = Uri.parse(path.get(index));
-                Log.w(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
+                Log.i(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
                 open(uri);
             }
         } catch (Exception e) {
@@ -106,10 +106,12 @@ public class TextView2 extends TextView implements _Content, _TAG {
 
     @Override
     public void stop() {
-        //mHandler.removeCallbacks(play);
-        //mHandler.removeCallbacks(prev);
-        //mHandler.removeCallbacks(next);
-        //mHandler.removeCallbacks(rand);
+        length = -1;
+        mHandler.removeCallbacks(call);
+        mHandler.removeCallbacks(play);
+        mHandler.removeCallbacks(prev);
+        mHandler.removeCallbacks(next);
+        mHandler.removeCallbacks(rand);
     }
 
     Random r = new Random();
@@ -128,7 +130,7 @@ public class TextView2 extends TextView implements _Content, _TAG {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            //Log.e(__CLASSNAME__, getMethodName() + ":" + index);
+            //Log.w(__CLASSNAME__, getMethodName() + ":" + index);
             open();
             play();
         }
@@ -140,14 +142,42 @@ public class TextView2 extends TextView implements _Content, _TAG {
         mHandler.postDelayed(rand, TIMER_OPEN_SHORT);
     }
 
-    @Override
-    public void next() {
-
-    }
+    private Runnable prev = new Runnable() {
+        @Override
+        public void run() {
+            index--;
+            if (index < 0) {
+                index = path.size() - 1;
+            }
+            //Log.i(__CLASSNAME__, getMethodName() + ":" + index);
+            open();
+            play();
+        }
+    };
 
     @Override
     public void prev() {
+        mHandler.removeCallbacks(prev);
+        mHandler.postDelayed(prev, TIMER_OPEN_SHORT);
+    }
 
+    private Runnable next = new Runnable() {
+        @Override
+        public void run() {
+            index++;
+            if (index > path.size() - 1) {
+                index = 0;
+            }
+            //Log.i(__CLASSNAME__, getMethodName() + ":" + index);
+            open();
+            play();
+        }
+    };
+
+    @Override
+    public void next() {
+        mHandler.removeCallbacks(next);
+        mHandler.postDelayed(next, TIMER_OPEN_SHORT);
     }
 
     @Override

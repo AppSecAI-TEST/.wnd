@@ -1,5 +1,6 @@
 package kr.co.windowfun.widget;
 
+import android.os.Environment;
 import android.os.Handler;
 
 /**
@@ -7,6 +8,9 @@ import android.os.Handler;
  */
 
 public interface _TAG {
+    String root = Environment.getExternalStorageDirectory().getAbsolutePath();
+    String root_mp4 = root + "/.mp4";
+
     Handler mHandler = new Handler();
 
     //TIMER

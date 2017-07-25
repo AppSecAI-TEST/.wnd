@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.bumptech.glide.request.RequestOptions;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -79,7 +80,7 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
 
     @Override
     public void open(Uri uri) {
-        //Log.e(__CLASSNAME__, getMethodName() + ":" + index + "(" + "w:" + getMeasuredWidth() + ", h:" + getMeasuredHeight() + ")" + uri);
+        //Log.w(__CLASSNAME__, getMethodName() + ":" + index + "(" + "w:" + getMeasuredWidth() + ", h:" + getMeasuredHeight() + ")" + uri);
         try {
             int w = getMeasuredWidth();
             int h = getMeasuredHeight();
@@ -100,17 +101,24 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
             //    options.downsample(DownsampleStrategy.FIT_CENTER);
             //}
             //bumptech/glide
-            GlideApp.with(getContext())
-                    .applyDefaultRequestOptions(options)
-                    .load(uri)
-                    .into(this);
+            if (new File(uri.getPath()) == null) {
+                GlideApp.with(getContext())
+                        .applyDefaultRequestOptions(options)
+                        .load(uri)
+                        .into(this);
+            } else {
+                GlideApp.with(getContext())
+                        .applyDefaultRequestOptions(options)
+                        .load(new File(uri.getPath()))
+                        .into(this);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
         super.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                //Log.e(__CLASSNAME__, getMethodName() + ":" + v + "," + event);
+                //Log.w(__CLASSNAME__, getMethodName() + ":" + v + "," + event);
                 float w = v.getWidth();
                 //float h = v.getHeight();
                 float x = event.getX();
@@ -131,11 +139,11 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
     }
 
     private void open() {
-        //Log.e(__CLASSNAME__, getMethodName() + ":" + this.index + ":" + this.path);
+        //Log.w(__CLASSNAME__, getMethodName() + ":" + this.index + ":" + this.path);
         try {
             if (ImageView2.this.index < ImageView2.this.path.size()) {
                 Uri uri = Uri.parse(path.get(index));
-                Log.w(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
+                Log.i(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
                 open(uri);
             }
         } catch (Exception e) {
@@ -187,6 +195,8 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
 
     @Override
     public void stop() {
+        length = -1;
+        mHandler.removeCallbacks(call);
         mHandler.removeCallbacks(play);
         mHandler.removeCallbacks(prev);
         mHandler.removeCallbacks(next);
@@ -209,7 +219,7 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            //Log.e(__CLASSNAME__, getMethodName() + ":" + index);
+            //Log.w(__CLASSNAME__, getMethodName() + ":" + index);
             open();
             play();
         }
@@ -228,7 +238,7 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
             if (index < 0) {
                 index = path.size() - 1;
             }
-            //Log.w(__CLASSNAME__, getMethodName() + ":" + index);
+            //Log.i(__CLASSNAME__, getMethodName() + ":" + index);
             open();
             play();
         }
@@ -246,7 +256,7 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
             if (index > path.size() - 1) {
                 index = 0;
             }
-            //Log.w(__CLASSNAME__, getMethodName() + ":" + index);
+            //Log.i(__CLASSNAME__, getMethodName() + ":" + index);
             open();
             play();
         }

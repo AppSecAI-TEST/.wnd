@@ -133,7 +133,7 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
     public VideoView2 path(ArrayList<String> path) {
         this.path = path;
         this.index = 0;
-        //Log.e(__CLASSNAME__, getMethodName() + ":" + this.index + ":" + this.path + ":" + path);
+        //Log.w(__CLASSNAME__, getMethodName() + ":" + this.index + ":" + this.path + ":" + path);
         return this;
     }
 
@@ -141,12 +141,12 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
 
     @Override
     public void open(final Uri uri) {
-        //Log.e(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
+        //Log.w(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
         super.setVideoURI(uri);
         super.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
-                Log.e(__CLASSNAME__, getMethodName() + "(" + what + "," + extra + ")" + ":" + index + ":" + uri + "\t" + VideoView2.this);
+                Log.w(__CLASSNAME__, getMethodName() + "(" + what + "," + extra + ")" + ":" + index + ":" + uri + "\t" + VideoView2.this);
                 //Toast.makeText(getContext(), getMethodName() + "(" + what + "," + extra + ")" + extra, Toast.LENGTH_SHORT).show();
                 if (mOnErrorListener != null) {
                     mOnErrorListener.onError(mp, what, extra);
@@ -158,7 +158,7 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
         super.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                //Log.w(__CLASSNAME__, getMethodName() + ":" + ",w:" + getWidth() + ",h:" + getHeight());
+                //Log.i(__CLASSNAME__, getMethodName() + ":" + ",w:" + getWidth() + ",h:" + getHeight());
                 setDimensions(getWidth(), getHeight());
                 VideoView2.this.mp = mp;
                 VideoView2.this.mute(VideoView2.this.mute);
@@ -180,7 +180,7 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
         super.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                //Log.e(__CLASSNAME__, getMethodName() + ":" + v + "," + event);
+                //Log.w(__CLASSNAME__, getMethodName() + ":" + v + "," + event);
                 float w = v.getWidth();
                 //float h = v.getHeight();
                 float x = event.getX();
@@ -201,11 +201,11 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
     }
 
     private void open() {
-        //Log.e(__CLASSNAME__, getMethodName() + ":" + this.index + ":" + this.path);
+        //Log.w(__CLASSNAME__, getMethodName() + ":" + this.index + ":" + this.path);
         try {
             if (VideoView2.this.index < VideoView2.this.path.size()) {
                 Uri uri = Uri.parse(path.get(index).toString());
-                //Log.w(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
+                //Log.i(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
                 open(uri);
             }
         } catch (Exception e) {
@@ -213,14 +213,27 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
         }
     }
 
+    @Override
+    public void start() {
+        super.start();
+    }
+
+    int length = -1;
     private Runnable play = new Runnable() {
         @Override
         public void run() {
             try {
-                VideoView2.super.start();
+                VideoView2.this.start();
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    };
+
+    private Runnable call = new Runnable() {
+        @Override
+        public void run() {
+            if (mContentListener != null) mContentListener.onCompletion();
         }
     };
 
@@ -238,6 +251,8 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
     @Override
     public void stop() {
         stopPlayback();
+        length = -1;
+        mHandler.removeCallbacks(call);
         mHandler.removeCallbacks(play);
         mHandler.removeCallbacks(prev);
         mHandler.removeCallbacks(next);
@@ -261,7 +276,7 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            //Log.e(__CLASSNAME__, getMethodName() + ":" + VideoView2.this.index);
+            //Log.w(__CLASSNAME__, getMethodName() + ":" + VideoView2.this.index);
             open();
             play();
         }
@@ -280,7 +295,7 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
             if (index < 0) {
                 index = path.size() - 1;
             }
-            //Log.w(__CLASSNAME__, getMethodName() + ":" + index);
+            //Log.i(__CLASSNAME__, getMethodName() + ":" + index);
             open();
             play();
         }
@@ -299,7 +314,7 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
             if (index > path.size() - 1) {
                 index = 0;
             }
-            //Log.w(__CLASSNAME__, getMethodName() + ":" + index);
+            //Log.i(__CLASSNAME__, getMethodName() + ":" + index);
             open();
             play();
         }

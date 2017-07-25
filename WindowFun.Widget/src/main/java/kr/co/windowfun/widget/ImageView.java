@@ -17,7 +17,7 @@ class ImageView extends android.support.v7.widget.AppCompatImageView implements 
         int idx = 0;
         for (int i = 0; i < ste.length; i++) {
             StackTraceElement item = ste[i];
-            ////Log.w(_CLASSNAME_, "" + item.getClassName());
+            ////Log.i(_CLASSNAME_, "" + item.getClassName());
             if (item.getClassName().contains(_CLASSNAME_)) {
                 idx = i;
                 //Log.v(__CLASSNAME__, "" + item);

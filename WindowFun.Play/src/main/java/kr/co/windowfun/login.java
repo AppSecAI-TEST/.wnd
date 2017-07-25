@@ -130,11 +130,11 @@ public class login extends _Activity {
         super.onSuccess(statusCode, headers, response);
         Toast.makeText(this, getApp().userid + ":" + error_message, Toast.LENGTH_SHORT).show();
         if ("0".equalsIgnoreCase(error_code) && "0".equalsIgnoreCase(result_code)) {
-            Log.e(__CLASSNAME__, getMethodName() + ":" + "[[" + getApp().token + "]]");
+            Log.w(__CLASSNAME__, getMethodName() + ":" + "[[" + getApp().token + "]]");
             getApp().setUserInfo();
             finish();
         } else {
-            Log.e(__CLASSNAME__, getMethodName() + ":" + "[[" + error_message + "]]");
+            Log.w(__CLASSNAME__, getMethodName() + ":" + "[[" + error_message + "]]");
         }
     }
 

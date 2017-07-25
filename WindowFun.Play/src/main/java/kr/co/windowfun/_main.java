@@ -45,7 +45,7 @@ public class _main extends _Activity {
         //Log.wtf(__CLASSNAME__, getMethodName() + "List: " + root_mp4);
         File directory = new File(root_mp4);
         File[] files = directory.listFiles();
-        Log.e(__CLASSNAME__, getMethodName() + "List: " + files);
+        Log.w(__CLASSNAME__, getMethodName() + "List: " + files);
         if (files != null) {
             ////Log.d(__CLASSNAME__, "Size: "+ files.length);
             for (int i = 0; i < files.length; i++) {
@@ -188,7 +188,7 @@ public class _main extends _Activity {
     private void menus() {
         //isyoon:Hitomis/CircleMenu
         menu = (CircleMenu) findViewById(R.id.menu);
-        ////Log.w(__CLASSNAME__, getMethodName() + "\t" + circleMenu);
+        ////Log.i(__CLASSNAME__, getMethodName() + "\t" + circleMenu);
 
         menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_icon_event, new Object[]{"#258CFF", "html", "http://windowfun.co.kr/type/typea/"});}});
         //menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_icon_member, new Object[]{"#30A400", "html", "http://windowfun.co.kr/type/typeb/"});}});
@@ -222,20 +222,20 @@ public class _main extends _Activity {
 
                     @Override
                     public void onMenuOpened() {
-                        ////Log.w(__CLASSNAME__, getMethodName());
+                        ////Log.i(__CLASSNAME__, getMethodName());
                         mHandler.removeCallbacks(hideMenu);
                     }
 
                     @Override
                     public void onMenuClosed() {
-                        ////Log.w(__CLASSNAME__, getMethodName());
+                        ////Log.i(__CLASSNAME__, getMethodName());
                         mHandler.postDelayed(hideMenu, 5000);
                     }
 
                 });
 
         for (int i = 0; i < menus.size(); i++) {
-            ////Log.e(__CLASSNAME__, "" + menus.get(i));
+            ////Log.w(__CLASSNAME__, "" + menus.get(i));
             HashMap<Integer, Object[]> map = (HashMap<Integer, Object[]>) menus.get(i);
             for (Map.Entry<Integer, Object[]> entry : map.entrySet()) {
                 menu.addSubMenu(Color.parseColor((String) entry.getValue()[0]), entry.getKey());
@@ -352,7 +352,7 @@ public class _main extends _Activity {
     }
 
     private void openHTML(String url) {
-        //Log.e(__CLASSNAME__, getMethodName() + ":" + url);
+        //Log.w(__CLASSNAME__, getMethodName() + ":" + url);
         if (!TextUtils.isEmpty(url)) {
             Intent intent = new Intent(_main.this, html.class);
             intent.putExtra("url", url);
@@ -374,7 +374,7 @@ public class _main extends _Activity {
     }
 
     private void openVIDEO(String url) {
-        //Log.e(__CLASSNAME__, getMethodName() + ":" + url);
+        //Log.w(__CLASSNAME__, getMethodName() + ":" + url);
         if (!TextUtils.isEmpty(url)) {
             Intent intent = new Intent(_main.this, video.class);
             intent.putExtra("url", url);

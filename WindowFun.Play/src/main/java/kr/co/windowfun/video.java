@@ -38,7 +38,7 @@ public class video extends _Activity {
         String url = getIntent().getStringExtra("url");
         if (!TextUtils.isEmpty(url)) {
             String ext = url.substring(url.lastIndexOf("."));
-            Log.e(__CLASSNAME__, getMethodName() + ":" + ext + ":" + url);
+            Log.w(__CLASSNAME__, getMethodName() + ":" + ext + ":" + url);
             video.open(Uri.parse(url));
             video.play();
         }

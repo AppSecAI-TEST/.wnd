@@ -100,7 +100,7 @@ public class Activity2 extends Activity {
         return null;
     }
 
-    protected String  toString(JSONObject response, int indentSpaces) {
+    protected String toString(JSONObject response, int indentSpaces) {
         try {
             return response.toString(indentSpaces);
         } catch (Exception e) {
@@ -109,7 +109,7 @@ public class Activity2 extends Activity {
         return null;
     }
 
-    protected String  toString(JSONArray response, int indentSpaces) {
+    protected String toString(JSONArray response, int indentSpaces) {
         try {
             return response.toString(indentSpaces);
         } catch (Exception e) {

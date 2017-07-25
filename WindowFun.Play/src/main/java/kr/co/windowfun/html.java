@@ -38,8 +38,8 @@ public class html extends _Activity {
         String url = getIntent().getStringExtra("url");
         if (!TextUtils.isEmpty(url)) {
             String ext = url.substring(url.lastIndexOf("."));
-            //if (ext.equalsIgnoreCase(".pdf")) /*url = "http://drive.google.com/viewerng/viewer?embedded=true&url=" + url;*///Log.w(__CLASSNAME__, getMethodName() + ":" + url);
-            //Log.e(__CLASSNAME__, getMethodName() + ":" + ext + ":" + url);
+            //if (ext.equalsIgnoreCase(".pdf")) /*url = "http://drive.google.com/viewerng/viewer?embedded=true&url=" + url;*///Log.i(__CLASSNAME__, getMethodName() + ":" + url);
+            //Log.w(__CLASSNAME__, getMethodName() + ":" + ext + ":" + url);
             html.loadUrl(url);
         }
 
