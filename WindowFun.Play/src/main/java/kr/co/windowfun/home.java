@@ -324,12 +324,12 @@ public class home extends _Activity {
     @Override
     protected void onProgress(String src, String dst, long bytesWritten, long totalSize) {
         super.onProgress(src, dst, bytesWritten, totalSize);
-        mHandler.removeCallbacks(onProgress);
-        mHandler.post(onProgress);
         this.src = src;
         this.dst = dst;
         this.bytesWritten = bytesWritten;
         this.totalSize = totalSize;
+        mHandler.removeCallbacks(onProgress);
+        mHandler.post(onProgress);
     }
 
     private Runnable onProgress = new Runnable() {
@@ -382,7 +382,7 @@ public class home extends _Activity {
                 }
                 ((ProgressBar) findViewById(R.id.progress2)).setMax((int) totalSizes);
                 ((ProgressBar) findViewById(R.id.progress2)).setProgress((int) bytes);
-                if (bytes == totalSizes) {
+                if (bytes == totalSizes || (int) ((float) bytes / (float) totalSizes * 100f) == 99) {
                     ((TextView) findViewById(R.id.label)).setText("다운완료...");
                 }
             } catch (Exception e) {
