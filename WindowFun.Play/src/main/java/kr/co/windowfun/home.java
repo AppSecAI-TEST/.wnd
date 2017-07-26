@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +28,7 @@ import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 import kr.co.windowfun.widget.CFile;
+import kr.co.windowfun.widget.ProgressBar;
 import kr.co.windowfun.widget._TextUtil;
 
 /**
@@ -336,8 +336,7 @@ public class home extends _Activity {
         @Override
         public void run() {
             try {
-                //label
-                String text = "파일다운:";
+                //bytes
                 int index = 0;
                 for (final Map.Entry<String, Uri> entry : lists.entrySet()) {
                     if (dst.equalsIgnoreCase(entry.getKey())) {
@@ -347,15 +346,25 @@ public class home extends _Activity {
                     }
                     index++;
                 }
-                text += "(" + (index + 1) + "/" + lists.size() + ")";
-                text += "(" + bytesWritten + "/" + totalSize + ")";
                 long bytes = 0;
                 for (Long item : bytesWrittens) {
                     bytes += item;
                 }
+                //label
+                String text = "다운중...";
+                text += "\t";
+                text += "(" + (index + 1) + "/" + lists.size() + "건" + ")";
+                text += "\t";
+                //text += "(" + (int) ((float) bytesWritten / (float) totalSize * 100f) + "/" + (int) ((float) totalSize / (float) totalSize * 100f) + "%" + ")";
+                //text += "\t";
+                text += "(" + (int) ((float) bytes / (float) totalSizes * 100f) + "/" + (int) ((float) totalSizes / (float) totalSizes * 100f) + "%" + ")";
+                text += "\t";
                 //text += Uri.decode(src);
+                //text += "\t";
                 //text += "->" + dst;
-                //text += "\t" + _TextUtil.getFileName(dst);
+                //text += "\t";
+                //text += _TextUtil.getFileName(dst);
+                //text += "\t";
                 ((TextView) findViewById(R.id.label)).setText(text);
                 //progress1
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -373,6 +382,9 @@ public class home extends _Activity {
                 }
                 ((ProgressBar) findViewById(R.id.progress2)).setMax((int) totalSizes);
                 ((ProgressBar) findViewById(R.id.progress2)).setProgress((int) bytes);
+                if (bytes == totalSizes) {
+                    ((TextView) findViewById(R.id.label)).setText("다운완료...");
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <!-- Customize your theme here. -->
-    </style>
-
-    <style name="AppThemeDark" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="android:actionBarStyle">@style/AppThemeDark.ActionBarStyle</item>
-    </style>
-
-    <style name="AppThemeDark.ActionBarStyle" parent="android:Widget.ActionBar">
-        <item name="android:background">@color/DarkActionBarColor</item>
-    </style>
-    <!--isyoon:banner-->
-    <style name="text_view_layout">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">@dimen/floating_action_button_margin_small</item>
-    </style>
-
+    <!--isyoon:text_banner_layout-->
     <style name="text_banner_layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -38,26 +18,25 @@
         <!--<item name="android:focusableInTouchMode">true</item>-->
         <!--<item name="android:freezesText">true</item>-->
     </style>
-    <!--isyoon:controls-->
+    <!--isyoon:banner_bar_layout-->
     <style name="banner_bar_layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">0dp</item>
     </style>
-
+    <!--isyoon:circle_menu_layout-->
     <style name="circle_menu_layout">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">0dp</item>
     </style>
-
+    <!--isyoon:action_button_layout-->
     <style name="action_button_layout">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">@dimen/floating_action_button_margin_small</item>
     </style>
-
-
+    <!--isyoon:right_videos_layout-->
     <style name="right_videos_layout">
         <item name="android:layout_width">380dp</item>
         <item name="android:layout_height">match_parent</item>

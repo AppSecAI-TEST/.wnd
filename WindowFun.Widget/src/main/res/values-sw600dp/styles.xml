@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <!--isyoon:banner_bar_layout-->
     <style name="banner_bar_layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">0dp</item>
     </style>
-
+    <!--isyoon:circle_menu_layout-->
     <style name="circle_menu_layout">
         <item name="android:layout_width">480dp</item>
         <item name="android:layout_height">480dp</item>
         <item name="android:layout_margin">0dp</item>
     </style>
-
+    <!--isyoon:action_button_layout-->
     <style name="action_button_layout">
         <item name="android:layout_width">80dp</item>
         <item name="android:layout_height">80dp</item>
         <item name="android:layout_margin">@dimen/floating_action_button_margin_normal</item>
     </style>
-
+    <!--isyoon:right_videos_layout-->
     <style name="right_videos_layout">
         <item name="android:layout_width">380dp</item>
         <item name="android:layout_height">match_parent</item>
