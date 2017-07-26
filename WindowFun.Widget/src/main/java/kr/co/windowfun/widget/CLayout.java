@@ -18,10 +18,11 @@ import java.io.File;
 import java.util.Random;
 
 /**
+ * 컨텐츠레이아웃<br>
  * Created by isyoon on 2017-07-19.
  */
 
-public class ContentLayout extends RelativeLayout implements _Content, _TAG, ContentListener, View.OnTouchListener {
+public class CLayout extends RelativeLayout implements _Content, _TAG, CListener, View.OnTouchListener {
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
     private JSONArray contents;
@@ -41,26 +42,26 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG, Con
         return ste[idx].toString();
     }
 
-    public ContentLayout(Context context) {
+    public CLayout(Context context) {
         super(context);
         _CLASSNAME_ = this.getClass().getName();
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
     }
 
-    public ContentLayout(Context context, AttributeSet attrs) {
+    public CLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         _CLASSNAME_ = this.getClass().getName();
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
     }
 
-    public ContentLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         _CLASSNAME_ = this.getClass().getName();
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public ContentLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         _CLASSNAME_ = this.getClass().getName();
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
@@ -105,7 +106,7 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG, Con
             e.printStackTrace();
         }
         try {
-            if (ContentLayout.this.index < ContentLayout.this.contents.length()) {
+            if (CLayout.this.index < CLayout.this.contents.length()) {
                 String division = ((JSONObject) contents.get(index)).getString(result_c.division);
                 String title = ((JSONObject) contents.get(index)).getString(result_c.title);
                 String filename = ((JSONObject) contents.get(index)).getString(result_c.filename);
@@ -235,9 +236,9 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG, Con
             int max = contents.length() - 1;
             int index = -1;
             try {
-                if (ContentLayout.this.index < ContentLayout.this.contents.length()) {
+                if (CLayout.this.index < CLayout.this.contents.length()) {
                     index = r.nextInt(max - min) + min;
-                    ContentLayout.this.index = index;
+                    CLayout.this.index = index;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -324,7 +325,7 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG, Con
         //Log.i(__CLASSNAME__, getMethodName() + "\n[contents]\n" + toString(contents, 2));
         this.contents = contents;
         index = 0;
-        //ContentListener
+        //CListener
         ((VideoView2) findViewById(R.id.video)).set(this);
         ((ImageView2) findViewById(R.id.image)).set(this);
         ((TextView2) findViewById(R.id.text)).set(this);
@@ -341,19 +342,19 @@ public class ContentLayout extends RelativeLayout implements _Content, _TAG, Con
 
 
     @Override
-    public void onPrepared() {
+    public void onPrepared(View v) {
         Log.w(__CLASSNAME__, getMethodName());
     }
 
     @Override
-    public void onError() {
+    public void onError(View v) {
         Log.w(__CLASSNAME__, getMethodName());
         next();
         //rand(); //test
     }
 
     @Override
-    public void onCompletion() {
+    public void onCompletion(View v) {
         Log.w(__CLASSNAME__, getMethodName());
         next();
         //rand(); //test

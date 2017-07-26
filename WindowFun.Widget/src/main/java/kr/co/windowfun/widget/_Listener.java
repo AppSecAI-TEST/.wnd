@@ -5,5 +5,5 @@ package kr.co.windowfun.widget;
  */
 
 public interface _Listener {
-    void set(ContentListener l);
+    void set(CListener l);
 }

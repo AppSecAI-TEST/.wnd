@@ -2,7 +2,6 @@ package kr.co.windowfun;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
@@ -10,8 +9,6 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.hanks.htextview.base.HTextView;
-
-import kr.co.windowfun.app.Activity2;
 
 /**
  * Created by isyoon on 2017-07-11.

@@ -53,10 +53,10 @@ class HtmlView extends android.webkit.WebView implements _Listener {
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
     }
 
-    ContentListener mContentListener;
+    CListener mCListener;
 
     @Override
-    public void set(ContentListener l) {
-        mContentListener = l;
+    public void set(CListener l) {
+        mCListener = l;
     }
 }

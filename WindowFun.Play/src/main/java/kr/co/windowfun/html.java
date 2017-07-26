@@ -11,8 +11,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import kr.co.windowfun.app.Activity2;
-
 /**
  * Created by isyoon on 2017-07-05.
  */

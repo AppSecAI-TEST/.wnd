@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import kr.co.windowfun.widget.ContentLayout;
+import kr.co.windowfun.widget.CLayout;
 import kr.co.windowfun.widget.ImageView2;
 import kr.co.windowfun.widget.TextView2;
 import kr.co.windowfun.widget.VideoView2;
@@ -155,28 +155,28 @@ public class _main extends _Activity {
     }
 
     private void content() {
-        ((ContentLayout) findViewById(R.id.c1)).setOnTouchListener(new View.OnTouchListener() {
+        ((CLayout) findViewById(R.id.c1)).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 mHandler.post(showMenu);
                 return false;
             }
         });
-        ((ContentLayout) findViewById(R.id.c2)).setOnTouchListener(new View.OnTouchListener() {
+        ((CLayout) findViewById(R.id.c2)).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 mHandler.post(showMenu);
                 return false;
             }
         });
-        ((ContentLayout) findViewById(R.id.c3)).setOnTouchListener(new View.OnTouchListener() {
+        ((CLayout) findViewById(R.id.c3)).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 mHandler.post(showMenu);
                 return false;
             }
         });
-        ((ContentLayout) findViewById(R.id.c4)).setOnTouchListener(new View.OnTouchListener() {
+        ((CLayout) findViewById(R.id.c4)).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 mHandler.post(showMenu);
@@ -190,15 +190,16 @@ public class _main extends _Activity {
         menu = (CircleMenu) findViewById(R.id.menu);
         ////Log.i(__CLASSNAME__, getMethodName() + "\t" + circleMenu);
 
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_icon_event, new Object[]{"#258CFF", "html", "http://windowfun.co.kr/type/typea/"});}});
-        //menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_icon_member, new Object[]{"#30A400", "html", "http://windowfun.co.kr/type/typeb/"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_icon_point, new Object[]{"#FF4B32", "html", "http://windowfun.co.kr/type/typec/"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_icon_retrieval, new Object[]{"#8A39FF", "html", "http://windowfun.co.kr/type/typed/"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_icon_store, new Object[]{"#FF6A00", "html", "http://windowfun.co.kr/type/typee/"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_icon_home, new Object[]{"#258CFF", "html", "http://drive.google.com/viewerng/viewer?embedded=true&url=http://windowfun.co.kr/type/windowfun.pdf"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_icon_search, new Object[]{"#30A400", "video", root_mp4 + File.separator + "c" + File.separator + "c1.mp4"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_icon_game, new Object[]{"#FF4B32", "html", "http://windowfun.co.kr/game/"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_icon_member, new Object[]{"#8A39FF", "open", new Intent(_main.this, login.class)});}});
+        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_event, new Object[]{"#258CFF", "html", "http://windowfun.co.kr/type/typea/"});}});
+        //menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_member, new Object[]{"#30A400", "html", "http://windowfun.co.kr/type/typeb/"});}});
+        //menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_point, new Object[]{"#FF4B32", "html", "http://windowfun.co.kr/type/typec/"});}});
+        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_retrieval, new Object[]{"#8A39FF", "html", "http://windowfun.co.kr/type/typed/"});}});
+        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_store, new Object[]{"#FF6A00", "html", "http://windowfun.co.kr/type/typee/"});}});
+        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_home, new Object[]{"#258CFF", "html", "http://drive.google.com/viewerng/viewer?embedded=true&url=http://windowfun.co.kr/type/windowfun.pdf"});}});
+        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_search, new Object[]{"#30A400", "video", root_mp4 + File.separator + "c" + File.separator + "c1.mp4"});}});
+        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_game, new Object[]{"#FF4B32", "html", "http://windowfun.co.kr/game/"});}});
+        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_point, new Object[]{"#FF4B32", "open", new Intent(_main.this, text.class)});}});
+        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_member, new Object[]{"#8A39FF", "open", new Intent(_main.this, login.class)});}});
 
         menu.setMainMenu(ContextCompat.getColor(this, android.R.color.holo_red_dark),
                 R.drawable.wf_icon_menu,

@@ -51,21 +51,21 @@ public class home extends _Activity {
             findViewById(R.id.typea).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(home.this, main.class));
+                    startActivity(new Intent(home.this, demo.class));
                 }
             });
 
             findViewById(R.id.typeb1).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(home.this, main2.class));
+                    startActivity(new Intent(home.this, demo2.class));
                 }
             });
 
             findViewById(R.id.typeb2).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(home.this, main3.class));
+                    startActivity(new Intent(home.this, demo3.class));
                 }
             });
 
@@ -174,7 +174,7 @@ public class home extends _Activity {
     private Runnable open = new Runnable() {
         @Override
         public void run() {
-            startActivity(new Intent(home.this, main4.class));
+            startActivity(new Intent(home.this, main.class));
         }
     };
 

@@ -6,7 +6,7 @@ import android.util.Log;
  * Created by isyoon on 2017-07-17.
  */
 
-public class Application extends android.app.Application {
+class Application extends android.app.Application {
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
 

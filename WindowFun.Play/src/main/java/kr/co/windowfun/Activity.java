@@ -5,15 +5,15 @@ import android.util.Log;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
-import kr.co.windowfun.app.Activity2;
+import kr.co.windowfun.app.__Activity;
 import kr.co.windowfun.widget._TAG;
 
 /**
- * JSON데이터처리<br>
+ * JSON데이터처리
  * Created by isyoon on 2017-07-25.
  */
 
-class Activity extends Activity2 implements _TAG {
+class Activity extends __Activity implements _TAG {
     protected _Application getApp() {
         return (_Application) getApplication();
     }

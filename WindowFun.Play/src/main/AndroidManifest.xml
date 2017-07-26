@@ -59,19 +59,19 @@
             android:label="@string/app_name"
             android:screenOrientation="sensorLandscape"/>
         <activity
+            android:name="kr.co.windowfun.demo"
+            android:label="@string/app_name"
+            android:screenOrientation="sensorLandscape"/>
+        <activity
+            android:name="kr.co.windowfun.demo2"
+            android:label="@string/app_name"
+            android:screenOrientation="sensorLandscape"/>
+        <activity
+            android:name="kr.co.windowfun.demo3"
+            android:label="@string/app_name"
+            android:screenOrientation="sensorLandscape"/>
+        <activity
             android:name="kr.co.windowfun.main"
-            android:label="@string/app_name"
-            android:screenOrientation="sensorLandscape"/>
-        <activity
-            android:name="kr.co.windowfun.main2"
-            android:label="@string/app_name"
-            android:screenOrientation="sensorLandscape"/>
-        <activity
-            android:name="kr.co.windowfun.main3"
-            android:label="@string/app_name"
-            android:screenOrientation="sensorLandscape"/>
-        <activity
-            android:name="kr.co.windowfun.main4"
             android:label="@string/app_name"
             android:screenOrientation="sensorLandscape"/>
         <activity

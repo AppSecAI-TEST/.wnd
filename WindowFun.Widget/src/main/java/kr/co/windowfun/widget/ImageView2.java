@@ -155,7 +155,7 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
     private Runnable play = new Runnable() {
         @Override
         public void run() {
-            mHandler.removeCallbacks(call);
+            mHandler.removeCallbacks(complete);
             int r = ImageView2.this.r.nextInt(TIMER_JPG_LONG - TIMER_JPG_SHORT + 1) + TIMER_JPG_SHORT;
             if (ImageView2.this.index < ImageView2.this.path.size()) {
                 Uri uri = Uri.parse(path.get(index));
@@ -168,15 +168,15 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
             if (length < 0) {
                 length = r;
             }
-            mHandler.postDelayed(call, length);
+            mHandler.postDelayed(complete, length);
         }
     };
 
 
-    private Runnable call = new Runnable() {
+    private Runnable complete = new Runnable() {
         @Override
         public void run() {
-            if (mContentListener != null) mContentListener.onCompletion();
+            if (mCListener != null) mCListener.onCompletion(ImageView2.this);
         }
     };
 
@@ -196,7 +196,7 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
     @Override
     public void stop() {
         length = -1;
-        mHandler.removeCallbacks(call);
+        mHandler.removeCallbacks(complete);
         mHandler.removeCallbacks(play);
         mHandler.removeCallbacks(prev);
         mHandler.removeCallbacks(next);

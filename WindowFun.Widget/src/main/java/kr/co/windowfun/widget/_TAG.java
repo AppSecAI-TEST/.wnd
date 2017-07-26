@@ -8,6 +8,8 @@ import android.os.Handler;
  */
 
 public interface _TAG {
+    boolean DEBUG = BuildConfig.DEBUG;
+
     String root = Environment.getExternalStorageDirectory().getAbsolutePath();
     String root_mp4 = root + "/.mp4";
 

@@ -12,10 +12,11 @@ import cz.msebera.android.httpclient.Header;
 import kr.co.windowfun.api.JsonHttpResponseHandler2;
 
 /**
+ * JSON전송
  * Created by isyoon on 2017-07-17.
  */
 
-public class Activity2 extends Activity {
+class Activity2 extends Activity {
     AsyncHttpClient client = new AsyncHttpClient();
 
     private JsonHttpResponseHandler2 response = new JsonHttpResponseHandler2() {
@@ -27,16 +28,16 @@ public class Activity2 extends Activity {
         }
 
         @Override
-        public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-            Log.wtf(__CLASSNAME__, getMethodName() + "\n[status]\n" + statusCode + "\n[header]\n" + headers + "\n[response]\n" + response);
-            super.onSuccess(statusCode, headers, response);
-        }
-
-        @Override
         public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
             Log.wtf(__CLASSNAME__, getMethodName() + "\n[status]\n" + statusCode + "\n[header]\n" + headers + "\n[headers]\n" + throwable + "\n[errorResponse]\n" + errorResponse);
             super.onFailure(statusCode, headers, throwable, errorResponse);
             Activity2.this.onFailure(statusCode, headers, throwable, errorResponse);
+        }
+
+        @Override
+        public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+            Log.wtf(__CLASSNAME__, getMethodName() + "\n[status]\n" + statusCode + "\n[header]\n" + headers + "\n[response]\n" + response);
+            super.onSuccess(statusCode, headers, response);
         }
 
         @Override
@@ -58,7 +59,6 @@ public class Activity2 extends Activity {
         }
     };
 
-
     public void setResponse(JsonHttpResponseHandler2 response) {
         this.response = response;
     }
@@ -71,6 +71,16 @@ public class Activity2 extends Activity {
     }
 
     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+    }
+
+    protected void send(String url) {
+        Log.d(__CLASSNAME__, getMethodName() + ":" + url);
+        client.post(url, response);
+    }
+
+    protected void send(String url, RequestParams params) {
+        Log.d(__CLASSNAME__, getMethodName() + ":" + url + ":" + params);
+        client.post(url, params, response);
     }
 
     protected String getString(JSONObject response, String name) {
@@ -116,15 +126,5 @@ public class Activity2 extends Activity {
             e.printStackTrace();
         }
         return null;
-    }
-
-    protected void send(String url) {
-        Log.d(__CLASSNAME__, getMethodName() + ":" + url);
-        client.post(url, response);
-    }
-
-    protected void send(String url, RequestParams params) {
-        Log.d(__CLASSNAME__, getMethodName() + ":" + url + ":" + params);
-        client.post(url, params, response);
     }
 }

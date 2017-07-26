@@ -151,7 +151,7 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
                 if (mOnErrorListener != null) {
                     mOnErrorListener.onError(mp, what, extra);
                 }
-                if (mContentListener != null) mContentListener.onError();
+                if (mCListener != null) mCListener.onError(VideoView2.this);
                 return true;
             }
         });
@@ -165,7 +165,7 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
                 if (mOnPreparedListener != null) {
                     mOnPreparedListener.onPrepared(mp);
                 }
-                if (mContentListener != null) mContentListener.onPrepared();
+                if (mCListener != null) mCListener.onPrepared(VideoView2.this);
             }
         });
         super.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -174,7 +174,7 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
                 if (mOnCompletionListener != null) {
                     mOnCompletionListener.onCompletion(mp);
                 }
-                if (mContentListener != null) mContentListener.onCompletion();
+                if (mCListener != null) mCListener.onCompletion(VideoView2.this);
             }
         });
         super.setOnTouchListener(new OnTouchListener() {
@@ -233,7 +233,7 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
     private Runnable call = new Runnable() {
         @Override
         public void run() {
-            if (mContentListener != null) mContentListener.onCompletion();
+            if (mCListener != null) mCListener.onCompletion(VideoView2.this);
         }
     };
 

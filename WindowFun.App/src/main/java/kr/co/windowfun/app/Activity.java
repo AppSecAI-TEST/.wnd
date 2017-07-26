@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 /**
+ * 기본액티비티
  * Created by isyoon on 2017-07-06.
  */
 
