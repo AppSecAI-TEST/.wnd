@@ -6,8 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/WindowFun.API/WindowFun.API.iml" filepath="$PROJECT_DIR$/WindowFun.API/WindowFun.API.iml" />
       <module fileurl="file://$PROJECT_DIR$/WindowFun.App/WindowFun.App.iml" filepath="$PROJECT_DIR$/WindowFun.App/WindowFun.App.iml" />
       <module fileurl="file://$PROJECT_DIR$/WindowFun.Play/WindowFun.Play.iml" filepath="$PROJECT_DIR$/WindowFun.Play/WindowFun.Play.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WindowFun.Play.Widget/WindowFun.Play.Widget.iml" filepath="$PROJECT_DIR$/WindowFun.Play.Widget/WindowFun.Play.Widget.iml" />
       <module fileurl="file://$PROJECT_DIR$/WindowFun.Test/WindowFun.Test.iml" filepath="$PROJECT_DIR$/WindowFun.Test/WindowFun.Test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/WindowFun.Widget/WindowFun.Widget.iml" filepath="$PROJECT_DIR$/WindowFun.Widget/WindowFun.Widget.iml" />
     </modules>
   </component>
 </project>

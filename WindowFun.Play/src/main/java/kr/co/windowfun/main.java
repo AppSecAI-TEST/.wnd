@@ -11,7 +11,7 @@ import kr.co.windowfun.widget.VideoView2;
  * Created by isyoon on 2017-07-12.
  */
 
-public class main extends _main {
+public class main extends __main {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         //Log.w(__CLASSNAME__, getMethodName());

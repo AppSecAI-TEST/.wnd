@@ -31,5 +31,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(path: ':WindowFun.API')
     compile project(path: ':WindowFun.App')
-    compile project(path: ':WindowFun.Widget')
+    compile project(path: ':WindowFun.Play.Widget')
 }

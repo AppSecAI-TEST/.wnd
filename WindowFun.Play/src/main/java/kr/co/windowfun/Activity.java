@@ -30,12 +30,12 @@ class Activity extends __Activity implements _TAG {
             e.printStackTrace();
         }
         super.onSuccess(statusCode, headers, response);
-        error_message = getString(response, _error_message);
-        error_code = getString(response, _error_code);
-        result_code = getString(response, _result_code);
+        error_message = getString(response, result.error_message);
+        error_code = getString(response, result.error_code);
+        result_code = getString(response, result.result_code);
         //login data
-        getApp().token = getString(getJSONObject(response, _result_data), result_data.token);
-        getApp().userid = getString(getJSONObject(response, _result_data), result_data.userid);
+        getApp().token = getString(getJSONObject(response, result.result_data), result_data.token);
+        getApp().userid = getString(getJSONObject(response, result.result_data), result_data.userid);
         //Toast.makeText(this, getApp().userid + ":" + getApp().token, Toast.LENGTH_SHORT).show();
     }
 

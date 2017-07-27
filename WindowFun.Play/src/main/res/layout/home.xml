@@ -6,36 +6,26 @@
                 android:layout_height="match_parent"
                 tools:ignore="HardcodedText,ContentDescription,RelativeOverlap">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:clickable="true"
-        app:fabSize="mini"
-        app:srcCompat="@drawable/ic_action_left"/>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:clickable="true"
-        app:fabSize="mini"
-        app:srcCompat="@drawable/ic_action_left"/>
-
     <LinearLayout
-        android:id="@+id/button"
+        android:id="@+id/admin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/progress"
         android:orientation="vertical"
         android:visibility="visible">
 
         <RelativeLayout
+            android:id="@+id/loginout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+
+            <Button
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="로그인"
+                android:visibility="visible"/>
 
             <Button
                 android:id="@+id/logout"
@@ -44,12 +34,6 @@
                 android:text="로그아웃"
                 android:visibility="visible"/>
 
-            <Button
-                android:id="@+id/login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="로그인"
-                android:visibility="visible"/>
         </RelativeLayout>
 
         <Button
@@ -97,7 +81,7 @@
             <!--android:orientation="vertical"/>-->
             <!--</LinearLayout>-->
             <TextView
-                android:id="@+id/text"
+                android:id="@+id/report"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
@@ -131,6 +115,7 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/progress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -172,5 +157,35 @@
             app:mpb_progressStyle="horizontal"
             app:mpb_useIntrinsicPadding="false"/>
     </LinearLayout>
+
+    <!--app:srcCompat="@drawable/ic_action_left"-->
+    <!--app:fabSize="auto"-->
+    <ImageButton
+        android:id="@+id/left"
+        style="@style/action_button_layout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        android:longClickable="true"
+        android:tint="@android:color/white"
+        android:visibility="visible"
+        app:backgroundTint="@android:color/transparent"
+        />
+
+    <!--app:srcCompat="@drawable/ic_action_right"-->
+    <!--app:fabSize="auto"-->
+    <ImageButton
+        android:id="@+id/right"
+        style="@style/action_button_layout"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        android:longClickable="true"
+        android:tint="@android:color/white"
+        android:visibility="visible"
+        app:backgroundTint="@android:color/transparent"
+        />
 
 </RelativeLayout>

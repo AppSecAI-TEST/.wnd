@@ -35,21 +35,21 @@ class Activity3 extends Activity2 {
             @Override
             public void onProgress(long bytesWritten, long totalSize) {
                 //Log.i(__CLASSNAME__, getMethodName() + "\n" + src + "\n[bytesWritten]" + bytesWritten + "\n[totalSize]" + totalSize);
-                super.onProgress(bytesWritten, totalSize);
+                if (BuildConfig.DEBUG) super.onProgress(bytesWritten, totalSize);
                 Activity3.this.onProgress(src, dst, bytesWritten, totalSize);
             }
         });
     }
 
     protected void onFailure(String src, String dst, int statusCode, Header[] headers, Throwable throwable, File file) {
-        Log.w(__CLASSNAME__, getMethodName() + "\n[src]" + src + "\n[dst]" + dst + "\n[statusCode]" + statusCode + "\n[headers]" + headers + "\n[throwable]" + throwable + "\n[file]" + file);
+        Log.e(__CLASSNAME__, getMethodName() + "\n[src]" + src + "\n[dst]" + dst + "\n[statusCode]" + statusCode + "\n[headers]" + headers + "\n[throwable]" + throwable + "\n[file]" + file);
     }
 
     protected void onSuccess(String src, String dst, int statusCode, Header[] headers, File response) {
-        Log.w(__CLASSNAME__, getMethodName() + "\n[src]" + src + "\n[dst]" + dst + "\n[statusCode]" + statusCode + "\n[headers]" + headers + "\n[response]" + response);
+        Log.i(__CLASSNAME__, getMethodName() + "\n[src]" + src + "\n[dst]" + dst + "\n[statusCode]" + statusCode + "\n[headers]" + headers + "\n[response]" + response);
     }
 
     protected void onProgress(String src, String dst, long bytesWritten, long totalSize) {
-        //Log.i(__CLASSNAME__, getMethodName() + "\n[src]" + src + "\n[dst]" + dst + "\n[bytesWritten]" + bytesWritten + "\n[totalSize]" + totalSize);
+        //Log.v(__CLASSNAME__, getMethodName() + "\n[src]" + src + "\n[dst]" + dst + "\n[bytesWritten]" + bytesWritten + "\n[totalSize]" + totalSize);
     }
 }

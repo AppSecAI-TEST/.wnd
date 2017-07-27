@@ -109,10 +109,10 @@ public class CLayout extends RelativeLayout implements _Content, _TAG, CListener
             if (CLayout.this.index < CLayout.this.contents.length()) {
                 String division = ((JSONObject) contents.get(index)).getString(result_c.type);
                 String title = ((JSONObject) contents.get(index)).getString(result_c.title);
-                String filename = ((JSONObject) contents.get(index)).getString(result_c.filename);
-                String contents_order = ((JSONObject) contents.get(index)).getString(result_c.contents_order);
+                String filename = ((JSONObject) contents.get(index)).getString(result_c.file_name);
+                String contents_order = ((JSONObject) contents.get(index)).getString(result_c.play_length);
                 Uri uri = Uri.parse(!TextUtils.isEmpty(filename) ? filename : title);
-                //Log.w(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri + "<-" + type + ":" + title + ":" + filename + ":" + contents_order);
+                //Log.w(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri + "<-" + type + ":" + title + ":" + file_name + ":" + play_length);
                 open(uri);
             }
         } catch (Exception e) {
@@ -173,7 +173,7 @@ public class CLayout extends RelativeLayout implements _Content, _TAG, CListener
         public void run() {
             try {
                 String division = ((JSONObject) contents.get(index)).getString(result_c.type);
-                String contents_order = ((JSONObject) contents.get(index)).getString(result_c.contents_order);
+                String contents_order = ((JSONObject) contents.get(index)).getString(result_c.play_length);
                 int length = Integer.parseInt(contents_order) * 1000;
                 //length /= 10; //test
                 //Log.w(__CLASSNAME__,getMethodName() + ":" + type);

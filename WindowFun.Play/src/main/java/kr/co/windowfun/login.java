@@ -47,7 +47,7 @@ public class login extends _Activity {
                 }
             }
         });
-        ((EditText)findViewById(R.id.pw)).setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        ((EditText) findViewById(R.id.pw)).setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
@@ -55,7 +55,8 @@ public class login extends _Activity {
                     send();
                     handled = true;
                 }
-                return handled;            }
+                return handled;
+            }
         });
 
 
@@ -73,11 +74,8 @@ public class login extends _Activity {
             }
         });
 
-        if (!getApp().isLogin()) {
-            showLogIn();
-        } else {
-            hideLogin();
-        }
+        if (getApp().isLogin()) hideLogin();
+        else showLogIn();
     }
 
     private Runnable showLogin = new Runnable() {

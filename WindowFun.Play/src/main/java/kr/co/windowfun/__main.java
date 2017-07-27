@@ -30,7 +30,11 @@ import kr.co.windowfun.widget.ImageView2;
 import kr.co.windowfun.widget.TextView2;
 import kr.co.windowfun.widget.VideoView2;
 
-public class _main extends _Activity {
+/**
+ * Created by isyoon on 2017-07-03.
+ */
+
+public class __main extends _Activity {
     protected ArrayList<TextView2> texts = new ArrayList<>();
     protected ArrayList<String> txt = new ArrayList<>();
     protected ArrayList<ImageView2> images = new ArrayList<>();
@@ -198,8 +202,8 @@ public class _main extends _Activity {
         menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_home, new Object[]{"#258CFF", "html", "http://drive.google.com/viewerng/viewer?embedded=true&url=http://windowfun.co.kr/type/windowfun.pdf"});}});
         menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_search, new Object[]{"#30A400", "video", root_mp4 + File.separator + "c" + File.separator + "c1.mp4"});}});
         menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_game, new Object[]{"#FF4B32", "html", "http://windowfun.co.kr/game/"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_point, new Object[]{"#FF4B32", "open", new Intent(_main.this, text.class)});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_member, new Object[]{"#8A39FF", "open", new Intent(_main.this, login.class)});}});
+        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_point, new Object[]{"#FF4B32", "open", new Intent(__main.this, text.class)});}});
+        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_member, new Object[]{"#8A39FF", "open", new Intent(__main.this, login.class)});}});
 
         menu.setMainMenu(ContextCompat.getColor(this, android.R.color.holo_red_dark),
                 R.drawable.wf_icon_menu,
@@ -355,7 +359,7 @@ public class _main extends _Activity {
     private void openHTML(String url) {
         //Log.w(__CLASSNAME__, getMethodName() + ":" + url);
         if (!TextUtils.isEmpty(url)) {
-            Intent intent = new Intent(_main.this, html.class);
+            Intent intent = new Intent(__main.this, html.class);
             intent.putExtra("url", url);
             startActivity(intent);
         }
@@ -377,7 +381,7 @@ public class _main extends _Activity {
     private void openVIDEO(String url) {
         //Log.w(__CLASSNAME__, getMethodName() + ":" + url);
         if (!TextUtils.isEmpty(url)) {
-            Intent intent = new Intent(_main.this, video.class);
+            Intent intent = new Intent(__main.this, video.class);
             intent.putExtra("url", url);
             startActivity(intent);
         }

@@ -11,27 +11,6 @@ import android.util.Log;
  */
 
 class Activity2 extends Activity {
-    //private Runnable getLoginInfo = new Runnable() {
-    //    @Override
-    //    public void run() {
-    //        if (!isACTIONMAIN()) {
-    //            return;
-    //        }
-    //        getApp().getLoginInfo();
-    //        Log.d(__CLASSNAME__, getMethodName() + ":" + getApp().userid + ":" + getApp().token);
-    //        if (!getApp().isLogin()) {
-    //            Log.wtf(__CLASSNAME__, getMethodName() + ":" + getApp().token);
-    //            login();
-    //        }
-    //    }
-    //};
-    //
-    //protected void getLoginInfo() {
-    //    mHandler.removeCallbacks(getLoginInfo);
-    //    mHandler.postDelayed(getLoginInfo, TIMER_OPEN_LONG);
-    //}
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +22,7 @@ class Activity2 extends Activity {
         public void run() {
             Log.d(__CLASSNAME__, getMethodName() + ":" + getApp().token);
             Intent intent = new Intent(Activity2.this, login.class);
-            startActivityForResult(intent, RESULT_LOGIN);
+            startActivityForResult(intent, _RESULT_LOGIN);
         }
     };
 

@@ -50,7 +50,7 @@ public class CFile implements _TAG {
         this.filename = filename;
         this.filesize = filesize;
         if (TextUtils.isEmpty(filename) || TextUtils.isEmpty(filesize)) {
-            throw new Exception("No File Info" + "[filename]" + filename + "[filesize]" + filesize);
+            throw new Exception("No File Info" + "[file_name]" + filename + "[filesize]" + filesize);
         }
         if (!TextUtils.isEmpty(filename) && !TextUtils.isEmpty(filesize)) {
             this.name = _TextUtil.getFileName(filename);
@@ -58,7 +58,7 @@ public class CFile implements _TAG {
             this.url = _TextUtil.getFileUrl(filename);
             this.file = new File(this.path);
             this.size = this.file != null ? this.file.length() : 0L;
-            //Log.wtf(__CLASSNAME__, getMethodName() + this.file + "\n[filesize]" + filesize + "\n[uri]" + filename + "\n[url]" + url + "\n[name]" + name + "\n[path]" + path + "\n[size]" + size);
+            //Log.wtf(__CLASSNAME__, getMethodName() + this.file + "\n[filesize]" + filesize + "\n[uri]" + file_name + "\n[url]" + url + "\n[name]" + name + "\n[path]" + path + "\n[size]" + size);
         }
     }
 
