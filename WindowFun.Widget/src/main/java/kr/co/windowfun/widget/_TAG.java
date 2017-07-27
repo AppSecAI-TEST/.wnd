@@ -1,5 +1,6 @@
 package kr.co.windowfun.widget;
 
+import android.app.Activity;
 import android.os.Environment;
 import android.os.Handler;
 
@@ -14,6 +15,16 @@ public interface _TAG {
     String root_mp4 = root + "/.mp4";
 
     Handler mHandler = new Handler();
+
+    //PROGRESS
+    float PROGRESS_PERCENT = 100f;
+    float PROGRESS_MAX = 1000f;
+    float PROGRESS_DOWN = PROGRESS_MAX * 0.9f;
+
+    //RESULT
+    int RESULT_OK = Activity.RESULT_OK;
+    int RESULT_CANCELED = Activity.RESULT_CANCELED;
+    int RESULT_LOGIN = Activity.RESULT_FIRST_USER;
 
     //TIMER
     int TIMER_OPEN_SHORT = 100;
@@ -37,8 +48,8 @@ public interface _TAG {
 
     //result_c
     interface result_c {
-        //division: "M",
-        String division = "division";
+        //type: "M",
+        String type = "division";
         //title: "9번동영상",
         String title = "title";
         //start_day: "20170701",

@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.wnd.iml" filepath="$PROJECT_DIR$/.wnd.iml" />
       <module fileurl="file://$PROJECT_DIR$/WindowFun.API/WindowFun.API.iml" filepath="$PROJECT_DIR$/WindowFun.API/WindowFun.API.iml" />
-      <module fileurl="file://$PROJECT_DIR$/WindowFun.Anim/WindowFun.Anim.iml" filepath="$PROJECT_DIR$/WindowFun.Anim/WindowFun.Anim.iml" />
       <module fileurl="file://$PROJECT_DIR$/WindowFun.App/WindowFun.App.iml" filepath="$PROJECT_DIR$/WindowFun.App/WindowFun.App.iml" />
       <module fileurl="file://$PROJECT_DIR$/WindowFun.Play/WindowFun.Play.iml" filepath="$PROJECT_DIR$/WindowFun.Play/WindowFun.Play.iml" />
       <module fileurl="file://$PROJECT_DIR$/WindowFun.Test/WindowFun.Test.iml" filepath="$PROJECT_DIR$/WindowFun.Test/WindowFun.Test.iml" />

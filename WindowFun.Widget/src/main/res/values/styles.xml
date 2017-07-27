@@ -4,7 +4,6 @@
     <style name="text_banner_layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <!--<item name="android:layout_margin">@dimen/floating_action_button_margin_small</item>-->
         <item name="android:gravity">top|center</item>
         <item name="android:textColor">#fff</item>
         <item name="android:textSize">92sp</item>

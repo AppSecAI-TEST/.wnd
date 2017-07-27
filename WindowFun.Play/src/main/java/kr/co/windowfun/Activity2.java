@@ -43,7 +43,7 @@ class Activity2 extends Activity {
         public void run() {
             Log.d(__CLASSNAME__, getMethodName() + ":" + getApp().token);
             Intent intent = new Intent(Activity2.this, login.class);
-            startActivity(intent);
+            startActivityForResult(intent, RESULT_LOGIN);
         }
     };
 

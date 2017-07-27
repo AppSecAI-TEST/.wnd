@@ -48,21 +48,21 @@ public class home extends _Activity {
         send();
 
         try {
-            findViewById(R.id.typea).setOnClickListener(new View.OnClickListener() {
+            findViewById(R.id.demo).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(home.this, demo.class));
                 }
             });
 
-            findViewById(R.id.typeb1).setOnClickListener(new View.OnClickListener() {
+            findViewById(R.id.demo2).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(home.this, demo2.class));
                 }
             });
 
-            findViewById(R.id.typeb2).setOnClickListener(new View.OnClickListener() {
+            findViewById(R.id.demo3).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(home.this, demo3.class));
@@ -108,6 +108,14 @@ public class home extends _Activity {
             showLogIn();
         } else {
             hideLogin();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RESULT_LOGIN) {
+            send();
         }
     }
 
@@ -221,7 +229,7 @@ public class home extends _Activity {
 
     private void delete(JSONArray results) {
         //Log.wtf(__CLASSNAME__, getMethodName() + results);
-        for (int i = 0; i < results.length(); i++) {
+        for (int i = 0; i < (results != null ? results.length() : 0); i++) {
             try {
                 JSONObject item = (JSONObject) results.get(i);
                 final String filename = item.getString(result_c.filename);
@@ -355,9 +363,9 @@ public class home extends _Activity {
                 text += "\t";
                 text += "(" + (index + 1) + "/" + lists.size() + "건" + ")";
                 text += "\t";
-                //text += "(" + (int) ((float) bytesWritten / (float) totalSize * 100f) + "/" + (int) ((float) totalSize / (float) totalSize * 100f) + "%" + ")";
+                //text += "(" + (int) ((float) bytesWritten / (float) totalSize * PROGRESS_PERCENT) + "/" + (int) ((float) totalSize / (float) totalSize * PROGRESS_PERCENT) + "%" + ")";
                 //text += "\t";
-                text += "(" + (int) ((float) bytes / (float) totalSizes * 100f) + "/" + (int) ((float) totalSizes / (float) totalSizes * 100f) + "%" + ")";
+                text += "(" + (int) ((float) bytes / (float) totalSizes * PROGRESS_PERCENT) + "/" + (int) ((float) totalSizes / (float) totalSizes * PROGRESS_PERCENT) + "%" + ")";
                 text += "\t";
                 //text += Uri.decode(src);
                 //text += "\t";
@@ -366,23 +374,26 @@ public class home extends _Activity {
                 //text += _TextUtil.getFileName(dst);
                 //text += "\t";
                 ((TextView) findViewById(R.id.label)).setText(text);
+                //color
+                int blue = android.R.color.holo_blue_light;
+                int red = android.R.color.holo_red_light;
                 //progress1
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    ((ProgressBar) findViewById(R.id.progress1)).setProgressTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), android.R.color.holo_blue_dark)));
+                    ((ProgressBar) findViewById(R.id.progress1)).setProgressTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), blue)));
                 } else {
-                    ((ProgressBar) findViewById(R.id.progress1)).getProgressDrawable().setColorFilter(ContextCompat.getColor(getApplicationContext(), android.R.color.holo_blue_dark), android.graphics.PorterDuff.Mode.SRC_IN);
+                    ((ProgressBar) findViewById(R.id.progress1)).getProgressDrawable().setColorFilter(ContextCompat.getColor(getApplicationContext(), blue), android.graphics.PorterDuff.Mode.SRC_IN);
                 }
-                ((ProgressBar) findViewById(R.id.progress1)).setMax((int) totalSize);
-                ((ProgressBar) findViewById(R.id.progress1)).setProgress((int) bytesWritten);
+                ((ProgressBar) findViewById(R.id.progress1)).setMax((int) (/*totalSize / totalSize * */PROGRESS_MAX));
+                ((ProgressBar) findViewById(R.id.progress1)).setProgress((int) ((float) bytesWritten / (float) totalSize * PROGRESS_MAX));
                 //progress2
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    ((ProgressBar) findViewById(R.id.progress2)).setProgressTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), android.R.color.holo_red_dark)));
+                    ((ProgressBar) findViewById(R.id.progress2)).setProgressTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), red)));
                 } else {
-                    ((ProgressBar) findViewById(R.id.progress2)).getProgressDrawable().setColorFilter(ContextCompat.getColor(getApplicationContext(), android.R.color.holo_red_dark), android.graphics.PorterDuff.Mode.SRC_IN);
+                    ((ProgressBar) findViewById(R.id.progress2)).getProgressDrawable().setColorFilter(ContextCompat.getColor(getApplicationContext(), red), android.graphics.PorterDuff.Mode.SRC_IN);
                 }
-                ((ProgressBar) findViewById(R.id.progress2)).setMax((int) totalSizes);
-                ((ProgressBar) findViewById(R.id.progress2)).setProgress((int) bytes);
-                if (bytes == totalSizes || (int) ((float) bytes / (float) totalSizes * 100f) == 99) {
+                ((ProgressBar) findViewById(R.id.progress2)).setMax((int) (/*totalSizes / totalSizes * */PROGRESS_MAX));
+                ((ProgressBar) findViewById(R.id.progress2)).setProgress((int) ((float) bytes / (float) totalSizes * PROGRESS_MAX));
+                if (bytes == totalSizes || (int) ((float) bytes / (float) totalSizes * PROGRESS_MAX) == PROGRESS_DOWN) {
                     ((TextView) findViewById(R.id.label)).setText("다운완료...");
                 }
             } catch (Exception e) {

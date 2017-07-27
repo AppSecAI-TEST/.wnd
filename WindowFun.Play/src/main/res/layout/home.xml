@@ -4,61 +4,106 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:ignore="HardcodedText,ContentDescription">
+                tools:ignore="HardcodedText,ContentDescription,RelativeOverlap">
 
-    <RelativeLayout
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_action_left"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_action_left"/>
+
+    <LinearLayout
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:visibility="visible">
 
-        <Button
-            android:id="@+id/typea"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/delete"
-            android:text="A타입"/>
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="로그인"/>
+            <Button
+                android:id="@+id/logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="로그아웃"
+                android:visibility="visible"/>
+
+            <Button
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="로그인"
+                android:visibility="visible"/>
+        </RelativeLayout>
 
         <Button
             android:id="@+id/send"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/login"
-            android:text="시작"/>
+            android:text="시작"
+            android:visibility="visible"/>
 
         <Button
             android:id="@+id/delete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/send"
-            android:text="삭제"/>
+            android:text="삭제"
+            android:visibility="visible"/>
 
         <Button
-            android:id="@+id/typeb1"
+            android:id="@+id/demo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/typea"
-            android:text="B타입(동영상)"/>
+            android:text="데모:A타입"
+            android:visibility="visible"/>
 
         <Button
-            android:id="@+id/typeb2"
+            android:id="@+id/demo2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/typeb1"
-            android:text="B타입(이미지)"/>
+            android:text="데모:B타입(동영상)"
+            android:visibility="visible"/>
 
         <Button
-            android:id="@+id/logout"
+            android:id="@+id/demo3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="로그아웃"/>
-    </RelativeLayout>
+            android:text="데모:B타입(이미지)"
+            android:visibility="visible"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical"/>-->
+            <!--</LinearLayout>-->
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </ScrollView>
+
+    </LinearLayout>
 
 
     <RelativeLayout

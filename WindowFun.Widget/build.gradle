@@ -38,4 +38,18 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC1'
     //DreaminginCodeZH/MaterialProgressBar
     compile 'me.zhanghai.android.materialprogressbar:library:1.4.1'
+    //hanks-zyh/HTextView
+    String htextview_version = "0.1.1"
+    compile "com.hanks:htextview-base:$htextview_version"    // base library
+    compile "com.hanks:htextview-fade:$htextview_version"        // optional
+    compile "com.hanks:htextview-line:$htextview_version"        // optional
+    compile "com.hanks:htextview-rainbow:$htextview_version"     // optional
+    compile "com.hanks:htextview-fade:$htextview_version"        // optional
+    compile "com.hanks:htextview-typer:$htextview_version"       // optional
+    compile "com.hanks:htextview-scale:$htextview_version"       // optional
+    compile "com.hanks:htextview-evaporate:$htextview_version"   // optional
+    compile "com.hanks:htextview-fall:$htextview_version"        // optional
+    //daimajia/AndroidViewAnimations
+    compile 'com.daimajia.easing:library:2.0@aar'
+    compile 'com.daimajia.androidanimations:library:2.2@aar'
 }

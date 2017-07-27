@@ -39,9 +39,6 @@ public class _main extends _Activity {
     protected ArrayList<String> mp4 = new ArrayList<>();
 
     private void path() {
-        if (!requestForPermission()) {
-            return;
-        }
         //Log.wtf(__CLASSNAME__, getMethodName() + "List: " + root_mp4);
         File directory = new File(root_mp4);
         File[] files = directory.listFiles();
@@ -135,8 +132,6 @@ public class _main extends _Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        menus();
-        path();
         mHandler.postDelayed(init, TIMER_OPEN_SHORT);
     }
 
@@ -148,6 +143,11 @@ public class _main extends _Activity {
     };
 
     protected void init() {
+        if (!requestForPermission()) {
+            return;
+        }
+        menus();
+        path();
         content();
         videos();
         images();

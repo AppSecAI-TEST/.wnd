@@ -107,12 +107,12 @@ public class CLayout extends RelativeLayout implements _Content, _TAG, CListener
         }
         try {
             if (CLayout.this.index < CLayout.this.contents.length()) {
-                String division = ((JSONObject) contents.get(index)).getString(result_c.division);
+                String division = ((JSONObject) contents.get(index)).getString(result_c.type);
                 String title = ((JSONObject) contents.get(index)).getString(result_c.title);
                 String filename = ((JSONObject) contents.get(index)).getString(result_c.filename);
                 String contents_order = ((JSONObject) contents.get(index)).getString(result_c.contents_order);
                 Uri uri = Uri.parse(!TextUtils.isEmpty(filename) ? filename : title);
-                //Log.w(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri + "<-" + division + ":" + title + ":" + filename + ":" + contents_order);
+                //Log.w(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri + "<-" + type + ":" + title + ":" + filename + ":" + contents_order);
                 open(uri);
             }
         } catch (Exception e) {
@@ -139,8 +139,8 @@ public class CLayout extends RelativeLayout implements _Content, _TAG, CListener
         stop();
 
         try {
-            String division = ((JSONObject) contents.get(index)).getString(result_c.division);
-            //Log.i(__CLASSNAME__,getMethodName() + ":" + division + ":" + url);
+            String division = ((JSONObject) contents.get(index)).getString(result_c.type);
+            //Log.i(__CLASSNAME__,getMethodName() + ":" + type + ":" + url);
             switch (division) {
                 case "T":
                     showText();
@@ -172,11 +172,11 @@ public class CLayout extends RelativeLayout implements _Content, _TAG, CListener
         @Override
         public void run() {
             try {
-                String division = ((JSONObject) contents.get(index)).getString(result_c.division);
+                String division = ((JSONObject) contents.get(index)).getString(result_c.type);
                 String contents_order = ((JSONObject) contents.get(index)).getString(result_c.contents_order);
                 int length = Integer.parseInt(contents_order) * 1000;
                 //length /= 10; //test
-                //Log.w(__CLASSNAME__,getMethodName() + ":" + division);
+                //Log.w(__CLASSNAME__,getMethodName() + ":" + type);
                 switch (division) {
                     case "T":
                         showText();

@@ -1,6 +1,8 @@
 # .mp4
 .mp4/
 .mp4.zip
+_mp4/
+_mp4.zip
 # Built application files
 *.apk
 *.ap_

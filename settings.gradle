@@ -1,5 +1,5 @@
 include ':WindowFun.API'
-include ':WindowFun.Anim'
+//include ':WindowFun.Anim'
 include ':WindowFun.App'
 include ':WindowFun.Widget'
 include ':WindowFun.Play'
