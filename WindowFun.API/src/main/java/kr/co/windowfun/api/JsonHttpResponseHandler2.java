@@ -26,7 +26,7 @@ public class JsonHttpResponseHandler2 extends JsonHttpResponseHandler {
     @Override
     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
         //try {
-        //    Log.d(__CLASSNAME__, "onSuccess()" + "\n[status]\n" + statusCode + "\n[header]\n" + headers + "\n[response]\n" + response.toString(2));
+        //    Log.d(__CLASSNAME__, "onSuccess()" + "\n[status]\n" + statusCode + "\n[headers]\n" + debugHeaders(headers) + "\n[response]\n" + response.toString(2));
         //} catch (Exception e) {
         //    e.printStackTrace();
         //}
@@ -43,7 +43,7 @@ public class JsonHttpResponseHandler2 extends JsonHttpResponseHandler {
     //@Override
     //public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
     //    try {
-    //        Log.d(__CLASSNAME__, "onSuccess()" + "\n[status]\n" + statusCode + "\n[header]\n" + headers + "\n[response]\n" + response.toString(2));
+    //        Log.d(__CLASSNAME__, "onSuccess()" + "\n[status]\n" + statusCode + "\n[headers]\n" + debugHeaders(headers) + "\n[response]\n" + response.toString(2));
     //    } catch (Exception e) {
     //        e.printStackTrace();
     //    }
@@ -53,7 +53,7 @@ public class JsonHttpResponseHandler2 extends JsonHttpResponseHandler {
     //@Override
     //public void onSuccess(int statusCode, Header[] headers, String responseString) {
     //    try {
-    //        Log.d(__CLASSNAME__, "onSuccess()" + "\n[status]\n" + statusCode + "\n[header]\n" + headers + "\n[responseString]\n" + responseString);
+    //        Log.d(__CLASSNAME__, "onSuccess()" + "\n[status]\n" + statusCode + "\n[headers]\n" + debugHeaders(headers) + "\n[responseString]\n" + responseString);
     //    } catch (Exception e) {
     //        e.printStackTrace();
     //    }
@@ -71,7 +71,7 @@ public class JsonHttpResponseHandler2 extends JsonHttpResponseHandler {
     @Override
     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
         //try {
-        //    Log.d(__CLASSNAME__, "onFailure()" + "\n[status]\n" + statusCode + "\n[header]\n" + headers + "\n[throwable]\n" + throwable + "\n[errorResponse]\n" + errorResponse.toString(2));
+        //    Log.d(__CLASSNAME__, "onFailure()" + "\n[status]\n" + statusCode + "\n[headers]\n" + debugHeaders(headers) + "\n[throwable]\n" + throwable + "\n[errorResponse]\n" + errorResponse.toString(2));
         //} catch (Exception e) {
         //    e.printStackTrace();
         //}
@@ -89,7 +89,7 @@ public class JsonHttpResponseHandler2 extends JsonHttpResponseHandler {
     //@Override
     //public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
     //    try {
-    //        Log.d(__CLASSNAME__, "onFailure()" + "\n[status]\n" + statusCode + "\n[header]\n" + headers + "\n[throwable]\n" + throwable + "\n[errorResponse]\n" + errorResponse.toString(2));
+    //        Log.d(__CLASSNAME__, "onFailure()" + "\n[status]\n" + statusCode + "\n[headers]\n" + debugHeaders(headers) + "\n[throwable]\n" + throwable + "\n[errorResponse]\n" + errorResponse.toString(2));
     //    } catch (Exception e) {
     //        e.printStackTrace();
     //    }
@@ -99,7 +99,7 @@ public class JsonHttpResponseHandler2 extends JsonHttpResponseHandler {
     //@Override
     //public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
     //    try {
-    //        Log.d(__CLASSNAME__, "onFailure()" + "\n[status]\n" + statusCode + "\n[header]\n" + headers + "\n[throwable]\n" + throwable + "\n[responseString]\n" + responseString + ":" + "\n[throwable]\n" + throwable);
+    //        Log.d(__CLASSNAME__, "onFailure()" + "\n[status]\n" + statusCode + "\n[headers]\n" + debugHeaders(headers) + "\n[responseString]\n" + responseString + ":" + "\n[throwable]\n" + throwable);
     //    } catch (Exception e) {
     //        e.printStackTrace();
     //    }

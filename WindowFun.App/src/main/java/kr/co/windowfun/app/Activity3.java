@@ -3,53 +3,128 @@ package kr.co.windowfun.app;
 import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.FileAsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
-import java.io.File;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
+import kr.co.windowfun.api.JsonHttpResponseHandler2;
 
 /**
- * 다운로드
- * Created by isyoon on 2017-07-26.
+ * JSON전송
+ * Created by isyoon on 2017-07-17.
  */
 
 class Activity3 extends Activity2 {
+    AsyncHttpClient client = new AsyncHttpClient();
 
-    protected void down(final String src, final String dst) {
-        Log.i(__CLASSNAME__, getMethodName() + ":" + src + ":" + dst);
-        AsyncHttpClient down = new AsyncHttpClient();
-        down.get(src, new FileAsyncHttpResponseHandler(new File(dst), false, false, true) {
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, File file) {
-                //Log.w(__CLASSNAME__, getMethodName() + "\n" + src + "\n[statusCode]" + statusCode + "\n[headers]" + headers + "\n[throwable]" + throwable + "\n[file]" + file);
-                Activity3.this.onFailure(src, dst, statusCode, headers, throwable, file);
-            }
+    private JsonHttpResponseHandler2 response = new JsonHttpResponseHandler2() {
+        @Override
+        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+            Log.e(__CLASSNAME__, getMethodName() + "\n[status]\n" + statusCode + "\n[headers]\n" + debugHeaders(headers) + "\n[response]\n" + response);
+            super.onSuccess(statusCode, headers, response);
+            Activity3.this.onSuccess(statusCode, headers, response);
+        }
 
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, File response) {
-                //Log.i(__CLASSNAME__, getMethodName() + "\n" + src + "\n[statusCode]" + statusCode + "\n[headers]" + headers + "\n[response]" + response);
-                Activity3.this.onSuccess(src, dst, statusCode, headers, response);
-            }
+        @Override
+        public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+            Log.e(__CLASSNAME__, getMethodName() + "\n[status]\n" + statusCode + "\n[headers]\n" + debugHeaders(headers) + "\n[throwable]\n" + throwable.getStackTrace() + "\n[errorResponse]\n" + errorResponse);
+            super.onFailure(statusCode, headers, throwable, errorResponse);
+            Activity3.this.onFailure(statusCode, headers, throwable, errorResponse);
+        }
 
-            @Override
-            public void onProgress(long bytesWritten, long totalSize) {
-                //Log.i(__CLASSNAME__, getMethodName() + "\n" + src + "\n[bytesWritten]" + bytesWritten + "\n[totalSize]" + totalSize);
-                if (BuildConfig.DEBUG) super.onProgress(bytesWritten, totalSize);
-                Activity3.this.onProgress(src, dst, bytesWritten, totalSize);
-            }
-        });
+        @Override
+        public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+            Log.e(__CLASSNAME__, getMethodName() + "\n[status]\n" + statusCode + "\n[headers]\n" + debugHeaders(headers) + "\n[response]\n" + response);
+            super.onSuccess(statusCode, headers, response);
+        }
+
+        @Override
+        public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+            Log.e(__CLASSNAME__, getMethodName() + "\n[status]\n" + statusCode + "\n[headers]\n" + debugHeaders(headers) + "\n[throwable]\n" + throwable.getStackTrace() + "\n[errorResponse]\n" + errorResponse);
+            super.onFailure(statusCode, headers, throwable, errorResponse);
+        }
+
+        @Override
+        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+            Log.e(__CLASSNAME__, getMethodName() + "\n[status]\n" + statusCode + "\n[headers]\n" + debugHeaders(headers) + "\n[responseString]\n" + responseString + "\n[throwable]\n" + throwable);
+            super.onFailure(statusCode, headers, responseString, throwable);
+        }
+
+        @Override
+        public void onSuccess(int statusCode, Header[] headers, String responseString) {
+            Log.e(__CLASSNAME__, getMethodName() + "\n[status]\n" + statusCode + "\n[headers]\n" + debugHeaders(headers) + "\n[responseString]\n" + responseString);
+            super.onSuccess(statusCode, headers, responseString);
+        }
+    };
+
+    public void setResponse(JsonHttpResponseHandler2 response) {
+        this.response = response;
     }
 
-    protected void onFailure(String src, String dst, int statusCode, Header[] headers, Throwable throwable, File file) {
-        Log.e(__CLASSNAME__, getMethodName() + "\n[src]" + src + "\n[dst]" + dst + "\n[statusCode]" + statusCode + "\n[headers]" + headers + "\n[throwable]" + throwable + "\n[file]" + file);
+    public JsonHttpResponseHandler2 getResponse() {
+        return this.response;
     }
 
-    protected void onSuccess(String src, String dst, int statusCode, Header[] headers, File response) {
-        Log.i(__CLASSNAME__, getMethodName() + "\n[src]" + src + "\n[dst]" + dst + "\n[statusCode]" + statusCode + "\n[headers]" + headers + "\n[response]" + response);
+    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
     }
 
-    protected void onProgress(String src, String dst, long bytesWritten, long totalSize) {
-        //Log.v(__CLASSNAME__, getMethodName() + "\n[src]" + src + "\n[dst]" + dst + "\n[bytesWritten]" + bytesWritten + "\n[totalSize]" + totalSize);
+    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+    }
+
+    protected void send(String url) {
+        Log.d(__CLASSNAME__, getMethodName() + ":" + url);
+        client.post(url, response);
+    }
+
+    protected void send(String url, RequestParams params) {
+        Log.d(__CLASSNAME__, getMethodName() + ":" + url + ":" + params);
+        client.post(url, params, response);
+    }
+
+    protected String getString(JSONObject response, String name) {
+        try {
+            return response.getString(name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    protected JSONObject getJSONObject(JSONObject response, String name) {
+        try {
+            return response.getJSONObject(name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    protected JSONArray getJSONArray(JSONObject response, String name) {
+        try {
+            return response.getJSONArray(name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    protected String toString(JSONObject response, int indentSpaces) {
+        try {
+            return response.toString(indentSpaces);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    protected String toString(JSONArray response, int indentSpaces) {
+        try {
+            return response.toString(indentSpaces);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

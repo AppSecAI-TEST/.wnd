@@ -41,42 +41,7 @@ class Activity extends android.app.Activity {
         return ste[idx].toString();
     }
 
-    /**
-     *
-     * @return
-     */
     protected boolean isACTIONMAIN() {
         return Intent.ACTION_MAIN.equalsIgnoreCase(getIntent().getAction());
-    }
-
-    public final String[] EXTERNAL_PERMS = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE
-    };
-
-    public final int EXTERNAL_REQUEST = 138;
-
-    public boolean requestForPermission() {
-        boolean isPermissionOn = true;
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!canAccessExternalSd()) {
-                isPermissionOn = false;
-                requestPermissions(EXTERNAL_PERMS, EXTERNAL_REQUEST);
-            }
-        }
-
-        return isPermissionOn;
-    }
-
-    public boolean canAccessExternalSd() {
-        return (hasPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE));
-    }
-
-    private boolean hasPermission(String perm) {
-        return (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(this, perm));
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

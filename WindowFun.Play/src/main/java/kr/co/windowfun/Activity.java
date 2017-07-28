@@ -25,7 +25,7 @@ class Activity extends __Activity implements _TAG {
     @Override
     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
         try {
-            Log.d(__CLASSNAME__, getMethodName() + "\n[status]\n" + statusCode + "\n[header]\n" + headers + "\n[response]\n" + response.toString(2));
+            Log.d(__CLASSNAME__, getMethodName() + "\n[status]\n" + statusCode + "\n[headers]\n" + debugHeaders(headers) + "\n[response]\n" + response.toString(2));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -42,7 +42,7 @@ class Activity extends __Activity implements _TAG {
     @Override
     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
         try {
-            Log.d(__CLASSNAME__, getMethodName() + "\n[status]\n" + statusCode + "\n[header]\n" + headers + "\n[throwable]\n" + throwable + "\n[errorResponse]\n" + errorResponse.toString(2));
+            Log.d(__CLASSNAME__, getMethodName() + "\n[status]\n" + statusCode + "\n[headers]\n" + debugHeaders(headers) + "\n[throwable]\n" + throwable + "\n[errorResponse]\n" + errorResponse.toString(2));
         } catch (Exception e) {
             e.printStackTrace();
         }

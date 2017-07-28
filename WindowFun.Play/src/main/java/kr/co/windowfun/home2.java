@@ -1,7 +1,5 @@
 package kr.co.windowfun;
 
-import android.app.*;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.net.Uri;
@@ -175,6 +173,7 @@ class home2 extends home {
     }
 
     private void send() {
+        clear();
         mHandler.removeCallbacks(send);
         mHandler.postDelayed(send, TIMER_OPEN_SHORT);
     }
@@ -243,7 +242,7 @@ class home2 extends home {
     }
 
     private void delete(JSONArray results) {
-        //Log.wtf(__CLASSNAME__, getMethodName() + results);
+        //Log.w(__CLASSNAME__, getMethodName() + results);
         for (int i = 0; i < (results != null ? results.length() : 0); i++) {
             try {
                 JSONObject item = (JSONObject) results.get(i);
@@ -254,7 +253,7 @@ class home2 extends home {
                 }
                 final CFile file = new CFile(filename, filesize);
                 if (file.equal()) {
-                    Log.wtf(__CLASSNAME__, getMethodName() + "[FILE]" + "[DEL]" + file.sizes() + ":" + file.exists() + ":" + file.equal() + "\n[file]" + file.file + "\n[filesize]" + filesize + "\n[uri]" + filename + "\n[url]" + file.url + "\n[name]" + file.name + "\n[path]" + file.path + "\n[size]" + file.size);
+                    Log.e(__CLASSNAME__, getMethodName() + "[FILE]" + "[DEL]" + file.sizes() + ":" + file.exists() + ":" + file.equal() + "\n[file]" + file.file + "\n[filesize]" + filesize + "\n[uri]" + filename + "\n[url]" + file.url + "\n[name]" + file.name + "\n[path]" + file.path + "\n[size]" + file.size);
                     new File(file.path).delete();
                 }
             } catch (Exception e) {
@@ -264,7 +263,7 @@ class home2 extends home {
         }
     }
 
-    Map<String, Uri> lists = new HashMap<>();
+    Map<String, Uri> adds = new HashMap<>();
 
     private void add(JSONArray results) {
         for (int i = 0; i < results.length(); i++) {
@@ -277,11 +276,10 @@ class home2 extends home {
                 }
                 final CFile file = new CFile(filename, filesize);
                 if (!file.sizes()) {
-                    if (lists.get(file.path) == null) {
-                        Log.wtf(__CLASSNAME__, getMethodName() + "[FILE]" + "[ADD]" + file.sizes() + ":" + file.exists() + ":" + file.equal() + "\n[file]" + file.file + "\n[filesize]" + filesize + "\n[uri]" + filename + "\n[url]" + file.url + "\n[name]" + file.name + "\n[path]" + file.path + "\n[size]" + file.size);
+                    if (adds.get(file.path) == null) {
+                        Log.e(__CLASSNAME__, getMethodName() + "[FILE]" + "[ADD]" + file.sizes() + ":" + file.exists() + ":" + file.equal() + "\n[file]" + file.file + "\n[filesize]" + filesize + "\n[uri]" + filename + "\n[url]" + file.url + "\n[name]" + file.name + "\n[path]" + file.path + "\n[size]" + file.size);
                         totalSizes += Long.parseLong(filesize);
-                        bytesWrittens.add(0L);
-                        lists.put(file.path, Uri.parse(filename));
+                        adds.put(file.path, Uri.parse(filename));
                     }
                 }
             } catch (Exception e) {
@@ -291,38 +289,45 @@ class home2 extends home {
         }
     }
 
+    Map<String, Boolean> downs = new HashMap<>();
     int count = 0;
     private Runnable down = new Runnable() {
         @Override
         public void run() {
-            bytesWrittens.clear();
             totalSizes = 0;
-            lists.clear();
 
+            adds.clear();
             add(getApp().result_c1);
             add(getApp().result_c2);
             add(getApp().result_c3);
             add(getApp().result_c4);
 
-            count = 0;
-
-            for (final Map.Entry<String, Uri> entry : lists.entrySet()) {
+            for (final Map.Entry<String, Uri> entry : adds.entrySet()) {
                 final String filename = entry.getValue().toString();
                 final String path = entry.getKey();
                 final String url = _TextUtil.getFileUrl(filename);
                 Log.w(__CLASSNAME__, getMethodName() + "[FILE]" + "[DL]"/* + "\n[filesize]" + filesize*/ + "\n[uri]" + filename + "\n[url]" + url/* + "\n[name]" + name*/ + "\n[path]" + path/* +  "\n[size]" + size*/);
-                down(url, path);
+                if (downs.get(path) == null || !downs.get(path)) {
+                    down(url, path);
+                    downs.put(path, true);
+                }
             }
 
-            if (lists.size() == 0) {
+            bytesWrittens.clear();
+            for (final Map.Entry<String, Boolean> entry : downs.entrySet()) {
+                bytesWrittens.put(entry.getKey(), 0L);
+            }
+
+            if (adds.size() == 0) {
                 complete();
                 open();
             }
+
+            Log.wtf(__CLASSNAME__, getMethodName() + "[DOWN]" + "[!!!START!!!]" + "(" + count + "/" + downs.size() + "/" + adds.size() + ")");
         }
     };
 
     private void down() {
-        Log.wtf(__CLASSNAME__, getMethodName() + "[DOWN]" + "[!!!START!!!]");
         mHandler.removeCallbacks(down);
         mHandler.postDelayed(down, TIMER_OPEN_SHORT);
     }
@@ -335,7 +340,10 @@ class home2 extends home {
     };
 
     private void complete() {
-        Log.wtf(__CLASSNAME__, getMethodName() + "[DOWN]" + "[!!!END!!!]" + lists.size());
+        Log.wtf(__CLASSNAME__, getMethodName() + "[DOWN]" + "[!!!END!!!]" + "(" + count + "/" + downs.size() + "/" + adds.size() + ")");
+        count = 0;
+        adds.clear();
+        downs.clear();
         mHandler.removeCallbacks(complete);
         mHandler.post(complete);
     }
@@ -350,7 +358,7 @@ class home2 extends home {
     protected void onSuccess(String src, String dst, int statusCode, Header[] headers, File response) {
         super.onSuccess(src, dst, statusCode, headers, response);
         count++;
-        if (count == lists.size()) {
+        if (count == downs.size()) {
             complete();
             open();
         }
@@ -359,8 +367,8 @@ class home2 extends home {
     String src;
     String dst;
     long bytesWritten;
+    Map<String, Long> bytesWrittens = new HashMap<>();
     long totalSize;
-    List<Long> bytesWrittens = new ArrayList<>();
     long totalSizes;
 
     @Override
@@ -379,23 +387,21 @@ class home2 extends home {
         public void run() {
             try {
                 //bytes
-                int index = 0;
-                for (final Map.Entry<String, Uri> entry : lists.entrySet()) {
+                for (final Map.Entry<String, Boolean> entry : downs.entrySet()) {
                     if (dst.equalsIgnoreCase(entry.getKey())) {
-                        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + index + ":" + bytesWritten + ":" + dst);
-                        bytesWrittens.set(index, bytesWritten);
+                        //Log.d(__CLASSNAME__, getMethodName() + ":" + index + ":" + bytesWritten + ":" + ":" + entry.getValue() + "->" + dst);
+                        bytesWrittens.put(entry.getKey(), bytesWritten);
                         break;
                     }
-                    index++;
                 }
                 long bytes = 0;
-                for (Long item : bytesWrittens) {
-                    bytes += item;
+                for (final Map.Entry<String, Long> entry : bytesWrittens.entrySet()) {
+                    bytes += entry.getValue();
                 }
                 //label
                 String text = "다운중...";
                 text += "\t";
-                text += "(" + (index + 1) + "/" + lists.size() + "건" + ")";
+                text += "(" + count + "/" + downs.size() + "건" + ")";
                 text += "\t";
                 //text += "(" + (int) ((float) bytesWritten / (float) totalSize * PROGRESS_PERCENT) + "/" + (int) ((float) totalSize / (float) totalSize * PROGRESS_PERCENT) + "%" + ")";
                 //text += "\t";

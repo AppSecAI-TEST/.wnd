@@ -5,5 +5,5 @@ package kr.co.windowfun.app;
  * Created by isyoon on 2017-07-26.
  */
 
-public class __Activity extends Activity3 {
+public class __Activity extends Activity5 {
 }

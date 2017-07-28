@@ -140,11 +140,23 @@ class home extends _Activity {
         mHandler.post(reports);
     }
 
+    private  Runnable clear = new Runnable() {
+        @Override
+        public void run() {
+            ((TextView) findViewById(R.id.report)).setText("");
+        }
+    };
+
+    protected void clear() {
+        mHandler.removeCallbacks(clear);
+        mHandler.post(clear);
+    }
+
     @Override
     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
         super.onFailure(statusCode, headers, throwable, errorResponse);
         try {
-            reports(getMethodName() + "\n[status]\n" + statusCode + "\n[header]\n" + headers + "\n[throwable]\n" + throwable + "\n[errorResponse]\n" + errorResponse.toString(2));
+            reports(getMethodName() + "\n[status]\n" + statusCode + "\n[headers]\n" + debugHeaders(headers) + "\n[throwable]\n" + throwable + "\n[errorResponse]\n" + errorResponse.toString(2));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -154,7 +166,7 @@ class home extends _Activity {
     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
         super.onSuccess(statusCode, headers, response);
         try {
-            reports(getMethodName() + "\n[status]\n" + statusCode + "\n[header]\n" + headers + "\n[response]\n" + response.toString(2));
+            reports(getMethodName() + "\n[status]\n" + statusCode + "\n[headers]\n" + debugHeaders(headers) + "\n[response]\n" + response.toString(2));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -163,12 +175,12 @@ class home extends _Activity {
     @Override
     protected void onFailure(String src, String dst, int statusCode, Header[] headers, Throwable throwable, File file) {
         super.onFailure(src, dst, statusCode, headers, throwable, file);
-        reports(getMethodName() + "\n[src]" + src + "\n[dst]" + dst + "\n[statusCode]" + statusCode + "\n[headers]" + headers + "\n[throwable]" + throwable + "\n[file]" + file);
+        reports(getMethodName() + "\n[src]" + src + "\n[dst]" + dst + "\n[statusCode]" + statusCode + "\n[header]\n" + debugHeaders(headers) + "\n[throwable]\n" + throwable.getStackTrace() + "\n[file]" + file);
     }
 
     @Override
     protected void onSuccess(String src, String dst, int statusCode, Header[] headers, File response) {
         super.onSuccess(src, dst, statusCode, headers, response);
-        //reports(getMethodName() + "\n[src]" + src + "\n[dst]" + dst + "\n[statusCode]" + statusCode + "\n[headers]" + headers + "\n[response]" + response);
+        //reports(getMethodName() + "\n[src]" + src + "\n[dst]" + dst + "\n[statusCode]" + statusCode + "\n[header]\n" + debugHeaders(headers) + "\n[response]" + response);
     }
 }
