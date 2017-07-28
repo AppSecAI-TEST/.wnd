@@ -19,9 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
@@ -79,7 +77,8 @@ class home2 extends home {
             findViewById(R.id.send).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    send();
+                    if (getApp().isLogin()) send();
+                    else login();
                 }
             });
 
@@ -336,6 +335,10 @@ class home2 extends home {
         @Override
         public void run() {
             ((TextView) findViewById(R.id.label)).setText("다운완료...");
+            ((ProgressBar) findViewById(R.id.progress1)).setMax((int) PROGRESS_MAX);
+            ((ProgressBar) findViewById(R.id.progress1)).setProgress((int) PROGRESS_MAX);
+            ((ProgressBar) findViewById(R.id.progress2)).setMax((int) PROGRESS_MAX);
+            ((ProgressBar) findViewById(R.id.progress2)).setProgress((int) PROGRESS_MAX);
         }
     };
 
@@ -403,9 +406,9 @@ class home2 extends home {
                 text += "\t";
                 text += "(" + count + "/" + downs.size() + "건" + ")";
                 text += "\t";
-                //text += "(" + (int) ((float) bytesWritten / (float) totalSize * PROGRESS_PERCENT) + "/" + (int) ((float) totalSize / (float) totalSize * PROGRESS_PERCENT) + "%" + ")";
+                //text += "(" + (int) ((float) bytesWritten / (float) totalSize * PROGRESS_PER) + "/" + (int) ((float) totalSize / (float) totalSize * PROGRESS_PER) + "%" + ")";
                 //text += "\t";
-                text += "(" + (int) ((float) bytes / (float) totalSizes * PROGRESS_PERCENT) + "/" + (int) ((float) totalSizes / (float) totalSizes * PROGRESS_PERCENT) + "%" + ")";
+                text += "(" + (int) ((float) bytes / (float) totalSizes * PROGRESS_PER) + "/" + (int) ((float) totalSizes / (float) totalSizes * PROGRESS_PER) + "%" + ")";
                 text += "\t";
                 //text += Uri.decode(src);
                 //text += "\t";

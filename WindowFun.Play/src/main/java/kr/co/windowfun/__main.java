@@ -43,7 +43,8 @@ public class __main extends _Activity {
     protected ArrayList<String> mp4 = new ArrayList<>();
 
     private void path() {
-        //Log.wtf(__CLASSNAME__, getMethodName() + "List: " + root_mp4);
+        String root_mp4 = root + "/_mp4";
+        Log.wtf(__CLASSNAME__, getMethodName() + "List: " + root_mp4);
         File directory = new File(root_mp4);
         File[] files = directory.listFiles();
         Log.w(__CLASSNAME__, getMethodName() + "List: " + files);

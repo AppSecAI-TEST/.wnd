@@ -101,15 +101,17 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
             //    options.downsample(DownsampleStrategy.FIT_CENTER);
             //}
             //bumptech/glide
-            if (new File(uri.getPath()) == null) {
-                GlideApp.with(getContext())
-                        .applyDefaultRequestOptions(options)
-                        .load(uri)
-                        .into(this);
-            } else {
+            if (new File(uri.getPath()).exists()) {
+                Log.i(__CLASSNAME__, getMethodName() + "[PATH]" + index + "(" + "w:" + w + ", h:" + h + ")" + uri);
                 GlideApp.with(getContext())
                         .applyDefaultRequestOptions(options)
                         .load(new File(uri.getPath()))
+                        .into(this);
+            } else {
+                Log.i(__CLASSNAME__, getMethodName() + "[HTTP]" + index + "(" + "w:" + w + ", h:" + h + ")" + uri);
+                GlideApp.with(getContext())
+                        .applyDefaultRequestOptions(options)
+                        .load(uri)
                         .into(this);
             }
         } catch (Exception e) {

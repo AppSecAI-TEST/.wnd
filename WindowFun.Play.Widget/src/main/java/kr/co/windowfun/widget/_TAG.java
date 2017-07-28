@@ -17,7 +17,7 @@ public interface _TAG {
     Handler mHandler = new Handler();
 
     //PROGRESS
-    float PROGRESS_PERCENT = 100f;
+    float PROGRESS_PER = 100f;
     float PROGRESS_MAX = 1000f;
 
     //RESULT

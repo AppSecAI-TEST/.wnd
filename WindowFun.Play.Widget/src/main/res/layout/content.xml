@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <kr.co.windowfun.widget.CLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    tools:ignore="HardcodedText">
 
     <kr.co.windowfun.widget.HtmlView2
         android:id="@+id/html"
@@ -48,6 +50,7 @@
         android:background="@android:color/white"
         android:lines="1"
         android:maxLines="1"
+        android:text="label"
         android:textColor="@android:color/holo_red_dark"
         android:textStyle="bold"
         android:visibility="visible"/>
