@@ -43,10 +43,11 @@ public interface _TAG {
         String result_data = "result_data";
         String result_type = "result_type";
         String result_menu = "result_menu";
+        String result_banner = "result_banner"; //result_c2
         String result_c1 = "result_c1";
-        String result_c2 = "result_c2";
         String result_c3 = "result_c3";
         String result_c4 = "result_c4";
+        String result_c5 = "result_c5";
     }
 
     //result_data
@@ -83,12 +84,32 @@ public interface _TAG {
         String menu = "menu";
     }
 
-    //result_c
+    //"line|fade|typer|rainbow|scale|evaporate|fall"
+    interface effect_text {
+        String line = "line";
+        String fade = "fade";
+        String typer = "typer";
+        String rainbow = "rainbow";
+        String scale = "scale";
+        String evaporate = "evaporate";
+        String fall = "fall";
+    }
+
+
+    //"text|image|video|html"
+    interface c_type {
+        String text = "text";
+        String image = "image";
+        String video = "video";
+        String html = "html";
+    }
+
+        //result_c
     interface result_c {
         //icon: "http://…",
         String icon = "icon";
         //type: "text|image|video|html",
-        String type = "division";
+        String type = "type";
         //title: "타이틀",
         String title = "title";
         //text: "텍스트",
@@ -102,11 +123,11 @@ public interface _TAG {
         //effect_play: "3.2. 범례",
         String effect_play = "effect_play";
         //time_start: "20170701",
-        String time_start = "start_day";
+        String time_start = "time_start";
         //time_end: "20170731",
-        String time_end = "end_day";
+        String time_end = "time_end";
         //play_length: "30",
-        String play_length = "contents_order";
+        String play_length = "play_length";
         //play_repeat: "1",
         String play_repeat = "play_repeat";
         //file_name: "http://windowfun.co.kr/upload/2017/07/19/13/26/02/잇섭의 KT 라인프렌즈 스마트폰 리뷰! [KT].mp4",

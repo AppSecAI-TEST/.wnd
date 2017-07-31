@@ -169,7 +169,7 @@
     <!--app:fabSize="auto"-->
     <ImageButton
         android:id="@+id/left"
-        style="@style/action_button_layout"
+        style="@style/action_button"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:background="@android:color/transparent"
@@ -184,7 +184,7 @@
     <!--app:fabSize="auto"-->
     <ImageButton
         android:id="@+id/right"
-        style="@style/action_button_layout"
+        style="@style/action_button"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:background="@android:color/transparent"

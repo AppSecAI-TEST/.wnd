@@ -17,9 +17,9 @@ public class Application extends __Application implements _TAG {
     String userid;
     String token;
     JSONArray result_c1;
-    JSONArray result_c2;
     JSONArray result_c3;
     JSONArray result_c4;
+    JSONArray result_c5;
 
     protected boolean isLogin() {
         Log.d(__CLASSNAME__, getMethodName() + ":" + userid + ":" + token);

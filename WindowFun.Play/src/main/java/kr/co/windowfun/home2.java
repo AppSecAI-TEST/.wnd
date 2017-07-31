@@ -233,16 +233,16 @@ class home2 extends home {
         if ("0".equalsIgnoreCase(error_code) && "0".equalsIgnoreCase(result_code)) {
             //Log.w(__CLASSNAME__, getMethodName() + ":" + "[[" + getApp().token + "]]");
             getApp().result_c1 = getJSONArray(response, result.result_c1);
-            getApp().result_c2 = getJSONArray(response, result.result_c2);
             getApp().result_c3 = getJSONArray(response, result.result_c3);
             getApp().result_c4 = getJSONArray(response, result.result_c4);
-            getApp().result_c2 = getApp().result_c1; //test
-            getApp().result_c3 = getApp().result_c1; //test
-            getApp().result_c4 = getApp().result_c1; //test
+            getApp().result_c5 = getJSONArray(response, result.result_c5);
+            if (getApp().result_c3 == null) getApp().result_c3 = getApp().result_c1; //test
+            if (getApp().result_c4 == null) getApp().result_c4 = getApp().result_c1; //test
+            if (getApp().result_c5 == null) getApp().result_c5 = getApp().result_c1; //test
             //Log.i(__CLASSNAME__, getMethodName() + "\n[result_c1]\n" + toString(getApp().result_c1, 2));
-            //Log.i(__CLASSNAME__, getMethodName() + "\n[result_c2]\n" + toString(getApp().result_c2, 2));
-            //Log.i(__CLASSNAME__, getMethodName() + "\n[result_c3]\n" + toString(getApp().result_c3, 2));
             //Log.i(__CLASSNAME__, getMethodName() + "\n[result_c4]\n" + toString(getApp().result_c4, 2));
+            //Log.i(__CLASSNAME__, getMethodName() + "\n[result_c5]\n" + toString(getApp().result_c5, 2));
+            //Log.i(__CLASSNAME__, getMethodName() + "\n[result_c5]\n" + toString(getApp().result_c5, 2));
             //open();
             down();
         } else {
@@ -257,9 +257,9 @@ class home2 extends home {
 
     private void delete() {
         delete(getApp().result_c1);
-        delete(getApp().result_c2);
         delete(getApp().result_c3);
         delete(getApp().result_c4);
+        delete(getApp().result_c5);
     }
 
     private void delete(JSONArray results) {
@@ -319,9 +319,9 @@ class home2 extends home {
 
             adds.clear();
             add(getApp().result_c1);
-            add(getApp().result_c2);
             add(getApp().result_c3);
             add(getApp().result_c4);
+            add(getApp().result_c5);
 
             for (final Map.Entry<String, Uri> entry : adds.entrySet()) {
                 final String filename = entry.getValue().toString();

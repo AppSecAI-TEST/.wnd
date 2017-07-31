@@ -1,9 +1,16 @@
 package kr.co.windowfun.widget;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Gravity;
+import android.widget.RelativeLayout;
+
+import com.hanks.htextview.base.HTextView;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -13,6 +20,28 @@ import java.util.Random;
  */
 
 public class TextView2 extends TextView implements _Content, _TAG {
+    String[] sentences = {
+            //"What is design?",
+            //"Design is not just",
+            //"what it looks like and feels like.",
+            "Design is how it works. - Steve Jobs",
+            //"Older people",
+            //"sit down and ask,",
+            //"'What is it?'",
+            //"but the boy asks,",
+            "'What can I do with it?'. - Steve Jobs",
+            //"Swift",
+            //"Objective-C",
+            //"iPhone",
+            //"iPad",
+            //"Mac Mini",
+            //"MacBook Pro",
+            //"Mac Pro",
+            //"爱老婆",
+            //"老婆和女儿",
+            "만세만세만세만세만세 윈도펀 만세만세만세만세만세",
+            "세만세만세만세만세만 이종천 세만세만세만세만세만",
+    };
 
     public TextView2(Context context) {
         super(context);
@@ -39,17 +68,78 @@ public class TextView2 extends TextView implements _Content, _TAG {
     public TextView2 path(ArrayList<String> path) {
         this.path = path;
         this.index = 0;
+        //this.path = (ArrayList<String>) Arrays.asList(sentences); //test
         return this;
     }
+
+    String text;
 
     @Override
     public void open(Uri uri) {
         //Log.w(__CLASSNAME__, getMethodName() + ":" + uri);
-        setText(uri.toString());
+        this.text = uri.toString();
+        //remove
+        if (textView != null) removeView(textView);
+        //make
+        textView = CTextView.with(getContext(), this.type);
+        //style
+        if (Build.VERSION.SDK_INT < 23) {
+            textView.setTextAppearance(getContext(), R.style.text_view);
+        } else {
+            textView.setTextAppearance(R.style.text_view);
+        }
+        //textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.text_view_size_large));
+        //textView.setShadowLayer(float radius, float dx, float dy, int shadowColor)
+        textView.setShadowLayer(1.5f, -1, 1, Color.LTGRAY);
+        //line
+        textView.setMaxLines(1);
+        textView.setSingleLine(true);
+        //param
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+        textView.setLayoutParams(params);
+        textView.setGravity(Gravity.CENTER_VERTICAL);
+        //blank
+        String blank = "";
+        for (int i = 0; i < text.length(); i++) blank += "\t ";
+        setText(blank);
+        addView(textView);
     }
 
-    private void setText(String text) {
+    private Runnable marquee = new Runnable() {
+        @Override
+        public void run() {
+            //marquee
+            textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+            textView.setMarqueeRepeatLimit(-1);
+            textView.setSelected(true);
+            textView.setSingleLine(true);
+        }
+    };
 
+    private void marquee() {
+        mHandler.removeCallbacks(marquee);
+        mHandler.postDelayed(marquee, TIMER_OPEN_LONG);
+    }
+
+    String type;
+
+    public void type(String type) {
+        this.type = type;
+    }
+
+    android.widget.TextView textView;
+
+    private void setText(String text) {
+        try {
+            if (textView == null) return;
+            if (textView instanceof HTextView) {
+                ((HTextView) textView).animateText(text);
+            }
+            textView.setText(text);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void open() {
@@ -66,23 +156,16 @@ public class TextView2 extends TextView implements _Content, _TAG {
     }
 
     int length = -1;
+
     private Runnable play = new Runnable() {
         @Override
         public void run() {
             mHandler.removeCallbacks(complete);
-            int r = TextView2.this.r.nextInt(TIMER_JPG_LONG - TIMER_JPG_SHORT + 1) + TIMER_JPG_SHORT;
-            //if (ImageView2.this.index < ImageView2.this.path.size()) {
-            //    Uri uri = Uri.parse(path.get(index));
-            //    if (uri.toString().contains((".gif"))) {
-            //        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
-            //        r = TIMER_GIF_SHORT;
-            //        r = TIMER_GIF_LONG;
-            //    }
-            //}
             mHandler.postDelayed(complete, length);
+            setText(text);
+            marquee();
         }
     };
-
 
     private Runnable complete = new Runnable() {
         @Override
@@ -189,4 +272,5 @@ public class TextView2 extends TextView implements _Content, _TAG {
     public void resume() {
 
     }
+
 }

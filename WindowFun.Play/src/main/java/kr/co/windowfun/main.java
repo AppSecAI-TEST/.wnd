@@ -28,8 +28,8 @@ public class main extends __main {
         ((VideoView2)findViewById(R.id.c1).findViewById(R.id.video)).mute(false);
         super.init();
         ((CLayout)findViewById(R.id.c1)).setContents(getApp().result_c1);
-        ((CLayout)findViewById(R.id.c2)).setContents(getApp().result_c2);
         ((CLayout)findViewById(R.id.c3)).setContents(getApp().result_c3);
         ((CLayout)findViewById(R.id.c4)).setContents(getApp().result_c4);
+        ((CLayout)findViewById(R.id.c5)).setContents(getApp().result_c5);
     }
 }

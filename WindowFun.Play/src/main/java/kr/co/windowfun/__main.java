@@ -167,13 +167,6 @@ public class __main extends _Activity {
                 return false;
             }
         });
-        ((CLayout) findViewById(R.id.c2)).setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                mHandler.post(showMenu);
-                return false;
-            }
-        });
         ((CLayout) findViewById(R.id.c3)).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -182,6 +175,13 @@ public class __main extends _Activity {
             }
         });
         ((CLayout) findViewById(R.id.c4)).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                mHandler.post(showMenu);
+                return false;
+            }
+        });
+        ((CLayout) findViewById(R.id.c5)).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 mHandler.post(showMenu);
@@ -317,10 +317,10 @@ public class __main extends _Activity {
         public void run() {
             mHandler.removeCallbacks(hideMenu);
             if (menu.getVisibility() != View.VISIBLE) {
+                menu.setVisibility(View.VISIBLE);
                 YoYo.with(Techniques.Landing)
                         .duration(1000)
                         .playOn(menu);
-                menu.setVisibility(View.VISIBLE);
             }
             mHandler.postDelayed(hideMenu, 5000);
         }

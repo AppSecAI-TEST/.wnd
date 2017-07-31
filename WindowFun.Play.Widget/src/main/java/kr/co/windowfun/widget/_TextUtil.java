@@ -10,15 +10,30 @@ import java.io.File;
 
 public class _TextUtil implements _TAG {
     public static String getFileName(String filename) {
-        return filename.substring(filename.lastIndexOf("/") + 1);
+        try {
+            return filename.substring(filename.lastIndexOf("/") + 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static String getFileUrl(String filename) {
-        return filename.substring(0, filename.lastIndexOf("/") + 1) + Uri.encode(filename.substring(filename.lastIndexOf("/") + 1)/*, "UTF-8"*/);
+        try {
+            return filename.substring(0, filename.lastIndexOf("/") + 1) + Uri.encode(filename.substring(filename.lastIndexOf("/") + 1)/*, "UTF-8"*/);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static String getFilePath(String filename) {
-        return root_mp4 + File.separator + filename.substring(filename.lastIndexOf("/") + 1);
+        try {
+            return root_mp4 + File.separator + filename.substring(filename.lastIndexOf("/") + 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     ////출처: http://ccdev.tistory.com/23 [초보코딩왕의 Power Dev.]

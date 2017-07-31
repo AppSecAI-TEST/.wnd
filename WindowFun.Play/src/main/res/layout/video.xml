@@ -16,7 +16,7 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/close"
-        style="@style/action_button_layout"
+        style="@style/action_button"
         android:layout_above="@+id/banner"
         android:layout_margin="@dimen/floating_action_button_margin_small"
         android:clickable="true"

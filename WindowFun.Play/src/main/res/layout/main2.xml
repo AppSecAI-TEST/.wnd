@@ -30,7 +30,7 @@
             android:orientation="vertical">
 
             <include
-                android:id="@+id/c2"
+                android:id="@+id/c3"
                 layout="@layout/content"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -38,14 +38,14 @@
                 tools:ignore="NestedWeights"/>
 
             <include
-                android:id="@+id/c3"
+                android:id="@+id/c4"
                 layout="@layout/content"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1.0"/>
 
             <include
-                android:id="@+id/c4"
+                android:id="@+id/c5"
                 layout="@layout/content"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -56,12 +56,12 @@
 
     <WebView
         android:id="@+id/banner"
-        style="@style/banner_bar_layout"
+        style="@style/banner_bar"
         android:layout_alignParentBottom="true"/>
 
     <com.hitomi.cmlibrary.CircleMenu
         android:id="@+id/menu"
-        style="@style/circle_menu_layout"
+        style="@style/circle_menu"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:clickable="true"

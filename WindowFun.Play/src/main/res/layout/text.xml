@@ -12,7 +12,7 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/close"
-        style="@style/action_button_layout"
+        style="@style/action_button"
         android:layout_above="@+id/banner"
         android:layout_margin="@dimen/floating_action_button_margin_small"
         android:clickable="true"
@@ -41,7 +41,7 @@
 
                 <com.hanks.htextview.line.LineTextView
                     android:id="@+id/text_line"
-                    style="@style/text_banner_layout"
+                    style="@style/text_view"
                     android:text="This is line"
                     app:animationDuration="3000"
                     app:lineColor="#fff"
@@ -50,14 +50,14 @@
                 <!--fade-->
                 <com.hanks.htextview.fade.FadeTextView
                     android:id="@+id/text_fade"
-                    style="@style/text_banner_layout"
+                    style="@style/text_view"
                     android:text="This is fade"
                     app:animationDuration="1500"/>
 
                 <!--typer-->
                 <com.hanks.htextview.typer.TyperTextView
                     android:id="@+id/text_typer"
-                    style="@style/text_banner_layout"
+                    style="@style/text_view"
                     android:text="This is typer"
                     app:charIncrease="3"
                     app:typerSpeed="80"/>
@@ -65,7 +65,7 @@
                 <!--rainbow-->
                 <com.hanks.htextview.rainbow.RainbowTextView
                     android:id="@+id/text_rainbow"
-                    style="@style/text_banner_layout"
+                    style="@style/text_view"
                     android:text="This is rainbow"
                     app:colorSpace="150dp"
                     app:colorSpeed="4dp"/>
@@ -73,19 +73,19 @@
                 <!--scale (single line)-->
                 <com.hanks.htextview.scale.ScaleTextView
                     android:id="@+id/text_scale"
-                    style="@style/text_banner_layout"
+                    style="@style/text_view"
                     android:text="This is scale (single line)"/>
 
                 <!--evaporate (single line)-->
                 <com.hanks.htextview.evaporate.EvaporateTextView
                     android:id="@+id/text_evaporate"
-                    style="@style/text_banner_layout"
+                    style="@style/text_view"
                     android:text="This is evaporate (single line)"/>
 
                 <!--fall (single line)-->
                 <com.hanks.htextview.fall.FallTextView
                     android:id="@+id/text_fall"
-                    style="@style/text_banner_layout"
+                    style="@style/text_view"
                     android:layout_height="240dp"
                     android:text="This is fall (single line)"/>
 

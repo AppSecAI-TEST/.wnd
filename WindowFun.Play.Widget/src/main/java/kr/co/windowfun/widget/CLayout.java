@@ -1,5 +1,6 @@
 package kr.co.windowfun.widget;
 
+import android.animation.Animator;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
@@ -10,6 +11,9 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -107,11 +111,12 @@ public class CLayout extends RelativeLayout implements _Content, _TAG, CListener
         }
         try {
             if (CLayout.this.index < CLayout.this.contents.length()) {
-                String division = ((JSONObject) contents.get(index)).getString(result_c.type);
+                String type = ((JSONObject) contents.get(index)).getString(result_c.type);
                 String title = ((JSONObject) contents.get(index)).getString(result_c.title);
+                String text = ((JSONObject) contents.get(index)).getString(result_c.text);
                 String filename = ((JSONObject) contents.get(index)).getString(result_c.file_name);
-                String contents_order = ((JSONObject) contents.get(index)).getString(result_c.play_length);
-                Uri uri = Uri.parse(!TextUtils.isEmpty(filename) ? filename : title);
+                String play_length = ((JSONObject) contents.get(index)).getString(result_c.play_length);
+                Uri uri = Uri.parse(!TextUtils.isEmpty(filename) ? filename : text);
                 //Log.w(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri + "<-" + type + ":" + title + ":" + file_name + ":" + play_length);
                 open(uri);
             }
@@ -121,48 +126,60 @@ public class CLayout extends RelativeLayout implements _Content, _TAG, CListener
     }
 
     @Override
-    public void open(Uri uri) {
-        String url = uri.toString();
-        ((android.widget.TextView)findViewById(R.id.label)).setText(url);
-        try {
-            //Log.wtf(__CLASSNAME__,getMethodName() + "[BF]" + url);
-            url = _TextUtil.getFileUrl(url);
-            //Log.wtf(__CLASSNAME__, getMethodName() + "[AF]" + url);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        String path = _TextUtil.getFilePath(url);
-        if (new File(path) == null) {
-            path = url;
-        }
+    public void open(final Uri uri) {
+        final String url = _TextUtil.getFileUrl(uri.toString()) != null ? _TextUtil.getFileUrl(uri.toString()) : uri.toString();
+        final String path = new File(_TextUtil.getFilePath(url)) != null ? _TextUtil.getFilePath(url) : url;
 
         stop();
 
         try {
-            String division = ((JSONObject) contents.get(index)).getString(result_c.type);
+            final String type = ((JSONObject) contents.get(index)).getString(result_c.type);
+            final String effect_text = ((JSONObject) contents.get(index)).getString(result_c.effect_text);
+            final String effect_play = ((JSONObject) contents.get(index)).getString(result_c.effect_play);
+            if (c_type.text.equalsIgnoreCase(type)) {
+                ((android.widget.TextView) findViewById(R.id.label)).setText(type + ":" + effect_text + ":" + effect_play + ":" + uri.toString());
+            } else {
+                ((android.widget.TextView) findViewById(R.id.label)).setText(type + ":" + effect_text + ":" + effect_play + ":" + Uri.decode(path));
+            }
             //Log.i(__CLASSNAME__,getMethodName() + ":" + type + ":" + url);
-            switch (division) {
-                case "T":
+            View v = this;
+            switch (type) {
+                case c_type.text:
                     showText();
+                    ((TextView2) findViewById(R.id.text)).type(effect_text);
                     ((TextView2) findViewById(R.id.text)).open(uri);
+                    //v = findViewById(R.id.text); //test
                     break;
-                case "I":
+                case c_type.image:
                     showImage();
-                    ((android.widget.TextView)findViewById(R.id.label)).setText(Uri.decode(path));
+                    //((android.widget.TextView) findViewById(R.id.label)).setText(type + ":" + effect_text + ":" + effect_play + ":" + Uri.decode(path));
                     ((ImageView2) findViewById(R.id.image)).open(Uri.parse(path));
+                    //v = findViewById(R.id.image); //test
                     break;
-                case "M":
+                case c_type.video:
                     showVideo();
-                    ((android.widget.TextView)findViewById(R.id.label)).setText(Uri.decode(path));
+                    //((android.widget.TextView) findViewById(R.id.label)).setText(type + ":" + effect_text + ":" + effect_play + ":" + Uri.decode(path));
                     ((VideoView2) findViewById(R.id.video)).open(Uri.parse(path));
+                    //v = findViewById(R.id.video); //test
                     break;
-                case "H":
+                case c_type.html:
                     showHtml();
-                    ((HtmlView2) findViewById(R.id.html)).open(Uri.parse(url));
+                    //((android.widget.TextView) findViewById(R.id.label)).setText(type + ":" + effect_text + ":" + effect_play + ":" + Uri.decode(path));
+                    ((HtmlView2) findViewById(R.id.html)).open(Uri.parse(path));
+                    //v = findViewById(R.id.html); //test
                     break;
                 default:
                     break;
             }
+            YoYo.with(Techniques.valueOf(effect_play))
+                    .duration(1000)
+                    .onEnd(new YoYo.AnimatorCallback() {
+                        @Override
+                        public void call(Animator animator) {
+                            //Log.wtf(__CLASSNAME__, "YoYo.onEnd()" + ":" + type + ":" + effect_text + ":" + effect_play + ":" + uri + ":" + path);
+                        }
+                    })
+                    .playOn(v);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -172,25 +189,25 @@ public class CLayout extends RelativeLayout implements _Content, _TAG, CListener
         @Override
         public void run() {
             try {
-                String division = ((JSONObject) contents.get(index)).getString(result_c.type);
-                String contents_order = ((JSONObject) contents.get(index)).getString(result_c.play_length);
-                int length = Integer.parseInt(contents_order) * 1000;
+                String type = ((JSONObject) contents.get(index)).getString(result_c.type);
+                String play_length = ((JSONObject) contents.get(index)).getString(result_c.play_length);
+                int length = Integer.parseInt(play_length) * 1000;
                 //length /= 10; //test
                 //Log.w(__CLASSNAME__,getMethodName() + ":" + type);
-                switch (division) {
-                    case "T":
+                switch (type) {
+                    case c_type.text:
                         showText();
                         ((TextView2) findViewById(R.id.text)).play(length);
                         break;
-                    case "I":
+                    case c_type.image:
                         showImage();
                         ((ImageView2) findViewById(R.id.image)).play(length);
                         break;
-                    case "M":
+                    case c_type.video:
                         showVideo();
                         ((VideoView2) findViewById(R.id.video)).play();
                         break;
-                    case "H":
+                    case c_type.html:
                         showHtml();
                         ((HtmlView2) findViewById(R.id.html)).play();
                         break;
@@ -215,7 +232,7 @@ public class CLayout extends RelativeLayout implements _Content, _TAG, CListener
 
     @Override
     public void stop() {
-        Log.w(__CLASSNAME__,getMethodName());
+        Log.w(__CLASSNAME__, getMethodName());
         mHandler.removeCallbacks(play);
         mHandler.removeCallbacks(prev);
         mHandler.removeCallbacks(next);
