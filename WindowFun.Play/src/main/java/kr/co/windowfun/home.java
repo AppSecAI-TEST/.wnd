@@ -75,7 +75,7 @@ class home extends _Activity {
         }
     };
 
-    private void reset() {
+    protected void reset() {
         mHandler.removeCallbacks(reset);
         mHandler.postDelayed(reset, TIMER_RESET_SHORT);
     }

@@ -88,11 +88,33 @@ class home2 extends home {
                     delete();
                 }
             });
+
+            findViewById(R.id.reset).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    reset();
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         init();
+    }
+
+    private Runnable reset = new Runnable() {
+        @Override
+        public void run() {
+            logout();
+            delete();
+        }
+    };
+
+    @Override
+    protected void reset() {
+        super.reset();
+        mHandler.removeCallbacks(reset);
+        mHandler.post(reset);
     }
 
     private Runnable init = new Runnable() {

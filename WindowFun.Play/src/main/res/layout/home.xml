@@ -51,6 +51,13 @@
             android:visibility="visible"/>
 
         <Button
+            android:id="@+id/reset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="리셋"
+            android:visibility="visible"/>
+
+        <Button
             android:id="@+id/demo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
