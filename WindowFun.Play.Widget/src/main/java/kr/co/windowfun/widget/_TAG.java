@@ -3,6 +3,7 @@ package kr.co.windowfun.widget;
 import android.app.Activity;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Looper;
 
 /**
  * Created by isyoon on 2017-07-19.
@@ -14,7 +15,7 @@ public interface _TAG {
     String root = Environment.getExternalStorageDirectory().getAbsolutePath();
     String root_mp4 = root + "/.mp4";
 
-    Handler mHandler = new Handler();
+    Handler mHandler = new Handler(Looper.getMainLooper());
 
     //PROGRESS
     float PROGRESS_PER = 100f;
@@ -30,10 +31,11 @@ public interface _TAG {
     int TIMER_RESET_LONG = 5000;
     int TIMER_OPEN_SHORT = 100;
     int TIMER_OPEN_LONG = 1000;
-    int TIMER_JPG_SHORT = 3000;
-    int TIMER_JPG_LONG = 5000;
-    int TIMER_GIF_SHORT = 10000;
-    int TIMER_GIF_LONG = 30000;
+    int TIMER_IMG_SHORT = 3000;
+    int TIMER_IMG_LONG = 5000;
+    int TIMER_ANI_SHORT = 1000;
+    int TIMER_ANI_NORMAL = 10000;
+    int TIMER_ANI_LONG = 30000;
 
     //JSON
     interface result {

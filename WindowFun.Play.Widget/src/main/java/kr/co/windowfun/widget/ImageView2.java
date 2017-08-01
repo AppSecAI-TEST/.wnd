@@ -158,13 +158,13 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
         @Override
         public void run() {
             mHandler.removeCallbacks(complete);
-            int r = ImageView2.this.r.nextInt(TIMER_JPG_LONG - TIMER_JPG_SHORT + 1) + TIMER_JPG_SHORT;
+            int r = ImageView2.this.r.nextInt(TIMER_IMG_LONG - TIMER_IMG_SHORT + 1) + TIMER_IMG_SHORT;
             if (ImageView2.this.index < ImageView2.this.path.size()) {
                 Uri uri = Uri.parse(path.get(index));
                 if (uri.toString().contains((".gif"))) {
                     //Log.wtf(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
-                    r = TIMER_GIF_SHORT;
-                    r = TIMER_GIF_LONG;
+                    r = TIMER_ANI_NORMAL;
+                    r = TIMER_ANI_LONG;
                 }
             }
             if (length < 0) {

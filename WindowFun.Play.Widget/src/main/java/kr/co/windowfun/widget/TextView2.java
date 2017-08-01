@@ -4,10 +4,11 @@ import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.ViewGroup;
+import android.view.ViewPropertyAnimator;
 import android.widget.RelativeLayout;
 
 import com.hanks.htextview.base.HTextView;
@@ -80,6 +81,7 @@ public class TextView2 extends TextView implements _Content, _TAG {
         this.text = uri.toString();
         //remove
         if (textView != null) removeView(textView);
+        removeAllViews();
         //make
         textView = CTextView.with(getContext(), this.type);
         //style
@@ -106,20 +108,26 @@ public class TextView2 extends TextView implements _Content, _TAG {
         addView(textView);
     }
 
+    /**
+     * <a href="http://www.androidzeitgeist.com/2012/06/creating-marqueelayout-with-android.html">Creating a MarqueeLayout with the Android Animation System</a>
+     */
     private Runnable marquee = new Runnable() {
         @Override
         public void run() {
-            //marquee
-            textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-            textView.setMarqueeRepeatLimit(-1);
+            //textview marquee
+            //textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+            //textView.setMarqueeRepeatLimit(-1);
             textView.setSelected(true);
             textView.setSingleLine(true);
+            //layout marquee
+            setDuration(TIMER_ANI_NORMAL);
+            startAnimation();
         }
     };
 
     private void marquee() {
         mHandler.removeCallbacks(marquee);
-        mHandler.postDelayed(marquee, TIMER_OPEN_LONG);
+        mHandler.postDelayed(marquee, TIMER_ANI_SHORT);
     }
 
     String type;
@@ -137,9 +145,23 @@ public class TextView2 extends TextView implements _Content, _TAG {
                 ((HTextView) textView).animateText(text);
             }
             textView.setText(text);
+            textView.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
+            int w = textView.getMeasuredWidth();
+            int h = textView.getMeasuredHeight();
+            ViewGroup.LayoutParams params = textView.getLayoutParams();
+            //Log.wtf(__CLASSNAME__, getMethodName() + "w:" + params.width + ", h:" + params.height + "->" + "w:" + w + ", h:" + h);
+            params.width = w;
+            params.height = h;
+            textView.setLayoutParams(params);
+            //setLayoutParams(params);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected android.widget.TextView getTextView() {
+        return textView;
     }
 
     private void open() {
@@ -162,10 +184,26 @@ public class TextView2 extends TextView implements _Content, _TAG {
         public void run() {
             mHandler.removeCallbacks(complete);
             mHandler.postDelayed(complete, length);
-            setText(text);
+            animate();
             marquee();
         }
     };
+
+    Runnable animate = new Runnable() {
+        @Override
+        public void run() {
+            setText(text);
+            mHandler.removeCallbacks(animate);
+            mHandler.postDelayed(animate, TIMER_ANI_NORMAL);
+        }
+    };
+
+    @Override
+    public ViewPropertyAnimator animate() {
+        mHandler.removeCallbacks(animate);
+        mHandler.postDelayed(animate, 0);
+        return super.animate();
+    }
 
     private Runnable complete = new Runnable() {
         @Override
@@ -195,6 +233,10 @@ public class TextView2 extends TextView implements _Content, _TAG {
         mHandler.removeCallbacks(prev);
         mHandler.removeCallbacks(next);
         mHandler.removeCallbacks(rand);
+
+        mHandler.removeCallbacks(animate);
+        mHandler.removeCallbacks(marquee);
+        //stopAnimation();
     }
 
     Random r = new Random();
