@@ -3,6 +3,7 @@ package asia.ivity.android.marqueeview;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
 import android.text.Editable;
@@ -27,11 +28,29 @@ import kr.co.windowfun.widget.R;
  * @author Sebastian Roth <sebastian.roth@gmail.com>
  */
 public class MarqueeView extends LinearLayout {
-    private TextView mTextField;
+    private String _CLASSNAME_;
+    protected String __CLASSNAME__;
 
-    private ScrollView mScrollView;
+    protected String getMethodName() {
+        ////Log.wtf(__CLASSNAME__, "[[getMethodName()]]");
+        final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
+        int idx = 0;
+        for (int i = 0; i < ste.length; i++) {
+            StackTraceElement item = ste[i];
+            ////Log.i(_CLASSNAME_, "" + item.getClassName());
+            if (item.getClassName().contains(_CLASSNAME_)) {
+                idx = i;
+                //Log.v(__CLASSNAME__, "" + item);
+            }
+        }
+        return ste[idx].toString();
+    }
 
-    private static final int TEXTVIEW_VIRTUAL_WIDTH = 2000;
+    protected TextView mTextField;
+
+    protected ScrollView mScrollView;
+
+    protected static final int TEXTVIEW_VIRTUAL_WIDTH = 4000;
 
     private Animation mMoveTextOut = null;
     private Animation mMoveTextIn = null;
@@ -65,7 +84,7 @@ public class MarqueeView extends LinearLayout {
     private boolean mCancelled = false;
     private Runnable mAnimationStartRunnable;
 
-    private boolean mStarted;
+    protected boolean mStarted;
 
     /**
      * Sets the animation speed.
@@ -98,12 +117,16 @@ public class MarqueeView extends LinearLayout {
     @SuppressWarnings({"UnusedDeclaration"})
     public MarqueeView(Context context) {
         super(context);
+        _CLASSNAME_ = this.getClass().getName();
+        __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
         init();
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
     public MarqueeView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        _CLASSNAME_ = this.getClass().getName();
+        __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
 
         init();
         extractAttributes(attrs);
@@ -112,6 +135,8 @@ public class MarqueeView extends LinearLayout {
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public MarqueeView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        _CLASSNAME_ = this.getClass().getName();
+        __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
 
         init();
         extractAttributes(attrs);
@@ -149,8 +174,7 @@ public class MarqueeView extends LinearLayout {
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
 
-        if (getChildCount() != 1)
-        {
+        if (getChildCount() != 1) {
             throw new RuntimeException("MarqueeView must have exactly one child element.");
         }
 
@@ -181,7 +205,7 @@ public class MarqueeView extends LinearLayout {
         mStarted = true;
     }
 
-    private void startTextFieldAnimation() {
+    protected void startTextFieldAnimation() {
         mAnimationStartRunnable = new Runnable() {
             public void run() {
                 mTextField.startAnimation(mMoveTextOut);
@@ -211,7 +235,7 @@ public class MarqueeView extends LinearLayout {
         invalidate();
     }
 
-    private void prepareAnimation() {
+    protected void prepareAnimation() {
         // Measure
         mPaint.setTextSize(mTextField.getTextSize());
         mPaint.setTypeface(mTextField.getTypeface());
@@ -224,10 +248,11 @@ public class MarqueeView extends LinearLayout {
 
         //if (BuildConfig.DEBUG)
         {
-            Log.d(TAG, "mTextWidth       : " + mTextWidth);
-            Log.d(TAG, "measuredWidth    : " + getMeasuredWidth());
-            Log.d(TAG, "mMarqueeNeeded   : " + mMarqueeNeeded);
-            Log.d(TAG, "mTextDifference  : " + mTextDifference);
+            Log.wtf(TAG, "" + this);
+            Log.wtf(TAG, "mTextWidth       : " + mTextWidth);
+            Log.wtf(TAG, "measuredWidth    : " + getMeasuredWidth());
+            Log.wtf(TAG, "mMarqueeNeeded   : " + mMarqueeNeeded);
+            Log.wtf(TAG, "mTextDifference  : " + mTextDifference);
         }
 
         final int duration = (int) (mTextDifference * mSpeed);
@@ -281,7 +306,15 @@ public class MarqueeView extends LinearLayout {
         });
     }
 
+    /**
+     * isyoon
+     * @param textView
+     */
+    protected void addTextView(TextView textView) {
+    }
+
     private void initView(Context context) {
+        Log.wtf(__CLASSNAME__, getMethodName() + getChildAt(0));
         // Scroll View
         LayoutParams sv1lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         sv1lp.gravity = Gravity.CENTER_HORIZONTAL;
@@ -325,6 +358,8 @@ public class MarqueeView extends LinearLayout {
         });
 
         addView(mScrollView, sv1lp);
+
+        mScrollView.setBackgroundColor(Color.RED); //test
     }
 
     private void expandTextView() {
@@ -333,7 +368,7 @@ public class MarqueeView extends LinearLayout {
         mTextField.setLayoutParams(lp);
     }
 
-    private void cutTextView() {
+    protected void cutTextView() {
         if (mTextField.getWidth() != getMeasuredWidth()) {
             ViewGroup.LayoutParams lp = mTextField.getLayoutParams();
             lp.width = getMeasuredWidth();

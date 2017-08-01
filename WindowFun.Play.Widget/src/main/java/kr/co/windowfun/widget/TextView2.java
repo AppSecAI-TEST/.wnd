@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
-import android.widget.RelativeLayout;
 
 import com.hanks.htextview.base.HTextView;
 
@@ -20,7 +19,7 @@ import java.util.Random;
  * Created by isyoon on 2017-07-13.
  */
 
-public class TextView2 extends TextView implements _Content, _TAG {
+public class TextView2 extends TextView1 implements _Content, _TAG {
     String[] sentences = {
             //"What is design?",
             //"Design is not just",
@@ -75,13 +74,16 @@ public class TextView2 extends TextView implements _Content, _TAG {
 
     String text;
 
+    protected static final int TEXTVIEW_VIRTUAL_WIDTH = 10000;
+
     @Override
     public void open(Uri uri) {
-        //Log.w(__CLASSNAME__, getMethodName() + ":" + uri);
+        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + textView + ":" + uri);
         this.text = uri.toString();
         //remove
-        if (textView != null) removeView(textView);
+        stopAnimation();
         removeAllViews();
+        //if (textView != null)  removeView(textView);
         //make
         textView = CTextView.with(getContext(), this.type);
         //style
@@ -96,16 +98,21 @@ public class TextView2 extends TextView implements _Content, _TAG {
         //line
         textView.setMaxLines(1);
         textView.setSingleLine(true);
+        //textview marquee
+        //textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+        //textView.setMarqueeRepeatLimit(-1);
+        //textView.setSelected(true);
+        //textView.setSingleLine(true);
         //param
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(TEXTVIEW_VIRTUAL_WIDTH, LayoutParams.MATCH_PARENT);
         textView.setLayoutParams(params);
         textView.setGravity(Gravity.CENTER_VERTICAL);
+        //add
+        addView(textView);
         //blank
         String blank = "";
         for (int i = 0; i < text.length(); i++) blank += "\t ";
         setText(blank);
-        addView(textView);
     }
 
     /**
@@ -114,20 +121,19 @@ public class TextView2 extends TextView implements _Content, _TAG {
     private Runnable marquee = new Runnable() {
         @Override
         public void run() {
-            //textview marquee
-            //textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-            //textView.setMarqueeRepeatLimit(-1);
-            textView.setSelected(true);
-            textView.setSingleLine(true);
-            //layout marquee
-            setDuration(TIMER_ANI_NORMAL);
-            startAnimation();
+            try {
+                //layout marquee
+                setDuration(TIMER_ANI_NORMAL);
+                startAnimation();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     };
 
     private void marquee() {
         mHandler.removeCallbacks(marquee);
-        mHandler.postDelayed(marquee, TIMER_ANI_SHORT);
+        mHandler.postDelayed(marquee, TIMER_OPEN_LONG);
     }
 
     String type;
@@ -138,22 +144,15 @@ public class TextView2 extends TextView implements _Content, _TAG {
 
     android.widget.TextView textView;
 
-    private void setText(String text) {
+    @Override
+    protected void setText(String text) {
+        super.setText(text);
         try {
             if (textView == null) return;
             if (textView instanceof HTextView) {
                 ((HTextView) textView).animateText(text);
             }
             textView.setText(text);
-            textView.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
-            int w = textView.getMeasuredWidth();
-            int h = textView.getMeasuredHeight();
-            ViewGroup.LayoutParams params = textView.getLayoutParams();
-            //Log.wtf(__CLASSNAME__, getMethodName() + "w:" + params.width + ", h:" + params.height + "->" + "w:" + w + ", h:" + h);
-            params.width = w;
-            params.height = h;
-            textView.setLayoutParams(params);
-            //setLayoutParams(params);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -236,7 +235,8 @@ public class TextView2 extends TextView implements _Content, _TAG {
 
         mHandler.removeCallbacks(animate);
         mHandler.removeCallbacks(marquee);
-        //stopAnimation();
+
+        stopAnimation();
     }
 
     Random r = new Random();

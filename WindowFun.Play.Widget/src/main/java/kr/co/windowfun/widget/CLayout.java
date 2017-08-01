@@ -27,7 +27,7 @@ import java.util.Random;
  * Created by isyoon on 2017-07-19.
  */
 
-public class CLayout extends FrameLayout implements _Content, _TAG, CListener, View.OnTouchListener {
+public class CLayout extends RelativeLayout implements _Content, _TAG, CListener, View.OnTouchListener {
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
     private JSONArray contents;
