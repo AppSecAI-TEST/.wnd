@@ -25,10 +25,14 @@
     <dimen name="floating_action_button_size_normal">48dp</dimen>
     <dimen name="floating_action_button_size_small">36dp</dimen>
     <!--isyoon:TextSize-->
-    <dimen name="text_size_xlarge">192sp</dimen>
-    <dimen name="text_size_large">96sp</dimen>
-    <dimen name="text_size_normal">60sp</dimen>
-    <dimen name="text_size_small">36sp</dimen>
-    <dimen name="text_size_tiny">24sp</dimen>
-    <dimen name="text_size_micro">12sp</dimen>
+    <dimen name="text_size_xxxlarge">112sp</dimen>
+    <!--<dimen name="text_size_xxlarge">56sp</dimen>-->
+    <dimen name="text_size_xxlarge">90sp</dimen>
+    <dimen name="text_size_xlarge">45sp</dimen>
+    <dimen name="text_size_large">34sp</dimen>
+    <dimen name="text_size_normal">24sp</dimen>
+    <dimen name="text_size_small">20sp</dimen>
+    <dimen name="text_size_xsmall">16sp</dimen>
+    <dimen name="text_size_xxsmall">14sp</dimen>
+    <dimen name="text_size_xxxsmall">12sp</dimen>
 </resources>

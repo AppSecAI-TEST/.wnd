@@ -6,7 +6,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">top|center</item>
         <item name="android:textColor">#fff</item>
-        <item name="android:textSize">@dimen/text_size_normal</item>
+        <item name="android:textSize">@dimen/text_size_xxxlarge</item>
         <!--text marquee-->
         <!--<item name="android:singleLine">true</item>-->
         <!--<item name="android:maxLines">1</item>-->

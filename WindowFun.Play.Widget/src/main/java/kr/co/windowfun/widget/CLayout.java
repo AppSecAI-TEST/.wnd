@@ -244,7 +244,7 @@ class CLayout extends RelativeLayout implements _Content, _DEF,_ENUM, _JSON, CLi
                 effect_text = "rainbow"; //test
                 text_font = "font:TBD";  //test
                 text_line = "false"; //test
-                text_size = "large"; //test
+                text_size = "xxlarge"; //test
                 text_valign = "bottom"; //test
 
                 if (!TextUtils.isEmpty(text)) {

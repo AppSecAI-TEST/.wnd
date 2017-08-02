@@ -70,14 +70,17 @@ public interface _ENUM {
     }
 
     enum text_size {
-        //text_size: "micro|tiny|small|normal|large|xlarge"
-        micro(R.dimen.text_size_micro),
-        tiny(R.dimen.text_size_tiny),
-        small(R.dimen.text_size_small),
-        normal(R.dimen.text_size_normal),
+        //text_size: "xxxlarge|xxlarge|xlarge|large|normal|small|xsmall|xxsmall|xxxsmall"
+        xxxlarge(R.dimen.text_size_xxxlarge),
+        xxlarge(R.dimen.text_size_xxlarge),
+        xlarge(R.dimen.text_size_xlarge),
         large(R.dimen.text_size_large),
-        xlarge(R.dimen.text_size_xlarge);
-
+        normal(R.dimen.text_size_normal),
+        small(R.dimen.text_size_small),
+        xsmall(R.dimen.text_size_xsmall),
+        xxsmall(R.dimen.text_size_xxsmall),
+        xxxsmall(R.dimen.text_size_xxxsmall),
+        ;
         private final int value;
 
         text_size(int value) {
