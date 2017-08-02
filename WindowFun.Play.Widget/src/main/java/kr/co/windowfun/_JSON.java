@@ -93,6 +93,7 @@ public interface _JSON {
         String text = "text";
         String text_font = "text_font";
         String text_line = "text_line";
+        String text_size = "text_size";
         String text_valign = "text_valign";
         //link: "n/a",
         String link = "link";

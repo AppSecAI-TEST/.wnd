@@ -6,14 +6,13 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 import kr.co.windowfun.app.__Activity;
-import kr.co.windowfun.widget._TAG;
 
 /**
  * JSON데이터처리
  * Created by isyoon on 2017-07-25.
  */
 
-class Activity extends __Activity implements _TAG {
+class Activity extends __Activity implements _DEF, _JSON {
     protected _Application getApp() {
         return (_Application) getApplication();
     }

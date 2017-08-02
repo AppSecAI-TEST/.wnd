@@ -52,4 +52,6 @@ dependencies {
     //daimajia/AndroidViewAnimations
     compile 'com.daimajia.easing:library:2.0@aar'
     compile 'com.daimajia.androidanimations:library:2.2@aar'
+    //ened/Android-MarqueeView
+    compile 'asia.ivity.android:marqueeview:1.1.5@aar'
 }

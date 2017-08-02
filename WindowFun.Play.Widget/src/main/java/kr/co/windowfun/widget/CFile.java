@@ -1,16 +1,18 @@
 package kr.co.windowfun.widget;
 
-import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.File;
 
+import kr.co.windowfun._JSON;
+import kr.co.windowfun.util.TextUtil;
+
 /**
  * Created by isyoon on 2017-07-25.
  */
 
-public class CFile implements _TAG {
+public class CFile implements _JSON {
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
 
@@ -53,9 +55,9 @@ public class CFile implements _TAG {
             throw new Exception("No File Info" + "[file_name]" + filename + "[filesize]" + filesize);
         }
         if (!TextUtils.isEmpty(filename) && !TextUtils.isEmpty(filesize)) {
-            this.name = _TextUtil.getFileName(filename);
-            this.path = _TextUtil.getFilePath(filename);
-            this.url = _TextUtil.getFileUrl(filename);
+            this.name = TextUtil.getFileName(filename);
+            this.path = TextUtil.getFilePath(filename);
+            this.url = TextUtil.getFileUrl(filename);
             this.file = new File(this.path);
             this.size = this.file != null ? this.file.length() : 0L;
             //Log.wtf(__CLASSNAME__, getMethodName() + this.file + "\n[filesize]" + filesize + "\n[uri]" + file_name + "\n[url]" + url + "\n[name]" + name + "\n[path]" + path + "\n[size]" + size);

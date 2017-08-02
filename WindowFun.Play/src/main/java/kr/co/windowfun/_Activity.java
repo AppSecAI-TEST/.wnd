@@ -5,14 +5,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import kr.co.windowfun.widget._TAG;
-
 /**
  * 수퍼액티비티
  * Created by isyoon on 2017-07-18.
  */
 
-class _Activity extends Activity2 implements _TAG {
+class _Activity extends Activity2 {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

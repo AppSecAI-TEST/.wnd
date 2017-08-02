@@ -181,7 +181,7 @@ public class _main extends Activity2 {
 
                     @Override
                     public void onMenuSelected(int index) {
-                        //Log.d(__CLASSNAME__, getMethodName() + ":" + index + ":" + getMenuType(index));
+                        //Log.d(__CLASSNAME__, getMethodName() + ":" + index + "->" + getMenuType(index));
                         if (getMenuType(index).equalsIgnoreCase("html")) {
                             new OpenHTML().execute(getMenuURL(index));
                         } else if (getMenuType(index).equalsIgnoreCase("video")) {

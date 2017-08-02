@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--isyoon:text_view-->
+    <style name="text_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">top|center</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+        <!--text marquee-->
+        <!--<item name="android:singleLine">true</item>-->
+        <!--<item name="android:maxLines">1</item>-->
+        <!--<item name="android:ellipsize">marquee</item>-->
+        <!--<item name="android:marqueeRepeatLimit">marquee_forever</item>-->
+        <!--<item name="android:scrollHorizontally">true</item>-->
+        <!--<item name="android:focusable">true</item>-->
+        <!--<item name="android:focusableInTouchMode">true</item>-->
+        <!--<item name="android:freezesText">true</item>-->
+    </style>
+</resources>

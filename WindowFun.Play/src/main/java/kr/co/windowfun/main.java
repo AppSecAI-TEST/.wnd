@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
-import kr.co.windowfun.widget.CLayout;
-import kr.co.windowfun.widget.VideoView2;
+import kr.co.windowfun.widget.__CLayout;
+import kr.co.windowfun.widget.__VideoView;
 
 /**
  * Created by isyoon on 2017-07-12.
@@ -25,11 +25,11 @@ public class main extends __main {
     @Override
     protected void init() {
         //Log.w(__CLASSNAME__, getMethodName());
-        ((VideoView2)findViewById(R.id.c1).findViewById(R.id.video)).mute(false);
+        ((__VideoView)findViewById(R.id.c1).findViewById(R.id.video)).mute(false);
         super.init();
-        ((CLayout)findViewById(R.id.c1)).setContents(getApp().result_c1);
-        ((CLayout)findViewById(R.id.c3)).setContents(getApp().result_c3);
-        ((CLayout)findViewById(R.id.c4)).setContents(getApp().result_c4);
-        ((CLayout)findViewById(R.id.c5)).setContents(getApp().result_c5);
+        ((__CLayout)findViewById(R.id.c1)).setContents(getApp().result_c1);
+        ((__CLayout)findViewById(R.id.c3)).setContents(getApp().result_c3);
+        ((__CLayout)findViewById(R.id.c4)).setContents(getApp().result_c4);
+        ((__CLayout)findViewById(R.id.c5)).setContents(getApp().result_c5);
     }
 }

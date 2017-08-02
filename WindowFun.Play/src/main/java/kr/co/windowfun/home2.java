@@ -23,9 +23,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
+import kr.co.windowfun.util.TextUtil;
 import kr.co.windowfun.widget.CFile;
 import kr.co.windowfun.widget.ProgressBar;
-import kr.co.windowfun.widget._TextUtil;
 
 /**
  * 로그인/조회/다운
@@ -278,8 +278,7 @@ class home2 extends home {
                     new File(file.path).delete();
                 }
             } catch (Exception e) {
-                //e.printStackTrace();
-                Log.wtf(__CLASSNAME__, getMethodName() + "\n" + e.getStackTrace());
+                e.printStackTrace();
             }
         }
     }
@@ -304,8 +303,7 @@ class home2 extends home {
                     }
                 }
             } catch (Exception e) {
-                //e.printStackTrace();
-                Log.wtf(__CLASSNAME__, getMethodName() + "\n" + e.getStackTrace());
+                e.printStackTrace();
             }
         }
     }
@@ -326,7 +324,7 @@ class home2 extends home {
             for (final Map.Entry<String, Uri> entry : adds.entrySet()) {
                 final String filename = entry.getValue().toString();
                 final String path = entry.getKey();
-                final String url = _TextUtil.getFileUrl(filename);
+                final String url = TextUtil.getFileUrl(filename);
                 Log.w(__CLASSNAME__, getMethodName() + "[FILE]" + "[DL]"/* + "\n[filesize]" + filesize*/ + "\n[uri]" + filename + "\n[url]" + url/* + "\n[name]" + name*/ + "\n[path]" + path/* +  "\n[size]" + size*/);
                 if (downs.get(path) == null || !downs.get(path)) {
                     down(url, path);
@@ -414,7 +412,7 @@ class home2 extends home {
                 //bytes
                 for (final Map.Entry<String, Boolean> entry : downs.entrySet()) {
                     if (dst.equalsIgnoreCase(entry.getKey())) {
-                        //Log.d(__CLASSNAME__, getMethodName() + ":" + index + ":" + bytesWritten + ":" + ":" + entry.getValue() + "->" + dst);
+                        //Log.d(__CLASSNAME__, getMethodName() + ":" + index + "->" + bytesWritten + ":" + ":" + entry.getValue() + "->" + dst);
                         bytesWrittens.put(entry.getKey(), bytesWritten);
                         break;
                     }
@@ -436,7 +434,7 @@ class home2 extends home {
                 //text += "\t";
                 //text += "->" + dst;
                 //text += "\t";
-                //text += _TextUtil.getFileName(dst);
+                //text += TextUtil.getFileName(dst);
                 //text += "\t";
                 ((TextView) findViewById(R.id.label)).setText(text);
                 //color

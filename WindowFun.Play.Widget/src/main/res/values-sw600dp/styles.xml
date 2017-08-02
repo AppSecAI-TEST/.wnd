@@ -1,38 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--isyoon:text_view-->
-    <style name="text_view">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">top|center</item>
-        <item name="android:textColor">#fff</item>
-        <item name="android:textSize">@dimen/text_view_size_large</item>
-        <!--text marquee-->
-        <item name="android:singleLine">true</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:ellipsize">marquee</item>
-        <!--<item name="android:marqueeRepeatLimit">marquee_forever</item>-->
-        <!--<item name="android:scrollHorizontally">true</item>-->
-        <!--<item name="android:focusable">true</item>-->
-        <!--<item name="android:focusableInTouchMode">true</item>-->
-        <!--<item name="android:freezesText">true</item>-->
-    </style>
-    <!--isyoon:banner_bar_layout-->
+    <!--isyoon:banner_bar-->
     <style name="banner_bar">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">36dp</item>
         <item name="android:layout_margin">0dp</item>
     </style>
-    <!--isyoon:circle_menu_layout-->
+    <!--isyoon:circle_menu-->
     <style name="circle_menu">
         <item name="android:layout_width">480dp</item>
         <item name="android:layout_height">480dp</item>
         <item name="android:layout_margin">0dp</item>
     </style>
-    <!--isyoon:action_button_layout-->
+    <!--isyoon:action_button-->
     <style name="action_button">
         <item name="android:layout_width">80dp</item>
         <item name="android:layout_height">80dp</item>
         <item name="android:layout_margin">@dimen/floating_action_button_margin_normal</item>
+    </style>
+    <!--isyoon:hidden_button-->
+    <style name="hidden_button">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="android:layout_margin">@dimen/floating_action_button_margin_normal</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:clickable">true</item>
+        <item name="android:longClickable">true</item>
+        <item name="android:tint">@android:color/holo_red_dark</item>
+        <item name="android:visibility">visible</item>
     </style>
 </resources>

@@ -65,15 +65,13 @@ class TextView extends HorizontalScrollView implements _Listener {
     Animation animation;
 
     protected void setText(String text) {
-        //text
+        //param(width)
         if (getTextView() != null) {
             getTextView().measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
             int w = getTextView().getMeasuredWidth();
-            //int h = getTextView().getMeasuredHeight();
             ViewGroup.LayoutParams params = getTextView().getLayoutParams();
-            //Log.wtf(__CLASSNAME__, getMethodName() + ":" + getTextView() + ":" + "w:" + params.width + ", h:" + params.height + "->" + "w:" + w + ", h:" + h);
+            //Log.wtf(__CLASSNAME__, getMethodName() + ":" + getTextView() + ":" + params + ":" + "w:" + params.width + ", h:" + params.height + "->" + "w:" + w + ", h:" + h);
             params.width = w;
-            params.height = LayoutParams.MATCH_PARENT;
             getTextView().setLayoutParams(params);
         }
         //animation

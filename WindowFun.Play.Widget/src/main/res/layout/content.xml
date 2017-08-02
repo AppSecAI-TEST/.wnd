@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<kr.co.windowfun.widget.CLayout
+<kr.co.windowfun.widget.__CLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,7 +8,7 @@
     android:background="@android:color/black"
     tools:ignore="HardcodedText">
 
-    <kr.co.windowfun.widget.HtmlView2
+    <kr.co.windowfun.widget.__HtmlView
         android:id="@+id/html"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,7 +16,7 @@
         android:background="@android:color/transparent"
         android:visibility="visible"/>
 
-    <kr.co.windowfun.widget.VideoView2
+    <kr.co.windowfun.widget.__VideoView
         android:id="@+id/video"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,7 +24,7 @@
         android:background="@android:color/transparent"
         android:visibility="visible"/>
 
-    <kr.co.windowfun.widget.ImageView2
+    <kr.co.windowfun.widget.__ImageView
         android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,33 +34,7 @@
         android:visibility="visible"/>
 
 
-    <!--<kr.co.windowfun.widget.TextView2-->
-    <!--android:id="@+id/text"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_gravity="center_vertical"-->
-    <!--android:background="@android:color/transparent"-->
-    <!--android:visibility="visible">-->
-    <!--<LinearLayout-->
-    <!--android:id="@+id/scroll"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_gravity="center_vertical"-->
-    <!--android:orientation="vertical">-->
-    <!--<com.hanks.htextview.rainbow.RainbowTextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:background="@android:color/black"-->
-    <!--android:gravity="center_vertical"-->
-    <!--android:lines="1"-->
-    <!--android:maxLines="1"-->
-    <!--android:orientation="vertical"-->
-    <!--android:text="TextTextTextTextTextTextTextTextTextTextTextText"-->
-    <!--android:textColor="@android:color/white"-->
-    <!--android:textSize="@dimen/text_view_size_large"/>-->
-    <!--</LinearLayout>-->
-    <!--</kr.co.windowfun.widget.TextView2>-->
-    <kr.co.windowfun.widget.TextView2
+    <kr.co.windowfun.widget.__TextView
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -83,4 +57,4 @@
         android:textStyle="bold"
         android:visibility="visible"/>
 
-</kr.co.windowfun.widget.CLayout>
+</kr.co.windowfun.widget.__CLayout>

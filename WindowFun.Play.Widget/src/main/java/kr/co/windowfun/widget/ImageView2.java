@@ -13,11 +13,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
+import kr.co.windowfun._DEF;
+
 /**
  * Created by isyoon on 2017-07-13.
  */
 
-public class ImageView2 extends ImageView implements _Content, _TAG {
+class ImageView2 extends ImageView implements _Content, _DEF {
     public ImageView2(Context context) {
         super(context);
     }
@@ -89,8 +91,7 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
             //        .load(uri)
             //        .resize(getMeasuredWidth(), getMeasuredHeight())
             //        .into(this);
-            //Glide.get(getContext()).clearDiskCache(); //test
-            //option
+            //bumptech/glide:option
             RequestOptions options = new RequestOptions()
                     //.diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                     .override(getMeasuredWidth(), getMeasuredHeight())
@@ -100,7 +101,8 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
             //    uri = Uri.parse(uri.toString() + "?w=" + w + "&h=" + h);
             //    options.downsample(DownsampleStrategy.FIT_CENTER);
             //}
-            //bumptech/glide
+            //bumptech/glide:GlideApp
+            //Glide.get(getContext()).clearDiskCache(); //test
             if (new File(uri.getPath()).exists()) {
                 Log.i(__CLASSNAME__, getMethodName() + "[PATH]" + index + "(" + "w:" + w + ", h:" + h + ")" + uri);
                 GlideApp.with(getContext())
@@ -141,11 +143,11 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
     }
 
     private void open() {
-        //Log.w(__CLASSNAME__, getMethodName() + ":" + this.index + ":" + this.path);
+        //Log.w(__CLASSNAME__, getMethodName() + ":" + this.index + "->" + this.path);
         try {
             if (ImageView2.this.index < ImageView2.this.path.size()) {
                 Uri uri = Uri.parse(path.get(index));
-                Log.i(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
+                Log.i(__CLASSNAME__, getMethodName() + ":" + index + "->" + uri);
                 open(uri);
             }
         } catch (Exception e) {
@@ -162,7 +164,7 @@ public class ImageView2 extends ImageView implements _Content, _TAG {
             if (ImageView2.this.index < ImageView2.this.path.size()) {
                 Uri uri = Uri.parse(path.get(index));
                 if (uri.toString().contains((".gif"))) {
-                    //Log.wtf(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
+                    //Log.wtf(__CLASSNAME__, getMethodName() + ":" + index + "->" + uri);
                     r = TIMER_ANI_NORMAL;
                     r = TIMER_ANI_LONG;
                 }

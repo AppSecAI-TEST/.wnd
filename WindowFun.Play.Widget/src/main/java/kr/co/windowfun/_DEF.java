@@ -14,6 +14,10 @@ import kr.co.windowfun.widget.BuildConfig;
 public interface _DEF {
     boolean DEBUG = BuildConfig.DEBUG;
 
+    String TEXTVIEW_DEFAULT_TEXT = "window Fun Fun Fun Fun Fun Fun Fun";
+    int TEXTVIEW_VIRTUAL_WIDTH = 10000;
+
+
     String root = Environment.getExternalStorageDirectory().getAbsolutePath();
     String root_mp4 = root + "/.mp4";
 

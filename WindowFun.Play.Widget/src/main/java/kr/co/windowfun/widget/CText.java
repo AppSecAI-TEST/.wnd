@@ -3,13 +3,13 @@ package kr.co.windowfun.widget;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.hanks.htextview.evaporate.EvaporateTextView;
-import com.hanks.htextview.fade.FadeTextView;
-import com.hanks.htextview.fall.FallTextView;
-import com.hanks.htextview.line.LineTextView;
-import com.hanks.htextview.rainbow.RainbowTextView;
-import com.hanks.htextview.scale.ScaleTextView;
-import com.hanks.htextview.typer.TyperTextView;
+import com.hanks.htextview.EvaporateTextView2;
+import com.hanks.htextview.FadeTextView2;
+import com.hanks.htextview.FallTextView2;
+import com.hanks.htextview.LineTextView2;
+import com.hanks.htextview.RainbowTextView2;
+import com.hanks.htextview.ScaleTextView2;
+import com.hanks.htextview.TyperTextView2;
 
 /**
  * Created by isyuun on 7/31/2017.
@@ -19,13 +19,13 @@ public enum CText {
     //"line|fade|typer|rainbow|scale|evaporate|fall"
     plane(android.widget.TextView.class),
     //line(android.widget.TextView.class),
-    line(LineTextView.class),
-    fade(FadeTextView.class),
-    typer(TyperTextView.class),
-    rainbow(RainbowTextView.class),
-    scale(ScaleTextView.class),
-    evaporate(EvaporateTextView.class),
-    fall(FallTextView.class);
+    line(LineTextView2.class),
+    fade(FadeTextView2.class),
+    typer(TyperTextView2.class),
+    rainbow(RainbowTextView2.class),
+    scale(ScaleTextView2.class),
+    evaporate(EvaporateTextView2.class),
+    fall(FallTextView2.class);
 
     private Class textClass;
 

@@ -7,13 +7,12 @@ import android.util.Log;
 import org.json.JSONArray;
 
 import kr.co.windowfun.app.__Application;
-import kr.co.windowfun.widget._TAG;
 
 /**
  * Created by isyoon on 2017-07-26.
  */
 
-public class Application extends __Application implements _TAG {
+public class Application extends __Application implements _DEF {
     String userid;
     String token;
     JSONArray result_c1;

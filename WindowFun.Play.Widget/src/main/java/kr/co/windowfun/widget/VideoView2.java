@@ -13,11 +13,13 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.Random;
 
+import kr.co.windowfun._DEF;
+
 /**
  * Created by isyoon on 2017-07-04.
  */
 
-public class VideoView2 extends VideoView implements _Content, _TAG {
+class VideoView2 extends VideoView implements _Content, _DEF {
     MediaPlayer.OnPreparedListener mOnPreparedListener;
 
     public VideoView2(Context context) {
@@ -133,7 +135,7 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
     public VideoView2 path(ArrayList<String> path) {
         this.path = path;
         this.index = 0;
-        //Log.w(__CLASSNAME__, getMethodName() + ":" + this.index + ":" + this.path + ":" + path);
+        //Log.w(__CLASSNAME__, getMethodName() + ":" + this.index + "->" + this.path + ":" + path);
         return this;
     }
 
@@ -141,12 +143,12 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
 
     @Override
     public void open(final Uri uri) {
-        //Log.w(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
+        //Log.w(__CLASSNAME__, getMethodName() + ":" + index + "->" + uri);
         super.setVideoURI(uri);
         super.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
-                Log.w(__CLASSNAME__, getMethodName() + "(" + what + "," + extra + ")" + ":" + index + ":" + uri + "\t" + VideoView2.this);
+                Log.w(__CLASSNAME__, getMethodName() + "(" + what + "," + extra + ")" + ":" + index + "->" + uri + "\t" + VideoView2.this);
                 //Toast.makeText(getContext(), getMethodName() + "(" + what + "," + extra + ")" + extra, Toast.LENGTH_SHORT).show();
                 if (mOnErrorListener != null) {
                     mOnErrorListener.onError(mp, what, extra);
@@ -201,11 +203,11 @@ public class VideoView2 extends VideoView implements _Content, _TAG {
     }
 
     private void open() {
-        //Log.w(__CLASSNAME__, getMethodName() + ":" + this.index + ":" + this.path);
+        //Log.w(__CLASSNAME__, getMethodName() + ":" + this.index + "->" + this.path);
         try {
             if (VideoView2.this.index < VideoView2.this.path.size()) {
                 Uri uri = Uri.parse(path.get(index).toString());
-                //Log.i(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
+                //Log.i(__CLASSNAME__, getMethodName() + ":" + index + "->" + uri);
                 open(uri);
             }
         } catch (Exception e) {

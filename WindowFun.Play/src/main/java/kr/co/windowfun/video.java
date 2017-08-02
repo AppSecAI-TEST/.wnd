@@ -12,7 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.MediaController;
 
-import kr.co.windowfun.widget.VideoView2;
+import kr.co.windowfun.widget.__VideoView;
 
 /**
  * Created by isyoon on 2017-07-10.
@@ -27,7 +27,7 @@ public class video extends _Activity {
         setContentView(R.layout.video);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        final VideoView2 video = (VideoView2) findViewById(R.id.video);
+        final __VideoView video = (__VideoView) findViewById(R.id.video);
         MediaController mediaController = new MediaController(this);
         mediaController.setAnchorView(video);
 

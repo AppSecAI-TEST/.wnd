@@ -10,11 +10,13 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Random;
 
+import kr.co.windowfun._DEF;
+
 /**
  * Created by isyoon on 2017-07-19.
  */
 
-public class HtmlView2 extends HtmlView implements _Content, _TAG {
+class HtmlView2 extends HtmlView implements _Content, _DEF {
     public HtmlView2(Context context) {
         super(context);
     }
@@ -54,11 +56,11 @@ public class HtmlView2 extends HtmlView implements _Content, _TAG {
     }
 
     private void open() {
-        //Log.w(__CLASSNAME__, getMethodName() + ":" + this.index + ":" + this.path);
+        //Log.w(__CLASSNAME__, getMethodName() + ":" + this.index + "->" + this.path);
         try {
             if (HtmlView2.this.index < HtmlView2.this.path.size()) {
                 Uri uri = Uri.parse(path.get(index));
-                Log.i(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
+                Log.i(__CLASSNAME__, getMethodName() + ":" + index + "->" + uri);
                 open(uri);
             }
         } catch (Exception e) {
@@ -75,7 +77,7 @@ public class HtmlView2 extends HtmlView implements _Content, _TAG {
             //if (HtmlView2.this.index < HtmlView2.this.path.size()) {
             //    Uri uri = Uri.parse(path.get(index));
             //    if (uri.toString().contains((".gif"))) {
-            //        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
+            //        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + index + "->" + uri);
             //        r = TIMER_ANI_NORMAL;
             //        r = TIMER_ANI_LONG;
             //    }

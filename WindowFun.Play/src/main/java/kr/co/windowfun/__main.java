@@ -25,21 +25,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import kr.co.windowfun.widget.CLayout;
-import kr.co.windowfun.widget.ImageView2;
-import kr.co.windowfun.widget.TextView2;
-import kr.co.windowfun.widget.VideoView2;
+import kr.co.windowfun.widget.__CLayout;
+import kr.co.windowfun.widget.__ImageView;
+import kr.co.windowfun.widget.__TextView;
+import kr.co.windowfun.widget.__VideoView;
 
 /**
  * Created by isyoon on 2017-07-03.
  */
 
 public class __main extends _Activity {
-    protected ArrayList<TextView2> texts = new ArrayList<>();
+    protected ArrayList<__TextView> texts = new ArrayList<>();
     protected ArrayList<String> txt = new ArrayList<>();
-    protected ArrayList<ImageView2> images = new ArrayList<>();
+    protected ArrayList<__ImageView> images = new ArrayList<>();
     protected ArrayList<String> jpg = new ArrayList<>();
-    protected ArrayList<VideoView2> videos = new ArrayList<>();
+    protected ArrayList<__VideoView> videos = new ArrayList<>();
     protected ArrayList<String> mp4 = new ArrayList<>();
 
     private void path() {
@@ -112,7 +112,7 @@ public class __main extends _Activity {
     }
 
     private void pause() {
-        for (final VideoView2 v : videos) {
+        for (final __VideoView v : videos) {
             v.pause();
         }
     }
@@ -124,7 +124,7 @@ public class __main extends _Activity {
     }
 
     private void resume() {
-        for (final VideoView2 v : videos) {
+        for (final __VideoView v : videos) {
             v.resume();
         }
     }
@@ -160,28 +160,28 @@ public class __main extends _Activity {
     }
 
     private void content() {
-        ((CLayout) findViewById(R.id.c1)).setOnTouchListener(new View.OnTouchListener() {
+        ((__CLayout) findViewById(R.id.c1)).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 mHandler.post(showMenu);
                 return false;
             }
         });
-        ((CLayout) findViewById(R.id.c3)).setOnTouchListener(new View.OnTouchListener() {
+        ((__CLayout) findViewById(R.id.c3)).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 mHandler.post(showMenu);
                 return false;
             }
         });
-        ((CLayout) findViewById(R.id.c4)).setOnTouchListener(new View.OnTouchListener() {
+        ((__CLayout) findViewById(R.id.c4)).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 mHandler.post(showMenu);
                 return false;
             }
         });
-        ((CLayout) findViewById(R.id.c5)).setOnTouchListener(new View.OnTouchListener() {
+        ((__CLayout) findViewById(R.id.c5)).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 mHandler.post(showMenu);
@@ -213,7 +213,7 @@ public class __main extends _Activity {
 
                     @Override
                     public void onMenuSelected(int index) {
-                        //Log.d(__CLASSNAME__, getMethodName() + ":" + index + ":" + getMenuType(index));
+                        //Log.d(__CLASSNAME__, getMethodName() + ":" + index + "->" + getMenuType(index));
                         if ("html".equalsIgnoreCase(getMenuType(index))) {
                             new OpenHTML().execute(getMenuURL(index));
                         } else if ("video".equalsIgnoreCase(getMenuType(index))) {
@@ -273,16 +273,16 @@ public class __main extends _Activity {
     }
 
     protected void rand() {
-        for (final ImageView2 i : images) {
+        for (final __ImageView i : images) {
             i.rand();
         }
-        for (final VideoView2 v : videos) {
+        for (final __VideoView v : videos) {
             v.rand();
         }
     }
 
     private void images() {
-        for (final ImageView2 i : images) {
+        for (final __ImageView i : images) {
             i.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View i, MotionEvent event) {
@@ -294,11 +294,11 @@ public class __main extends _Activity {
     }
 
     private void videos() {
-        for (final VideoView2 v : videos) {
+        for (final __VideoView v : videos) {
             v.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    for (VideoView2 video : videos) {
+                    for (__VideoView video : videos) {
                         if (v == video) {
                             video.mute(false);
                         } else {

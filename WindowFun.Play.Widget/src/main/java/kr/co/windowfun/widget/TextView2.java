@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
+import android.widget.FrameLayout;
 
 import com.hanks.htextview.base.HTextView;
 
@@ -52,9 +53,15 @@ class TextView2 extends TextView implements _Content, _DEF,_ENUM {
         return this;
     }
 
-    String text;
+    effect_text type = effect_text.rainbow;
 
-    protected static final int TEXTVIEW_VIRTUAL_WIDTH = 10000;
+    public void open(Uri uri, String type) {
+        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + effect_text.valueOf(type) + ":" + textView + ":" + uri);
+        this.type = effect_text.valueOf(type);
+        open(uri);
+    }
+
+    String text;
 
     @Override
     public void open(Uri uri) {
@@ -72,26 +79,38 @@ class TextView2 extends TextView implements _Content, _DEF,_ENUM {
         } else {
             textView.setTextAppearance(R.style.text_view);
         }
+        //textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.text_size_tiny));
         //shadow
         textView.setShadowLayer(1.5f, -1, 1, Color.LTGRAY);
         //line
-        textView.setMaxLines(1);
-        textView.setSingleLine(true);
-        //param
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(TEXTVIEW_VIRTUAL_WIDTH, LayoutParams.MATCH_PARENT);
+        //textView.setMaxLines(1);
+        //textView.setSingleLine(true);
+        //param(width)
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        params.gravity = Gravity.CENTER_VERTICAL;
         textView.setLayoutParams(params);
+        //gravity
         textView.setGravity(Gravity.CENTER_VERTICAL);
         //add
         addView(textView);
         //blank
-        String blank = "window Fun";
+        String blank = TEXTVIEW_DEFAULT_TEXT;
         //for (int i = 0; i < text.length(); i++) blank += "\t ";
         setText(blank);
     }
 
-    public void open(Uri uri, int length) {
-        this.length = length;
-        open(uri);
+    @Override
+    protected void setText(String text) {
+        super.setText(text);
+        try {
+            if (textView == null) return;
+            if (textView instanceof HTextView) {
+                ((HTextView) textView).animateText(text);
+            }
+            textView.setText(text);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -113,26 +132,6 @@ class TextView2 extends TextView implements _Content, _DEF,_ENUM {
     private void marquee() {
         mHandler.removeCallbacks(marquee);
         mHandler.postDelayed(marquee, TIMER_OPEN_LONG);
-    }
-
-    effect_text type = effect_text.rainbow;
-
-    public void type(String type) {
-        this.type = effect_text.valueOf(type);
-    }
-
-    @Override
-    protected void setText(String text) {
-        super.setText(text);
-        try {
-            if (textView == null) return;
-            if (textView instanceof HTextView) {
-                ((HTextView) textView).animateText(text);
-            }
-            textView.setText(text);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     private void open() {
