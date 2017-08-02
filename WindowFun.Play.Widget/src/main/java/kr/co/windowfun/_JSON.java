@@ -1,4 +1,4 @@
-package kr.co.windowfun.widget;
+package kr.co.windowfun;
 
 import android.app.Activity;
 import android.os.Environment;
@@ -9,35 +9,8 @@ import android.os.Looper;
  * Created by isyoon on 2017-07-19.
  */
 
-public interface _TAG {
-    boolean DEBUG = BuildConfig.DEBUG;
-
-    String root = Environment.getExternalStorageDirectory().getAbsolutePath();
-    String root_mp4 = root + "/.mp4";
-
-    Handler mHandler = new Handler(Looper.getMainLooper());
-
-    //PROGRESS
-    float PROGRESS_PER = 100f;
-    float PROGRESS_MAX = 1000f;
-
-    //RESULT
-    int _RESULT_OK = Activity.RESULT_OK;
-    int _RESULT_CANCELED = Activity.RESULT_CANCELED;
-    int _RESULT_LOGIN = Activity.RESULT_FIRST_USER;
-
-    //TIMER
-    int TIMER_RESET_SHORT = 3000;
-    int TIMER_RESET_LONG = 5000;
-    int TIMER_OPEN_SHORT = 100;
-    int TIMER_OPEN_LONG = 1000;
-    int TIMER_IMG_SHORT = 3000;
-    int TIMER_IMG_LONG = 5000;
-    int TIMER_ANI_SHORT = 1000;
-    int TIMER_ANI_NORMAL = 10000;
-    int TIMER_ANI_LONG = 30000;
-
-    //JSON
+public interface _JSON {
+    //JSON:result
     interface result {
         String error_code = "error_code";
         String error_message = "error_message";
@@ -52,23 +25,25 @@ public interface _TAG {
         String result_c5 = "result_c5";
     }
 
-    //result_data
+    //JSON:result_data
     interface result_data {
         String token = "token";
         String userid = "userid";
     }
 
-    //result_type
+    //JSON:result_type
     interface result_type {
-        //type:"A|B|C|D|E|F",
-        String type = "type";
+        //c_type:"A|B|C|D|E|F",
+        String c_type = "c_type";
+        //m_type: "A|B|C|...",
+        String m_type = "m_type";
         //reg_dm:"20170719132751",
         String reg_dm = "reg_dm";
         //upd_dm:"20170719132751"
         String upd_dm = "upd_dm";
     }
 
-    //result_menu
+    //JSON:result_menu
     interface result_menu {
         //icon: "wf_menu_event|wf_menu_game|wf_menu_home|wf_menu_member|wf_menu_point|wf_menu_retrieval|wf_menu_search|wf_menu_setup|wf_menu_star|wf_menu_store|wf_menu_view|...",
         String icon = "icon";
@@ -82,31 +57,31 @@ public interface _TAG {
         String link = "link";
         //data: "",
         String data = "data";
-        //menu: "서브메뉴(result_menu반복)"
+        //menu: "서브메뉴 = result_menu반복)"
         String menu = "menu";
     }
 
-    //"line|fade|typer|rainbow|scale|evaporate|fall"
-    interface effect_text {
-        String line = "line";
-        String fade = "fade";
-        String typer = "typer";
-        String rainbow = "rainbow";
-        String scale = "scale";
-        String evaporate = "evaporate";
-        String fall = "fall";
-    }
-
-
-    //"text|image|video|html"
-    interface c_type {
+    //JSON:result_banner
+    interface  result_banner {
+        //icon: "http://…",
+        String icon = "icon";
+        //type: "html|video|...",
+        String type = "type";
+        //title: "타이틀",
+        String title = "title";
+        //text: "텍스트",
         String text = "text";
-        String image = "image";
-        String video = "video";
-        String html = "html";
+        //link: "http://...",
+        String link = "link";
+        //data: "",
+        String data = "data";
+        //effect_text: "3.1. 범례",
+        String effect_text = "effect_text";
+        //effect_play: "3.2. 범례",
+        String effect_play = "effect_play";
     }
 
-        //result_c
+    //JSON:result_c
     interface result_c {
         //icon: "http://…",
         String icon = "icon";
@@ -116,6 +91,9 @@ public interface _TAG {
         String title = "title";
         //text: "텍스트",
         String text = "text";
+        String text_font = "text_font";
+        String text_line = "text_line";
+        String text_valign = "text_valign";
         //link: "n/a",
         String link = "link";
         //data: "",

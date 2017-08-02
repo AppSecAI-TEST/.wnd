@@ -1,14 +1,16 @@
-package kr.co.windowfun.widget;
+package kr.co.windowfun.util;
 
 import android.net.Uri;
 
 import java.io.File;
 
+import kr.co.windowfun._DEF;
+
 /**
  * Created by isyoon on 2017-07-25.
  */
 
-public class _TextUtil implements _TAG {
+public class TextUtil implements _DEF {
     public static String getFileName(String filename) {
         try {
             return filename.substring(filename.lastIndexOf("/") + 1);

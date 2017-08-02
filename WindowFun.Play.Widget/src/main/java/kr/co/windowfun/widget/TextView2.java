@@ -15,34 +15,14 @@ import com.hanks.htextview.base.HTextView;
 import java.util.ArrayList;
 import java.util.Random;
 
+import kr.co.windowfun._DEF;
+import kr.co.windowfun._ENUM;
+
 /**
  * Created by isyoon on 2017-07-13.
  */
 
-public class TextView2 extends TextView1 implements _Content, _TAG {
-    String[] sentences = {
-            //"What is design?",
-            //"Design is not just",
-            //"what it looks like and feels like.",
-            "Design is how it works. - Steve Jobs",
-            //"Older people",
-            //"sit down and ask,",
-            //"'What is it?'",
-            //"but the boy asks,",
-            "'What can I do with it?'. - Steve Jobs",
-            //"Swift",
-            //"Objective-C",
-            //"iPhone",
-            //"iPad",
-            //"Mac Mini",
-            //"MacBook Pro",
-            //"Mac Pro",
-            //"爱老婆",
-            //"老婆和女儿",
-            "만세만세만세만세만세 윈도펀 만세만세만세만세만세",
-            "세만세만세만세만세만 이종천 세만세만세만세만세만",
-    };
-
+class TextView2 extends TextView implements _Content, _DEF,_ENUM {
     public TextView2(Context context) {
         super(context);
     }
@@ -78,31 +58,25 @@ public class TextView2 extends TextView1 implements _Content, _TAG {
 
     @Override
     public void open(Uri uri) {
-        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + textView + ":" + uri);
         this.text = uri.toString();
         //remove
-        stopAnimation();
+        stopMarquee();
         removeAllViews();
         //if (textView != null)  removeView(textView);
         //make
-        textView = CTextView.with(getContext(), this.type);
+        textView = CTextView.with(getContext(), this.type.toString());
+        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + this.type + ":" + textView + ":" + uri);
         //style
         if (Build.VERSION.SDK_INT < 23) {
             textView.setTextAppearance(getContext(), R.style.text_view);
         } else {
             textView.setTextAppearance(R.style.text_view);
         }
-        //textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.text_view_size_large));
-        //textView.setShadowLayer(float radius, float dx, float dy, int shadowColor)
+        //shadow
         textView.setShadowLayer(1.5f, -1, 1, Color.LTGRAY);
         //line
         textView.setMaxLines(1);
         textView.setSingleLine(true);
-        //textview marquee
-        //textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-        //textView.setMarqueeRepeatLimit(-1);
-        //textView.setSelected(true);
-        //textView.setSingleLine(true);
         //param
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(TEXTVIEW_VIRTUAL_WIDTH, LayoutParams.MATCH_PARENT);
         textView.setLayoutParams(params);
@@ -110,9 +84,14 @@ public class TextView2 extends TextView1 implements _Content, _TAG {
         //add
         addView(textView);
         //blank
-        String blank = "";
-        for (int i = 0; i < text.length(); i++) blank += "\t ";
+        String blank = "window Fun";
+        //for (int i = 0; i < text.length(); i++) blank += "\t ";
         setText(blank);
+    }
+
+    public void open(Uri uri, int length) {
+        this.length = length;
+        open(uri);
     }
 
     /**
@@ -124,7 +103,7 @@ public class TextView2 extends TextView1 implements _Content, _TAG {
             try {
                 //layout marquee
                 setDuration(TIMER_ANI_NORMAL);
-                startAnimation();
+                startMarquee();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -136,13 +115,11 @@ public class TextView2 extends TextView1 implements _Content, _TAG {
         mHandler.postDelayed(marquee, TIMER_OPEN_LONG);
     }
 
-    String type;
+    effect_text type = effect_text.rainbow;
 
     public void type(String type) {
-        this.type = type;
+        this.type = effect_text.valueOf(type);
     }
-
-    android.widget.TextView textView;
 
     @Override
     protected void setText(String text) {
@@ -158,17 +135,12 @@ public class TextView2 extends TextView1 implements _Content, _TAG {
         }
     }
 
-    @Override
-    protected android.widget.TextView getTextView() {
-        return textView;
-    }
-
     private void open() {
-        //Log.w(__CLASSNAME__, getMethodName() + ":" + this.index + ":" + this.path);
+        //Log.w(__CLASSNAME__, getMethodName() + ":" + this.index + "->" + this.path);
         try {
             if (TextView2.this.index < TextView2.this.path.size()) {
                 Uri uri = Uri.parse(path.get(index));
-                Log.i(__CLASSNAME__, getMethodName() + ":" + index + ":" + uri);
+                Log.i(__CLASSNAME__, getMethodName() + ":" + index + "->" + uri);
                 open(uri);
             }
         } catch (Exception e) {
@@ -182,9 +154,18 @@ public class TextView2 extends TextView1 implements _Content, _TAG {
         @Override
         public void run() {
             mHandler.removeCallbacks(complete);
-            mHandler.postDelayed(complete, length);
+            if (length > 0) {
+                mHandler.postDelayed(complete, length);
+            }
             animate();
             marquee();
+        }
+    };
+
+    private Runnable complete = new Runnable() {
+        @Override
+        public void run() {
+            if (mCListener != null) mCListener.onCompletion(TextView2.this);
         }
     };
 
@@ -203,13 +184,6 @@ public class TextView2 extends TextView1 implements _Content, _TAG {
         mHandler.postDelayed(animate, 0);
         return super.animate();
     }
-
-    private Runnable complete = new Runnable() {
-        @Override
-        public void run() {
-            if (mCListener != null) mCListener.onCompletion(TextView2.this);
-        }
-    };
 
     @Override
     public void play() {
@@ -236,7 +210,7 @@ public class TextView2 extends TextView1 implements _Content, _TAG {
         mHandler.removeCallbacks(animate);
         mHandler.removeCallbacks(marquee);
 
-        stopAnimation();
+        stopMarquee();
     }
 
     Random r = new Random();
