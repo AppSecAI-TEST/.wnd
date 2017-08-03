@@ -32,7 +32,6 @@ public class video extends _Activity {
         mediaController.setAnchorView(video);
 
         video.setMediaController(mediaController);
-        video.requestFocus();
         video.setMediaController(null);
 
         String url = getIntent().getStringExtra("url");

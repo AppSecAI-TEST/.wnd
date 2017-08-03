@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -83,7 +84,7 @@ class TextView2 extends TextView implements _Content, _DEF,_ENUM {
         } else {
             textView.setTextAppearance(R.style.text_view);
         }
-        //textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.text_size_tiny));
+        //textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, ContextCompat.getDimensionPixelSize(R.dimen.text_size_tiny));
         //shadow
         textView.setShadowLayer(1.5f, -1, 1, Color.LTGRAY);
         //gravity

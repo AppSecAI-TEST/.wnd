@@ -12,7 +12,7 @@
         android:id="@+id/html"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
+        android:layout_centerVertical="true"
         android:background="@android:color/transparent"
         android:visibility="visible"/>
 
@@ -37,16 +37,19 @@
     <kr.co.windowfun.widget.__TextView
         android:id="@+id/text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:scrollbars="none"
         android:background="@android:color/transparent"
         android:visibility="visible">
 
         <com.hanks.htextview.rainbow.RainbowTextView
             android:id="@+id/text_view"
             style="@style/text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:text="@string/text_default_text"/>
     </kr.co.windowfun.widget.__TextView>
 

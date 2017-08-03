@@ -108,30 +108,67 @@ class CLayout extends RelativeLayout implements _Content, _DEF,_ENUM, _JSON, CLi
         ((__HtmlView) findViewById(R.id.html)).setVisibility(View.VISIBLE);
     }
 
-    private void open() {
-        try {
-            Log.i(__CLASSNAME__, getMethodName() + ":" + this.index + "\n" + ((JSONObject) this.contents.get(index)).toString(2));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            if (CLayout.this.index < CLayout.this.contents.length()) {
-                String type = ((JSONObject) contents.get(index)).getString(result_c.type);
-                String text = ((JSONObject) contents.get(index)).getString(result_c.text);
-                String filename = ((JSONObject) contents.get(index)).getString(result_c.file_name);
-                Uri uri = Uri.parse(filename);
-                if (c_type.text == c_type.valueOf(type)) {
-                    uri = Uri.parse(text);
-                }
-                //Log.w(__CLASSNAME__, getMethodName() + ":" + index + "->" + type + ":" + text + ":" + filename + ":" + uri);
-                open(uri);
+
+    Runnable showBanner = new Runnable() {
+        @Override
+        public void run() {
+            String type = null;
+            String text = null;
+            String effect_text = null;
+            String effect_play = null;
+            String text_font;
+            String text_line;
+            String text_size;
+            String text_valign;
+
+            try {
+                type = ((JSONObject) contents.get(index)).getString(result_c.type);
+                if (c_type.text == c_type.valueOf(type)) return;
+                text = ((JSONObject) contents.get(index)).getString(result_c.text);
+                effect_text = ((JSONObject) contents.get(index)).getString(result_c.effect_text);
+                effect_play = ((JSONObject) contents.get(index)).getString(result_c.effect_play);
+                //text_...
+                text_font = ((JSONObject) contents.get(index)).getString(result_c.text_font);
+                text_line = ((JSONObject) contents.get(index)).getString(result_c.text_line);
+                text_size = ((JSONObject) contents.get(index)).getString(result_c.text_size);
+                text_valign = ((JSONObject) contents.get(index)).getString(result_c.text_valign);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+
+            try {
+                text = "[TEST]" + getResources().getString(R.string.text_default_text) + "[TEST]"; //test
+                effect_text = "rainbow"; //test
+                text_font = "font:TBD";  //test
+                text_line = "false"; //test
+                text_size = "xxlarge"; //test
+                text_valign = "bottom"; //test
+
+                if (!TextUtils.isEmpty(text)) {
+                    //Log.wtf(__CLASSNAME__, getMethodName() + ":" + type + ":" + text + ":" + effect_text + ":" + effect_play);
+                    ((__TextView) findViewById(R.id.text)).open(Uri.parse(text), effect_text);
+                    ((__TextView) findViewById(R.id.text)).textFont(text_font);
+                    ((__TextView) findViewById(R.id.text)).textLine(Boolean.parseBoolean(text_line));
+                    ((__TextView) findViewById(R.id.text)).textSize(_ENUM.text_size.valueOf(text_size));
+                    ((__TextView) findViewById(R.id.text)).textVAlign(_ENUM.text_valign.valueOf(text_valign));
+                    //start
+                    ((__TextView) findViewById(R.id.text)).setVisibility(View.VISIBLE);
+                    ((__TextView) findViewById(R.id.text)).play(-1);
+                    //scroll
+                    ((__TextView) findViewById(R.id.text)).setOnTouchListener(null); //don't touch
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+    };
+
+    private void showBanner() {
+        mHandler.removeCallbacks(showBanner);
+        mHandler.postDelayed(showBanner, TIMER_OPEN_NORMAL);
     }
 
-    @Override
+   @Override
     public void open(final Uri uri) {
         final String url = TextUtil.getFileUrl(uri.toString()) != null ? TextUtil.getFileUrl(uri.toString()) : uri.toString();
         final String path = new File(TextUtil.getFilePath(url)) != null ? TextUtil.getFilePath(url) : url;
@@ -160,12 +197,13 @@ class CLayout extends RelativeLayout implements _Content, _DEF,_ENUM, _JSON, CLi
             e.printStackTrace();
         }
 
-        //label //test
+        //label
         if (c_type.text == c_type.valueOf(type)) {
-            ((android.widget.TextView) findViewById(R.id.label)).setText(type + ":" + effect_text + ":" + effect_play + ":" + uri.toString());
+            ((android.widget.TextView) findViewById(R.id.label)).setText(type + ":" + effect_text + ":" + effect_play + ":" + uri.toString()); //test
         } else {
-            ((android.widget.TextView) findViewById(R.id.label)).setText(type + ":" + effect_text + ":" + effect_play + ":" + Uri.decode(path));
+            ((android.widget.TextView) findViewById(R.id.label)).setText(type + ":" + effect_text + ":" + effect_play + ":" + Uri.decode(path)); //test
         }
+
         //Log.wtf(__CLASSNAME__, getMethodName() + ":" + type + ":" + text + ":" + effect_text + ":" + effect_play + ":" + uri.toString());
 
         View v = this;
@@ -211,114 +249,93 @@ class CLayout extends RelativeLayout implements _Content, _DEF,_ENUM, _JSON, CLi
                 .playOn(v);
     }
 
-    Runnable showBanner = new Runnable() {
-        @Override
-        public void run() {
-            String type = null;
-            String text = null;
-            String effect_text = null;
-            String effect_play = null;
-            String text_font;
-            String text_line;
-            String text_size;
-            String text_valign;
-
-            try {
-                type = ((JSONObject) contents.get(index)).getString(result_c.type);
-                if (c_type.text == c_type.valueOf(type)) return;
-                text = ((JSONObject) contents.get(index)).getString(result_c.text);
-                effect_text = ((JSONObject) contents.get(index)).getString(result_c.effect_text);
-                effect_play = ((JSONObject) contents.get(index)).getString(result_c.effect_play);
-                //text_...
-                text_font = ((JSONObject) contents.get(index)).getString(result_c.text_font);
-                text_line = ((JSONObject) contents.get(index)).getString(result_c.text_line);
-                text_size = ((JSONObject) contents.get(index)).getString(result_c.text_size);
-                text_valign = ((JSONObject) contents.get(index)).getString(result_c.text_valign);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            try {
-                text = getResources().getString(R.string.text_default_text); //test
-                effect_text = "rainbow"; //test
-                text_font = "font:TBD";  //test
-                text_line = "false"; //test
-                text_size = "xxlarge"; //test
-                text_valign = "bottom"; //test
-
-                if (!TextUtils.isEmpty(text)) {
-                    //Log.wtf(__CLASSNAME__, getMethodName() + ":" + type + ":" + text + ":" + effect_text + ":" + effect_play);
-                    ((__TextView) findViewById(R.id.text)).open(Uri.parse(text), effect_text);
-                    ((__TextView) findViewById(R.id.text)).textFont(text_font);
-                    ((__TextView) findViewById(R.id.text)).textLine(Boolean.parseBoolean(text_line));
-                    ((__TextView) findViewById(R.id.text)).textSize(_ENUM.text_size.valueOf(text_size));
-                    ((__TextView) findViewById(R.id.text)).textVAlign(_ENUM.text_valign.valueOf(text_valign));
-                    //start
-                    ((__TextView) findViewById(R.id.text)).setVisibility(View.VISIBLE);
-                    ((__TextView) findViewById(R.id.text)).play(-1);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    };
-
-    private void showBanner() {
-        mHandler.removeCallbacks(showBanner);
-        mHandler.postDelayed(showBanner, TIMER_OPEN_NORMAL);
-    }
-
-    private Runnable play = new Runnable() {
-        @Override
-        public void run() {
-            try {
-                String type = ((JSONObject) contents.get(index)).getString(result_c.type);
-                String play_length = ((JSONObject) contents.get(index)).getString(result_c.play_length);
-                int length = Integer.parseInt(play_length) * 1000;
-                //Log.w(__CLASSNAME__,getMethodName() + ":" + type);
-                switch (c_type.valueOf(type)) {
-                    case text:
-                        showText();
-                        ((__TextView) findViewById(R.id.text)).play(length);
-                        break;
-                    case image:
-                        showImage();
-                        ((__ImageView) findViewById(R.id.image)).play(length);
-                        break;
-                    case video:
-                        showVideo();
-                        ((__VideoView) findViewById(R.id.video)).play();
-                        break;
-                    case html:
-                        showHtml();
-                        ((__HtmlView) findViewById(R.id.html)).play();
-                        break;
-                    default:
-                        break;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    };
-
     @Override
     public void play() {
-        mHandler.removeCallbacks(play);
-        mHandler.postDelayed(play, TIMER_OPEN_SHORT);
     }
 
     @Override
     public void play(int length) {
     }
 
+    /**
+     * OPEN N PLAY
+     */
+    private void _open() {
+        try {
+            Log.i(__CLASSNAME__, getMethodName() + ":" + CLayout.this.index + "\n" + ((JSONObject) CLayout.this.contents.get(index)).toString(2));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            if (CLayout.this.index < (contents != null ? contents.length() : 0)) {
+                String type = ((JSONObject) contents.get(index)).getString(result_c.type);
+                String text = ((JSONObject) contents.get(index)).getString(result_c.text);
+                String filename = ((JSONObject) contents.get(index)).getString(result_c.file_name);
+                Uri uri = Uri.parse(filename);
+                if (c_type.text == c_type.valueOf(type)) {
+                    uri = Uri.parse(text);
+                }
+                //Log.w(__CLASSNAME__, getMethodName() + ":" + index + "->" + type + ":" + text + ":" + filename + ":" + uri);
+                open(uri);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * OPEN N PLAY
+     */
+    private void _play() {
+        String type = null;
+        String play_length = null;
+        try {
+            type = ((JSONObject) contents.get(index)).getString(result_c.type);
+            play_length = ((JSONObject) contents.get(index)).getString(result_c.play_length);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            int length = Integer.parseInt(play_length) * 1000;
+            //Log.w(__CLASSNAME__,getMethodName() + ":" + type);
+            switch (c_type.valueOf(type)) {
+                case text:
+                    showText();
+                    ((__TextView) findViewById(R.id.text)).play(length);
+                    break;
+                case image:
+                    showImage();
+                    ((__ImageView) findViewById(R.id.image)).play(length);
+                    break;
+                case video:
+                    showVideo();
+                    ((__VideoView) findViewById(R.id.video)).play();
+                    break;
+                case html:
+                    showHtml();
+                    ((__HtmlView) findViewById(R.id.html)).play();
+                    break;
+                default:
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void start() {
+        _open();
+        _play();
+    }
+
     @Override
     public void stop() {
         Log.w(__CLASSNAME__, getMethodName());
-        mHandler.removeCallbacks(play);
+        //calbacks
         mHandler.removeCallbacks(prev);
         mHandler.removeCallbacks(next);
         mHandler.removeCallbacks(rand);
+        //content
         ((__TextView) findViewById(R.id.text)).stop();
         ((__ImageView) findViewById(R.id.image)).stop();
         ((__VideoView) findViewById(R.id.video)).stop();
@@ -332,10 +349,10 @@ class CLayout extends RelativeLayout implements _Content, _DEF,_ENUM, _JSON, CLi
         @Override
         public void run() {
             int min = 0;
-            int max = contents.length() - 1;
+            int max = (contents != null ? contents.length() : 0) - 1;
             int index = -1;
             try {
-                if (CLayout.this.index < CLayout.this.contents.length()) {
+                if (CLayout.this.index < (contents != null ? contents.length() : 0)) {
                     index = r.nextInt(max - min) + min;
                     CLayout.this.index = index;
                 }
@@ -343,8 +360,7 @@ class CLayout extends RelativeLayout implements _Content, _DEF,_ENUM, _JSON, CLi
                 e.printStackTrace();
             }
             //Log.w(__CLASSNAME__, getMethodName() + ":" + __VideoView.this.index);
-            open();
-            play();
+            start();
         }
     };
 
@@ -359,11 +375,10 @@ class CLayout extends RelativeLayout implements _Content, _DEF,_ENUM, _JSON, CLi
         public void run() {
             index--;
             if (index < 0) {
-                index = contents.length() - 1;
+                index = (contents != null ? contents.length() : 0) - 1;
             }
             //Log.i(__CLASSNAME__, getMethodName() + ":" + index);
-            open();
-            play();
+            start();
         }
     };
 
@@ -377,12 +392,11 @@ class CLayout extends RelativeLayout implements _Content, _DEF,_ENUM, _JSON, CLi
         @Override
         public void run() {
             index++;
-            if (index > contents.length() - 1) {
+            if (index > (contents != null ? contents.length() : 0) - 1) {
                 index = 0;
             }
             //Log.i(__CLASSNAME__, getMethodName() + ":" + index);
-            open();
-            play();
+            start();
         }
     };
 
@@ -432,10 +446,9 @@ class CLayout extends RelativeLayout implements _Content, _DEF,_ENUM, _JSON, CLi
         //OnTouchListener
         ((__VideoView) findViewById(R.id.video)).setOnTouchListener(this);
         ((__ImageView) findViewById(R.id.image)).setOnTouchListener(this);
-        ((__TextView) findViewById(R.id.text)).setOnTouchListener(this);
+        ((__TextView) findViewById(R.id.text)).setOnTouchListener(this); //don't touch
         ((__HtmlView) findViewById(R.id.html)).setOnTouchListener(this);
-        open();
-        play();
+        start();
         //rand(); //test
     }
 

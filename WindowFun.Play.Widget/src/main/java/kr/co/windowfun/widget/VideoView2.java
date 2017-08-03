@@ -148,7 +148,7 @@ class VideoView2 extends VideoView implements _Content, _DEF {
         super.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
-                Log.w(__CLASSNAME__, getMethodName() + "(" + what + "," + extra + ")" + ":" + index + "->" + uri + "\t" + VideoView2.this);
+                Log.wtf(__CLASSNAME__, "MediaPlayer.OnError(...)"/*getMethodName()*/ + "(" + "what:" + what + ",extra:" + extra + ")" + ":" + index + "->" + uri);
                 //Toast.makeText(getContext(), getMethodName() + "(" + what + "," + extra + ")" + extra, Toast.LENGTH_SHORT).show();
                 if (mOnErrorListener != null) {
                     mOnErrorListener.onError(mp, what, extra);
@@ -160,7 +160,7 @@ class VideoView2 extends VideoView implements _Content, _DEF {
         super.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                //Log.i(__CLASSNAME__, getMethodName() + ":" + ",w:" + getWidth() + ",h:" + getHeight());
+                Log.wtf(__CLASSNAME__, "MediaPlayer.onPrepared()"/*getMethodName()*/ + "(" + "w:" + getWidth() + ",h:" + getHeight() + ")" + ":" + index + "->" + uri);
                 setDimensions(getWidth(), getHeight());
                 VideoView2.this.mp = mp;
                 VideoView2.this.mute(VideoView2.this.mute);
@@ -173,6 +173,7 @@ class VideoView2 extends VideoView implements _Content, _DEF {
         super.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
+                Log.wtf(__CLASSNAME__, "MediaPlayer.onCompletion()"/*getMethodName()*/ + "(" + "w:" + getWidth() + ",h:" + getHeight() + ")" + ":" + index + "->" + uri);
                 if (mOnCompletionListener != null) {
                     mOnCompletionListener.onCompletion(mp);
                 }
