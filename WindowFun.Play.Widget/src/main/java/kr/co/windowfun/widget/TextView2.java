@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import com.hanks.htextview.base.HTextView;
 
@@ -67,6 +68,15 @@ class TextView2 extends TextView implements _Content, _DEF,_ENUM {
     @Override
     public void open(Uri uri) {
         this.text = uri.toString();
+        //scroll don't touch
+        try {
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) getLayoutParams();
+            params.width = RelativeLayout.LayoutParams.MATCH_PARENT;
+            params.height = RelativeLayout.LayoutParams.WRAP_CONTENT;
+            setLayoutParams(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //remove
         stopMarquee();
         removeAllViews();
