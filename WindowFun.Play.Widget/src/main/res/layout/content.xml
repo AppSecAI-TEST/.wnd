@@ -40,7 +40,15 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         android:background="@android:color/transparent"
-        android:visibility="visible"/>
+        android:visibility="visible">
+
+        <com.hanks.htextview.rainbow.RainbowTextView
+            android:id="@+id/text_view"
+            style="@style/text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_default_text"/>
+    </kr.co.windowfun.widget.__TextView>
 
     <android.widget.TextView
         android:id="@+id/label"

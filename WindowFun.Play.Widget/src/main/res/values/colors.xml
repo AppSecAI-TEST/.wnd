@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="DarkActionBarColor">#333333</color>
+    <color name="text_default_color">#ffffffff</color>
+    <color name="text_default_background">#ffff00ff</color>
 </resources>

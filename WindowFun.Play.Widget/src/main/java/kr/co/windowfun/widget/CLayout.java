@@ -16,7 +16,6 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -240,7 +239,7 @@ class CLayout extends RelativeLayout implements _Content, _DEF,_ENUM, _JSON, CLi
             }
 
             try {
-                text = TEXTVIEW_DEFAULT_TEXT; //test
+                text = getResources().getString(R.string.text_default_text); //test
                 effect_text = "rainbow"; //test
                 text_font = "font:TBD";  //test
                 text_line = "false"; //test

@@ -58,22 +58,9 @@ class TextView extends HorizontalScrollView implements _Listener {
 
     protected android.widget.TextView textView;
 
-    protected android.widget.TextView getTextView() {
-        return textView;
-    }
-
     Animation animation;
 
     protected void setText(String text) {
-        //param(width)
-        if (getTextView() != null) {
-            getTextView().measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
-            int w = getTextView().getMeasuredWidth();
-            ViewGroup.LayoutParams params = getTextView().getLayoutParams();
-            //Log.wtf(__CLASSNAME__, getMethodName() + ":" + getTextView() + ":" + params + ":" + "w:" + params.width + ", h:" + params.height + "->" + "w:" + w + ", h:" + h);
-            params.width = w;
-            getTextView().setLayoutParams(params);
-        }
         //animation
         this.animation = new TranslateAnimation(
                 Animation.RELATIVE_TO_SELF, 0.0f,
@@ -95,7 +82,7 @@ class TextView extends HorizontalScrollView implements _Listener {
     public void startMarquee() {
         //Log.wtf(__CLASSNAME__, getMethodName());
         try {
-            if (getTextView() != null) getTextView().startAnimation(animation);
+            if (textView != null) textView.startAnimation(animation);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -104,7 +91,7 @@ class TextView extends HorizontalScrollView implements _Listener {
     public void stopMarquee() {
         //Log.wtf(__CLASSNAME__, getMethodName());
         try {
-            if (getTextView() != null) getTextView().clearAnimation();
+            if (textView != null) textView.clearAnimation();
         } catch (Exception e) {
             e.printStackTrace();
         }

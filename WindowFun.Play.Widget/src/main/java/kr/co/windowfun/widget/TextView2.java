@@ -71,7 +71,7 @@ class TextView2 extends TextView implements _Content, _DEF,_ENUM {
         removeAllViews();
         //if (textView != null)  removeView(textView);
         //make
-        textView = CTextView.with(getContext(), this.type.toString());
+        textView = CText.valueOf(this.type.toString()).with(getContext());
         //Log.wtf(__CLASSNAME__, getMethodName() + ":" + this.type + ":" + textView + ":" + uri);
         //style
         if (Build.VERSION.SDK_INT < 23) {
@@ -82,9 +82,6 @@ class TextView2 extends TextView implements _Content, _DEF,_ENUM {
         //textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.text_size_tiny));
         //shadow
         textView.setShadowLayer(1.5f, -1, 1, Color.LTGRAY);
-        //line
-        //textView.setMaxLines(1);
-        //textView.setSingleLine(true);
         //param(width)
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         params.gravity = Gravity.CENTER_VERTICAL;
@@ -94,7 +91,7 @@ class TextView2 extends TextView implements _Content, _DEF,_ENUM {
         //add
         addView(textView);
         //blank
-        String blank = TEXTVIEW_DEFAULT_TEXT;
+        String blank = getResources().getString(R.string.text_default_text);
         //for (int i = 0; i < text.length(); i++) blank += "\t ";
         setText(blank);
     }
@@ -104,6 +101,13 @@ class TextView2 extends TextView implements _Content, _DEF,_ENUM {
         super.setText(text);
         try {
             if (textView == null) return;
+            //param(width)
+            textView.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
+            int w = textView.getMeasuredWidth();
+            ViewGroup.LayoutParams params = textView.getLayoutParams();
+            //Log.wtf(__CLASSNAME__, getMethodName() + ":" + textView + ":" + params + ":" + "w:" + params.width + ", h:" + params.height + "->" + "w:" + w + ", h:" + h);
+            params.width = w;
+            textView.setLayoutParams(params);
             if (textView instanceof HTextView) {
                 ((HTextView) textView).animateText(text);
             }

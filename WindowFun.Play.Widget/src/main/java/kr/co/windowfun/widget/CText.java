@@ -2,6 +2,7 @@ package kr.co.windowfun.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import com.hanks.htextview.EvaporateTextView2;
 import com.hanks.htextview.FadeTextView2;
@@ -27,36 +28,39 @@ public enum CText {
     evaporate(EvaporateTextView2.class),
     fall(FallTextView2.class);
 
-    private Class textClass;
+    private Class value;
 
-    private CText(Class clazz) {
-        this.textClass = clazz;
+    CText(Class value) {
+        this.value = value;
     }
 
-    public android.widget.TextView getText(Context context) {
+    public android.widget.TextView with(Context context) {
+        Log.wtf("[[kr.co.windowfun.widget.CText]]", this.value + ":" + context);
         try {
             Class[] parameterTypes = {Context.class};
-            return (android.widget.TextView) this.textClass.getConstructor(parameterTypes).newInstance(context);
+            return (android.widget.TextView) this.value.getConstructor(parameterTypes).newInstance(context);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public android.widget.TextView getText(Context context, AttributeSet attrs){
+    public android.widget.TextView with(Context context, AttributeSet attrs) {
+        Log.wtf("[[kr.co.windowfun.widget.CTextView]]", this.value + ":" + context + ", " + context + ", " + attrs);
         try {
             Class[] parameterTypes = {Context.class, AttributeSet.class};
-            return (android.widget.TextView) this.textClass.getConstructor(parameterTypes).newInstance(context, attrs);
+            return (android.widget.TextView) this.value.getConstructor(parameterTypes).newInstance(context, attrs);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public android.widget.TextView getText(Context context, AttributeSet attrs, int defStyleAttr) {
+    public android.widget.TextView with(Context context, AttributeSet attrs, int defStyleAttr) {
+        Log.wtf("[[kr.co.windowfun.widget.CTextView]]", this.value + ":" + context + ", " + context + ", " + attrs + ", " + defStyleAttr);
         try {
             Class[] parameterTypes = {Context.class, AttributeSet.class, int.class};
-            return (android.widget.TextView) this.textClass.getConstructor(parameterTypes).newInstance(context, attrs, defStyleAttr);
+            return (android.widget.TextView) this.value.getConstructor(parameterTypes).newInstance(context, attrs, defStyleAttr);
         } catch (Exception e) {
             e.printStackTrace();
         }

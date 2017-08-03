@@ -2,12 +2,13 @@
 <resources>
     <!--isyoon:text_view-->
     <style name="text_view">
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">top|center</item>
-        <item name="android:textColor">#fff</item>
+        <item name="android:gravity">center_vertical</item>
         <item name="android:textSize">@dimen/text_size_xxxlarge</item>
-        <!--text marquee-->
+        <item name="android:textColor">@color/text_default_color</item>
+        <item name="android:background">@color/text_default_background</item> <!--//test-->
+        <!--text marquee:FUCK-->
         <!--<item name="android:singleLine">true</item>-->
         <!--<item name="android:maxLines">1</item>-->
         <!--<item name="android:ellipsize">marquee</item>-->

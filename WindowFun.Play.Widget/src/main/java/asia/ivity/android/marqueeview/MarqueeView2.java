@@ -61,7 +61,7 @@ public class MarqueeView2 extends MarqueeView {
     //        mTextField = (TextView) getChildAt(0);
     //        removeView(mTextField);
     //
-    //        mScrollView.addView(mTextField, new ScrollView.LayoutParams(TEXTVIEW_VIRTUAL_WIDTH, LayoutParams.WRAP_CONTENT));
+    //        mScrollView.addView(mTextField, new ScrollView.LayoutParams(TEXT_VIRTUAL_WIDTH, LayoutParams.WRAP_CONTENT));
     //
     //        mTextField.addTextChangedListener(new TextWatcher() {
     //            @Override
