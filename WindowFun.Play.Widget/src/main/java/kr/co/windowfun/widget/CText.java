@@ -35,7 +35,7 @@ public enum CText {
     }
 
     public android.widget.TextView with(Context context) {
-        Log.wtf("[[kr.co.windowfun.widget.CText]]", this.value + ":" + context);
+        //Log.wtf("[[kr.co.windowfun.widget.CText]]", this.value + ":" + context);
         try {
             Class[] parameterTypes = {Context.class};
             return (android.widget.TextView) this.value.getConstructor(parameterTypes).newInstance(context);
@@ -46,7 +46,7 @@ public enum CText {
     }
 
     public android.widget.TextView with(Context context, AttributeSet attrs) {
-        Log.wtf("[[kr.co.windowfun.widget.CTextView]]", this.value + ":" + context + ", " + context + ", " + attrs);
+        //Log.wtf("[[kr.co.windowfun.widget.CTextView]]", this.value + ":" + context + ", " + context + ", " + attrs);
         try {
             Class[] parameterTypes = {Context.class, AttributeSet.class};
             return (android.widget.TextView) this.value.getConstructor(parameterTypes).newInstance(context, attrs);
@@ -57,7 +57,7 @@ public enum CText {
     }
 
     public android.widget.TextView with(Context context, AttributeSet attrs, int defStyleAttr) {
-        Log.wtf("[[kr.co.windowfun.widget.CTextView]]", this.value + ":" + context + ", " + context + ", " + attrs + ", " + defStyleAttr);
+        //Log.wtf("[[kr.co.windowfun.widget.CTextView]]", this.value + ":" + context + ", " + context + ", " + attrs + ", " + defStyleAttr);
         try {
             Class[] parameterTypes = {Context.class, AttributeSet.class, int.class};
             return (android.widget.TextView) this.value.getConstructor(parameterTypes).newInstance(context, attrs, defStyleAttr);
