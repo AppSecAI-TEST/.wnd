@@ -236,9 +236,6 @@ class home2 extends home {
             getApp().result_c3 = getJSONArray(response, result.result_c3);
             getApp().result_c4 = getJSONArray(response, result.result_c4);
             getApp().result_c5 = getJSONArray(response, result.result_c5);
-            if (getApp().result_c3 == null) getApp().result_c3 = getApp().result_c1; //test
-            if (getApp().result_c4 == null) getApp().result_c4 = getApp().result_c1; //test
-            if (getApp().result_c5 == null) getApp().result_c5 = getApp().result_c1; //test
             //Log.i(__CLASSNAME__, getMethodName() + "\n[result_c1]\n" + toString(getApp().result_c1, 2));
             //Log.i(__CLASSNAME__, getMethodName() + "\n[result_c4]\n" + toString(getApp().result_c4, 2));
             //Log.i(__CLASSNAME__, getMethodName() + "\n[result_c5]\n" + toString(getApp().result_c5, 2));
@@ -286,7 +283,7 @@ class home2 extends home {
     Map<String, Uri> adds = new HashMap<>();
 
     private void add(JSONArray results) {
-        for (int i = 0; i < results.length(); i++) {
+        for (int i = 0; i < (results != null ? results.length() : 0); i++) {
             try {
                 JSONObject item = (JSONObject) results.get(i);
                 final String filename = item.getString(result_c.file_name);

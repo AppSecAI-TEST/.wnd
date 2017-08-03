@@ -73,6 +73,10 @@ class TextView2 extends TextView implements _Content, _DEF,_ENUM {
         //make
         textView = CText.valueOf(this.type.toString()).with(getContext());
         //Log.wtf(__CLASSNAME__, getMethodName() + ":" + this.type + ":" + textView + ":" + uri);
+        //param(width)
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        params.gravity = Gravity.CENTER_VERTICAL;
+        textView.setLayoutParams(params);
         //style
         if (Build.VERSION.SDK_INT < 23) {
             textView.setTextAppearance(getContext(), R.style.text_view);
@@ -82,10 +86,6 @@ class TextView2 extends TextView implements _Content, _DEF,_ENUM {
         //textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.text_size_tiny));
         //shadow
         textView.setShadowLayer(1.5f, -1, 1, Color.LTGRAY);
-        //param(width)
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        params.gravity = Gravity.CENTER_VERTICAL;
-        textView.setLayoutParams(params);
         //gravity
         textView.setGravity(Gravity.CENTER_VERTICAL);
         //add

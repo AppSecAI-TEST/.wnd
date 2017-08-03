@@ -2,5 +2,7 @@
 <resources>
     <color name="DarkActionBarColor">#333333</color>
     <color name="text_default_color">#ffffffff</color>
-    <color name="text_default_background">#ffff00ff</color>
+    <color name="text_default_background">@android:color/transparent</color>
+    <!--<color name="text_default_background">#ffff00ff</color>  //test-->
+
 </resources>
