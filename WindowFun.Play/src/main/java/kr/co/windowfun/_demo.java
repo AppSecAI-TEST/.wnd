@@ -1,5 +1,7 @@
 package kr.co.windowfun;
 
+import android.util.Log;
+
 import kr.co.windowfun.widget.__ImageView;
 import kr.co.windowfun.widget.__VideoView;
 
@@ -9,6 +11,7 @@ import kr.co.windowfun.widget.__VideoView;
 
 class _demo extends __main {
     protected void rand() {  //test
+        Log.wtf(__CLASSNAME__, getMethodName());
         for (final __ImageView i : images) {
             i.rand(); //test
         }

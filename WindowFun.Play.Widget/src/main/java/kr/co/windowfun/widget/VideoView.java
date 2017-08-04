@@ -57,7 +57,7 @@ class VideoView extends android.widget.VideoView implements _Listener {
     CListener mCListener;
 
     @Override
-    public void set(CListener l) {
+    public void setCListener(CListener l) {
         mCListener = l;
     }
 }

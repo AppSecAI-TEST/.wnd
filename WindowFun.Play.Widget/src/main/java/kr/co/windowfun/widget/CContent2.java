@@ -31,13 +31,12 @@ class CContent2 extends CContent implements CListener {
 
     @Override
     protected void onAttachedToWindow() {
-        Log.wtf(__CLASSNAME__, getMethodName());
         super.onAttachedToWindow();
         //CListener
-        ((__VideoView) findViewById(R.id.video)).set(this);
-        ((__ImageView) findViewById(R.id.image)).set(this);
-        ((__TextView) findViewById(R.id.text)).set(this);
-        ((__HtmlView) findViewById(R.id.html)).set(this);
+        ((__VideoView) findViewById(R.id.video)).setCListener(this);
+        ((__ImageView) findViewById(R.id.image)).setCListener(this);
+        ((__TextView) findViewById(R.id.text)).setCListener(this);
+        ((__HtmlView) findViewById(R.id.html)).setCListener(this);
     }
 
     @Override

@@ -46,7 +46,7 @@ class ImageView extends android.support.v7.widget.AppCompatImageView implements 
 
     CListener mCListener;
     @Override
-    public void set(CListener l) {
+    public void setCListener(CListener l) {
         mCListener = l;
     }
 }
