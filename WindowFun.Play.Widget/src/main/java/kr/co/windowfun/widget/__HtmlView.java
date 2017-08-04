@@ -10,7 +10,7 @@ import android.util.AttributeSet;
  * Created by isyuun on 8/2/2017.
  */
 
-public class __HtmlView extends HtmlView2 {
+public class __HtmlView extends HtmlView3 {
     public __HtmlView(Context context) {
         super(context);
     }

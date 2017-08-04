@@ -4,14 +4,14 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
-import kr.co.windowfun.widget.ImageView2;
-import kr.co.windowfun.widget.VideoView2;
+import kr.co.windowfun.widget.__ImageView;
+import kr.co.windowfun.widget.__VideoView;
 
 /**
  * Created by isyoon on 2017-07-12.
  */
 
-public class main3 extends _main {
+public class demo3 extends _main {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,10 +23,13 @@ public class main3 extends _main {
 
     @Override
     protected void init() {
-        videos.add(((VideoView2) findViewById(R.id.c1).findViewById(R.id.video)).path(mp4).mute(false));
-        videos.add(((VideoView2)findViewById(R.id.c2).findViewById(R.id.video))/*.path(mp4)*/);
-        videos.add(((VideoView2)findViewById(R.id.c3).findViewById(R.id.video))/*.path(mp4)*/);
-        videos.add(((VideoView2)findViewById(R.id.c4).findViewById(R.id.video))/*.path(mp4)*/);
+        videos.add(((__VideoView) findViewById(R.id.c1).findViewById(R.id.video))/*.path(mp4).mute(false)*/);
+        videos.add(((__VideoView) findViewById(R.id.c2).findViewById(R.id.video))/*.path(mp4)*/);
+        videos.add(((__VideoView) findViewById(R.id.c3).findViewById(R.id.video))/*.path(mp4)*/);
+        videos.add(((__VideoView) findViewById(R.id.c4).findViewById(R.id.video))/*.path(mp4)*/);
+
+        ((__VideoView) findViewById(R.id.c1).findViewById(R.id.video)).path(mp4);
+        ((__VideoView) findViewById(R.id.c1).findViewById(R.id.video)).mute(false);
 
         jpg.add("http://windowfun.co.kr/Manager/share/img/login_bg.jpg");
         jpg.add("http://inthecheesefactory.com/uploads/source/glidepicasso/cover.jpg");
@@ -40,14 +43,18 @@ public class main3 extends _main {
         //jpg.add("https://thechive.files.wordpress.com/2017/06/whos-that-girl-from-stand-up-and-the-avn-awards-24.gif?w=600");
         //jpg.add("https://thechive.files.wordpress.com/2017/06/whos-that-girl-from-stand-up-and-the-avn-awards-23.gif?w=600");
 
-        /*images.add(((ImageView2) findViewById(R.id.plate0).findViewById(R.id.image)).path(jpg));*/
-        images.add(((ImageView2) findViewById(R.id.c2).findViewById(R.id.image)).path(jpg));
-        images.add(((ImageView2) findViewById(R.id.c3).findViewById(R.id.image)).path(jpg));
-        images.add(((ImageView2) findViewById(R.id.c4).findViewById(R.id.image)).path(jpg));
+        /*images.add(((__ImageView) findViewById(R.id.plate0).findViewById(R.id.image)).path(jpg));*/
+        images.add(((__ImageView) findViewById(R.id.c2).findViewById(R.id.image))/*.path(jpg)*/);
+        images.add(((__ImageView) findViewById(R.id.c3).findViewById(R.id.image))/*.path(jpg)*/);
+        images.add(((__ImageView) findViewById(R.id.c4).findViewById(R.id.image))/*.path(jpg)*/);
+
+        ((__ImageView) findViewById(R.id.c2).findViewById(R.id.image)).path(jpg);
+        ((__ImageView) findViewById(R.id.c3).findViewById(R.id.image)).path(jpg);
+        ((__ImageView) findViewById(R.id.c4).findViewById(R.id.image)).path(jpg);
 
         super.init();
 
-        //for (VideoView2 v : videos) {
+        //for (__VideoView v : videos) {
         //    v.stop();
         //}
     }

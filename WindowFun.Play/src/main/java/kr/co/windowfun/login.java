@@ -22,7 +22,7 @@ import cz.msebera.android.httpclient.Header;
  * Created by isyoon on 2017-07-18.
  */
 
-public class login extends _Activity {
+public class login extends _Activity implements _API {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -113,10 +113,11 @@ public class login extends _Activity {
     private void send() {
         String id = "" + ((EditText) findViewById(R.id.id)).getText();
         String pw = "" + ((EditText) findViewById(R.id.pw)).getText();
-        String url = "http://windowfun.co.kr/Manager/API/W_login.html?userid=windowfun4&password=4321";
-        //url = "http://windowfun.co.kr/Manager/API/W_login.html?userid=" + id + "&password=" + pw;
+        String url;
+        //url = "http://windowfun.co.kr/Manager/API/W_login.html?userid=windowfun4&password=4321"; //test
+        //url = "http://windowfun.co.kr/Manager/API/W_login.html?userid=" + id + "&password=" + pw; //test
         //send(url);
-        url = "http://windowfun.co.kr/Manager/API/W_login.html";
+        url = W_API_URL_LOGIN;
         RequestParams params = new RequestParams();
         params.put("userid", id);
         params.put("password", pw);

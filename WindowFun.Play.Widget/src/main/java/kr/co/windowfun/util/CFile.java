@@ -1,18 +1,15 @@
-package kr.co.windowfun.widget;
+package kr.co.windowfun.util;
 
 import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.File;
 
-import kr.co.windowfun._JSON;
-import kr.co.windowfun.util.TextUtil;
-
 /**
  * Created by isyoon on 2017-07-25.
  */
 
-public class CFile implements _JSON {
+public class CFile /*implements _JSON */ {
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
 
@@ -37,8 +34,8 @@ public class CFile implements _JSON {
         return ste[idx].toString();
     }
 
-    public String filename;
-    public String filesize;
+    public String file_name;
+    public String file_size;
 
     public String name;
     public String path;
@@ -47,20 +44,20 @@ public class CFile implements _JSON {
     public File file;
     public long size = 0L;
 
-    public CFile(String filename, String filesize) throws Exception {
+    public CFile(String file_name, String file_size) throws Exception {
         this();
-        this.filename = filename;
-        this.filesize = filesize;
-        if (TextUtils.isEmpty(filename) || TextUtils.isEmpty(filesize)) {
-            throw new Exception("No File Info" + "[file_name]" + filename + "[filesize]" + filesize);
+        this.file_name = file_name;
+        this.file_size = file_size;
+        if (TextUtils.isEmpty(file_name) || TextUtils.isEmpty(file_size)) {
+            throw new Exception("No File Info" + "[file_name]" + file_name + "[file_size]" + file_size);
         }
-        if (!TextUtils.isEmpty(filename) && !TextUtils.isEmpty(filesize)) {
-            this.name = TextUtil.getFileName(filename);
-            this.path = TextUtil.getFilePath(filename);
-            this.url = TextUtil.getFileUrl(filename);
+        if (!TextUtils.isEmpty(file_name) && !TextUtils.isEmpty(file_size)) {
+            this.name = TextUtil.getFileName(file_name);
+            this.path = TextUtil.getFilePath(file_name);
+            this.url = TextUtil.getFileUrl(file_name);
             this.file = new File(this.path);
             this.size = this.file != null ? this.file.length() : 0L;
-            //Log.wtf(__CLASSNAME__, getMethodName() + this.file + "\n[filesize]" + filesize + "\n[uri]" + file_name + "\n[url]" + url + "\n[name]" + name + "\n[path]" + path + "\n[size]" + size);
+            //Log.wtf(__CLASSNAME__, getMethodName() + this.file + "\n[file_size]" + file_size + "\n[uri]" + file_name + "\n[url]" + url + "\n[name]" + name + "\n[path]" + path + "\n[size]" + size);
         }
     }
 
@@ -69,7 +66,7 @@ public class CFile implements _JSON {
     }
 
     public boolean sizes() {
-        return (this.size > 0 && this.size == Long.parseLong(this.filesize));
+        return (this.size > 0 && this.size == Long.parseLong(this.file_size));
     }
 
     public boolean equal() {

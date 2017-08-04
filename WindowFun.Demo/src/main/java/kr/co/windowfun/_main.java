@@ -28,12 +28,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import kr.co.windowfun.app.Activity2;
-import kr.co.windowfun.widget.ImageView2;
-import kr.co.windowfun.widget.TextView2;
-import kr.co.windowfun.widget.VideoView2;
+import kr.co.windowfun.widget.__ImageView;
+import kr.co.windowfun.widget.__TextView;
+import kr.co.windowfun.widget.__VideoView;
 
-public class _main extends Activity2 {
+public class _main extends _Activity {
     protected final int DELAY_TIME_OPEN = 100;
 
     private Handler mHandler = new Handler();
@@ -41,11 +40,11 @@ public class _main extends Activity2 {
     final String root = Environment.getExternalStorageDirectory().getAbsolutePath();
     String root_mp4 = root + "/.mp4";
 
-    protected ArrayList<TextView2> texts = new ArrayList<>();
+    protected ArrayList<__TextView> texts = new ArrayList<>();
     protected ArrayList<String> txt = new ArrayList<>();
-    protected ArrayList<ImageView2> images = new ArrayList<>();
+    protected ArrayList<__ImageView> images = new ArrayList<>();
     protected ArrayList<String> jpg = new ArrayList<>();
-    protected ArrayList<VideoView2> videos = new ArrayList<>();
+    protected ArrayList<__VideoView> videos = new ArrayList<>();
     protected ArrayList<String> mp4 = new ArrayList<>();
 
     private void path() {
@@ -111,7 +110,7 @@ public class _main extends Activity2 {
     }
 
     private void pause() {
-        for (final VideoView2 v : videos) {
+        for (final __VideoView v : videos) {
             v.pause();
         }
     }
@@ -123,7 +122,7 @@ public class _main extends Activity2 {
     }
 
     private void resume() {
-        for (final VideoView2 v : videos) {
+        for (final __VideoView v : videos) {
             v.resume();
         }
     }
@@ -164,18 +163,18 @@ public class _main extends Activity2 {
         menu = (CircleMenu) findViewById(R.id.menu);
         ////Log.i(__CLASSNAME__, getMethodName() + "\t" + circleMenu);
 
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.mipmap.wf_icon_event, new Object[]{"#258CFF", "html", "http://windowfun.co.kr/type/typea/"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.mipmap.wf_icon_member, new Object[]{"#30A400", "html", "http://windowfun.co.kr/type/typeb/"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.mipmap.wf_icon_point, new Object[]{"#FF4B32", "html", "http://windowfun.co.kr/type/typec/"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.mipmap.wf_icon_retrieval, new Object[]{"#8A39FF", "html", "http://windowfun.co.kr/type/typed/"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.mipmap.wf_icon_store, new Object[]{"#FF6A00", "html", "http://windowfun.co.kr/type/typee/"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.mipmap.wf_icon_home, new Object[]{"#258CFF", "html", "http://drive.google.com/viewerng/viewer?embedded=true&url=http://windowfun.co.kr/type/windowfun.pdf"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.mipmap.wf_icon_search, new Object[]{"#30A400", "video", root_mp4 + File.separator + "c" + File.separator + "c1.mp4"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.mipmap.wf_icon_game, new Object[]{"#FF4B32", "html", "http://windowfun.co.kr/game/"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.mipmap.wf_icon_setup, new Object[]{"#8A39FF", "html", "http://to-day.co.kr"});}});
+        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_event, new Object[]{"#258CFF", "html", "http://windowfun.co.kr/type/typea/"});}});
+        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_member, new Object[]{"#30A400", "html", "http://windowfun.co.kr/type/typeb/"});}});
+        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_point, new Object[]{"#FF4B32", "html", "http://windowfun.co.kr/type/typec/"});}});
+        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_retrieval, new Object[]{"#8A39FF", "html", "http://windowfun.co.kr/type/typed/"});}});
+        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_store, new Object[]{"#FF6A00", "html", "http://windowfun.co.kr/type/typee/"});}});
+        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_home, new Object[]{"#258CFF", "html", "http://drive.google.com/viewerng/viewer?embedded=true&url=http://windowfun.co.kr/type/windowfun.pdf"});}});
+        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_search, new Object[]{"#30A400", "video", root_mp4 + File.separator + "c" + File.separator + "c1.mp4"});}});
+        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_game, new Object[]{"#FF4B32", "html", "http://windowfun.co.kr/game/"});}});
+        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_setup, new Object[]{"#8A39FF", "html", "http://to-day.co.kr"});}});
 
         menu.setMainMenu(ContextCompat.getColor(this, android.R.color.holo_red_dark),
-                R.mipmap.wf_icon_menu,
+                R.drawable.wf_icon_menu,
                 R.drawable.wf_icon_close)
                 .setOnMenuSelectedListener(new OnMenuSelectedListener() {
 
@@ -239,7 +238,7 @@ public class _main extends Activity2 {
     }
 
     private void images() {
-        for (final ImageView2 i : images) {
+        for (final __ImageView i : images) {
             i.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View i, MotionEvent event) {
@@ -249,11 +248,11 @@ public class _main extends Activity2 {
                     float x = event.getX();
                     //float y = event.getY();
                     if (x < w / 2) {
-                        ((ImageView2) i).prev();
+                        ((__ImageView) i).prev();
                     } else if (x > w / 2) {
-                        ((ImageView2) i).next();
+                        ((__ImageView) i).next();
                     }
-                    for (VideoView2 video : videos) {
+                    for (__VideoView video : videos) {
                         if (i == video) {
                             video.mute(false);
                         } else {
@@ -270,7 +269,7 @@ public class _main extends Activity2 {
     }
 
     private void videos() {
-        for (final VideoView2 v : videos) {
+        for (final __VideoView v : videos) {
             //리스너 등록
             v.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
@@ -281,17 +280,17 @@ public class _main extends Activity2 {
             v.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    //////Log.w(__CLASSNAME__, getMethodName() + ":" + v + "," + event);
+                    Log.wtf(__CLASSNAME__, getMethodName() + ":" + v + "," + event);
                     float w = v.getWidth();
                     //float h = v.getHeight();
                     float x = event.getX();
                     //float y = event.getY();
                     if (x < w / 2) {
-                        ((VideoView2) v).prev();
+                        ((__VideoView) v).prev();
                     } else if (x > w / 2) {
-                        ((VideoView2) v).next();
+                        ((__VideoView) v).next();
                     }
-                    for (VideoView2 video : videos) {
+                    for (__VideoView video : videos) {
                         if (v == video) {
                             video.mute(false);
                         } else {

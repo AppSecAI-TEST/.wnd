@@ -32,19 +32,15 @@ class TextView3 extends TextView2 {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        this.font = "";
-        this.line = false;
-        this.valign = text_valign.top;
-        this.size = text_size.xxxlarge;
-        this.backgound = ContextCompat.getColor(getContext(), R.color.text_default_background);
         init();
     }
 
     private String font = "";
     private boolean line = false;
-    private text_valign valign = text_valign.center;
+    private text_valign valign = text_valign.top;
     private text_size size = text_size.xxxlarge;
-    private int backgound = 0;
+    private int color = ContextCompat.getColor(getContext(), android.R.color.white);
+    private int backcolor = ContextCompat.getColor(getContext(), R.color.text_test_background);
 
     Runnable init = new Runnable() {
         @Override
@@ -54,7 +50,8 @@ class TextView3 extends TextView2 {
             textLine(TextView3.this.line);
             textVAlign(TextView3.this.valign);
             textSize(TextView3.this.size);
-            textBackgound(TextView3.this.backgound);
+            //textColor(TextView3.this.color);
+            textBackcolor(TextView3.this.backcolor);
         }
     };
 
@@ -65,13 +62,13 @@ class TextView3 extends TextView2 {
     }
 
     @Override
-    public void open(Uri uri) {
+    public void open(final Uri uri) {
         super.open(uri);
         textFont(this.font);
         textLine(this.line);
         textVAlign(this.valign);
         textSize(this.size);
-        textBackgound(this.backgound);
+        textBackcolor(this.backcolor);
     }
 
     /**
@@ -154,11 +151,21 @@ class TextView3 extends TextView2 {
         }
     }
 
-    private void textBackgound(int backgound) {
-        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + backgound);
-        this.backgound = backgound;
+    private void textColor(int color) {
+        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + color);
+        this.color = color;
         try {
-            textView.setBackgroundColor(backgound);
+            textView.setTextColor(color);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void textBackcolor(int backcolor) {
+        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + backcolor);
+        this.backcolor = backcolor;
+        try {
+            textView.setBackgroundColor(backcolor);
         } catch (Exception e) {
             e.printStackTrace();
         }

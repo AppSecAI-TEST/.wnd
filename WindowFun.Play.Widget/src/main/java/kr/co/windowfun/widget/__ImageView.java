@@ -8,7 +8,7 @@ import android.util.AttributeSet;
  * Created by isyuun on 8/2/2017.
  */
 
-public class __ImageView extends ImageView2 {
+public class __ImageView extends ImageView3 {
     public __ImageView(Context context) {
         super(context);
     }

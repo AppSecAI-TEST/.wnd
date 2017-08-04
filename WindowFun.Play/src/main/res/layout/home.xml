@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/progress"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="visible"> //test
 
         <RelativeLayout
             android:id="@+id/loginout"

@@ -11,7 +11,7 @@ import kr.co.windowfun.widget.R;
 
 public interface _ENUM {
     //"plane|line|fade|typer|rainbow|scale|evaporate|fall"
-    enum effect_text {
+    enum text_effect {
         plane(CText.plane),
         line(CText.line),
         fade(CText.fade),
@@ -22,7 +22,8 @@ public interface _ENUM {
         fall(CText.fall),;
 
         private CText value;
-        effect_text(CText value) {
+
+        text_effect(CText value) {
             this.value = value;
         }
 

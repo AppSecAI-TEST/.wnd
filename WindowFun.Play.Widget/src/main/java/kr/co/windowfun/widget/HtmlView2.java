@@ -6,6 +6,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -51,17 +52,19 @@ class HtmlView2 extends HtmlView implements _Content, _DEF {
     }
 
     @Override
-    public void open(Uri uri) {
+    public void open(final Uri uri) {
         loadUrl(uri.toString());
     }
 
     private void open() {
         //Log.w(__CLASSNAME__, getMethodName() + ":" + this.index + "->" + this.path);
         try {
-            if (HtmlView2.this.index < HtmlView2.this.path.size()) {
+            if (index > -1 && index < path.size()) {
                 Uri uri = Uri.parse(path.get(index));
                 Log.i(__CLASSNAME__, getMethodName() + ":" + index + "->" + uri);
                 open(uri);
+            } else {
+                setVisibility(View.INVISIBLE);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -162,6 +165,11 @@ class HtmlView2 extends HtmlView implements _Content, _DEF {
     public void prev() {
         mHandler.removeCallbacks(prev);
         mHandler.postDelayed(prev, TIMER_OPEN_SHORT);
+    }
+
+    @Override
+    public boolean paused() {
+        return false;
     }
 
     private Runnable next = new Runnable() {

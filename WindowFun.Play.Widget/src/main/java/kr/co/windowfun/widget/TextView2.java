@@ -4,10 +4,10 @@ import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
 import android.widget.FrameLayout;
@@ -55,18 +55,18 @@ class TextView2 extends TextView implements _Content, _DEF,_ENUM {
         return this;
     }
 
-    effect_text type = effect_text.rainbow;
+    text_effect type = text_effect.rainbow;
 
     public void open(Uri uri, String type) {
-        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + effect_text.valueOf(type) + ":" + textView + ":" + uri);
-        this.type = effect_text.valueOf(type);
+        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + text_effect.valueOf(type) + ":" + textView + ":" + uri);
+        this.type = text_effect.valueOf(type);
         open(uri);
     }
 
     String text;
 
     @Override
-    public void open(Uri uri) {
+    public void open(final Uri uri) {
         this.text = uri.toString();
         //scroll don't touch
         try {
@@ -152,10 +152,12 @@ class TextView2 extends TextView implements _Content, _DEF,_ENUM {
     private void open() {
         //Log.w(__CLASSNAME__, getMethodName() + ":" + this.index + "->" + this.path);
         try {
-            if (TextView2.this.index < TextView2.this.path.size()) {
+            if (index > -1 && index < path.size()) {
                 Uri uri = Uri.parse(path.get(index));
                 Log.i(__CLASSNAME__, getMethodName() + ":" + index + "->" + uri);
                 open(uri);
+            } else {
+                setVisibility(View.INVISIBLE);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -272,6 +274,11 @@ class TextView2 extends TextView implements _Content, _DEF,_ENUM {
     public void prev() {
         mHandler.removeCallbacks(prev);
         mHandler.postDelayed(prev, TIMER_OPEN_SHORT);
+    }
+
+    @Override
+    public boolean paused() {
+        return false;
     }
 
     private Runnable next = new Runnable() {

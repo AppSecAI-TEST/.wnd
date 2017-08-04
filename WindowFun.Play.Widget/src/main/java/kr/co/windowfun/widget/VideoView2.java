@@ -7,7 +7,6 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -40,6 +39,17 @@ class VideoView2 extends VideoView implements _Content, _DEF {
     }
 
     @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return false;
+            }
+        });
+    }
+
+    @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         stop();
@@ -65,14 +75,6 @@ class VideoView2 extends VideoView implements _Content, _DEF {
     public void setOnErrorListener(MediaPlayer.OnErrorListener l) {
         //super.setOnErrorListener(l);
         mOnErrorListener = l;
-    }
-
-    OnTouchListener mOnTouchListener;
-
-    @Override
-    public void setOnTouchListener(OnTouchListener l) {
-        super.setOnTouchListener(l);
-        mOnTouchListener = l;
     }
 
     public boolean mute = true;
@@ -143,12 +145,12 @@ class VideoView2 extends VideoView implements _Content, _DEF {
 
     @Override
     public void open(final Uri uri) {
-        //Log.w(__CLASSNAME__, getMethodName() + ":" + index + "->" + uri);
+        //Log.w(__CLASSNAME__, getMethodName() + ":" + index + "->" + Uri.decode(uri.toString()));
         super.setVideoURI(uri);
         super.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
-                Log.wtf(__CLASSNAME__, "MediaPlayer.OnError(...)"/*getMethodName()*/ + "(" + "what:" + what + ",extra:" + extra + ")" + ":" + index + "->" + uri);
+                Log.wtf(__CLASSNAME__, "MediaPlayer.OnError" + "(" + what + ", " + extra + ")" + ":" + index + "->" + Uri.decode(uri.toString()));
                 //Toast.makeText(getContext(), getMethodName() + "(" + what + "," + extra + ")" + extra, Toast.LENGTH_SHORT).show();
                 if (mOnErrorListener != null) {
                     mOnErrorListener.onError(mp, what, extra);
@@ -160,7 +162,7 @@ class VideoView2 extends VideoView implements _Content, _DEF {
         super.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                Log.wtf(__CLASSNAME__, "MediaPlayer.onPrepared()"/*getMethodName()*/ + "(" + "w:" + getWidth() + ",h:" + getHeight() + ")" + ":" + index + "->" + uri);
+                Log.e(__CLASSNAME__, "MediaPlayer.onPrepared()" + "(" + "w:" + getWidth() + ",h:" + getHeight() + ")" + ":" + index + "->" + Uri.decode(uri.toString()));
                 setDimensions(getWidth(), getHeight());
                 VideoView2.this.mp = mp;
                 VideoView2.this.mute(VideoView2.this.mute);
@@ -173,32 +175,11 @@ class VideoView2 extends VideoView implements _Content, _DEF {
         super.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                Log.wtf(__CLASSNAME__, "MediaPlayer.onCompletion()"/*getMethodName()*/ + "(" + "w:" + getWidth() + ",h:" + getHeight() + ")" + ":" + index + "->" + uri);
+                Log.e(__CLASSNAME__, "MediaPlayer.onCompletion()" + "(" + "w:" + getWidth() + ",h:" + getHeight() + ")" + ":" + index + "->" + Uri.decode(uri.toString()));
                 if (mOnCompletionListener != null) {
                     mOnCompletionListener.onCompletion(mp);
                 }
                 if (mCListener != null) mCListener.onCompletion(VideoView2.this);
-            }
-        });
-        super.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                //Log.w(__CLASSNAME__, getMethodName() + ":" + v + "," + event);
-                float w = v.getWidth();
-                //float h = v.getHeight();
-                float x = event.getX();
-                //float y = event.getY();
-                if (x < w / 2) {
-                    /*((VideoView2) v).*/
-                    prev();
-                } else if (x > w / 2) {
-                    /*((VideoView2) v).*/
-                    next();
-                }
-                if (mOnTouchListener != null) {
-                    mOnTouchListener.onTouch(v, event);
-                }
-                return false;
             }
         });
     }
@@ -206,10 +187,12 @@ class VideoView2 extends VideoView implements _Content, _DEF {
     private void open() {
         //Log.w(__CLASSNAME__, getMethodName() + ":" + this.index + "->" + this.path);
         try {
-            if (VideoView2.this.index < VideoView2.this.path.size()) {
-                Uri uri = Uri.parse(path.get(index).toString());
-                //Log.i(__CLASSNAME__, getMethodName() + ":" + index + "->" + uri);
+            if (index > -1 && index < path.size()) {
+                Uri uri = Uri.parse(path.get(index));
+                Log.i(__CLASSNAME__, getMethodName() + ":" + index + "->" + uri);
                 open(uri);
+            } else {
+                setVisibility(View.INVISIBLE);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -327,6 +310,11 @@ class VideoView2 extends VideoView implements _Content, _DEF {
     public void next() {
         mHandler.removeCallbacks(next);
         mHandler.postDelayed(next, TIMER_OPEN_SHORT);
+    }
+
+    @Override
+    public boolean paused() {
+        return !isPlaying();
     }
 
     int cur;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<kr.co.windowfun.widget.__CLayout
+<kr.co.windowfun.widget.__CContent
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,6 +14,8 @@
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
         android:background="@android:color/transparent"
+        android:clickable="true"
+        android:longClickable="true"
         android:visibility="visible"/>
 
     <kr.co.windowfun.widget.__VideoView
@@ -22,6 +24,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:background="@android:color/transparent"
+        android:clickable="true"
+        android:longClickable="true"
         android:visibility="visible"/>
 
     <kr.co.windowfun.widget.__ImageView
@@ -31,6 +35,8 @@
         android:layout_gravity="center"
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
+        android:clickable="true"
+        android:longClickable="true"
         android:visibility="visible"/>
 
 
@@ -43,6 +49,8 @@
         android:layout_alignParentBottom="true"
         android:scrollbars="none"
         android:background="@android:color/transparent"
+        android:clickable="true"
+        android:longClickable="true"
         android:visibility="visible">
 
         <com.hanks.htextview.rainbow.RainbowTextView
@@ -68,4 +76,13 @@
         android:textStyle="bold"
         android:visibility="visible"/>
 
-</kr.co.windowfun.widget.__CLayout>
+    <View
+        android:id="@+id/space"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/text_test_background"
+        android:clickable="true"
+        android:longClickable="true"
+        android:visibility="invisible"/>
+
+</kr.co.windowfun.widget.__CContent>

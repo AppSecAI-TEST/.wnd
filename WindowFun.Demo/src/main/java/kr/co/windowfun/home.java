@@ -8,13 +8,11 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import kr.co.windowfun.app.Activity2;
-
 /**
  * Created by isyoon on 2017-07-12.
  */
 
-public class home extends Activity2 {
+public class home extends _Activity {
     private Handler mHandler = new Handler();
 
     @Override
@@ -28,28 +26,28 @@ public class home extends Activity2 {
         findViewById(R.id.main_typea).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(home.this, main.class));
+                startActivity(new Intent(home.this, demo.class));
             }
         });
 
         findViewById(R.id.main_typeb1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(home.this, main2.class));
+                startActivity(new Intent(home.this, demo2.class));
             }
         });
 
         findViewById(R.id.main_typeb2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(home.this, main3.class));
+                startActivity(new Intent(home.this, demo3.class));
             }
         });
 
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(home.this, main2.class));
+                startActivity(new Intent(home.this, demo2.class));
             }
         }, 300);
     }

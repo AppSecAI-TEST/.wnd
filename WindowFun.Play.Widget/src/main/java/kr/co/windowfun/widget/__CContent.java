@@ -10,21 +10,21 @@ import android.util.AttributeSet;
  * Created by isyuun on 8/2/2017.
  */
 
-public class __CLayout extends CLayout {
-    public __CLayout(Context context) {
+public class __CContent extends CContent3 {
+    public __CContent(Context context) {
         super(context);
     }
 
-    public __CLayout(Context context, AttributeSet attrs) {
+    public __CContent(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public __CLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public __CContent(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public __CLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public __CContent(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 }

@@ -15,6 +15,8 @@ interface _Content {
     void rand();
     void next();
     void prev();
+
+    boolean paused();
     void pause();
     void resume();
 }

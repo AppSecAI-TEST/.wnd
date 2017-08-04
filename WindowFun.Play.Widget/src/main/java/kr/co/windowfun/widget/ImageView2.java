@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 
 import com.bumptech.glide.request.RequestOptions;
@@ -72,16 +71,8 @@ class ImageView2 extends ImageView implements _Content, _DEF {
         return this;
     }
 
-    OnTouchListener mOnTouchListener;
-
     @Override
-    public void setOnTouchListener(OnTouchListener l) {
-        super.setOnTouchListener(l);
-        mOnTouchListener = l;
-    }
-
-    @Override
-    public void open(Uri uri) {
+    public void open(final Uri uri) {
         //Log.w(__CLASSNAME__, getMethodName() + ":" + index + "(" + "w:" + getMeasuredWidth() + ", h:" + getMeasuredHeight() + ")" + uri);
         try {
             int w = getMeasuredWidth();
@@ -119,36 +110,17 @@ class ImageView2 extends ImageView implements _Content, _DEF {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        super.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                //Log.w(__CLASSNAME__, getMethodName() + ":" + v + "," + event);
-                float w = v.getWidth();
-                //float h = v.getHeight();
-                float x = event.getX();
-                //float y = event.getY();
-                if (x < w / 2) {
-                    /*((VideoView2) v).*/
-                    prev();
-                } else if (x > w / 2) {
-                    /*((VideoView2) v).*/
-                    next();
-                }
-                if (mOnTouchListener != null) {
-                    mOnTouchListener.onTouch(v, event);
-                }
-                return false;
-            }
-        });
     }
 
     private void open() {
         //Log.w(__CLASSNAME__, getMethodName() + ":" + this.index + "->" + this.path);
         try {
-            if (ImageView2.this.index < ImageView2.this.path.size()) {
+            if (index > -1 && index < path.size()) {
                 Uri uri = Uri.parse(path.get(index));
                 Log.i(__CLASSNAME__, getMethodName() + ":" + index + "->" + uri);
                 open(uri);
+            } else {
+                setVisibility(View.INVISIBLE);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -161,7 +133,7 @@ class ImageView2 extends ImageView implements _Content, _DEF {
         public void run() {
             mHandler.removeCallbacks(complete);
             int r = ImageView2.this.r.nextInt(TIMER_IMG_LONG - TIMER_IMG_SHORT + 1) + TIMER_IMG_SHORT;
-            if (ImageView2.this.index < ImageView2.this.path.size()) {
+            if (index > -1 && index < path.size()) {
                 Uri uri = Uri.parse(path.get(index));
                 if (uri.toString().contains((".gif"))) {
                     //Log.wtf(__CLASSNAME__, getMethodName() + ":" + index + "->" + uri);
@@ -216,7 +188,7 @@ class ImageView2 extends ImageView implements _Content, _DEF {
             int max = path.size() - 1;
             int index = -1;
             try {
-                if (ImageView2.this.index < ImageView2.this.path.size()) {
+                if (index > -1 && index < path.size()) {
                     index = r.nextInt(max - min) + min;
                     ImageView2.this.index = index;
                 }
@@ -277,6 +249,11 @@ class ImageView2 extends ImageView implements _Content, _DEF {
         public void run() {
         }
     };
+
+    @Override
+    public boolean paused() {
+        return false;
+    }
 
     @Override
     public void pause() {

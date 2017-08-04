@@ -11,27 +11,27 @@ import kr.co.windowfun._DEF;
  */
 
 public class TextUtil implements _DEF {
-    public static String getFileName(String filename) {
+    public static String getFileName(String file_name) {
         try {
-            return filename.substring(filename.lastIndexOf("/") + 1);
+            return file_name.substring(file_name.lastIndexOf("/") + 1);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public static String getFileUrl(String filename) {
+    public static String getFileUrl(String file_name) {
         try {
-            return filename.substring(0, filename.lastIndexOf("/") + 1) + Uri.encode(filename.substring(filename.lastIndexOf("/") + 1)/*, "UTF-8"*/);
+            return file_name.substring(0, file_name.lastIndexOf("/") + 1) + Uri.encode(file_name.substring(file_name.lastIndexOf("/") + 1)/*, "UTF-8"*/);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public static String getFilePath(String filename) {
+    public static String getFilePath(String file_name) {
         try {
-            return root_mp4 + File.separator + filename.substring(filename.lastIndexOf("/") + 1);
+            return root_mp4 + File.separator + file_name.substring(file_name.lastIndexOf("/") + 1);
         } catch (Exception e) {
             e.printStackTrace();
         }

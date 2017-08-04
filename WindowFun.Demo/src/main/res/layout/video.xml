@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <kr.co.windowfun.widget.VideoView2
+    <kr.co.windowfun.widget.__VideoView
         android:id="@+id/video"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/close"
-        style="@style/action_button_layout"
+        style="@style/action_button"
         android:layout_above="@+id/banner"
         android:layout_margin="@dimen/floating_action_button_margin_small"
         android:clickable="true"
@@ -24,6 +24,6 @@
         app:fabSize="auto"
         app:layout_anchor="@id/video"
         app:layout_anchorGravity="top|right|end"
-        app:srcCompat="@drawable/ic_close"/>
+        app:srcCompat="@drawable/wf_icon_close"/>
 
 </android.support.design.widget.CoordinatorLayout>

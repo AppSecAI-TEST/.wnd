@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
-import kr.co.windowfun.widget.__CLayout;
+import kr.co.windowfun.widget.__CContent;
 import kr.co.windowfun.widget.__VideoView;
 
 /**
@@ -27,9 +27,9 @@ public class main extends __main {
         //Log.w(__CLASSNAME__, getMethodName());
         ((__VideoView)findViewById(R.id.c1).findViewById(R.id.video)).mute(false);
         super.init();
-        ((__CLayout)findViewById(R.id.c1)).setContents(getApp().result_c1);
-        ((__CLayout)findViewById(R.id.c3)).setContents(getApp().result_c3);
-        ((__CLayout)findViewById(R.id.c4)).setContents(getApp().result_c4);
-        ((__CLayout)findViewById(R.id.c5)).setContents(getApp().result_c5);
+        ((__CContent)findViewById(R.id.c1)).setContents(getApp().result_c1);
+        ((__CContent)findViewById(R.id.c3)).setContents(getApp().result_c3);
+        ((__CContent)findViewById(R.id.c4)).setContents(getApp().result_c4);
+        ((__CContent)findViewById(R.id.c5)).setContents(getApp().result_c5);
     }
 }

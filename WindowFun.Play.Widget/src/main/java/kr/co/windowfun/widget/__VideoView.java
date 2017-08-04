@@ -10,7 +10,7 @@ import android.util.AttributeSet;
  * Created by isyuun on 8/2/2017.
  */
 
-public class __VideoView extends VideoView2 {
+public class __VideoView extends VideoView3 {
     public __VideoView(Context context) {
         super(context);
     }

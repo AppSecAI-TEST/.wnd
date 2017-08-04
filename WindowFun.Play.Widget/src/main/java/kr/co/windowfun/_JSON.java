@@ -1,10 +1,5 @@
 package kr.co.windowfun;
 
-import android.app.Activity;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.Looper;
-
 /**
  * Created by isyoon on 2017-07-19.
  */
@@ -75,10 +70,10 @@ public interface _JSON {
         String link = "link";
         //data: "",
         String data = "data";
-        //effect_text: "3.1. 범례",
-        String effect_text = "effect_text";
-        //effect_play: "3.2. 범례",
-        String effect_play = "effect_play";
+        //text_effect: "3.1. 범례",
+        String text_effect = "text_effect";
+        //play_effect: "3.2. 범례",
+        String play_effect = "play_effect";
     }
 
     //JSON:result_c
@@ -91,30 +86,32 @@ public interface _JSON {
         String title = "title";
         //text: "텍스트",
         String text = "text";
+        //text_effect: "3.1. 범례",
+        String text_effect = "effect_text";
         String text_font = "text_font";
         String text_line = "text_line";
         String text_size = "text_size";
         String text_valign = "text_valign";
+        String text_color = "text_color";
+        String text_backcolor = "text_backcolor";
         //link: "n/a",
         String link = "link";
         //data: "",
         String data = "data";
-        //effect_text: "3.1. 범례",
-        String effect_text = "effect_text";
-        //effect_play: "3.2. 범례",
-        String effect_play = "effect_play";
         //time_start: "20170701",
         String time_start = "time_start";
         //time_end: "20170731",
         String time_end = "time_end";
+        //play_effect: "3.2. 범례",
+        String play_effect = "effect_play";
         //play_length: "30",
         String play_length = "play_length";
         //play_repeat: "1",
         String play_repeat = "play_repeat";
         //file_name: "http://windowfun.co.kr/upload/2017/07/19/13/26/02/잇섭의 KT 라인프렌즈 스마트폰 리뷰! [KT].mp4",
         String file_name = "filename";
-        //filesize: "18040399"
-        String filesize = "filesize";
+        //file_size: "18040399"
+        String file_size = "filesize";
         //use_yn: "Y"
         String use_yn = "use_yn3";
     }

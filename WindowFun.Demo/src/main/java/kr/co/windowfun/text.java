@@ -5,22 +5,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.hanks.htextview.base.HTextView;
-import com.hanks.htextview.fall.FallTextView;
-
-import kr.co.windowfun.app.Activity2;
 
 /**
  * Created by isyoon on 2017-07-11.
  */
 
-public class text extends Activity2 {
+public class text extends _Activity {
     String[] sentences = {
             //"What is design?",
             //"Design is not just",

@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import kr.co.windowfun.widget.__CLayout;
 import kr.co.windowfun.widget.__ImageView;
 import kr.co.windowfun.widget.__TextView;
 import kr.co.windowfun.widget.__VideoView;
@@ -34,7 +33,7 @@ import kr.co.windowfun.widget.__VideoView;
  * Created by isyoon on 2017-07-03.
  */
 
-public class __main extends _Activity {
+class __main extends _Activity {
     protected ArrayList<__TextView> texts = new ArrayList<>();
     protected ArrayList<String> txt = new ArrayList<>();
     protected ArrayList<__ImageView> images = new ArrayList<>();
@@ -160,28 +159,28 @@ public class __main extends _Activity {
     }
 
     private void content() {
-        ((__CLayout) findViewById(R.id.c1)).setOnTouchListener(new View.OnTouchListener() {
+        findViewById(R.id.c1).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 mHandler.post(showMenu);
                 return false;
             }
         });
-        ((__CLayout) findViewById(R.id.c3)).setOnTouchListener(new View.OnTouchListener() {
+        findViewById(R.id.c3).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 mHandler.post(showMenu);
                 return false;
             }
         });
-        ((__CLayout) findViewById(R.id.c4)).setOnTouchListener(new View.OnTouchListener() {
+        findViewById(R.id.c4).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 mHandler.post(showMenu);
                 return false;
             }
         });
-        ((__CLayout) findViewById(R.id.c5)).setOnTouchListener(new View.OnTouchListener() {
+        findViewById(R.id.c5).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 mHandler.post(showMenu);
@@ -270,15 +269,6 @@ public class __main extends _Activity {
                 return true;
             }
         });
-    }
-
-    protected void rand() {
-        for (final __ImageView i : images) {
-            i.rand();
-        }
-        for (final __VideoView v : videos) {
-            v.rand();
-        }
     }
 
     private void images() {

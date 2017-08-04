@@ -23,8 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
+import kr.co.windowfun.util.CFile;
 import kr.co.windowfun.util.TextUtil;
-import kr.co.windowfun.widget.CFile;
 import kr.co.windowfun.widget.ProgressBar;
 
 /**
@@ -32,7 +32,7 @@ import kr.co.windowfun.widget.ProgressBar;
  * Created by isyoon on 2017-07-12.
  */
 
-class home2 extends home {
+class home2 extends home implements _API {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -203,10 +203,11 @@ class home2 extends home {
         @Override
         public void run() {
             Log.w(__CLASSNAME__, getMethodName() + ":" + getApp().userid + ":" + getApp().token);
-            String url = "http://windowfun.co.kr/Manager/API/W_cfg.html?userid=windowfun4&token=C3S/ugUsBlM03ohSSxEwlsXURU9dfm9czOT4KcI6xihfEHM0st/d^ohgqos";
-            //url = "http://windowfun.co.kr/Manager/API/W_cfg.html?userid=" + getApp().userid + "&token=" + getApp().token;
+            String url;
+            //url = "http://windowfun.co.kr/Manager/API/W_cfg.html?userid=windowfun4&token=C3S/ugUsBlM03ohSSxEwlsXURU9dfm9czOT4KcI6xihfEHM0st/d^ohgqos"; //test
+            //url = "http://windowfun.co.kr/Manager/API/W_cfg.html?userid=" + getApp().userid + "&token=" + getApp().token; //test
             //send(url);
-            url = "http://windowfun.co.kr/Manager/API/W_cfg.html";
+            url = W_API_URL_CONFIG;
             RequestParams params = new RequestParams();
             params.put("userid", getApp().userid);
             params.put("token", getApp().token);
@@ -264,14 +265,14 @@ class home2 extends home {
         for (int i = 0; i < (results != null ? results.length() : 0); i++) {
             try {
                 JSONObject item = (JSONObject) results.get(i);
-                final String filename = item.getString(result_c.file_name);
-                final String filesize = item.getString(result_c.filesize);
-                if (TextUtils.isEmpty(filename) || TextUtils.isEmpty(filesize)) {
+                final String file_name = item.getString(result_c.file_name);
+                final String file_size = item.getString(result_c.file_size);
+                if (TextUtils.isEmpty(file_name) || TextUtils.isEmpty(file_size)) {
                     continue;
                 }
-                final CFile file = new CFile(filename, filesize);
+                final CFile file = new CFile(file_name, file_size);
                 if (file.equal()) {
-                    Log.e(__CLASSNAME__, getMethodName() + "[FILE]" + "[DEL]" + file.sizes() + ":" + file.exists() + ":" + file.equal() + "\n[file]" + file.file + "\n[filesize]" + filesize + "\n[uri]" + filename + "\n[url]" + file.url + "\n[name]" + file.name + "\n[path]" + file.path + "\n[size]" + file.size);
+                    Log.e(__CLASSNAME__, getMethodName() + "[FILE]" + "[DEL]" + file.sizes() + ":" + file.exists() + ":" + file.equal() + "\n[file]" + file.file + "\n[file_size]" + file_size + "\n[uri]" + file_name + "\n[url]" + file.url + "\n[name]" + file.name + "\n[path]" + file.path + "\n[size]" + file.size);
                     new File(file.path).delete();
                 }
             } catch (Exception e) {
@@ -286,17 +287,17 @@ class home2 extends home {
         for (int i = 0; i < (results != null ? results.length() : 0); i++) {
             try {
                 JSONObject item = (JSONObject) results.get(i);
-                final String filename = item.getString(result_c.file_name);
-                final String filesize = item.getString(result_c.filesize);
-                if (TextUtils.isEmpty(filename) || TextUtils.isEmpty(filesize)) {
+                final String file_name = item.getString(result_c.file_name);
+                final String file_size = item.getString(result_c.file_size);
+                if (TextUtils.isEmpty(file_name) || TextUtils.isEmpty(file_size)) {
                     continue;
                 }
-                final CFile file = new CFile(filename, filesize);
+                final CFile file = new CFile(file_name, file_size);
                 if (!file.sizes()) {
                     if (adds.get(file.path) == null) {
-                        Log.e(__CLASSNAME__, getMethodName() + "[FILE]" + "[ADD]" + file.sizes() + ":" + file.exists() + ":" + file.equal() + "\n[file]" + file.file + "\n[filesize]" + filesize + "\n[uri]" + filename + "\n[url]" + file.url + "\n[name]" + file.name + "\n[path]" + file.path + "\n[size]" + file.size);
-                        totalSizes += Long.parseLong(filesize);
-                        adds.put(file.path, Uri.parse(filename));
+                        Log.e(__CLASSNAME__, getMethodName() + "[FILE]" + "[ADD]" + file.sizes() + ":" + file.exists() + ":" + file.equal() + "\n[file]" + file.file + "\n[file_size]" + file_size + "\n[uri]" + file_name + "\n[url]" + file.url + "\n[name]" + file.name + "\n[path]" + file.path + "\n[size]" + file.size);
+                        totalSizes += Long.parseLong(file_size);
+                        adds.put(file.path, Uri.parse(file_name));
                     }
                 }
             } catch (Exception e) {
@@ -319,10 +320,10 @@ class home2 extends home {
             add(getApp().result_c5);
 
             for (final Map.Entry<String, Uri> entry : adds.entrySet()) {
-                final String filename = entry.getValue().toString();
+                final String file_name = entry.getValue().toString();
                 final String path = entry.getKey();
-                final String url = TextUtil.getFileUrl(filename);
-                Log.w(__CLASSNAME__, getMethodName() + "[FILE]" + "[DL]"/* + "\n[filesize]" + filesize*/ + "\n[uri]" + filename + "\n[url]" + url/* + "\n[name]" + name*/ + "\n[path]" + path/* +  "\n[size]" + size*/);
+                final String url = TextUtil.getFileUrl(file_name);
+                Log.w(__CLASSNAME__, getMethodName() + "[FILE]" + "[DL]"/* + "\n[file_size]" + file_size*/ + "\n[uri]" + file_name + "\n[url]" + url/* + "\n[name]" + name*/ + "\n[path]" + path/* +  "\n[size]" + size*/);
                 if (downs.get(path) == null || !downs.get(path)) {
                     down(url, path);
                     downs.put(path, true);

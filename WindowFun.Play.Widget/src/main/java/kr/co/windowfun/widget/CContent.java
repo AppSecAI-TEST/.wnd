@@ -8,7 +8,6 @@ import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -31,7 +30,7 @@ import kr.co.windowfun.util.TextUtil;
  * Created by isyoon on 2017-07-19.
  */
 
-class CLayout extends RelativeLayout implements _Content, _DEF,_ENUM, _JSON, CListener, View.OnTouchListener {
+class CContent extends RelativeLayout implements _Content, _DEF, _ENUM, _JSON {
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
     private JSONArray contents;
@@ -51,26 +50,26 @@ class CLayout extends RelativeLayout implements _Content, _DEF,_ENUM, _JSON, CLi
         return ste[idx].toString();
     }
 
-    public CLayout(Context context) {
+    public CContent(Context context) {
         super(context);
         _CLASSNAME_ = this.getClass().getName();
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
     }
 
-    public CLayout(Context context, AttributeSet attrs) {
+    public CContent(Context context, AttributeSet attrs) {
         super(context, attrs);
         _CLASSNAME_ = this.getClass().getName();
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
     }
 
-    public CLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CContent(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         _CLASSNAME_ = this.getClass().getName();
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public CLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CContent(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         _CLASSNAME_ = this.getClass().getName();
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
@@ -108,109 +107,108 @@ class CLayout extends RelativeLayout implements _Content, _DEF,_ENUM, _JSON, CLi
         ((__HtmlView) findViewById(R.id.html)).setVisibility(View.VISIBLE);
     }
 
+    @Deprecated
+    @Override
+    public void open(final Uri uri) {
+    }
 
-    Runnable showBanner = new Runnable() {
-        @Override
-        public void run() {
-            String type = null;
-            String text = null;
-            String effect_text = null;
-            String effect_play = null;
-            String text_font;
-            String text_line;
-            String text_size;
-            String text_valign;
+    @Deprecated
+    @Override
+    public void play() {
+    }
 
-            try {
-                type = ((JSONObject) contents.get(index)).getString(result_c.type);
-                if (c_type.text == c_type.valueOf(type)) return;
-                text = ((JSONObject) contents.get(index)).getString(result_c.text);
-                effect_text = ((JSONObject) contents.get(index)).getString(result_c.effect_text);
-                effect_play = ((JSONObject) contents.get(index)).getString(result_c.effect_play);
-                //text_...
-                text_font = ((JSONObject) contents.get(index)).getString(result_c.text_font);
-                text_line = ((JSONObject) contents.get(index)).getString(result_c.text_line);
-                text_size = ((JSONObject) contents.get(index)).getString(result_c.text_size);
-                text_valign = ((JSONObject) contents.get(index)).getString(result_c.text_valign);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            try {
-                text = "[TEST]" + getResources().getString(R.string.text_default_text) + "[TEST]"; //test
-                effect_text = "rainbow"; //test
-                text_font = "font:TBD";  //test
-                text_line = "false"; //test
-                text_size = "xxlarge"; //test
-                text_valign = "bottom"; //test
-
-                if (!TextUtils.isEmpty(text)) {
-                    //Log.wtf(__CLASSNAME__, getMethodName() + ":" + type + ":" + text + ":" + effect_text + ":" + effect_play);
-                    ((__TextView) findViewById(R.id.text)).open(Uri.parse(text), effect_text);
-                    ((__TextView) findViewById(R.id.text)).textFont(text_font);
-                    ((__TextView) findViewById(R.id.text)).textLine(Boolean.parseBoolean(text_line));
-                    ((__TextView) findViewById(R.id.text)).textSize(_ENUM.text_size.valueOf(text_size));
-                    ((__TextView) findViewById(R.id.text)).textVAlign(_ENUM.text_valign.valueOf(text_valign));
-                    //start
-                    ((__TextView) findViewById(R.id.text)).setVisibility(View.VISIBLE);
-                    ((__TextView) findViewById(R.id.text)).play(-1);
-                    //scroll
-                    ((__TextView) findViewById(R.id.text)).setOnTouchListener(null); //don't touch
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    };
+    @Deprecated
+    @Override
+    public void play(int length) {
+    }
 
     private void showBanner() {
         mHandler.removeCallbacks(showBanner);
         mHandler.postDelayed(showBanner, TIMER_OPEN_NORMAL);
     }
 
-   @Override
-    public void open(final Uri uri) {
+    private Runnable showBanner = new Runnable() {
+        @Override
+        public void run() {
+            _showBanner();
+        }
+    };
+
+    JSONObject item = null;
+    String type = null;
+    String text = null;
+    String text_effect = "rainbow"; //default
+    String text_font = "font:TBD"; //default
+    String text_line = "false"; //default
+    String text_size = "xxlarge"; //default
+    String text_valign = "center"; //default
+    String text_color = "#ffffffff"; //default
+    String text_backcolor = "#55ff00ff"; //default
+    String play_effect = null;
+    String play_length = null;
+    String file_name = null;
+
+    /**
+     * DON'T CALL DIRECT CALL [[USE]] {@link #start()}
+     */
+    private void _open() {
+        try {
+            Log.i(__CLASSNAME__, getMethodName() + ":" + CContent.this.index + "\n" + ((JSONObject) CContent.this.contents.get(index)).toString(2));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            if (index < (contents != null ? contents.length() : 0)) {
+                item = contents.getJSONObject(index);
+                type = !item.isNull(result_c.type) ? item.getString(result_c.type) : type;
+                text = !item.isNull(result_c.text) ? item.getString(result_c.text) : text;
+                //text_...
+                text_effect = !item.isNull(result_c.text_effect) ? item.getString(result_c.text_effect) : text_effect;
+                text_font = !item.isNull(result_c.text_font) ? item.getString(result_c.text_font) : text_font;
+                text_line = !item.isNull(result_c.text_line) ? item.getString(result_c.text_line) : text_line;
+                text_size = !item.isNull(result_c.text_size) ? item.getString(result_c.text_size) : text_size;
+                text_valign = !item.isNull(result_c.text_valign) ? item.getString(result_c.text_valign) : text_valign;
+                text_color = !item.isNull(result_c.text_color) ? item.getString(result_c.text_color) : text_color;
+                text_backcolor = !item.isNull(result_c.text_color) ? item.getString(result_c.text_color) : text_color;
+                //play_...
+                play_effect = !item.isNull(result_c.play_effect) ? item.getString(result_c.play_effect) : play_effect;
+                play_length = !item.isNull(result_c.play_length) ? item.getString(result_c.play_length) : play_length;
+                //file_name
+                file_name = !item.isNull(result_c.file_name) ? item.getString(result_c.file_name) : file_name;
+                //uri
+                Uri uri = Uri.parse(file_name);
+                if (c_type.text == c_type.valueOf(type)) {
+                    uri = Uri.parse(text);
+                }
+                //Log.w(__CLASSNAME__, getMethodName() + ":" + index + "->" + type + ":" + text + ":" + file_name + ":" + uri);
+                _open(uri);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.wtf(__CLASSNAME__, getMethodName() + e.getStackTrace());
+        }
+    }
+
+    protected void _open(final Uri uri) {
         final String url = TextUtil.getFileUrl(uri.toString()) != null ? TextUtil.getFileUrl(uri.toString()) : uri.toString();
         final String path = new File(TextUtil.getFilePath(url)) != null ? TextUtil.getFilePath(url) : url;
 
         stop();
 
-        String type = null;
-        String text = null;
-        String effect_text = null;
-        String effect_play = null;
-        String text_font = null;
-        String text_line = null;
-        String text_size = null;
-        String text_valign = null;
-        try {
-            type = ((JSONObject) contents.get(index)).getString(result_c.type);
-            text = ((JSONObject) contents.get(index)).getString(result_c.text);
-            effect_text = ((JSONObject) contents.get(index)).getString(result_c.effect_text);
-            effect_play = ((JSONObject) contents.get(index)).getString(result_c.effect_play);
-            //text_...
-            text_font = ((JSONObject) contents.get(index)).getString(result_c.text_font);
-            text_line = ((JSONObject) contents.get(index)).getString(result_c.text_line);
-            text_size = ((JSONObject) contents.get(index)).getString(result_c.text_size);
-            text_valign = ((JSONObject) contents.get(index)).getString(result_c.text_valign);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         //label
         if (c_type.text == c_type.valueOf(type)) {
-            ((android.widget.TextView) findViewById(R.id.label)).setText(type + ":" + effect_text + ":" + effect_play + ":" + uri.toString()); //test
+            ((android.widget.TextView) findViewById(R.id.label)).setText(type + ":" + text_effect + ":" + play_effect + ":" + uri.toString()); //test
         } else {
-            ((android.widget.TextView) findViewById(R.id.label)).setText(type + ":" + effect_text + ":" + effect_play + ":" + Uri.decode(path)); //test
+            ((android.widget.TextView) findViewById(R.id.label)).setText(type + ":" + text_effect + ":" + play_effect + ":" + Uri.decode(path)); //test
         }
 
-        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + type + ":" + text + ":" + effect_text + ":" + effect_play + ":" + uri.toString());
+        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + type + ":" + text + ":" + text_effect + ":" + play_effect + ":" + uri.toString());
 
         View v = this;
         switch (c_type.valueOf(type)) {
             case text:
                 showText();
-                ((__TextView) findViewById(R.id.text)).open(uri, effect_text);
+                ((__TextView) findViewById(R.id.text)).open(uri, text_effect);
                 ((__TextView) findViewById(R.id.text)).textFont(text_font);
                 ((__TextView) findViewById(R.id.text)).textLine(Boolean.parseBoolean(text_line));
                 ((__TextView) findViewById(R.id.text)).textSize(_ENUM.text_size.valueOf(text_size));
@@ -236,47 +234,44 @@ class CLayout extends RelativeLayout implements _Content, _DEF,_ENUM, _JSON, CLi
                 break;
         }
         //banner
-        if (c_type.text != c_type.valueOf(type)) showBanner();
-        //effect_play
-        YoYo.with(Techniques.valueOf(effect_play))
+        text = getResources().getString(R.string.text_test_text); //test
+        if (/*c_type.text != c_type.valueOf(type) && */!TextUtils.isEmpty(text)) showBanner();
+        //play_effect
+        YoYo.with(Techniques.valueOf(play_effect))
                 .duration(1000)
                 .onEnd(new YoYo.AnimatorCallback() {
                     @Override
                     public void call(Animator animator) {
-                        //Log.wtf(__CLASSNAME__, "YoYo.onEnd()" + ":" + type + ":" + effect_text + ":" + effect_play + ":" + uri + ":" + path);
+                        //Log.wtf(__CLASSNAME__, "YoYo.onEnd()" + ":" + type + ":" + text_effect + ":" + play_effect + ":" + uri + ":" + path);
                     }
                 })
                 .playOn(v);
     }
 
-    @Override
-    public void play() {
-    }
-
-    @Override
-    public void play(int length) {
-    }
-
     /**
-     * OPEN N PLAY
+     * DON'T CALL DIRECT CALL [[USE]] {@link #showBanner()}
      */
-    private void _open() {
+    protected void _showBanner() {
+        if (c_type.text == c_type.valueOf(type)) return;
+
         try {
-            Log.i(__CLASSNAME__, getMethodName() + ":" + CLayout.this.index + "\n" + ((JSONObject) CLayout.this.contents.get(index)).toString(2));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            if (CLayout.this.index < (contents != null ? contents.length() : 0)) {
-                String type = ((JSONObject) contents.get(index)).getString(result_c.type);
-                String text = ((JSONObject) contents.get(index)).getString(result_c.text);
-                String filename = ((JSONObject) contents.get(index)).getString(result_c.file_name);
-                Uri uri = Uri.parse(filename);
-                if (c_type.text == c_type.valueOf(type)) {
-                    uri = Uri.parse(text);
-                }
-                //Log.w(__CLASSNAME__, getMethodName() + ":" + index + "->" + type + ":" + text + ":" + filename + ":" + uri);
-                open(uri);
+            text = getResources().getString(R.string.text_test_text); //test
+            text_effect = "rainbow"; //test
+            text_font = "font:TBD";  //test
+            text_line = "false"; //test
+            text_size = "xxlarge"; //test
+            text_valign = "bottom"; //test
+
+            if (!TextUtils.isEmpty(text)) {
+                //Log.wtf(__CLASSNAME__, getMethodName() + ":" + type + ":" + text + ":" + text_effect + ":" + play_effect);
+                ((__TextView) findViewById(R.id.text)).open(Uri.parse(text), text_effect);
+                ((__TextView) findViewById(R.id.text)).textFont(text_font);
+                ((__TextView) findViewById(R.id.text)).textLine(Boolean.parseBoolean(text_line));
+                ((__TextView) findViewById(R.id.text)).textSize(_ENUM.text_size.valueOf(text_size));
+                ((__TextView) findViewById(R.id.text)).textVAlign(_ENUM.text_valign.valueOf(text_valign));
+                //start
+                ((__TextView) findViewById(R.id.text)).setVisibility(View.VISIBLE);
+                ((__TextView) findViewById(R.id.text)).play(-1);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -284,17 +279,9 @@ class CLayout extends RelativeLayout implements _Content, _DEF,_ENUM, _JSON, CLi
     }
 
     /**
-     * OPEN N PLAY
+     * DON'T CALL DIRECT CALL [[USE]] {@link #start()}
      */
     private void _play() {
-        String type = null;
-        String play_length = null;
-        try {
-            type = ((JSONObject) contents.get(index)).getString(result_c.type);
-            play_length = ((JSONObject) contents.get(index)).getString(result_c.play_length);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         try {
             int length = Integer.parseInt(play_length) * 1000;
             //Log.w(__CLASSNAME__,getMethodName() + ":" + type);
@@ -352,9 +339,9 @@ class CLayout extends RelativeLayout implements _Content, _DEF,_ENUM, _JSON, CLi
             int max = (contents != null ? contents.length() : 0) - 1;
             int index = -1;
             try {
-                if (CLayout.this.index < (contents != null ? contents.length() : 0)) {
+                if (CContent.this.index < (contents != null ? contents.length() : 0)) {
                     index = r.nextInt(max - min) + min;
-                    CLayout.this.index = index;
+                    CContent.this.index = index;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -407,6 +394,11 @@ class CLayout extends RelativeLayout implements _Content, _DEF,_ENUM, _JSON, CLi
     }
 
     @Override
+    public boolean paused() {
+        return false;
+    }
+
+    @Override
     public void pause() {
     }
 
@@ -435,68 +427,10 @@ class CLayout extends RelativeLayout implements _Content, _DEF,_ENUM, _JSON, CLi
     int index = -1;
 
     public void setContents(JSONArray contents) {
-        //Log.i(__CLASSNAME__, getMethodName() + "\n[contents]\n" + toString(contents, 2));
+        //Log.wtf(__CLASSNAME__, getMethodName() + "\n[contents]\n" + toString(contents, 2));
         this.contents = contents;
         index = 0;
-        //CListener
-        ((__VideoView) findViewById(R.id.video)).set(this);
-        ((__ImageView) findViewById(R.id.image)).set(this);
-        ((__TextView) findViewById(R.id.text)).set(this);
-        ((__HtmlView) findViewById(R.id.html)).set(this);
-        //OnTouchListener
-        ((__VideoView) findViewById(R.id.video)).setOnTouchListener(this);
-        ((__ImageView) findViewById(R.id.image)).setOnTouchListener(this);
-        ((__TextView) findViewById(R.id.text)).setOnTouchListener(this); //don't touch
-        ((__HtmlView) findViewById(R.id.html)).setOnTouchListener(this);
         start();
         //rand(); //test
-    }
-
-
-    @Override
-    public void onPrepared(View v) {
-        Log.w(__CLASSNAME__, getMethodName());
-    }
-
-    @Override
-    public void onError(View v) {
-        Log.w(__CLASSNAME__, getMethodName());
-        next();
-        //rand(); //test
-    }
-
-    @Override
-    public void onCompletion(View v) {
-        Log.w(__CLASSNAME__, getMethodName());
-        next();
-        //rand(); //test
-    }
-
-    OnTouchListener mOnTouchListener;
-
-    @Override
-    public void setOnTouchListener(OnTouchListener l) {
-        super.setOnTouchListener(l);
-        mOnTouchListener = l;
-    }
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        //Log.w(__CLASSNAME__, getMethodName() + ":" + v + "," + event);
-        float w = v.getWidth();
-        //float h = v.getHeight();
-        float x = event.getX();
-        //float y = event.getY();
-        if (x < w / 2) {
-                    /*((__VideoView) v).*/
-            prev();
-        } else if (x > w / 2) {
-                    /*((__VideoView) v).*/
-            next();
-        }
-        if (mOnTouchListener != null) {
-            mOnTouchListener.onTouch(v, event);
-        }
-        return false;
     }
 }

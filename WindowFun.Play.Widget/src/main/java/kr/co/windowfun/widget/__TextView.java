@@ -8,7 +8,7 @@ import android.util.AttributeSet;
  * Created by isyuun on 8/2/2017.
  */
 
-public class __TextView extends TextView3 {
+public class __TextView extends TextView4 {
     String[] sentences = {
             //"What is design?",
             //"Design is not just",
