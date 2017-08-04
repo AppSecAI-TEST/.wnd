@@ -47,7 +47,7 @@ public class _main extends _Activity {
     protected ArrayList<__VideoView> videos = new ArrayList<>();
     protected ArrayList<String> mp4 = new ArrayList<>();
 
-    private void path() {
+    private void path() { //test
         if (!requestForPermission()) {
             return;
         }
@@ -147,15 +147,105 @@ public class _main extends _Activity {
     private Runnable init = new Runnable() {
         @Override
         public void run() {
-            path();
-            init();
+            path(); //test
+            init(); //tst
         }
     };
 
-    protected void init() {
-        videos();
-        images();
-        banner();
+    protected void init() { //test
+        videos(); //test
+        images(); //test
+        banner(); //test
+    }
+
+    private void banner() { //test
+
+        WebView webView = (WebView) findViewById(R.id.banner);
+        webView.setWebViewClient(new WebViewClient()); // 이걸 안해주면 새창이 뜸
+        webView.getSettings().setJavaScriptEnabled(true);
+        //webView.setBackgroundColor(0);  투명
+
+        webView.clearCache(true);
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webView.loadUrl("http://windowfun.co.kr/type/index2.html");
+
+        //isyoon
+        webView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
+    }
+
+    private void images() { //test
+        for (final __ImageView i : images) {
+            i.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View i, MotionEvent event) {
+                    //////Log.w(__CLASSNAME__, getMethodName() + ":" + i + "," + event);
+                    float w = i.getWidth();
+                    //float h = i.getHeight();
+                    float x = event.getX();
+                    //float y = event.getY();
+                    if (x < w / 2) {
+                        ((__ImageView) i).prev();
+                    } else if (x > w / 2) {
+                        ((__ImageView) i).next();
+                    }
+                    for (__VideoView video : videos) {
+                        if (i == video) {
+                            video.mute(false);
+                        } else {
+                            video.mute(true);
+                        }
+                    }
+                    mHandler.post(showMenu);
+                    return false;
+                }
+            });
+
+            i.rand(); //test
+        }
+    }
+
+    private void videos() { //test
+        for (final __VideoView v : videos) {
+            //리스너 등록
+            v.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    v.rand(); //test
+                }
+            });
+            v.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    Log.wtf(__CLASSNAME__, getMethodName() + ":" + v + "," + event);
+                    float w = v.getWidth();
+                    //float h = v.getHeight();
+                    float x = event.getX();
+                    //float y = event.getY();
+                    if (x < w / 2) {
+                        ((__VideoView) v).prev();
+                    } else if (x > w / 2) {
+                        ((__VideoView) v).next();
+                    }
+                    for (__VideoView video : videos) {
+                        if (v == video) {
+                            video.mute(false);
+                        } else {
+                            video.mute(true);
+                        }
+                    }
+                    mHandler.post(showMenu);
+                    return false;
+                }
+            });
+
+            v.rand(); //test
+        }
     }
 
     private void manus() {
@@ -214,96 +304,6 @@ public class _main extends _Activity {
         }
 
         mHandler.postDelayed(hideMenu, DELAY_TIME_OPEN);
-    }
-
-    private void banner() {
-
-        WebView webView = (WebView) findViewById(R.id.banner);
-        webView.setWebViewClient(new WebViewClient()); // 이걸 안해주면 새창이 뜸
-        webView.getSettings().setJavaScriptEnabled(true);
-        //webView.setBackgroundColor(0);  투명
-
-        webView.clearCache(true);
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webView.loadUrl("http://windowfun.co.kr/type/index2.html");
-
-        //isyoon
-        webView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
-            }
-        });
-    }
-
-    private void images() {
-        for (final __ImageView i : images) {
-            i.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View i, MotionEvent event) {
-                    //////Log.w(__CLASSNAME__, getMethodName() + ":" + i + "," + event);
-                    float w = i.getWidth();
-                    //float h = i.getHeight();
-                    float x = event.getX();
-                    //float y = event.getY();
-                    if (x < w / 2) {
-                        ((__ImageView) i).prev();
-                    } else if (x > w / 2) {
-                        ((__ImageView) i).next();
-                    }
-                    for (__VideoView video : videos) {
-                        if (i == video) {
-                            video.mute(false);
-                        } else {
-                            video.mute(true);
-                        }
-                    }
-                    mHandler.post(showMenu);
-                    return false;
-                }
-            });
-
-            i.rand();
-        }
-    }
-
-    private void videos() {
-        for (final __VideoView v : videos) {
-            //리스너 등록
-            v.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    v.rand();
-                }
-            });
-            v.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    Log.wtf(__CLASSNAME__, getMethodName() + ":" + v + "," + event);
-                    float w = v.getWidth();
-                    //float h = v.getHeight();
-                    float x = event.getX();
-                    //float y = event.getY();
-                    if (x < w / 2) {
-                        ((__VideoView) v).prev();
-                    } else if (x > w / 2) {
-                        ((__VideoView) v).next();
-                    }
-                    for (__VideoView video : videos) {
-                        if (v == video) {
-                            video.mute(false);
-                        } else {
-                            video.mute(true);
-                        }
-                    }
-                    mHandler.post(showMenu);
-                    return false;
-                }
-            });
-
-            v.rand();
-        }
     }
 
     private Runnable showMenu = new Runnable() {

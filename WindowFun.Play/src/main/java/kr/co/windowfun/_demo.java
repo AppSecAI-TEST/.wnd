@@ -10,10 +10,10 @@ import kr.co.windowfun.widget.__VideoView;
 class _demo extends __main {
     protected void rand() {  //test
         for (final __ImageView i : images) {
-            i.rand();
+            i.rand(); //test
         }
         for (final __VideoView v : videos) {
-            v.rand();
+            v.rand(); //test
         }
     }
 }

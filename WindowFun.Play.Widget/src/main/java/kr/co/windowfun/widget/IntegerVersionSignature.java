@@ -2,13 +2,12 @@ package kr.co.windowfun.widget;
 
 import com.bumptech.glide.load.Key;
 
-import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 
 /**
  * Created by isyoon on 2017-07-21.
  */
-
+@Deprecated
 public class IntegerVersionSignature implements Key {
     private int currentVersion;
 

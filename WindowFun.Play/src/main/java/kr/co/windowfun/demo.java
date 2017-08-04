@@ -31,6 +31,6 @@ public class demo extends _demo {
         ((__VideoView) findViewById(R.id.c1).findViewById(R.id.video)).mute(false);
         findViewById(R.id.cs).setVisibility(View.GONE);
         super.init();
-        rand();
+        rand(); //test
     }
 }

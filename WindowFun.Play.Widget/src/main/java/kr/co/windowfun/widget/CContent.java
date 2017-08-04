@@ -2,6 +2,7 @@ package kr.co.windowfun.widget;
 
 import android.animation.Animator;
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -163,13 +164,20 @@ class CContent extends RelativeLayout implements _Content, _DEF, _ENUM, _JSON {
                 type = !item.isNull(result_c.type) ? item.getString(result_c.type) : type;
                 text = !item.isNull(result_c.text) ? item.getString(result_c.text) : text;
                 //text_...
+                text_effect = "rainbow"; //default
+                text_font = "font:TBD"; //default
+                text_line = "false"; //default
+                text_size = "xxlarge"; //default
+                text_valign = "center"; //default
+                text_color = "#ffffffff"; //default
+                text_backcolor = "#55ff00ff"; //default
                 text_effect = !item.isNull(result_c.text_effect) ? item.getString(result_c.text_effect) : text_effect;
                 text_font = !item.isNull(result_c.text_font) ? item.getString(result_c.text_font) : text_font;
                 text_line = !item.isNull(result_c.text_line) ? item.getString(result_c.text_line) : text_line;
                 text_size = !item.isNull(result_c.text_size) ? item.getString(result_c.text_size) : text_size;
                 text_valign = !item.isNull(result_c.text_valign) ? item.getString(result_c.text_valign) : text_valign;
                 text_color = !item.isNull(result_c.text_color) ? item.getString(result_c.text_color) : text_color;
-                text_backcolor = !item.isNull(result_c.text_color) ? item.getString(result_c.text_color) : text_color;
+                text_backcolor = !item.isNull(result_c.text_backcolor) ? item.getString(result_c.text_backcolor) : text_backcolor;
                 //play_...
                 play_effect = !item.isNull(result_c.play_effect) ? item.getString(result_c.play_effect) : play_effect;
                 play_length = !item.isNull(result_c.play_length) ? item.getString(result_c.play_length) : play_length;
@@ -177,15 +185,26 @@ class CContent extends RelativeLayout implements _Content, _DEF, _ENUM, _JSON {
                 file_name = !item.isNull(result_c.file_name) ? item.getString(result_c.file_name) : file_name;
                 //uri
                 Uri uri = Uri.parse(file_name);
-                if (c_type.text == c_type.valueOf(type)) {
-                    uri = Uri.parse(text);
-                }
                 //Log.w(__CLASSNAME__, getMethodName() + ":" + index + "->" + type + ":" + text + ":" + file_name + ":" + uri);
                 _open(uri);
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            Log.wtf(__CLASSNAME__, getMethodName() + e.getStackTrace());
+            Log.wtf(__CLASSNAME__, getMethodName() + Log.getStackTraceString(e));
+            //e.printStackTrace();
+        }
+    }
+
+    private void text() {
+        try {
+            ((__TextView) findViewById(R.id.text)).open(Uri.parse(text), text_effect);
+            ((__TextView) findViewById(R.id.text)).textFont(text_font);
+            ((__TextView) findViewById(R.id.text)).textLine(Boolean.parseBoolean(text_line));
+            ((__TextView) findViewById(R.id.text)).textSize(_ENUM.text_size.valueOf(text_size));
+            ((__TextView) findViewById(R.id.text)).textVAlign(_ENUM.text_valign.valueOf(text_valign));
+            ((__TextView) findViewById(R.id.text)).textColor(Color.parseColor(text_color));
+            ((__TextView) findViewById(R.id.text)).textBackColor(Color.parseColor(text_backcolor));
+        } catch (IllegalArgumentException e) {
+            Log.wtf(__CLASSNAME__, getMethodName() + Log.getStackTraceString(e));
         }
     }
 
@@ -196,23 +215,21 @@ class CContent extends RelativeLayout implements _Content, _DEF, _ENUM, _JSON {
         stop();
 
         //label
+        String log = getMethodName() + ":" + type + ":" + text + ":" + text_effect + ":" + play_effect; //test
         if (c_type.text == c_type.valueOf(type)) {
-            ((android.widget.TextView) findViewById(R.id.label)).setText(type + ":" + text_effect + ":" + play_effect + ":" + uri.toString()); //test
+            ((android.widget.TextView) findViewById(R.id.label)).setText(type + ":" + text_effect + ":" + play_effect + ":" + text); //test
+            log +=  ":" + text;
         } else {
             ((android.widget.TextView) findViewById(R.id.label)).setText(type + ":" + text_effect + ":" + play_effect + ":" + Uri.decode(path)); //test
+            log +=  ":" + Uri.decode(path);
         }
-
-        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + type + ":" + text + ":" + text_effect + ":" + play_effect + ":" + uri.toString());
+        Log.wtf(__CLASSNAME__, log); //test
 
         View v = this;
         switch (c_type.valueOf(type)) {
             case text:
                 showText();
-                ((__TextView) findViewById(R.id.text)).open(uri, text_effect);
-                ((__TextView) findViewById(R.id.text)).textFont(text_font);
-                ((__TextView) findViewById(R.id.text)).textLine(Boolean.parseBoolean(text_line));
-                ((__TextView) findViewById(R.id.text)).textSize(_ENUM.text_size.valueOf(text_size));
-                ((__TextView) findViewById(R.id.text)).textVAlign(_ENUM.text_valign.valueOf(text_valign));
+                text();
                 v = findViewById(R.id.text);
                 break;
             case image:
@@ -235,7 +252,7 @@ class CContent extends RelativeLayout implements _Content, _DEF, _ENUM, _JSON {
         }
         //banner
         text = getResources().getString(R.string.text_test_text); //test
-        if (/*c_type.text != c_type.valueOf(type) && */!TextUtils.isEmpty(text)) showBanner();
+        if (c_type.text != c_type.valueOf(type) && !TextUtils.isEmpty(text)) showBanner();
         //play_effect
         YoYo.with(Techniques.valueOf(play_effect))
                 .duration(1000)
@@ -261,14 +278,9 @@ class CContent extends RelativeLayout implements _Content, _DEF, _ENUM, _JSON {
             text_line = "false"; //test
             text_size = "xxlarge"; //test
             text_valign = "bottom"; //test
-
             if (!TextUtils.isEmpty(text)) {
                 //Log.wtf(__CLASSNAME__, getMethodName() + ":" + type + ":" + text + ":" + text_effect + ":" + play_effect);
-                ((__TextView) findViewById(R.id.text)).open(Uri.parse(text), text_effect);
-                ((__TextView) findViewById(R.id.text)).textFont(text_font);
-                ((__TextView) findViewById(R.id.text)).textLine(Boolean.parseBoolean(text_line));
-                ((__TextView) findViewById(R.id.text)).textSize(_ENUM.text_size.valueOf(text_size));
-                ((__TextView) findViewById(R.id.text)).textVAlign(_ENUM.text_valign.valueOf(text_valign));
+                text();
                 //start
                 ((__TextView) findViewById(R.id.text)).setVisibility(View.VISIBLE);
                 ((__TextView) findViewById(R.id.text)).play(-1);

@@ -50,8 +50,8 @@ class TextView3 extends TextView2 {
             textLine(TextView3.this.line);
             textVAlign(TextView3.this.valign);
             textSize(TextView3.this.size);
-            //textColor(TextView3.this.color);
-            textBackcolor(TextView3.this.backcolor);
+            textColor(TextView3.this.color);
+            textBackColor(TextView3.this.backcolor);
         }
     };
 
@@ -68,7 +68,7 @@ class TextView3 extends TextView2 {
         textLine(this.line);
         textVAlign(this.valign);
         textSize(this.size);
-        textBackcolor(this.backcolor);
+        textBackColor(this.backcolor);
     }
 
     /**
@@ -151,7 +151,7 @@ class TextView3 extends TextView2 {
         }
     }
 
-    private void textColor(int color) {
+    public void textColor(int color) {
         //Log.wtf(__CLASSNAME__, getMethodName() + ":" + color);
         this.color = color;
         try {
@@ -161,7 +161,7 @@ class TextView3 extends TextView2 {
         }
     }
 
-    private void textBackcolor(int backcolor) {
+    public void textBackColor(int backcolor) {
         //Log.wtf(__CLASSNAME__, getMethodName() + ":" + backcolor);
         this.backcolor = backcolor;
         try {

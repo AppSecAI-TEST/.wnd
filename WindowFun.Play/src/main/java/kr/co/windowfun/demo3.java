@@ -50,6 +50,6 @@ public class demo3 extends _demo {
         ((__ImageView) findViewById(R.id.c4).findViewById(R.id.image)).path(jpg);
         ((__ImageView) findViewById(R.id.c5).findViewById(R.id.image)).path(jpg);
         super.init();
-        rand();
+        rand(); //test
     }
 }

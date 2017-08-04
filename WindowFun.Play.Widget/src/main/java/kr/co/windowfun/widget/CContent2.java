@@ -31,6 +31,7 @@ class CContent2 extends CContent implements CListener {
 
     @Override
     protected void onAttachedToWindow() {
+        Log.wtf(__CLASSNAME__, getMethodName());
         super.onAttachedToWindow();
         //CListener
         ((__VideoView) findViewById(R.id.video)).set(this);
@@ -41,19 +42,20 @@ class CContent2 extends CContent implements CListener {
 
     @Override
     public void onPrepared(View v) {
-        Log.wtf(__CLASSNAME__, getMethodName());
+        Log.wtf(__CLASSNAME__, getMethodName() + ":" + v);
+        //
     }
 
     @Override
     public void onError(View v) {
-        Log.wtf(__CLASSNAME__, getMethodName());
+        Log.wtf(__CLASSNAME__, getMethodName() + ":" + v);
         next();
         //rand(); //test
     }
 
     @Override
     public void onCompletion(View v) {
-        Log.wtf(__CLASSNAME__, getMethodName());
+        Log.wtf(__CLASSNAME__, getMethodName() + ":" + v);
         next();
         //rand(); //test
     }

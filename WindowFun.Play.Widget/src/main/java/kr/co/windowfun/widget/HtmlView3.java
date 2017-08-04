@@ -5,7 +5,6 @@ import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -33,21 +32,11 @@ class HtmlView3 extends HtmlView2 implements View.OnTouchListener, View.OnClickL
 
     @Override
     protected void onAttachedToWindow() {
-        //Log.wtf(__CLASSNAME__, getMethodName());
         super.onAttachedToWindow();
         super.setOnTouchListener(this);
         super.setOnClickListener(this);
         super.setOnLongClickListener(this);
     }
-
-    //@Override
-    //public void open(Uri uri) {
-    //    Log.wtf(__CLASSNAME__, getMethodName() + uri.toString());
-    //    super.open(uri);
-    //    super.setOnTouchListener(this);
-    //    super.setOnClickListener(this);
-    //    super.setOnLongClickListener(this);
-    //}
 
     OnTouchListener mOnTouchListener;
     MotionEvent event;
@@ -81,7 +70,7 @@ class HtmlView3 extends HtmlView2 implements View.OnTouchListener, View.OnClickL
         //float h = v.getHeight();
         float x = event.getX();
         //float y = event.getY();
-        Log.wtf(__CLASSNAME__, getMethodName()/* + ":" + v + "\t"*/ + ":w:" + v.getWidth() + "\t" + "x:" + (int) x + "(" + (int) (w * 1.0f / 3.0f) + " - " + (int) (w * 2.0f / 3.0f) + ")" + "\t" + event);
+        //Log.wtf(__CLASSNAME__, getMethodName()/* + ":" + v + "\t"*/ + ":w:" + v.getWidth() + "\t" + "x:" + (int) x + "\t" + "(" + (int) (w * 1.0f / 3.0f) + " - " + (int) (w * 2.0f / 3.0f) + ")" + "\t" + event);
         if (x < (w * 1.0f / 3.0f)) {
             prev();
         } else if (x > (w * 2.0f / 3.0f)) {
@@ -105,7 +94,7 @@ class HtmlView3 extends HtmlView2 implements View.OnTouchListener, View.OnClickL
         //float h = v.getHeight();
         float x = event != null ? event.getX() : w / 2.0f;
         //float y = event.getY();
-        Log.wtf(__CLASSNAME__, getMethodName()/* + ":" + v + "\t"*/ + ":w:" + v.getWidth() + "\t" + "x:" + (int) x + "(" + (int) (w * 1.0f / 3.0f) + " - " + (int) (w * 2.0f / 3.0f) + ")" + "\t" + event);
+        //Log.wtf(__CLASSNAME__, getMethodName()/* + ":" + v + "\t"*/ + ":w:" + v.getWidth() + "\t" + "x:" + (int) x + "\t" + "(" + (int) (w * 1.0f / 3.0f) + " - " + (int) (w * 2.0f / 3.0f) + ")" + "\t" + event);
         if (x < (w * 1.0f / 3.0f)) {
             prev();
         } else if (x > (w * 2.0f / 3.0f)) {
@@ -122,7 +111,7 @@ class HtmlView3 extends HtmlView2 implements View.OnTouchListener, View.OnClickL
         //float h = v.getHeight();
         float x = event != null ? event.getX() : w / 2.0f;
         //float y = event.getY();
-        Log.wtf(__CLASSNAME__, getMethodName()/* + ":" + v + "\t"*/ + ":w:" + v.getWidth() + "\t" + "x:" + (int) x + "(" + (int) (w * 1.0f / 3.0f) + " - " + (int) (w * 2.0f / 3.0f) + ")" + "\t" + event);
+        //Log.wtf(__CLASSNAME__, getMethodName()/* + ":" + v + "\t"*/ + ":w:" + v.getWidth() + "\t" + "x:" + (int) x + "\t" + "(" + (int) (w * 1.0f / 3.0f) + " - " + (int) (w * 2.0f / 3.0f) + ")" + "\t" + event);
         if (mOnLongClickListener != null) {
             mOnLongClickListener.onLongClick(v);
         }

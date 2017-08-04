@@ -34,7 +34,6 @@ class CContent3 extends CContent2 implements View.OnTouchListener, View.OnClickL
 
     @Override
     protected void onAttachedToWindow() {
-        Log.wtf(__CLASSNAME__, getMethodName());
         super.onAttachedToWindow();
         //OnTouchListener
         ((__VideoView) findViewById(R.id.video)).setOnTouchListener(this);
@@ -55,7 +54,7 @@ class CContent3 extends CContent2 implements View.OnTouchListener, View.OnClickL
 
     @Override
     public void _open(Uri uri) {
-        Log.wtf(__CLASSNAME__, getMethodName() + uri.toString());
+        //Log.wtf(__CLASSNAME__, getMethodName() + uri.toString());
         super._open(uri);
         //marqee
         ((__TextView) findViewById(R.id.text)).setOnTouchListener(this); //don't touch
@@ -100,7 +99,7 @@ class CContent3 extends CContent2 implements View.OnTouchListener, View.OnClickL
         //float h = v.getHeight();
         float x = event.getX();
         //float y = event.getY();
-        Log.wtf(__CLASSNAME__, getMethodName() + ":" + v + "\t" + ":w:" + v.getWidth() + "\t" + "x:" + (int) x + "(" + (int) (w * 1.0f / 3.0f) + " - " + (int) (w * 2.0f / 3.0f) + ")" + "\t" + event);
+        Log.wtf(__CLASSNAME__, getMethodName() + ":" + v + "\t" + ":w:" + v.getWidth() + "\t" + "x:" + (int) x + "\t" + "(" + (int) (w * 1.0f / 3.0f) + " - " + (int) (w * 2.0f / 3.0f) + ")" + "\t" + event);
         if (x < (w * 1.0f / 3.0f)) {
             prev();
         } else if (x > (w * 2.0f / 3.0f)) {
@@ -124,7 +123,7 @@ class CContent3 extends CContent2 implements View.OnTouchListener, View.OnClickL
         //float h = v.getHeight();
         float x = event != null ? event.getX() : w / 2.0f;
         //float y = event.getY();
-        Log.wtf(__CLASSNAME__, getMethodName() + ":" + v + "\t" + ":w:" + v.getWidth() + "\t" + "x:" + (int) x + "(" + (int) (w * 1.0f / 3.0f) + " - " + (int) (w * 2.0f / 3.0f) + ")" + "\t" + event);
+        Log.wtf(__CLASSNAME__, getMethodName() + ":" + v + "\t" + ":w:" + v.getWidth() + "\t" + "x:" + (int) x + "\t" + "(" + (int) (w * 1.0f / 3.0f) + " - " + (int) (w * 2.0f / 3.0f) + ")" + "\t" + event);
         if (x < (w * 1.0f / 3.0f)) {
             prev();
         } else if (x > (w * 2.0f / 3.0f)) {
