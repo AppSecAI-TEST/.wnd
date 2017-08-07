@@ -9,7 +9,7 @@ import android.util.AttributeSet;
  * Created by isyoon on 2017-07-19.
  */
 
-class HtmlView extends android.webkit.WebView implements _Listener {
+class HtmlView extends android.webkit.WebView implements _CListener {
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
 
@@ -53,10 +53,10 @@ class HtmlView extends android.webkit.WebView implements _Listener {
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
     }
 
-    CListener mCListener;
+    _CContentListener mCOnListener;
 
     @Override
-    public void setCListener(CListener l) {
-        mCListener = l;
+    public void setConListener(_CContentListener l) {
+        mCOnListener = l;
     }
 }

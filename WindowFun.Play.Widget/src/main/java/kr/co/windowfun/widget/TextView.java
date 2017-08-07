@@ -3,7 +3,6 @@ package kr.co.windowfun.widget;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.HorizontalScrollView;
@@ -12,7 +11,7 @@ import android.widget.HorizontalScrollView;
  * Created by isyoon on 2017-07-19.
  */
 
-class TextView extends HorizontalScrollView implements _Listener {
+class TextView extends HorizontalScrollView implements _CListener {
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
 
@@ -49,11 +48,11 @@ class TextView extends HorizontalScrollView implements _Listener {
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
     }
 
-    CListener mCListener;
+    _CContentListener mCOnListener;
 
     @Override
-    public void setCListener(CListener l) {
-        mCListener = l;
+    public void setConListener(_CContentListener l) {
+        mCOnListener = l;
     }
 
     protected android.widget.TextView textView;

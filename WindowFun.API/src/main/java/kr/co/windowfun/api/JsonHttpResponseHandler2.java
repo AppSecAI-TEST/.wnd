@@ -1,7 +1,5 @@
 package kr.co.windowfun.api;
 
-import android.util.Log;
-
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;

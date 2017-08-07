@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--isyoon:contents_view-->
+    <style name="contents_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <!--<item name="android:layout_above">@+id/banner</item>-->
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:clickable">true</item>
+        <item name="android:longClickable">true</item>
+        <item name="android:visibility">visible</item>
+    </style>
+    <!--isyoon:contents_image-->
+    <style name="contents_image" parent="contents_view">
+        <item name="android:scaleType">fitXY</item>
+    </style>
+    <!--isyoon:contents_text-->
+    <style name="contents_text" parent="contents_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:scrollbars">none</item>
+    </style>
+    <!--isyoon:text_view-->
+    <style name="text_view">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/text_size_xxxlarge</item>
+        <item name="android:textColor">@color/text_default_color</item>
+        <item name="android:background">@color/text_default_background</item>
+        <!--text marquee:FUCK-->
+        <!--<item name="android:singleLine">true</item>-->
+        <!--<item name="android:maxLines">1</item>-->
+        <!--<item name="android:ellipsize">marquee</item>-->
+        <!--<item name="android:marqueeRepeatLimit">marquee_forever</item>-->
+        <!--<item name="android:scrollHorizontally">true</item>-->
+        <!--<item name="android:focusable">true</item>-->
+        <!--<item name="android:focusableInTouchMode">true</item>-->
+        <!--<item name="android:freezesText">true</item>-->
+        <!--isyoon:default.text-->
+        <item name="android:text">@string/text_default_text</item>
+    </style>
+    <!--isyoon:contents_text-->
+    <style name="contents_label" parent="contents_view">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <!--<item name="android:layout_alignParentStart">true</item>-->
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:lines">1</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:text">label</item>
+        <item name="android:textColor">@android:color/holo_red_dark</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

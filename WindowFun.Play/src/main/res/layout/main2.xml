@@ -10,17 +10,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/banner"
+        android:layout_above="@+id/banner_long"
         android:baselineAligned="false"
         android:orientation="horizontal">
 
-        <include
-            android:id="@+id/c1"
-            layout="@layout/content"
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_weight="7"/>
+            android:layout_weight="7">
+
+            <include
+                android:id="@+id/c1"
+                layout="@layout/content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/banner_short"
+                android:layout_gravity="center"/>
+
+            <WebView
+                android:id="@+id/banner_short"
+                style="@style/banner_bar"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/cs"
@@ -55,7 +67,7 @@
     </LinearLayout>
 
     <WebView
-        android:id="@+id/banner"
+        android:id="@+id/banner_long"
         style="@style/banner_bar"
         android:layout_alignParentBottom="true"/>
 

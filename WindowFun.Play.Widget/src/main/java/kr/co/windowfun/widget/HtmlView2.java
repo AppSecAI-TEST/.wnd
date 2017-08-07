@@ -17,7 +17,7 @@ import kr.co.windowfun._DEF;
  * Created by isyoon on 2017-07-19.
  */
 
-class HtmlView2 extends HtmlView implements _Content, _DEF {
+class HtmlView2 extends HtmlView implements _CContent, _DEF {
     public HtmlView2(Context context) {
         super(context);
     }
@@ -51,8 +51,16 @@ class HtmlView2 extends HtmlView implements _Content, _DEF {
         return this;
     }
 
+    Uri uri;
+
+    @Override
+    public Uri uri() {
+        return this.uri;
+    }
+
     @Override
     public void open(final Uri uri) {
+        this.uri = uri;
         loadUrl(uri.toString());
     }
 
@@ -93,7 +101,8 @@ class HtmlView2 extends HtmlView implements _Content, _DEF {
     private Runnable complete = new Runnable() {
         @Override
         public void run() {
-            if (mCListener != null) mCListener.onCompletion(HtmlView2.this);
+            if (mCOnListener != null)
+                mCOnListener.onCompletion((__CContent) getParent(), HtmlView2.this);
         }
     };
 
@@ -123,15 +132,17 @@ class HtmlView2 extends HtmlView implements _Content, _DEF {
     Random r = new Random();
 
     private Runnable rand = new Runnable() {
+
         @Override
         public void run() {
             int min = 0;
             int max = path.size() - 1;
-            int index = -1;
+            int idx;
             try {
-                if (HtmlView2.this.index < HtmlView2.this.path.size()) {
-                    index = r.nextInt(max - min) + min;
-                    HtmlView2.this.index = index;
+                idx = r.nextInt(max - min) + min;
+                if (idx > -1 && idx < path.size()) {
+                    index = idx;
+                    Log.wtf(__CLASSNAME__, getMethodName() + ":" + idx + ":" + path.get(idx));
                 }
             } catch (Exception e) {
                 e.printStackTrace();

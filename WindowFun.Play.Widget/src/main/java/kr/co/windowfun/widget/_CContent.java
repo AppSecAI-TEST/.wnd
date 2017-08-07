@@ -6,7 +6,8 @@ import android.net.Uri;
  * Created by isyoon on 2017-07-19.
  */
 
-interface _Content {
+interface _CContent {
+    Uri uri();
     void open(Uri uri);
     //void open();
     void play();
@@ -15,7 +16,6 @@ interface _Content {
     void rand();
     void next();
     void prev();
-
     boolean paused();
     void pause();
     void resume();

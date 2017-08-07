@@ -87,7 +87,7 @@ public interface _JSON {
         //text: "텍스트",
         String text = "text";
         //text_effect: "3.1. 범례",
-        String text_effect = "effect_text";
+        String text_effect = "text_effect";
         String text_font = "text_font";
         String text_line = "text_line";
         String text_size = "text_size";
@@ -103,15 +103,15 @@ public interface _JSON {
         //time_end: "20170731",
         String time_end = "time_end";
         //play_effect: "3.2. 범례",
-        String play_effect = "effect_play";
+        String play_effect = "play_effect";
         //play_length: "30",
         String play_length = "play_length";
         //play_repeat: "1",
         String play_repeat = "play_repeat";
         //file_name: "http://windowfun.co.kr/upload/2017/07/19/13/26/02/잇섭의 KT 라인프렌즈 스마트폰 리뷰! [KT].mp4",
-        String file_name = "filename";
+        String file_name = "file_name";
         //file_size: "18040399"
-        String file_size = "filesize";
+        String file_size = "file_size";
         //use_yn: "Y"
         String use_yn = "use_yn3";
     }

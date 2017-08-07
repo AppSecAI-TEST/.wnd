@@ -13,7 +13,7 @@
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/close"
         style="@style/action_button"
-        android:layout_above="@+id/banner"
+        android:layout_above="@+id/banner_long"
         android:clickable="true"
         android:tint="@android:color/white"
         app:backgroundTint="@android:color/holo_red_dark"

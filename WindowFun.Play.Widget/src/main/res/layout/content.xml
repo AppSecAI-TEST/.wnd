@@ -10,79 +10,32 @@
 
     <kr.co.windowfun.widget.__HtmlView
         android:id="@+id/html"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerVertical="true"
-        android:background="@android:color/transparent"
-        android:clickable="true"
-        android:longClickable="true"
+        style="@style/contents_view"
         android:visibility="visible"/>
 
     <kr.co.windowfun.widget.__VideoView
         android:id="@+id/video"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:background="@android:color/transparent"
-        android:clickable="true"
-        android:longClickable="true"
+        style="@style/contents_view"
         android:visibility="visible"/>
 
     <kr.co.windowfun.widget.__ImageView
         android:id="@+id/image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:background="@android:color/transparent"
-        android:scaleType="fitXY"
-        android:clickable="true"
-        android:longClickable="true"
+        style="@style/contents_image"
         android:visibility="visible"/>
-
 
     <kr.co.windowfun.widget.__TextView
         android:id="@+id/text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:scrollbars="none"
-        android:background="@android:color/transparent"
-        android:clickable="true"
-        android:longClickable="true"
+        style="@style/contents_text"
         android:visibility="visible">
 
         <com.hanks.htextview.rainbow.RainbowTextView
             android:id="@+id/text_view"
-            style="@style/text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/text_default_text"/>
+            style="@style/text_view"/>
     </kr.co.windowfun.widget.__TextView>
 
     <android.widget.TextView
         android:id="@+id/label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:background="@android:color/transparent"
-        android:lines="1"
-        android:maxLines="1"
-        android:text="label"
-        android:textColor="@android:color/holo_red_dark"
-        android:textStyle="bold"
+        style="@style/contents_label"
         android:visibility="visible"/>
-
-    <View
-        android:id="@+id/space"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/text_test_background"
-        android:clickable="true"
-        android:longClickable="true"
-        android:visibility="invisible"/>
 
 </kr.co.windowfun.widget.__CContent>

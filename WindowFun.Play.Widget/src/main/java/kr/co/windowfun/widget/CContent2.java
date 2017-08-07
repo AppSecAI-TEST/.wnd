@@ -4,14 +4,16 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 /**
  * Created by isyuun on 2017-08-04.
  */
 
-class CContent2 extends CContent implements CListener {
+class CContent2 extends CContent implements _CContentListener {
     public CContent2(Context context) {
         super(context);
     }
@@ -33,29 +35,61 @@ class CContent2 extends CContent implements CListener {
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         //CListener
-        ((__VideoView) findViewById(R.id.video)).setCListener(this);
-        ((__ImageView) findViewById(R.id.image)).setCListener(this);
-        ((__TextView) findViewById(R.id.text)).setCListener(this);
-        ((__HtmlView) findViewById(R.id.html)).setCListener(this);
+        ((__VideoView) findViewById(R.id.video)).setConListener(this);
+        ((__ImageView) findViewById(R.id.image)).setConListener(this);
+        ((__TextView) findViewById(R.id.text)).setConListener(this);
+        ((__HtmlView) findViewById(R.id.html)).setConListener(this);
+    }
+
+    _CContentListener mCOnListener;
+
+    public void setCListener(_CContentListener l) {
+        this.mCOnListener = l;
     }
 
     @Override
-    public void onPrepared(View v) {
-        Log.wtf(__CLASSNAME__, getMethodName() + ":" + v);
-        //
+    public void onPrepared(__CContent c, View v) {
+        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + v);
+        if (mCOnListener != null) mCOnListener.onPrepared(c, v);
     }
 
     @Override
-    public void onError(View v) {
-        Log.wtf(__CLASSNAME__, getMethodName() + ":" + v);
-        next();
+    public void onError(__CContent c, View v) {
+        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + v);
+        //next(); //test
         //rand(); //test
+        if (mCOnListener != null) mCOnListener.onError(c, v);
     }
 
     @Override
-    public void onCompletion(View v) {
-        Log.wtf(__CLASSNAME__, getMethodName() + ":" + v);
-        next();
+    public void onCompletion(__CContent c, View v) {
+        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + v);
+        //next(); //test
         //rand(); //test
+        if (mCOnListener != null) mCOnListener.onCompletion(c, v);
+    }
+
+    private ArrayList<View> getAllChildren(View v) {
+
+        if (!(v instanceof ViewGroup)) {
+            ArrayList<View> viewArrayList = new ArrayList<View>();
+            viewArrayList.add(v);
+            return viewArrayList;
+        }
+
+        ArrayList<View> result = new ArrayList<View>();
+
+        ViewGroup viewGroup = (ViewGroup) v;
+        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+
+            View child = viewGroup.getChildAt(i);
+
+            ArrayList<View> viewArrayList = new ArrayList<View>();
+            viewArrayList.add(v);
+            viewArrayList.addAll(getAllChildren(child));
+
+            result.addAll(viewArrayList);
+        }
+        return result;
     }
 }

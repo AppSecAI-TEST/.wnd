@@ -9,10 +9,10 @@ import android.util.TypedValue;
 import android.widget.RelativeLayout;
 
 /**
- * text_font: "TBD",<br>
- * text_line: "true|false",<br>
- * text_size: "text|tiny|small|normal|large|xlarge",<br>
- * text_valign: "top|center|bottom",<br>
+ * _text_font: "TBD",<br>
+ * _text_line: "true|false",<br>
+ * _text_size: "_text|tiny|small|normal|large|xlarge",<br>
+ * _text_valign: "top|center|bottom",<br>
  * Created by isyuun on 8/2/2017.
  */
 
@@ -72,7 +72,7 @@ class TextView3 extends TextView2 {
     }
 
     /**
-     * TODO:text_font: "TBD"
+     * TODO:_text_font: "TBD"
      */
     public void textFont(String font) {
         //Log.wtf(__CLASSNAME__, getMethodName() + font);
@@ -80,7 +80,7 @@ class TextView3 extends TextView2 {
     }
 
     /**
-     * text_line: "true|false"
+     * _text_line: "true|false"
      */
     public void textLine(boolean line) {
         //Log.wtf(__CLASSNAME__, getMethodName() + ":" + line);
@@ -95,7 +95,7 @@ class TextView3 extends TextView2 {
     }
 
     /**
-     * text_size: "text|tiny|small|normal|large|xlarge"
+     * _text_size: "_text|tiny|small|normal|large|xlarge"
      */
     public void textSize(text_size size) {
         //Log.wtf(__CLASSNAME__, getMethodName() + ":" + size + ":" + size.value());
@@ -108,12 +108,12 @@ class TextView3 extends TextView2 {
     }
 
     /**
-     * text_valign: "top|center|bottom"
+     * _text_valign: "top|center|bottom"
      */
     public void textVAlign(text_valign valign) {
         //Log.wtf(__CLASSNAME__, getMethodName() + ":" + valign + ":" + valign.value() + ":" + textView.getLayoutParams());
         this.valign = valign;
-        //text
+        //_text
         try {
             textView.setGravity(valign.value());
             //FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) textView.getLayoutParams();

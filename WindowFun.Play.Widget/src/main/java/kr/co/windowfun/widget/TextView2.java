@@ -25,7 +25,7 @@ import kr.co.windowfun._ENUM;
  * Created by isyoon on 2017-07-13.
  */
 
-class TextView2 extends TextView implements _Content, _DEF,_ENUM {
+class TextView2 extends TextView implements _CContent, _DEF,_ENUM {
     public TextView2(Context context) {
         super(context);
     }
@@ -58,12 +58,17 @@ class TextView2 extends TextView implements _Content, _DEF,_ENUM {
     text_effect type = text_effect.rainbow;
 
     public void open(Uri uri, String type) {
-        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + text_effect.valueOf(type) + ":" + textView + ":" + uri);
+        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + _text_effect.valueOf(_type) + ":" + textView + ":" + uri);
         this.type = text_effect.valueOf(type);
         open(uri);
     }
 
     String text;
+
+    @Override
+    public Uri uri() {
+        return Uri.parse(this.text);
+    }
 
     @Override
     public void open(final Uri uri) {
@@ -83,7 +88,7 @@ class TextView2 extends TextView implements _Content, _DEF,_ENUM {
         //if (textView != null)  removeView(textView);
         //make
         textView = CText.valueOf(this.type.toString()).with(getContext());
-        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + this.type + ":" + textView + ":" + uri);
+        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + this._type + ":" + textView + ":" + uri);
         //param(width)
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         params.gravity = Gravity.CENTER_VERTICAL;
@@ -103,7 +108,7 @@ class TextView2 extends TextView implements _Content, _DEF,_ENUM {
         addView(textView);
         //blank
         String blank = getResources().getString(R.string.text_default_text);
-        //for (int i = 0; i < text.length(); i++) blank += "\t ";
+        //for (int i = 0; i < _text.length(); i++) blank += "\t ";
         setText(blank);
     }
 
@@ -181,7 +186,7 @@ class TextView2 extends TextView implements _Content, _DEF,_ENUM {
     private Runnable complete = new Runnable() {
         @Override
         public void run() {
-            if (mCListener != null) mCListener.onCompletion(TextView2.this);
+            if (mCOnListener != null) mCOnListener.onCompletion((__CContent) getParent(), TextView2.this);
         }
     };
 
@@ -232,15 +237,17 @@ class TextView2 extends TextView implements _Content, _DEF,_ENUM {
     Random r = new Random();
 
     private Runnable rand = new Runnable() {
+
         @Override
         public void run() {
             int min = 0;
             int max = path.size() - 1;
-            int index = -1;
+            int idx;
             try {
-                if (TextView2.this.index < TextView2.this.path.size()) {
-                    index = r.nextInt(max - min) + min;
-                    TextView2.this.index = index;
+                idx = r.nextInt(max - min) + min;
+                if (idx > -1 && idx < path.size()) {
+                    index = idx;
+                    Log.wtf(__CLASSNAME__, getMethodName() + ":" + idx + ":" + path.get(idx));
                 }
             } catch (Exception e) {
                 e.printStackTrace();

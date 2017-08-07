@@ -18,7 +18,7 @@ import kr.co.windowfun._DEF;
  * Created by isyoon on 2017-07-13.
  */
 
-class ImageView2 extends ImageView implements _Content, _DEF {
+class ImageView2 extends ImageView implements _CContent, _DEF {
     public ImageView2(Context context) {
         super(context);
     }
@@ -71,8 +71,16 @@ class ImageView2 extends ImageView implements _Content, _DEF {
         return this;
     }
 
+    Uri uri;
+
+    @Override
+    public Uri uri() {
+        return this.uri;
+    }
+
     @Override
     public void open(final Uri uri) {
+        this.uri = uri;
         //Log.w(__CLASSNAME__, getMethodName() + ":" + index + "(" + "w:" + getMeasuredWidth() + ", h:" + getMeasuredHeight() + ")" + uri);
         try {
             int w = getMeasuredWidth();
@@ -152,7 +160,7 @@ class ImageView2 extends ImageView implements _Content, _DEF {
     private Runnable complete = new Runnable() {
         @Override
         public void run() {
-            if (mCListener != null) mCListener.onCompletion(ImageView2.this);
+            if (mCOnListener != null) mCOnListener.onCompletion((__CContent) getParent(), ImageView2.this);
         }
     };
 
@@ -182,15 +190,17 @@ class ImageView2 extends ImageView implements _Content, _DEF {
     Random r = new Random();
 
     private Runnable rand = new Runnable() {
+
         @Override
         public void run() {
             int min = 0;
             int max = path.size() - 1;
-            int index = -1;
+            int idx;
             try {
-                if (index > -1 && index < path.size()) {
-                    index = r.nextInt(max - min) + min;
-                    ImageView2.this.index = index;
+                idx = r.nextInt(max - min) + min;
+                if (idx > -1 && idx < path.size()) {
+                    index = idx;
+                    Log.wtf(__CLASSNAME__, getMethodName() + ":" + idx + ":" + path.get(idx));
                 }
             } catch (Exception e) {
                 e.printStackTrace();

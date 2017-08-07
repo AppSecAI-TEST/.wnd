@@ -18,7 +18,7 @@ import kr.co.windowfun._DEF;
  * Created by isyoon on 2017-07-04.
  */
 
-class VideoView2 extends VideoView implements _Content, _DEF {
+class VideoView2 extends VideoView implements _CContent, _DEF {
     MediaPlayer.OnPreparedListener mOnPreparedListener;
 
     public VideoView2(Context context) {
@@ -115,7 +115,7 @@ class VideoView2 extends VideoView implements _Content, _DEF {
     private int h = 0;
     private int w = 0;
 
-    private void setDimensions(int w, int h) {
+    private void setDimension(int w, int h) {
         this.h = h;
         this.w = w;
 
@@ -143,19 +143,27 @@ class VideoView2 extends VideoView implements _Content, _DEF {
 
     MediaPlayer mp;
 
+    Uri uri;
+
+    @Override
+    public Uri uri() {
+        return this.uri;
+    }
+
     @Override
     public void open(final Uri uri) {
+        this.uri = uri;
         //Log.w(__CLASSNAME__, getMethodName() + ":" + index + "->" + Uri.decode(uri.toString()));
         super.setVideoURI(uri);
         super.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
-                Log.wtf(__CLASSNAME__, "MediaPlayer.OnError" + "(" + what + ", " + extra + ")" + ":" + index + "->" + Uri.decode(uri.toString()));
-                //Toast.makeText(getContext(), getMethodName() + "(" + what + "," + extra + ")" + extra, Toast.LENGTH_SHORT).show();
-                if (mOnErrorListener != null) {
-                    mOnErrorListener.onError(mp, what, extra);
-                }
-                if (mCListener != null) mCListener.onError(VideoView2.this);
+                Log.e(__CLASSNAME__, "MediaPlayer.OnError" + "(" + what + ", " + extra + ")" + ":" + index + "->" + Uri.decode(uri.toString()));
+                ////Toast.makeText(getContext(), getMethodName() + "(" + what + "," + extra + ")" + extra, Toast.LENGTH_SHORT).show();
+                //if (mOnErrorListener != null) {
+                //    mOnErrorListener.onError(mp, what, extra);
+                //}
+                if (mCOnListener != null) mCOnListener.onError((__CContent) getParent(), VideoView2.this);
                 return true;
             }
         });
@@ -163,25 +171,38 @@ class VideoView2 extends VideoView implements _Content, _DEF {
             @Override
             public void onPrepared(MediaPlayer mp) {
                 Log.e(__CLASSNAME__, "MediaPlayer.onPrepared()" + "(" + "w:" + getWidth() + ",h:" + getHeight() + ")" + ":" + index + "->" + Uri.decode(uri.toString()));
-                setDimensions(getWidth(), getHeight());
+                setDimension(getWidth(), getHeight());
                 VideoView2.this.mp = mp;
-                VideoView2.this.mute(VideoView2.this.mute);
-                if (mOnPreparedListener != null) {
-                    mOnPreparedListener.onPrepared(mp);
-                }
-                if (mCListener != null) mCListener.onPrepared(VideoView2.this);
+                mute(mute);
+                //if (mOnPreparedListener != null) {
+                //    mOnPreparedListener.onPrepared(mp);
+                //}
+                if (mCOnListener != null) mCOnListener.onPrepared((__CContent) getParent(), VideoView2.this);
             }
         });
         super.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 Log.e(__CLASSNAME__, "MediaPlayer.onCompletion()" + "(" + "w:" + getWidth() + ",h:" + getHeight() + ")" + ":" + index + "->" + Uri.decode(uri.toString()));
-                if (mOnCompletionListener != null) {
-                    mOnCompletionListener.onCompletion(mp);
-                }
-                if (mCListener != null) mCListener.onCompletion(VideoView2.this);
+                //if (mOnCompletionListener != null) {
+                //    mOnCompletionListener.onCompletion(mp);
+                //}
+                if (mCOnListener != null) mCOnListener.onCompletion((__CContent) getParent(), VideoView2.this);
             }
         });
+    }
+
+    private  Runnable prepare = new Runnable() {
+        @Override
+        public void run() {
+            setDimension(getWidth(), getHeight());
+            mute(mute);
+        }
+    };
+
+    private void prepare() {
+        mHandler.removeCallbacks(prepare);
+        mHandler.postDelayed(prepare, TIMER_OPEN_SHORT);
     }
 
     private void open() {
@@ -219,7 +240,7 @@ class VideoView2 extends VideoView implements _Content, _DEF {
     private Runnable call = new Runnable() {
         @Override
         public void run() {
-            if (mCListener != null) mCListener.onCompletion(VideoView2.this);
+            if (mCOnListener != null) mCOnListener.onCompletion((__CContent) getParent(), VideoView2.this);
         }
     };
 
@@ -243,6 +264,8 @@ class VideoView2 extends VideoView implements _Content, _DEF {
         mHandler.removeCallbacks(prev);
         mHandler.removeCallbacks(next);
         mHandler.removeCallbacks(rand);
+        //video
+        mHandler.removeCallbacks(prepare);
     }
 
     Random r = new Random();
@@ -253,16 +276,17 @@ class VideoView2 extends VideoView implements _Content, _DEF {
         public void run() {
             int min = 0;
             int max = path.size() - 1;
-            int index = -1;
+            int idx;
             try {
-                if (VideoView2.this.index < VideoView2.this.path.size()) {
-                    index = r.nextInt(max - min) + min;
-                    VideoView2.this.index = index;
+                idx = r.nextInt(max - min) + min;
+                if (idx > -1 && idx < path.size()) {
+                    index = idx;
+                    Log.wtf(__CLASSNAME__, getMethodName() + ":" + idx + ":" + path.get(idx));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            //Log.w(__CLASSNAME__, getMethodName() + ":" + VideoView2.this.index);
+            //Log.w(__CLASSNAME__, getMethodName() + ":" + index);
             open();
             play();
         }

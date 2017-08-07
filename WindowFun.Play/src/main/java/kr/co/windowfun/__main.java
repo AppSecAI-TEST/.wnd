@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import kr.co.windowfun.widget._CContentListener;
+import kr.co.windowfun.widget.__CContent;
 import kr.co.windowfun.widget.__ImageView;
 import kr.co.windowfun.widget.__TextView;
 import kr.co.windowfun.widget.__VideoView;
@@ -33,7 +35,7 @@ import kr.co.windowfun.widget.__VideoView;
  * Created by isyoon on 2017-07-03.
  */
 
-class __main extends _Activity {
+class __main extends _Activity implements _CContentListener {
     protected ArrayList<__TextView> texts = new ArrayList<>();
     protected ArrayList<String> txt = new ArrayList<>();
     protected ArrayList<__ImageView> images = new ArrayList<>();
@@ -152,41 +154,74 @@ class __main extends _Activity {
         }
         menus();
         path();
-        content();
         videos();
         images();
-        banner();
+        _banner();
+        _contents();
     }
 
-    private void content() {
-        findViewById(R.id.c1).setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                mHandler.post(showMenu);
-                return false;
+    protected __CContent[] contents;
+
+    protected void _contents() {
+        ((__VideoView) findViewById(R.id.c1).findViewById(R.id.video)).mute(false);
+
+        ((__CContent) findViewById(R.id.c1)).setContents(getApp().result_c1);
+        ((__CContent) findViewById(R.id.c3)).setContents(getApp().result_c3);
+        ((__CContent) findViewById(R.id.c4)).setContents(getApp().result_c4);
+        ((__CContent) findViewById(R.id.c5)).setContents(getApp().result_c5);
+
+        contents = new __CContent[]{
+                (__CContent) findViewById(R.id.c1),
+                (__CContent) findViewById(R.id.c3),
+                (__CContent) findViewById(R.id.c4),
+                (__CContent) findViewById(R.id.c5)
+        };
+
+        for (__CContent c : contents) {
+            c.setCListener(this);
+            c.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    mHandler.post(showMenu);
+                    return false;
+                }
+            });
+        }
+    }
+
+    protected void start() {
+        for (__CContent c : contents) {
+            if (c.getVisibility() == View.VISIBLE) c.start();
+        }
+    }
+
+    @Override
+    public void onPrepared(__CContent c, View v) {
+        Log.e(__CLASSNAME__, "onPrepared()" + ":" + getResources().getResourceEntryName(c.getId()) + ":" + getResources().getResourceEntryName(v.getId()));
+    }
+
+    @Override
+    public void onError(__CContent c, View v) {
+        Log.e(__CLASSNAME__, "onError()" + ":" + getResources().getResourceEntryName(c.getId()) + ":" + getResources().getResourceEntryName(v.getId()));
+        int id = ((View) v.getParent()).getId();
+
+        if (id == R.id.c1) {
+            Log.wtf(__CLASSNAME__, "onError()" + ":" + getResources().getResourceEntryName(c.getId()) + ":" + getResources().getResourceEntryName(v.getId()));
+            for (__CContent cc : contents) {
+                cc.stop();
             }
-        });
-        findViewById(R.id.c3).setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                mHandler.post(showMenu);
-                return false;
+            for (__CContent cc : contents) {
+                cc.start();
             }
-        });
-        findViewById(R.id.c4).setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                mHandler.post(showMenu);
-                return false;
-            }
-        });
-        findViewById(R.id.c5).setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                mHandler.post(showMenu);
-                return false;
-            }
-        });
+        } else {
+            //((__CContent) findViewById(((View) v.getParent()).getId())).next();
+        }
+    }
+
+    @Override
+    public void onCompletion(__CContent c, View v) {
+        Log.e(__CLASSNAME__, "onCompletion()" + ":" + getResources().getResourceEntryName(((View) v.getParent()).getId()) + ":" + getResources().getResourceEntryName(v.getId()));
+        ((__CContent) findViewById(((View) v.getParent()).getId())).next();
     }
 
     private void menus() {
@@ -250,9 +285,9 @@ class __main extends _Activity {
         mHandler.postDelayed(hideMenu, TIMER_OPEN_SHORT);
     }
 
-    private void banner() {
+    protected void _banner() {
 
-        WebView webView = (WebView) findViewById(R.id.banner);
+        WebView webView = (WebView) findViewById(R.id.banner_long);
         webView.setWebViewClient(new WebViewClient()); // 이걸 안해주면 새창이 뜸
         webView.getSettings().setJavaScriptEnabled(true);
         //webView.setBackgroundColor(0);  투명

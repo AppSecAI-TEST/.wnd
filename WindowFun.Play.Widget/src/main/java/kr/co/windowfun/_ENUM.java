@@ -10,6 +10,82 @@ import kr.co.windowfun.widget.R;
  */
 
 public interface _ENUM {
+    //c_type: "A|B|C|D|E|F"
+    enum c_type {
+        A("A"),
+        B("B"),
+        C("C"),
+        D("D"),
+        E("E"),
+        F("F");
+
+        private String value;
+
+        c_type(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return this.value;
+        }
+    }
+
+    enum m_type {
+        A("A"),
+        B("B"),
+        C("C");
+
+        private String value;
+
+        m_type(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return this.value;
+        }
+    }
+
+    //"text|image|video|html"
+    enum result_menu_type {
+        text("text"),
+        image("image"),
+        video("video"),
+        html("html"),;
+
+        private String value;
+
+        result_menu_type(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return this.value;
+        }
+    }
+
+    //"text|image|video|html"
+    enum result_c_type {
+        text("text"),
+        image("image"),
+        video("video"),
+        html("html"),;
+
+        private String value;
+
+        result_c_type(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return this.value;
+        }
+    }
+
     //"plane|line|fade|typer|rainbow|scale|evaporate|fall"
     enum text_effect {
         plane(CText.plane),
@@ -30,44 +106,6 @@ public interface _ENUM {
         @Override
         public String toString() {
             return "" + this.value;
-        }
-    }
-
-    //"text|image|video|html"
-    enum m_type {
-        text("text"),
-        image("image"),
-        video("video"),
-        html("html"),;
-
-        private String value;
-
-        m_type(String value) {
-            this.value = value;
-        }
-
-        @Override
-        public String toString() {
-            return this.value;
-        }
-    }
-
-    //"text|image|video|html"
-    enum c_type {
-        text("text"),
-        image("image"),
-        video("video"),
-        html("html"),;
-
-        private String value;
-
-        c_type(String value) {
-            this.value = value;
-        }
-
-        @Override
-        public String toString() {
-            return this.value;
         }
     }
 

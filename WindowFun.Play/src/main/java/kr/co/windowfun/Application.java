@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import kr.co.windowfun.app.__Application;
 
@@ -15,6 +16,9 @@ import kr.co.windowfun.app.__Application;
 public class Application extends __Application implements _DEF {
     String userid;
     String token;
+    JSONObject result_type;
+    JSONArray result_menu;
+    JSONArray result_banner;
     JSONArray result_c1;
     JSONArray result_c3;
     JSONArray result_c4;
