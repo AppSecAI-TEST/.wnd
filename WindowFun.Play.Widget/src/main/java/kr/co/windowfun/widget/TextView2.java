@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import com.hanks.htextview.base.HTextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import kr.co.windowfun._DEF;
@@ -25,17 +26,36 @@ import kr.co.windowfun._ENUM;
  * Created by isyoon on 2017-07-13.
  */
 
-class TextView2 extends TextView implements _CContent, _DEF,_ENUM {
+class TextView2 extends TextView implements _CContent, _DEF, _ENUM {
+    Context context;
+
     public TextView2(Context context) {
         super(context);
+        this.context = context;
+        //_init();
     }
 
     public TextView2(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
+        //_init();
     }
 
     public TextView2(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        this.context = context;
+        //_init();
+    }
+
+    private void _init() {
+        Log.wtf(__CLASSNAME__, getMethodName());
+        text(context.getString(R.string.text_default_text), type.toString());
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        if (isInEditMode()) _init();
     }
 
     @Override
@@ -51,31 +71,33 @@ class TextView2 extends TextView implements _CContent, _DEF,_ENUM {
     public TextView2 path(ArrayList<String> path) {
         this.path = path;
         this.index = 0;
-        //this.path = (ArrayList<String>) Arrays.asList(sentences); //test
         return this;
     }
 
-    text_effect type = text_effect.rainbow;
-
-    public void open(Uri uri, String type) {
-        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + _text_effect.valueOf(_type) + ":" + textView + ":" + uri);
-        this.type = text_effect.valueOf(type);
-        open(uri);
+    @Override
+    public void path(String path) {
+        this.path = new ArrayList<>(Arrays.asList(new String[]{path}));
+        open();
     }
-
-    String text;
 
     @Override
     public Uri uri() {
         return Uri.parse(this.text);
     }
 
+    @Deprecated
     @Override
-    public void open(final Uri uri) {
-        this.text = uri.toString();
-        //scroll don't touch
+    final public void open(final Uri uri) {/*안써*/}
+
+    String text;
+    text_effect type = text_effect.rainbow;
+
+    public void text(String text, String type) {
+        this.text = text;
+        this.type = text_effect.valueOf(type);
+        this.path = new ArrayList<>(Arrays.asList(new String[]{text}));
         try {
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) getLayoutParams();
+            ViewGroup.LayoutParams params = getLayoutParams();
             params.width = RelativeLayout.LayoutParams.MATCH_PARENT;
             params.height = RelativeLayout.LayoutParams.WRAP_CONTENT;
             setLayoutParams(params);
@@ -88,7 +110,8 @@ class TextView2 extends TextView implements _CContent, _DEF,_ENUM {
         //if (textView != null)  removeView(textView);
         //make
         textView = CText.valueOf(this.type.toString()).with(getContext());
-        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + this._type + ":" + textView + ":" + uri);
+        //textView = CText.valueOf(this.type.toString()).with(getContext(), null, R.style.text_view);
+        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + getResources().getResourceEntryName(this.getId()) + ":" + this.type + ":" + textView + ":" + uri);
         //param(width)
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         params.gravity = Gravity.CENTER_VERTICAL;
@@ -101,15 +124,15 @@ class TextView2 extends TextView implements _CContent, _DEF,_ENUM {
         }
         //textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, ContextCompat.getDimensionPixelSize(R.dimen.text_size_tiny));
         //shadow
-        textView.setShadowLayer(1.5f, -1, 1, Color.LTGRAY);
+        if (!isInEditMode()) textView.setShadowLayer(1.5f, -1, 1, Color.LTGRAY);
         //gravity
         textView.setGravity(Gravity.CENTER_VERTICAL);
         //add
         addView(textView);
-        //blank
-        String blank = getResources().getString(R.string.text_default_text);
-        //for (int i = 0; i < _text.length(); i++) blank += "\t ";
-        setText(blank);
+        ////blank
+        //String blank = getResources().getString(R.string.text_default_text);
+        ////for (int i = 0; i < _text.length(); i++) blank += "\t ";
+        //setText(blank);
     }
 
     @Override
@@ -120,8 +143,9 @@ class TextView2 extends TextView implements _CContent, _DEF,_ENUM {
             //param(width)
             textView.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
             int w = textView.getMeasuredWidth();
+            int h = textView.getMeasuredHeight();
             ViewGroup.LayoutParams params = textView.getLayoutParams();
-            //Log.wtf(__CLASSNAME__, getMethodName() + ":" + textView + ":" + params + ":" + "w:" + params.width + ", h:" + params.height + "->" + "w:" + w + ", h:" + h);
+            Log.i(__CLASSNAME__, getMethodName() + ":" + getResources().getResourceEntryName(this.getId()) + ":" + this.type + ":" + textView + ":" + text + ":" + "w:" + params.width + ", h:" + params.height + "->" + "w:" + w + ", h:" + h);
             params.width = w;
             textView.setLayoutParams(params);
             if (textView instanceof HTextView) {
@@ -169,24 +193,11 @@ class TextView2 extends TextView implements _CContent, _DEF,_ENUM {
         }
     }
 
-    int length = -1;
-
-    private Runnable play = new Runnable() {
-        @Override
-        public void run() {
-            mHandler.removeCallbacks(complete);
-            if (length > 0) {
-                mHandler.postDelayed(complete, length);
-            }
-            animate();
-            marquee();
-        }
-    };
-
     private Runnable complete = new Runnable() {
         @Override
         public void run() {
-            if (mCOnListener != null) mCOnListener.onCompletion((__CContent) getParent(), TextView2.this);
+            if (mCOnListener != null)
+                mCOnListener.onCompletion((__CContent) getParent(), TextView2.this);
         }
     };
 
@@ -205,6 +216,20 @@ class TextView2 extends TextView implements _CContent, _DEF,_ENUM {
         mHandler.postDelayed(animate, 0);
         return super.animate();
     }
+
+    int length = -1;
+
+    private Runnable play = new Runnable() {
+        @Override
+        public void run() {
+            mHandler.removeCallbacks(complete);
+            if (length > 0) {
+                mHandler.postDelayed(complete, length);
+            }
+            animate();
+            marquee();
+        }
+    };
 
     @Override
     public void play() {
@@ -317,4 +342,18 @@ class TextView2 extends TextView implements _CContent, _DEF,_ENUM {
 
     }
 
+    @Override
+    public void show() {
+        setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hide() {
+        setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void gone() {
+        setVisibility(View.GONE);
+    }
 }

@@ -32,7 +32,7 @@ import kr.co.windowfun.widget.ProgressBar;
  * Created by isyoon on 2017-07-12.
  */
 
-class home2 extends home implements _API {
+class home2 extends home implements __API {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -110,9 +110,7 @@ class home2 extends home implements _API {
         }
     };
 
-    @Override
     protected void reset() {
-        super.reset();
         mHandler.removeCallbacks(reset);
         mHandler.post(reset);
     }
@@ -235,16 +233,15 @@ class home2 extends home implements _API {
             //Log.w(__CLASSNAME__, getMethodName() + ":" + "[[" + getApp().token + "]]");
             getApp().result_type = getJSONObject(response, result.result_type);
             getApp().result_menu = getJSONArray(response, result.result_menu);
-            getApp().result_banner = getJSONArray(response, result.result_banner);
             getApp().result_c1 = getJSONArray(response, result.result_c1);
             getApp().result_c3 = getJSONArray(response, result.result_c3);
             getApp().result_c4 = getJSONArray(response, result.result_c4);
             getApp().result_c5 = getJSONArray(response, result.result_c5);
+            getApp().result_banner = getJSONArray(response, result.result_banner);
             //Log.i(__CLASSNAME__, getMethodName() + "\n[result_c1]\n" + toString(getApp().result_c1, 2));
             //Log.i(__CLASSNAME__, getMethodName() + "\n[result_c4]\n" + toString(getApp().result_c4, 2));
             //Log.i(__CLASSNAME__, getMethodName() + "\n[result_c5]\n" + toString(getApp().result_c5, 2));
             //Log.i(__CLASSNAME__, getMethodName() + "\n[result_c5]\n" + toString(getApp().result_c5, 2));
-            //open();
             down();
         } else {
             Log.w(__CLASSNAME__, getMethodName() + ":" + "[[" + error_message + "]]");

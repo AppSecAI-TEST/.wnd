@@ -4,7 +4,7 @@ package kr.co.windowfun;
  * Created by isyuun on 2017-08-04.
  */
 
-public interface _API extends _DEF {
+public interface __API extends _DEF {
     String URI_HTTP = "http";
     String URI_HTTPS = "https";
     String URI_1COLON = ":";

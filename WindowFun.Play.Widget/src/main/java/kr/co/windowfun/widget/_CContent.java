@@ -7,9 +7,9 @@ import android.net.Uri;
  */
 
 interface _CContent {
+    void path(String path);
     Uri uri();
     void open(Uri uri);
-    //void open();
     void play();
     void play(int length);
     void stop();
@@ -19,4 +19,7 @@ interface _CContent {
     boolean paused();
     void pause();
     void resume();
+    void show();
+    void hide();
+    void gone();
 }

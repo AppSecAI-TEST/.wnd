@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 
 /**
- * 마시멜로.권한설정
+ * TODO:마시멜로.권한설정
  * Created by isyoon on 2017-07-28.
  */
 

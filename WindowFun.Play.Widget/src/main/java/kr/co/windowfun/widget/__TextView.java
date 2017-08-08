@@ -9,28 +9,28 @@ import android.util.AttributeSet;
  */
 
 public class __TextView extends TextView4 {
-    String[] sentences = {
-            //"What is design?",
-            //"Design is not just",
-            //"what it looks like and feels like.",
-            "Design is how it works. - Steve Jobs",
-            //"Older people",
-            //"sit down and ask,",
-            //"'What is it?'",
-            //"but the boy asks,",
-            "'What can I do with it?'. - Steve Jobs",
-            //"Swift",
-            //"Objective-C",
-            //"iPhone",
-            //"iPad",
-            //"Mac Mini",
-            //"MacBook Pro",
-            //"Mac Pro",
-            //"爱老婆",
-            //"老婆和女儿",
-            "만세만세만세만세만세 윈도펀 만세만세만세만세만세",
-            "세만세만세만세만세만 이종천 세만세만세만세만세만",
-    };
+    //String[] sentences = {
+    //        //"What is design?",
+    //        //"Design is not just",
+    //        //"what it looks like and feels like.",
+    //        "Design is how it works. - Steve Jobs",
+    //        //"Older people",
+    //        //"sit down and ask,",
+    //        //"'What is it?'",
+    //        //"but the boy asks,",
+    //        "'What can I do with it?'. - Steve Jobs",
+    //        //"Swift",
+    //        //"Objective-C",
+    //        //"iPhone",
+    //        //"iPad",
+    //        //"Mac Mini",
+    //        //"MacBook Pro",
+    //        //"Mac Pro",
+    //        //"爱老婆",
+    //        //"老婆和女儿",
+    //        "만세만세만세만세만세 윈도펀 만세만세만세만세만세",
+    //        "세만세만세만세만세만 이종천 세만세만세만세만세만",
+    //};
 
     public __TextView(Context context) {
         super(context);

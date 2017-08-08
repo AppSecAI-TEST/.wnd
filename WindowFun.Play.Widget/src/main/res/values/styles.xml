@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--isyoon:banner_bar-->
-    <style name="banner_bar">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">30dp</item>
-        <item name="android:layout_margin">0dp</item>
-    </style>
     <!--isyoon:circle_menu-->
     <style name="circle_menu">
         <item name="android:layout_width">wrap_content</item>
@@ -16,13 +10,13 @@
     <style name="action_button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">@dimen/floating_action_button_margin_small</item>
+        <item name="android:layout_margin">@dimen/margin_small</item>
     </style>
     <!--isyoon:hidden_button-->
     <style name="hidden_button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">@dimen/floating_action_button_margin_small</item>
+        <item name="android:layout_margin">@dimen/margin_small</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:clickable">true</item>
         <item name="android:longClickable">true</item>

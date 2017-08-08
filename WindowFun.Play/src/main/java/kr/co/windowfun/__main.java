@@ -35,7 +35,7 @@ import kr.co.windowfun.widget.__VideoView;
  * Created by isyoon on 2017-07-03.
  */
 
-class __main extends _Activity implements _CContentListener {
+class __main extends _Activity {
     protected ArrayList<__TextView> texts = new ArrayList<>();
     protected ArrayList<String> txt = new ArrayList<>();
     protected ArrayList<__ImageView> images = new ArrayList<>();
@@ -156,72 +156,6 @@ class __main extends _Activity implements _CContentListener {
         path();
         videos();
         images();
-        _banner();
-        _contents();
-    }
-
-    protected __CContent[] contents;
-
-    protected void _contents() {
-        ((__VideoView) findViewById(R.id.c1).findViewById(R.id.video)).mute(false);
-
-        ((__CContent) findViewById(R.id.c1)).setContents(getApp().result_c1);
-        ((__CContent) findViewById(R.id.c3)).setContents(getApp().result_c3);
-        ((__CContent) findViewById(R.id.c4)).setContents(getApp().result_c4);
-        ((__CContent) findViewById(R.id.c5)).setContents(getApp().result_c5);
-
-        contents = new __CContent[]{
-                (__CContent) findViewById(R.id.c1),
-                (__CContent) findViewById(R.id.c3),
-                (__CContent) findViewById(R.id.c4),
-                (__CContent) findViewById(R.id.c5)
-        };
-
-        for (__CContent c : contents) {
-            c.setCListener(this);
-            c.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    mHandler.post(showMenu);
-                    return false;
-                }
-            });
-        }
-    }
-
-    protected void start() {
-        for (__CContent c : contents) {
-            if (c.getVisibility() == View.VISIBLE) c.start();
-        }
-    }
-
-    @Override
-    public void onPrepared(__CContent c, View v) {
-        Log.e(__CLASSNAME__, "onPrepared()" + ":" + getResources().getResourceEntryName(c.getId()) + ":" + getResources().getResourceEntryName(v.getId()));
-    }
-
-    @Override
-    public void onError(__CContent c, View v) {
-        Log.e(__CLASSNAME__, "onError()" + ":" + getResources().getResourceEntryName(c.getId()) + ":" + getResources().getResourceEntryName(v.getId()));
-        int id = ((View) v.getParent()).getId();
-
-        if (id == R.id.c1) {
-            Log.wtf(__CLASSNAME__, "onError()" + ":" + getResources().getResourceEntryName(c.getId()) + ":" + getResources().getResourceEntryName(v.getId()));
-            for (__CContent cc : contents) {
-                cc.stop();
-            }
-            for (__CContent cc : contents) {
-                cc.start();
-            }
-        } else {
-            //((__CContent) findViewById(((View) v.getParent()).getId())).next();
-        }
-    }
-
-    @Override
-    public void onCompletion(__CContent c, View v) {
-        Log.e(__CLASSNAME__, "onCompletion()" + ":" + getResources().getResourceEntryName(((View) v.getParent()).getId()) + ":" + getResources().getResourceEntryName(v.getId()));
-        ((__CContent) findViewById(((View) v.getParent()).getId())).next();
     }
 
     private void menus() {
@@ -237,8 +171,8 @@ class __main extends _Activity implements _CContentListener {
         menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_home, new Object[]{"#258CFF", "html", "http://drive.google.com/viewerng/viewer?embedded=true&url=http://windowfun.co.kr/type/windowfun.pdf"});}});
         menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_search, new Object[]{"#30A400", "video", root_mp4 + File.separator + "c" + File.separator + "c1.mp4"});}});
         menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_game, new Object[]{"#FF4B32", "html", "http://windowfun.co.kr/game/"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_point, new Object[]{"#FF4B32", "open", new Intent(__main.this, text.class)});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_member, new Object[]{"#8A39FF", "open", new Intent(__main.this, login.class)});}});
+        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_point, new Object[]{"#FF4B32", "_open", new Intent(__main.this, text.class)});}});
+        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_member, new Object[]{"#8A39FF", "_open", new Intent(__main.this, login.class)});}});
 
         menu.setMainMenu(ContextCompat.getColor(this, android.R.color.holo_red_dark),
                 R.drawable.wf_icon_menu,
@@ -252,7 +186,7 @@ class __main extends _Activity implements _CContentListener {
                             new OpenHTML().execute(getMenuURL(index));
                         } else if ("video".equalsIgnoreCase(getMenuType(index))) {
                             new OpenVIDEO().execute(getMenuURL(index));
-                        } else if ("open".equalsIgnoreCase(getMenuType(index))) {
+                        } else if ("_open".equalsIgnoreCase(getMenuType(index))) {
                             new StartActivity().execute(getMenuIntent(index));
                         }
                     }
@@ -286,7 +220,6 @@ class __main extends _Activity implements _CContentListener {
     }
 
     protected void _banner() {
-
         WebView webView = (WebView) findViewById(R.id.banner_long);
         webView.setWebViewClient(new WebViewClient()); // 이걸 안해주면 새창이 뜸
         webView.getSettings().setJavaScriptEnabled(true);
@@ -350,6 +283,11 @@ class __main extends _Activity implements _CContentListener {
             mHandler.postDelayed(hideMenu, 5000);
         }
     };
+
+    protected void setShowMenu() {
+        mHandler.removeCallbacks(showMenu);
+        mHandler.postDelayed(showMenu, 0);
+    }
 
     private Runnable hideMenu = new Runnable() {
         @Override

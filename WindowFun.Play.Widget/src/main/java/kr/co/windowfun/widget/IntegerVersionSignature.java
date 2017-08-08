@@ -8,7 +8,7 @@ import java.security.MessageDigest;
  * Created by isyoon on 2017-07-21.
  */
 @Deprecated
-public class IntegerVersionSignature implements Key {
+final public class IntegerVersionSignature implements Key {
     private int currentVersion;
 
     public IntegerVersionSignature(int currentVersion) {

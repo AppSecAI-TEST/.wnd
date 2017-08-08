@@ -160,7 +160,7 @@ public class _main extends _Activity {
 
     private void banner() { //test
 
-        WebView webView = (WebView) findViewById(R.id.banner);
+        WebView webView = (WebView) findViewById(R.id.banner_text);
         webView.setWebViewClient(new WebViewClient()); // 이걸 안해주면 새창이 뜸
         webView.getSettings().setJavaScriptEnabled(true);
         //webView.setBackgroundColor(0);  투명

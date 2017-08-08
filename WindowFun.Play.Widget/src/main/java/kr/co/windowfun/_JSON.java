@@ -13,11 +13,11 @@ public interface _JSON {
         String result_data = "result_data";
         String result_type = "result_type";
         String result_menu = "result_menu";
-        String result_banner = "result_banner"; //result_c2
         String result_c1 = "result_c1";
         String result_c3 = "result_c3";
         String result_c4 = "result_c4";
         String result_c5 = "result_c5";
+        String result_banner = "result_banner"; //result_c2
     }
 
     //JSON:result_data

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import kr.co.windowfun._DEF;
@@ -49,6 +50,12 @@ class HtmlView2 extends HtmlView implements _CContent, _DEF {
         this.path = path;
         this.index = 0;
         return this;
+    }
+
+    @Override
+    public void path(String path) {
+        this.path = new ArrayList<>(Arrays.asList(new String[]{path}));
+        open();
     }
 
     Uri uri;
@@ -204,11 +211,24 @@ class HtmlView2 extends HtmlView implements _CContent, _DEF {
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
+    }
 
+    @Override
+    public void show() {
+        setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hide() {
+        setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void gone() {
+        setVisibility(View.GONE);
     }
 }

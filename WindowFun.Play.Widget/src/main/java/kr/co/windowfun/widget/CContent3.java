@@ -61,8 +61,8 @@ class CContent3 extends CContent2 implements View.OnTouchListener, View.OnClickL
     }
 
     @Override
-    protected void _showBanner() {
-        super._showBanner();
+    protected void _showTexting() {
+        super._showTexting();
         //scroll
         ((__TextView) findViewById(R.id.text)).setOnTouchListener(null); //don't touch
     }

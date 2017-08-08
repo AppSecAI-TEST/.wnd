@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--isyoon:banner_bar-->
+    <style name="banner_bar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:scrollbars">none</item>
+    </style>
+    <!--isyoon:banner_view-->
+    <style name="banner_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_margin">@dimen/margin_small</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:clickable">true</item>
+        <item name="android:longClickable">true</item>
+        <item name="android:visibility">visible</item>
+    </style>
+    <!--isyoon:banner_icon-->
+    <style name="banner_icon" parent="banner_view">
+        <item name="android:layout_width">56dp</item>
+        <item name="android:layout_height">56dp</item>
+    </style>
+    <!--isyoon:banner_title-->
+    <style name="banner_title" parent="banner_view">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:text">@string/text_default_text</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+        <!--<item name="android:textColor">@color/text_default_color</item>-->
+        <item name="android:background">@color/text_default_background</item>
+    </style>
+    <!--isyoon:banner_text-->
+    <style name="banner_text" parent="banner_title">
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+</resources>

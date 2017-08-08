@@ -23,8 +23,7 @@ public class ProgressBar extends MaterialProgressBar {
         super(context, attrs, defStyleAttr);
     }
 
-    //@Deprecated
-    //public ProgressBar(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-    //    super(context, attrs, defStyleAttr, defStyleRes);
-    //}
+    public ProgressBar(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+    }
 }

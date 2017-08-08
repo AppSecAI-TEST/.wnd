@@ -22,7 +22,7 @@ import cz.msebera.android.httpclient.Header;
  * Created by isyoon on 2017-07-18.
  */
 
-public class login extends _Activity implements _API {
+public class login extends _Activity implements __API {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

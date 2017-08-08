@@ -3,6 +3,7 @@ package kr.co.windowfun.app;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -43,5 +44,14 @@ class Activity extends android.app.Activity {
 
     protected boolean isACTIONMAIN() {
         return Intent.ACTION_MAIN.equalsIgnoreCase(getIntent().getAction());
+    }
+
+    public String getResourceEntryName(int resid) {
+        try {
+            return getResources().getResourceEntryName(resid);
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

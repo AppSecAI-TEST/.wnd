@@ -10,6 +10,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import kr.co.windowfun._DEF;
@@ -71,6 +72,12 @@ class ImageView2 extends ImageView implements _CContent, _DEF {
         return this;
     }
 
+    @Override
+    public void path(String path) {
+        this.path = new ArrayList<>(Arrays.asList(new String[]{path}));
+        open();
+    }
+
     Uri uri;
 
     @Override
@@ -88,33 +95,28 @@ class ImageView2 extends ImageView implements _CContent, _DEF {
             //square/picasso
             //Picasso.with(getContext())
             //        .load(uri)
-            //        .resize(getMeasuredWidth(), getMeasuredHeight())
+            //        .resize(w, h)
             //        .into(this);
+            //bumptech/glide:clearDiskCache
+            //Glide.get(getContext()).clearDiskCache(); //test
             //bumptech/glide:option
             RequestOptions options = new RequestOptions()
                     //.diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                    .override(getMeasuredWidth(), getMeasuredHeight())
+                    .override(w, h)
                     .lock();
-            //if (uri.toString().contains((".gif"))) {
-            //    Log.wtf(__CLASSNAME__, getMethodName() + ":" + index + "(" + "w:" + w + ", h:" + h + ")" + uri);
-            //    uri = Uri.parse(uri.toString() + "?w=" + w + "&h=" + h);
-            //    options.downsample(DownsampleStrategy.FIT_CENTER);
-            //}
             //bumptech/glide:GlideApp
-            //Glide.get(getContext()).clearDiskCache(); //test
+            Object model;
             if (new File(uri.getPath()).exists()) {
                 Log.i(__CLASSNAME__, getMethodName() + "[PATH]" + index + "(" + "w:" + w + ", h:" + h + ")" + uri);
-                GlideApp.with(getContext())
-                        .applyDefaultRequestOptions(options)
-                        .load(new File(uri.getPath()))
-                        .into(this);
+                model = new File(uri.getPath());
             } else {
                 Log.i(__CLASSNAME__, getMethodName() + "[HTTP]" + index + "(" + "w:" + w + ", h:" + h + ")" + uri);
-                GlideApp.with(getContext())
-                        .applyDefaultRequestOptions(options)
-                        .load(uri)
-                        .into(this);
+                model = uri;
             }
+            GlideApp.with(getContext())
+                    .applyDefaultRequestOptions(options)
+                    .load(model)
+                    .into(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -282,5 +284,20 @@ class ImageView2 extends ImageView implements _CContent, _DEF {
     public void resume() {
         mHandler.removeCallbacks(resume);
         mHandler.postDelayed(resume, TIMER_OPEN_SHORT);
+    }
+
+    @Override
+    public void show() {
+        setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hide() {
+        setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void gone() {
+        setVisibility(View.GONE);
     }
 }

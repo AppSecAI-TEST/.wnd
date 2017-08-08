@@ -11,7 +11,7 @@ import kr.co.windowfun.widget.__VideoView;
  * Created by isyuun on 2017-08-04.
  */
 
-class __demo extends __main {
+class __demo extends __main2 {
     @Override
     protected void init() {
         ((__VideoView) findViewById(R.id.c1).findViewById(R.id.video)).mute(false);
@@ -35,19 +35,19 @@ class __demo extends __main {
 
     @Override
     public void onPrepared(__CContent c, View v) {
-        Log.wtf(__CLASSNAME__, "onPrepared()" + ":" + getResources().getResourceEntryName(c.getId()) + ":" + getResources().getResourceEntryName(v.getId()));
+        Log.wtf(__CLASSNAME__, "onPrepared()" + ":" + getResourceEntryName(c.getId()) + ":" + getResourceEntryName(v.getId()));
     }
 
     @Override
     public void onError(__CContent c, View v) {
-        Log.wtf(__CLASSNAME__, "onError()" + ":" + getResources().getResourceEntryName(c.getId()) + ":" + getResources().getResourceEntryName(v.getId()));
+        Log.wtf(__CLASSNAME__, "onError()" + ":" + getResourceEntryName(c.getId()) + ":" + getResourceEntryName(v.getId()));
         super.onError(c, v);
         rand(); //test
     }
 
     @Override
     public void onCompletion(__CContent c, View v) {
-        Log.wtf(__CLASSNAME__, "onCompletion()" + ":" + getResources().getResourceEntryName(((View) v.getParent()).getId()) + ":" + getResources().getResourceEntryName(v.getId()));
+        Log.wtf(__CLASSNAME__, "onCompletion()" + ":" + getResourceEntryName(c.getId()) + ":" + getResourceEntryName(v.getId()));
         rand(); //test
     }
 }

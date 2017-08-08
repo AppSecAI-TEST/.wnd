@@ -61,13 +61,13 @@ class home extends _Activity {
                 shows();
                 ret = true;
             }
-            reset();
+            hide();
             show = true;
             return ret;
         }
     };
 
-    private Runnable reset = new Runnable() {
+    private Runnable hide = new Runnable() {
         @Override
         public void run() {
             show = false;
@@ -75,9 +75,9 @@ class home extends _Activity {
         }
     };
 
-    protected void reset() {
-        mHandler.removeCallbacks(reset);
-        mHandler.postDelayed(reset, TIMER_RESET_SHORT);
+    private void hide() {
+        mHandler.removeCallbacks(hide);
+        mHandler.postDelayed(hide, TIMER_RESET_SHORT);
     }
 
     private Runnable shows = new Runnable() {
@@ -140,7 +140,7 @@ class home extends _Activity {
         mHandler.post(reports);
     }
 
-    private  Runnable clear = new Runnable() {
+    private Runnable clear = new Runnable() {
         @Override
         public void run() {
             ((TextView) findViewById(R.id.report)).setText("");

@@ -56,16 +56,12 @@ class CContent2 extends CContent implements _CContentListener {
     @Override
     public void onError(__CContent c, View v) {
         //Log.wtf(__CLASSNAME__, getMethodName() + ":" + v);
-        //next(); //test
-        //rand(); //test
         if (mCOnListener != null) mCOnListener.onError(c, v);
     }
 
     @Override
     public void onCompletion(__CContent c, View v) {
         //Log.wtf(__CLASSNAME__, getMethodName() + ":" + v);
-        //next(); //test
-        //rand(); //test
         if (mCOnListener != null) mCOnListener.onCompletion(c, v);
     }
 

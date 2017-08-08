@@ -9,7 +9,7 @@ import com.hanks.htextview.base.HTextView;
  * Created by isyuun on 8/2/2017.
  */
 @Deprecated
-public class HTextView2 extends HTextView {
+final public class HTextView2 extends HTextView {
     public HTextView2(Context context) {
         super(context);
     }

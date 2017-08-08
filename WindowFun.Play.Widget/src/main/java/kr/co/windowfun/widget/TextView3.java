@@ -29,12 +29,6 @@ class TextView3 extends TextView2 {
         super(context, attrs, defStyleAttr);
     }
 
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        init();
-    }
-
     private String font = "";
     private boolean line = false;
     private text_valign valign = text_valign.top;
@@ -42,33 +36,19 @@ class TextView3 extends TextView2 {
     private int color = ContextCompat.getColor(getContext(), android.R.color.white);
     private int backcolor = ContextCompat.getColor(getContext(), R.color.text_test_background);
 
-    Runnable init = new Runnable() {
-        @Override
-        public void run() {
-            textView = (android.widget.TextView) findViewById(R.id.text_view);
-            textFont(TextView3.this.font);
-            textLine(TextView3.this.line);
-            textVAlign(TextView3.this.valign);
-            textSize(TextView3.this.size);
-            textColor(TextView3.this.color);
-            textBackColor(TextView3.this.backcolor);
-        }
-    };
-
-    private void init() {
-        if (isInEditMode()) return;
-        mHandler.removeCallbacks(init);
-        mHandler.postDelayed(init, 0);
-    }
-
     @Override
-    public void open(final Uri uri) {
-        super.open(uri);
-        textFont(this.font);
-        textLine(this.line);
-        textVAlign(this.valign);
-        textSize(this.size);
-        textBackColor(this.backcolor);
+    public void text(String text, String type) {
+        super.text(text, type);
+        try {
+            textFont(this.font);
+            textLine(this.line);
+            textVAlign(this.valign);
+            textSize(this.size);
+            textColor(TextView3.this.color);
+            textBackColor(this.backcolor);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

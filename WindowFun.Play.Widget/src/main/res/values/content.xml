@@ -4,7 +4,6 @@
     <style name="contents_view">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <!--<item name="android:layout_above">@+id/banner</item>-->
         <item name="android:layout_centerVertical">true</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:clickable">true</item>

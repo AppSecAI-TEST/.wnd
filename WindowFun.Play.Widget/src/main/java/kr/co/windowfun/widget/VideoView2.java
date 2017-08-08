@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import kr.co.windowfun._DEF;
@@ -94,17 +95,11 @@ class VideoView2 extends VideoView implements _CContent, _DEF {
         return this;
     }
 
-    ///**
-    // * isyoon:쓰지마!!!
-    // */
-    //@Deprecated
-    //public void setVideoURI(Uri uri) {/*super.setVideoURI(uri)*/ }
-    //
-    ///**
-    // * isyoon:쓰지마!!!
-    // */
-    //@Deprecated
-    //public void start() { /*super.start()*/ }
+    /**
+     * isyoon:쓰지마!!!
+     */
+    @Deprecated
+    final public void setVideoURI(Uri uri) {/*super.setVideoURI(uri)*/ }
 
     boolean resize = true;
     //public VideoView2 resize(boolean resize) {
@@ -141,6 +136,12 @@ class VideoView2 extends VideoView implements _CContent, _DEF {
         return this;
     }
 
+    @Override
+    public void path(String path) {
+        this.path = new ArrayList<>(Arrays.asList(new String[]{path}));
+        open();
+    }
+
     MediaPlayer mp;
 
     Uri uri;
@@ -163,7 +164,8 @@ class VideoView2 extends VideoView implements _CContent, _DEF {
                 //if (mOnErrorListener != null) {
                 //    mOnErrorListener.onError(mp, what, extra);
                 //}
-                if (mCOnListener != null) mCOnListener.onError((__CContent) getParent(), VideoView2.this);
+                if (mCOnListener != null)
+                    mCOnListener.onError((__CContent) getParent(), VideoView2.this);
                 return true;
             }
         });
@@ -177,7 +179,8 @@ class VideoView2 extends VideoView implements _CContent, _DEF {
                 //if (mOnPreparedListener != null) {
                 //    mOnPreparedListener.onPrepared(mp);
                 //}
-                if (mCOnListener != null) mCOnListener.onPrepared((__CContent) getParent(), VideoView2.this);
+                if (mCOnListener != null)
+                    mCOnListener.onPrepared((__CContent) getParent(), VideoView2.this);
             }
         });
         super.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -187,12 +190,13 @@ class VideoView2 extends VideoView implements _CContent, _DEF {
                 //if (mOnCompletionListener != null) {
                 //    mOnCompletionListener.onCompletion(mp);
                 //}
-                if (mCOnListener != null) mCOnListener.onCompletion((__CContent) getParent(), VideoView2.this);
+                if (mCOnListener != null)
+                    mCOnListener.onCompletion((__CContent) getParent(), VideoView2.this);
             }
         });
     }
 
-    private  Runnable prepare = new Runnable() {
+    private Runnable prepare = new Runnable() {
         @Override
         public void run() {
             setDimension(getWidth(), getHeight());
@@ -221,7 +225,7 @@ class VideoView2 extends VideoView implements _CContent, _DEF {
     }
 
     @Override
-    public void start() {
+    final public void start() {
         super.start();
     }
 
@@ -240,7 +244,8 @@ class VideoView2 extends VideoView implements _CContent, _DEF {
     private Runnable call = new Runnable() {
         @Override
         public void run() {
-            if (mCOnListener != null) mCOnListener.onCompletion((__CContent) getParent(), VideoView2.this);
+            if (mCOnListener != null)
+                mCOnListener.onCompletion((__CContent) getParent(), VideoView2.this);
         }
     };
 
@@ -371,5 +376,20 @@ class VideoView2 extends VideoView implements _CContent, _DEF {
     public void resume() {
         mHandler.removeCallbacks(resume);
         mHandler.postDelayed(resume, TIMER_OPEN_SHORT);
+    }
+
+    @Override
+    public void show() {
+        setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hide() {
+        setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void gone() {
+        setVisibility(View.GONE);
     }
 }

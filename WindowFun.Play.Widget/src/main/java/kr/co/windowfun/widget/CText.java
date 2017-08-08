@@ -19,7 +19,6 @@ import com.hanks.htextview.TyperTextView2;
 public enum CText {
     //"line|fade|typer|rainbow|scale|evaporate|fall"
     plane(android.widget.TextView.class),
-    //line(android.widget.TextView.class),
     line(LineTextView2.class),
     fade(FadeTextView2.class),
     typer(TyperTextView2.class),

@@ -7,7 +7,7 @@ import android.util.AttributeSet;
  * Created by isyuun on 8/1/2017.
  */
 @Deprecated
-public class MarqueeView2 extends MarqueeView {
+final public class MarqueeView2 extends MarqueeView {
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
 

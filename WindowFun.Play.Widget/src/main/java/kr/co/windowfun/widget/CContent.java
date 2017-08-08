@@ -19,6 +19,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import kr.co.windowfun._DEF;
@@ -79,66 +81,67 @@ class CContent extends RelativeLayout implements _CContent, _DEF, _ENUM, _JSON {
 
     private void showVideo() {
         //Log.w(__CLASSNAME__,getMethodName());
-        ((__VideoView) findViewById(R.id.video)).setVisibility(View.VISIBLE);
-        ((__ImageView) findViewById(R.id.image)).setVisibility(View.INVISIBLE);
-        ((__TextView) findViewById(R.id.text)).setVisibility(View.INVISIBLE);
-        ((__HtmlView) findViewById(R.id.html)).setVisibility(View.INVISIBLE);
+        ((__VideoView) findViewById(R.id.video)).show();
+        ((__ImageView) findViewById(R.id.image)).hide();
+        ((__TextView) findViewById(R.id.text)).hide();
+        ((__HtmlView) findViewById(R.id.html)).hide();
     }
 
     private void showImage() {
         //Log.w(__CLASSNAME__,getMethodName());
-        ((__VideoView) findViewById(R.id.video)).setVisibility(View.INVISIBLE);
-        ((__ImageView) findViewById(R.id.image)).setVisibility(View.VISIBLE);
-        ((__TextView) findViewById(R.id.text)).setVisibility(View.INVISIBLE);
-        ((__HtmlView) findViewById(R.id.html)).setVisibility(View.INVISIBLE);
+        ((__VideoView) findViewById(R.id.video)).hide();
+        ((__ImageView) findViewById(R.id.image)).show();
+        ((__TextView) findViewById(R.id.text)).hide();
+        ((__HtmlView) findViewById(R.id.html)).hide();
     }
 
     private void showText() {
         //Log.w(__CLASSNAME__,getMethodName());
-        ((__VideoView) findViewById(R.id.video)).setVisibility(View.INVISIBLE);
-        ((__ImageView) findViewById(R.id.image)).setVisibility(View.INVISIBLE);
-        ((__TextView) findViewById(R.id.text)).setVisibility(View.VISIBLE);
-        ((__HtmlView) findViewById(R.id.html)).setVisibility(View.INVISIBLE);
+        ((__VideoView) findViewById(R.id.video)).hide();
+        ((__ImageView) findViewById(R.id.image)).hide();
+        ((__TextView) findViewById(R.id.text)).show();
+        ((__HtmlView) findViewById(R.id.html)).hide();
     }
 
     private void showHtml() {
         //Log.w(__CLASSNAME__,getMethodName());
-        ((__VideoView) findViewById(R.id.video)).setVisibility(View.INVISIBLE);
-        ((__ImageView) findViewById(R.id.image)).setVisibility(View.INVISIBLE);
-        ((__TextView) findViewById(R.id.text)).setVisibility(View.INVISIBLE);
-        ((__HtmlView) findViewById(R.id.html)).setVisibility(View.VISIBLE);
+        ((__VideoView) findViewById(R.id.video)).hide();
+        ((__ImageView) findViewById(R.id.image)).hide();
+        ((__TextView) findViewById(R.id.text)).hide();
+        ((__HtmlView) findViewById(R.id.html)).show();
     }
 
     @Deprecated
     @Override
-    public void open(final Uri uri) {
+    final public void open(final Uri uri) {
     }
 
     @Deprecated
     @Override
-    public void play() {
+    final public void play() {
     }
 
     @Deprecated
     @Override
-    public void play(int length) {
+    final public void play(int length) {
     }
 
-    private void showBanner() {
-        mHandler.removeCallbacks(showBanner);
-        mHandler.postDelayed(showBanner, TIMER_OPEN_NORMAL);
+    private void showTexting() {
+        mHandler.removeCallbacks(showTexting);
+        mHandler.postDelayed(showTexting, TIMER_OPEN_NORMAL);
     }
 
-    private Runnable showBanner = new Runnable() {
+    private Runnable showTexting = new Runnable() {
         @Override
         public void run() {
-            _showBanner();
+            _showTexting();
         }
     };
 
     JSONObject2 item = null;
     String _type = null;
     String _text = null;
+    //text...
     /**
      * plane|line|fade|typer|rainbow|scale|evaporate|fall
      */
@@ -155,18 +158,17 @@ class CContent extends RelativeLayout implements _CContent, _DEF, _ENUM, _JSON {
     String _text_valign = text_valign.center.toString(); //default
     String _text_color = "#ffffffff"; //default
     String _text_backcolor = "#55ff00ff"; //default
+    //play...
     String _play_effect = null;
     String _play_length = null;
+    //file...
     String file_name = null;
 
     /**
-     * DON'T CALL DIRECT CALL [[USE]] {@link #showBanner()}
+     * DON'T CALL DIRECT CALL [[USE]] {@link #showTexting()}
      */
-    protected void _showBanner() {
+    protected void _showTexting() {
         if (result_c_type.text == result_c_type.valueOf(_type)) return;
-
-        Log.wtf(__CLASSNAME__, "_showBanner()");
-
         try {
             _text = getResources().getString(R.string.text_test_text); //test
             _text_effect = text_effect.rainbow.toString(); //test
@@ -178,7 +180,7 @@ class CContent extends RelativeLayout implements _CContent, _DEF, _ENUM, _JSON {
                 //Log.wtf(__CLASSNAME__, getMethodName() + ":" + _type + ":" + _text + ":" + _text_effect + ":" + _play_effect);
                 text();
                 //start
-                ((__TextView) findViewById(R.id.text)).setVisibility(View.VISIBLE);
+                ((__TextView) findViewById(R.id.text)).show();
                 ((__TextView) findViewById(R.id.text)).play(-1);
             }
         } catch (Exception e) {
@@ -234,16 +236,39 @@ class CContent extends RelativeLayout implements _CContent, _DEF, _ENUM, _JSON {
 
     private void text() {
         try {
-            ((__TextView) findViewById(R.id.text)).open(Uri.parse(_text), _text_effect);
+            ((__TextView) findViewById(R.id.text)).text(_text, _text_effect);
             ((__TextView) findViewById(R.id.text)).textFont(_text_font);
             ((__TextView) findViewById(R.id.text)).textLine(Boolean.parseBoolean(_text_line));
-            ((__TextView) findViewById(R.id.text)).textSize(_ENUM.text_size.valueOf(_text_size));
-            ((__TextView) findViewById(R.id.text)).textVAlign(_ENUM.text_valign.valueOf(_text_valign));
+            ((__TextView) findViewById(R.id.text)).textSize(text_size.valueOf(_text_size));
+            ((__TextView) findViewById(R.id.text)).textVAlign(text_valign.valueOf(_text_valign));
             ((__TextView) findViewById(R.id.text)).textColor(Color.parseColor(_text_color));
             ((__TextView) findViewById(R.id.text)).textBackColor(Color.parseColor(_text_backcolor));
         } catch (IllegalArgumentException e) {
             Log.wtf(__CLASSNAME__, getMethodName() + Log.getStackTraceString(e));
         }
+    }
+
+    private int index;
+
+    private ArrayList<String> path = new ArrayList<>();
+
+    public CContent path(ArrayList<String> path) {
+        this.path = path;
+        this.index = 0;
+        return this;
+    }
+
+    @Override
+    public void path(String path) {
+        this.path = new ArrayList<>(Arrays.asList(new String[]{path}));
+    }
+
+    public void setContents(JSONArray contents) {
+        //Log.wtf(__CLASSNAME__, getMethodName() + "\n[contents]\n" + toString(contents, 2));
+        this.contents = contents;
+        index = 0;
+        //start();
+        //rand(); //test
     }
 
     Uri uri;
@@ -263,11 +288,11 @@ class CContent extends RelativeLayout implements _CContent, _DEF, _ENUM, _JSON {
         String log = getMethodName() + ":" + _type + ":" + _text + ":" + _text_effect + ":" + _play_effect; //test
         if (result_c_type.text == result_c_type.valueOf(_type)) {
             ((android.widget.TextView) findViewById(R.id.label)).setText(_type + ":" + _text_effect + ":" + _play_effect + ":" + _text); //test
-            log +=  ":" + _text;
+            log += ":" + _text;
             this.uri = Uri.parse(this._text);
         } else {
             ((android.widget.TextView) findViewById(R.id.label)).setText(_type + ":" + _text_effect + ":" + _play_effect + ":" + Uri.decode(path)); //test
-            log +=  ":" + Uri.decode(path);
+            log += ":" + Uri.decode(path);
             this.uri = Uri.parse(path);
         }
         Log.wtf(__CLASSNAME__, log); //test
@@ -299,7 +324,8 @@ class CContent extends RelativeLayout implements _CContent, _DEF, _ENUM, _JSON {
         }
         //banner
         _text = getResources().getString(R.string.text_test_text); //test
-        if (result_c_type.text != result_c_type.valueOf(_type) && !TextUtils.isEmpty(_text)) showBanner();
+        if (result_c_type.text != result_c_type.valueOf(_type) && !TextUtils.isEmpty(_text))
+            showTexting();
         //_play_effect
         YoYo.with(Techniques.valueOf(_play_effect))
                 .duration(1000)
@@ -442,6 +468,33 @@ class CContent extends RelativeLayout implements _CContent, _DEF, _ENUM, _JSON {
     public void resume() {
     }
 
+    @Override
+    public void show() {
+        setVisibility(View.VISIBLE);
+        ((__TextView) findViewById(R.id.text)).show();
+        ((__ImageView) findViewById(R.id.image)).show();
+        ((__VideoView) findViewById(R.id.video)).show();
+        ((__HtmlView) findViewById(R.id.html)).show();
+    }
+
+    @Override
+    public void hide() {
+        setVisibility(View.INVISIBLE);
+        ((__TextView) findViewById(R.id.text)).hide();
+        ((__ImageView) findViewById(R.id.image)).hide();
+        ((__VideoView) findViewById(R.id.video)).hide();
+        ((__HtmlView) findViewById(R.id.html)).hide();
+    }
+
+    @Override
+    public void gone() {
+        setVisibility(View.GONE);
+        ((__TextView) findViewById(R.id.text)).hide();
+        ((__ImageView) findViewById(R.id.image)).hide();
+        ((__VideoView) findViewById(R.id.video)).hide();
+        ((__HtmlView) findViewById(R.id.html)).hide();
+    }
+
     protected String toString(JSONObject response, int indentSpaces) {
         try {
             return response.toString(indentSpaces);
@@ -460,13 +513,4 @@ class CContent extends RelativeLayout implements _CContent, _DEF, _ENUM, _JSON {
         return null;
     }
 
-    int index = -1;
-
-    public void setContents(JSONArray contents) {
-        //Log.wtf(__CLASSNAME__, getMethodName() + "\n[contents]\n" + toString(contents, 2));
-        this.contents = contents;
-        index = 0;
-        //start();
-        //rand(); //test
-    }
 }

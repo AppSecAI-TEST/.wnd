@@ -26,12 +26,7 @@
     <kr.co.windowfun.widget.__TextView
         android:id="@+id/text"
         style="@style/contents_text"
-        android:visibility="visible">
-
-        <com.hanks.htextview.rainbow.RainbowTextView
-            android:id="@+id/text_view"
-            style="@style/text_view"/>
-    </kr.co.windowfun.widget.__TextView>
+        android:visibility="visible"/>
 
     <android.widget.TextView
         android:id="@+id/label"
