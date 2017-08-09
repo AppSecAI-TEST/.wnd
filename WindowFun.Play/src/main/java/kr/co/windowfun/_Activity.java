@@ -31,7 +31,6 @@ class _Activity extends Activity2 {
     public void onBackPressed() {
         Log.e(__CLASSNAME__, getMethodName());
         super.onBackPressed();
-        finish();
     }
 
     @Override

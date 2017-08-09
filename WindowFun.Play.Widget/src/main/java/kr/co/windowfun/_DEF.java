@@ -36,7 +36,7 @@ public interface _DEF {
     int TIMER_OPEN_LONG = 1000;
     int TIMER_IMG_SHORT = 3000;
     int TIMER_IMG_LONG = 5000;
-    int TIMER_ANI_SHORT = 1000;
+    int TIMER_ANI_SHORT = 5000;
     int TIMER_ANI_NORMAL = 10000;
     int TIMER_ANI_LONG = 30000;
 }

@@ -174,7 +174,7 @@ class CContent extends RelativeLayout implements _CContent, _DEF, _ENUM, _JSON {
     int _text_color = Color.parseColor("#ffffffff"); //default
     int _text_backcolor = Color.parseColor("#55ff00ff"); //default
     //play...
-    String _play_effect = null;
+    String _play_effect = Techniques.FlipInX.toString();
     String _play_length = null;
     //file...
     String file_name = null;

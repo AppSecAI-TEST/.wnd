@@ -1,16 +1,23 @@
 package kr.co.windowfun.widget;
 
+import android.animation.Animator;
 import android.content.Context;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 import org.json.JSONArray;
 
+import kr.co.windowfun._DEF;
 import kr.co.windowfun._ENUM;
 import kr.co.windowfun._JSON;
 import kr.co.windowfun.api.JSONObject2;
@@ -19,7 +26,7 @@ import kr.co.windowfun.api.JSONObject2;
  * Created by isyuun on 2017-08-08.
  */
 
-public class _BannerAdpater extends RecyclerView.Adapter<_BannerAdpater.ViewHolder> implements _ENUM, _JSON {
+public class _BannerAdpater extends RecyclerView.Adapter<_BannerAdpater.ViewHolder> implements _DEF, _ENUM, _JSON {
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
 
@@ -96,6 +103,11 @@ public class _BannerAdpater extends RecyclerView.Adapter<_BannerAdpater.ViewHold
     String _text_valign = text_valign.center.toString(); //default
     int _text_color = Color.parseColor("#ff000000"); //default
     int _text_backcolor = Color.parseColor("#55ff00ff"); //default
+    //play...
+    String _play_effect = Techniques.FlipInX.toString();
+    String _play_length = null;
+    //file...
+    String file_name = null;
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
@@ -146,6 +158,32 @@ public class _BannerAdpater extends RecyclerView.Adapter<_BannerAdpater.ViewHold
             Log.wtf(__CLASSNAME__, getMethodName() + Log.getStackTraceString(e));
             //e.printStackTrace();
         }
+        try {
+            //play_...
+            _play_effect = !item.isNullString(result_c.play_effect) ? item.getString(result_c.play_effect) : _play_effect;
+            _play_length = !item.isNullString(result_c.play_length) ? item.getString(result_c.play_length) : _play_length;
+        } catch (Exception e) {
+            Log.wtf(__CLASSNAME__, getMethodName() + Log.getStackTraceString(e));
+            //e.printStackTrace();
+        }
+        try {
+            //play_...
+            _play_effect = !item.isNullString(result_c.play_effect) ? item.getString(result_c.play_effect) : _play_effect;
+            _play_length = !item.isNullString(result_c.play_length) ? item.getString(result_c.play_length) : _play_length;
+        } catch (Exception e) {
+            Log.wtf(__CLASSNAME__, getMethodName() + Log.getStackTraceString(e));
+            //e.printStackTrace();
+        }
+        //try {
+        //    //file_name
+        //    file_name = !item.isNullString(result_c.file_name) ? item.getString(result_c.file_name) : file_name;
+        //    //uri
+        //    Uri uri = Uri.parse(file_name);
+        //    //Log.w(__CLASSNAME__, getMethodName() + ":" + index + "->" + _type + ":" + _text + ":" + file_name + ":" + uri);
+        //} catch (Exception e) {
+        //    Log.wtf(__CLASSNAME__, getMethodName() + Log.getStackTraceString(e));
+        //    //e.printStackTrace();
+        //}
         //icon
         holder.icon.path(icon.toString());
         //title
@@ -177,6 +215,16 @@ public class _BannerAdpater extends RecyclerView.Adapter<_BannerAdpater.ViewHold
             holder.banner_text.textBackColor(_text_backcolor);
             holder.banner_text.play();
         }
+        YoYo.with(Techniques.valueOf(_play_effect))
+                .duration(1000)
+                .repeat(TIMER_ANI_LONG)
+                .onEnd(new YoYo.AnimatorCallback() {
+                    @Override
+                    public void call(Animator animator) {
+                        //Log.wtf(__CLASSNAME__, "YoYo.onEnd()" + ":" + _type + ":" + _text_effect + ":" + _play_effect + ":" + uri + ":" + path);
+                    }
+                })
+                .playOn(holder.text);
     }
 
     @Override

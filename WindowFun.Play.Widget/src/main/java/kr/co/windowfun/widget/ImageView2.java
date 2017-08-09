@@ -33,6 +33,11 @@ class ImageView2 extends ImageView implements _CContent, _DEF {
     }
 
     @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+    }
+
+    @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         stop();
@@ -87,6 +92,7 @@ class ImageView2 extends ImageView implements _CContent, _DEF {
 
     @Override
     public void open(final Uri uri) {
+        //if (!ViewCompat.isAttachedToWindow(this)) return;
         this.uri = uri;
         //Log.w(__CLASSNAME__, getMethodName() + ":" + index + "[" + "w:" + getMeasuredWidth() + ", h:" + getMeasuredHeight() + "]" + uri);
         try {
@@ -117,6 +123,7 @@ class ImageView2 extends ImageView implements _CContent, _DEF {
                     .load(model)
                     .into(this);
         } catch (Exception e) {
+            //Log.wtf(__CLASSNAME__, getMethodName() + ":" + Log.getStackTraceString(e));
             e.printStackTrace();
         }
     }
