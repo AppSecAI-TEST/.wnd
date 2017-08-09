@@ -107,10 +107,10 @@ class ImageView2 extends ImageView implements _CContent, _DEF {
             //bumptech/glide:GlideApp
             Object model;
             if (new File(uri.getPath()).exists()) {
-                Log.i(__CLASSNAME__, getMethodName() + "[PATH]" + index + "(" + "w:" + w + ", h:" + h + ")" + uri);
+                Log.i(__CLASSNAME__, getMethodName() + ":" + "[PATH]" + index + "(" + "w:" + w + ", h:" + h + ")" + uri);
                 model = new File(uri.getPath());
             } else {
-                Log.i(__CLASSNAME__, getMethodName() + "[HTTP]" + index + "(" + "w:" + w + ", h:" + h + ")" + uri);
+                Log.i(__CLASSNAME__, getMethodName() + ":" + "[HTTP]" + index + "(" + "w:" + w + ", h:" + h + ")" + uri);
                 model = uri;
             }
             GlideApp.with(getContext())
