@@ -77,8 +77,7 @@ class home2 extends home implements __API {
             findViewById(R.id.send).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (getApp().isLogin()) send();
-                    else login();
+                    _send();
                 }
             });
 
@@ -95,11 +94,30 @@ class home2 extends home implements __API {
                     reset();
                 }
             });
+
+            findViewById(R.id.image).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    _send();
+                }
+            });
+
+            findViewById(R.id.error).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    findViewById(R.id.banner_long).setVisibility(View.VISIBLE);
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         init();
+    }
+
+    private void _send() {
+        if (getApp().isLogin()) send();
+        else login();
     }
 
     private Runnable reset = new Runnable() {

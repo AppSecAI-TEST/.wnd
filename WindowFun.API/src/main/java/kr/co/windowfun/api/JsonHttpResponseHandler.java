@@ -17,13 +17,14 @@ public class JsonHttpResponseHandler extends com.loopj.android.http.JsonHttpResp
         for (i = 0; i < ste.length; i++) {
             item = ste[i];
             if (item.getMethodName().equalsIgnoreCase("getMethodName")) continue;
+            if (item.getMethodName().contains("access$")) continue;
             //Log.v(_CLASSNAME_.replaceAll(reg, ""), item.getClassName().replaceAll(reg, "") + ":" + item.getMethodName() + "(" + item.getFileName() + ":" + item.getLineNumber() + ")");
             if (item.getClassName().replaceAll(reg, "").contains(_CLASSNAME_.replaceAll(reg, ""))) {
                 //Log.i(_CLASSNAME_, item.getClassName() + ":" + item.getMethodName() + "(" + item.getFileName() + ":" + item.getLineNumber() + ")");
                 break;
             }
         }
-        return item.toString();
+        return "" + item;
     }
 
 
