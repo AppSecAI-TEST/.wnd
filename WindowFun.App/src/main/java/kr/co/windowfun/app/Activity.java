@@ -1,16 +1,7 @@
 package kr.co.windowfun.app;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
 
 /**
  * 기본액티비티
@@ -28,18 +19,21 @@ class Activity extends android.app.Activity {
     }
 
     protected String getMethodName() {
-        ////Log.wtf(__CLASSNAME__, "[[getMethodName()]]");
+        //Log.wtf(__CLASSNAME__, "[[getMethodName()]]");
         final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
-        int idx = 0;
-        for (int i = 0; i < ste.length; i++) {
-            StackTraceElement item = ste[i];
-            ////Log.v(_CLASSNAME_, "" + item);
-            if (item.getClassName().contains(_CLASSNAME_)) {
-                idx = i;
-                Log.v(__CLASSNAME__, "" + item);
+        String reg = "[^A-Za-z0-9.]";
+        int i;
+        StackTraceElement item = null;
+        for (i = 0; i < ste.length; i++) {
+            item = ste[i];
+            if (item.getMethodName().equalsIgnoreCase("getMethodName")) continue;
+            //Log.v(_CLASSNAME_.replaceAll(reg, ""), item.getClassName().replaceAll(reg, "") + ":" + item.getMethodName() + "(" + item.getFileName() + ":" + item.getLineNumber() + ")");
+            if (item.getClassName().replaceAll(reg, "").contains(_CLASSNAME_.replaceAll(reg, ""))) {
+                //Log.i(_CLASSNAME_, item.getClassName() + ":" + item.getMethodName() + "(" + item.getFileName() + ":" + item.getLineNumber() + ")");
+                break;
             }
         }
-        return ste[idx].toString();
+        return item.toString();
     }
 
     protected boolean isACTIONMAIN() {

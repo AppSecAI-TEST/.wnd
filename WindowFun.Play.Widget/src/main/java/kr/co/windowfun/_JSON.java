@@ -57,7 +57,7 @@ public interface _JSON {
     }
 
     //JSON:result_banner
-    interface  result_banner {
+    interface result_banner {
         //icon: "http://…",
         String icon = "icon";
         //type: "html|video|...",

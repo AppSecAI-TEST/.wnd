@@ -95,16 +95,16 @@ class __main2 extends __main implements _CContentListener {
 
     @Override
     public void onPrepared(__CContent c, View v) {
-        Log.e(__CLASSNAME__, "onPrepared()" + ":" + getResourceEntryName(c.getId()) + ":" + getResourceEntryName(v.getId()));
+        Log.e(__CLASSNAME__, getMethodName()/* + "onPrepared()"*/ + ":" + getResourceEntryName(c.getId()) + ":" + getResourceEntryName(v.getId()));
         //show(c.getId());
     }
 
     @Override
     public void onError(__CContent c, View v) {
-        Log.e(__CLASSNAME__, "onError()" + ":" + getResourceEntryName(c.getId()) + ":" + getResourceEntryName(v.getId()));
+        Log.e(__CLASSNAME__, getMethodName()/* + "onError()"*/ + ":" + getResourceEntryName(c.getId()) + ":" + getResourceEntryName(v.getId()));
         int id = c.getId();
         if (id == R.id.c1) {
-            Log.wtf(__CLASSNAME__, "onError()" + ":" + getResourceEntryName(c.getId()) + ":" + getResourceEntryName(v.getId()));
+            Log.wtf(__CLASSNAME__, getMethodName()/* + "onError()"*/ + ":" + getResourceEntryName(c.getId()) + ":" + getResourceEntryName(v.getId()));
             restart();
         } else {
             //c.gone();
@@ -115,7 +115,7 @@ class __main2 extends __main implements _CContentListener {
 
     @Override
     public void onCompletion(__CContent c, View v) {
-        Log.e(__CLASSNAME__, "onCompletion()" + ":" + getResourceEntryName(c.getId()) + ":" + getResourceEntryName(v.getId()));
+        Log.e(__CLASSNAME__, getMethodName()/* + "onCompletion()"*/ + ":" + getResourceEntryName(c.getId()) + ":" + getResourceEntryName(v.getId()));
         ((__CContent) findViewById(c.getId())).next();
     }
 }

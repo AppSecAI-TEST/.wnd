@@ -119,8 +119,7 @@ public interface _ENUM {
         small(R.dimen.text_size_small),
         xsmall(R.dimen.text_size_xsmall),
         xxsmall(R.dimen.text_size_xxsmall),
-        xxxsmall(R.dimen.text_size_xxxsmall),
-        ;
+        xxxsmall(R.dimen.text_size_xxxsmall),;
         private final int value;
 
         text_size(int value) {

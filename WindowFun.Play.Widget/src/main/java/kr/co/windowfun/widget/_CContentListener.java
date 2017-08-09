@@ -9,6 +9,8 @@ import android.view.View;
 
 public interface _CContentListener {
     void onPrepared(__CContent c, View v);
+
     void onError(__CContent c, View v);
+
     void onCompletion(__CContent c, View v);
 }

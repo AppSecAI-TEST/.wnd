@@ -9,7 +9,7 @@
                 android:centerY="0.75"
                 android:endColor="#ff747674"
                 android:startColor="#ff9d9e9d"
-            />
+                />
         </shape>
     </item>
 
@@ -23,13 +23,13 @@
                     android:centerY="0.75"
                     android:endColor="#a0ffcb00"
                     android:startColor="#80ffd300"
-                />
+                    />
             </shape>
         </clip>
     </item>
     <item
         android:id="@android:id/progress"
-    >
+        >
         <clip>
             <shape>
                 <corners

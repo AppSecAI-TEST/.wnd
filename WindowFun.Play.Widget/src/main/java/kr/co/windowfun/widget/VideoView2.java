@@ -159,8 +159,8 @@ class VideoView2 extends VideoView implements _CContent, _DEF {
         super.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
-                Log.e(__CLASSNAME__, "MediaPlayer.OnError" + "(" + what + ", " + extra + ")" + ":" + index + "->" + Uri.decode(uri.toString()));
-                ////Toast.makeText(getContext(), getMethodName() + "(" + what + "," + extra + ")" + extra, Toast.LENGTH_SHORT).show();
+                Log.e(__CLASSNAME__, getMethodName()/* + "MediaPlayer.OnError"*/ + "[" + what + ", " + extra + "]" + ":" + index + "->" + Uri.decode(uri.toString()));
+                ////Toast.makeText(getContext(), getMethodName() + "[" + what + "," + extra + "]" + extra, Toast.LENGTH_SHORT).show();
                 //if (mOnErrorListener != null) {
                 //    mOnErrorListener.onError(mp, what, extra);
                 //}
@@ -172,7 +172,7 @@ class VideoView2 extends VideoView implements _CContent, _DEF {
         super.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                Log.e(__CLASSNAME__, "MediaPlayer.onPrepared()" + "(" + "w:" + getWidth() + ",h:" + getHeight() + ")" + ":" + index + "->" + Uri.decode(uri.toString()));
+                Log.e(__CLASSNAME__, getMethodName()/* + "MediaPlayer.onPrepared()"*/ + "[" + "w:" + getWidth() + ",h:" + getHeight() + "]" + ":" + index + "->" + Uri.decode(uri.toString()));
                 setDimension(getWidth(), getHeight());
                 VideoView2.this.mp = mp;
                 mute(mute);
@@ -186,7 +186,7 @@ class VideoView2 extends VideoView implements _CContent, _DEF {
         super.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                Log.e(__CLASSNAME__, "MediaPlayer.onCompletion()" + "(" + "w:" + getWidth() + ",h:" + getHeight() + ")" + ":" + index + "->" + Uri.decode(uri.toString()));
+                Log.e(__CLASSNAME__, getMethodName()/* + "MediaPlayer.onCompletion()"*/ + "[" + "w:" + getWidth() + ",h:" + getHeight() + "]" + ":" + index + "->" + Uri.decode(uri.toString()));
                 //if (mOnCompletionListener != null) {
                 //    mOnCompletionListener.onCompletion(mp);
                 //}

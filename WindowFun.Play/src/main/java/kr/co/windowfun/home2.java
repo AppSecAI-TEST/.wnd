@@ -340,7 +340,7 @@ class home2 extends home implements __API {
                 open();
             }
 
-            Log.wtf(__CLASSNAME__, getMethodName() + "[DOWN]" + "[!!!START!!!]" + "(" + count + "/" + downs.size() + "/" + adds.size() + ")");
+            Log.wtf(__CLASSNAME__, getMethodName() + "[DOWN]" + "[!!!START!!!]" + "[" + count + "/" + downs.size() + "/" + adds.size() + "]");
         }
     };
 
@@ -361,7 +361,7 @@ class home2 extends home implements __API {
     };
 
     private void complete() {
-        Log.wtf(__CLASSNAME__, getMethodName() + "[DOWN]" + "[!!!END!!!]" + "(" + count + "/" + downs.size() + "/" + adds.size() + ")");
+        Log.wtf(__CLASSNAME__, getMethodName() + "[DOWN]" + "[!!!END!!!]" + "[" + count + "/" + downs.size() + "/" + adds.size() + "]");
         count = 0;
         adds.clear();
         downs.clear();
@@ -422,11 +422,11 @@ class home2 extends home implements __API {
                 //label
                 String text = "다운중...";
                 text += "\t";
-                text += "(" + count + "/" + downs.size() + "건" + ")";
+                text += "[" + count + "/" + downs.size() + "건" + "]";
                 text += "\t";
-                //text += "(" + (int) ((float) bytesWritten / (float) totalSize * PROGRESS_PER) + "/" + (int) ((float) totalSize / (float) totalSize * PROGRESS_PER) + "%" + ")";
+                //text += "[" + (int) ((float) bytesWritten / (float) totalSize * PROGRESS_PER) + "/" + (int) ((float) totalSize / (float) totalSize * PROGRESS_PER) + "%" + "]";
                 //text += "\t";
-                text += "(" + (int) ((float) bytes / (float) totalSizes * PROGRESS_PER) + "/" + (int) ((float) totalSizes / (float) totalSizes * PROGRESS_PER) + "%" + ")";
+                text += "[" + (int) ((float) bytes / (float) totalSizes * PROGRESS_PER) + "/" + (int) ((float) totalSizes / (float) totalSizes * PROGRESS_PER) + "%" + "]";
                 text += "\t";
                 //text += Uri.decode(src);
                 //text += "\t";

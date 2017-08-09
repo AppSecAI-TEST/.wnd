@@ -34,13 +34,12 @@ class BannerView extends RecyclerView implements _DEF {
     }
 
     /**
-     *
      * @param SPEED Change this value (default=25f)
      */
     public void setLayoutManager(final float SPEED) {
         RecyclerView.LayoutManager LayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false) {
             @Override
-            public void smoothScrollToPosition(RecyclerView recyclerView,RecyclerView.State state, int position) {
+            public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state, int position) {
                 LinearSmoothScroller smoothScroller = new LinearSmoothScroller(context) {
                     @Override
                     protected float calculateSpeedPerPixel(DisplayMetrics displayMetrics) {

@@ -1,9 +1,5 @@
 package kr.co.windowfun;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSmoothScroller;
-import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.view.View;
 
 import kr.co.windowfun.api.JSONObject2;
@@ -51,7 +47,7 @@ class __main4 extends __main3 {
         findViewById(id).setVisibility(View.VISIBLE);
 
         //banner start
-        __BannerView banner  = (__BannerView) findViewById(id);
+        __BannerView banner = (__BannerView) findViewById(id);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView

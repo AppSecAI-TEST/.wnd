@@ -8,7 +8,7 @@ import android.util.AttributeSet;
  * Created by isyuun on 2017-08-08.
  */
 
-public class __BannerView extends BannerView{
+public class __BannerView extends BannerView {
     public __BannerView(Context context) {
         super(context);
     }

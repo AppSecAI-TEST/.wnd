@@ -88,7 +88,7 @@ class ImageView2 extends ImageView implements _CContent, _DEF {
     @Override
     public void open(final Uri uri) {
         this.uri = uri;
-        //Log.w(__CLASSNAME__, getMethodName() + ":" + index + "(" + "w:" + getMeasuredWidth() + ", h:" + getMeasuredHeight() + ")" + uri);
+        //Log.w(__CLASSNAME__, getMethodName() + ":" + index + "[" + "w:" + getMeasuredWidth() + ", h:" + getMeasuredHeight() + "]" + uri);
         try {
             int w = getMeasuredWidth();
             int h = getMeasuredHeight();
@@ -107,12 +107,11 @@ class ImageView2 extends ImageView implements _CContent, _DEF {
             //bumptech/glide:GlideApp
             Object model;
             if (new File(uri.getPath()).exists()) {
-                Log.i(__CLASSNAME__, getMethodName() + ":" + "[PATH]" + index + "(" + "w:" + w + ", h:" + h + ")" + uri);
                 model = new File(uri.getPath());
             } else {
-                Log.i(__CLASSNAME__, getMethodName() + ":" + "[HTTP]" + index + "(" + "w:" + w + ", h:" + h + ")" + uri);
                 model = uri;
             }
+            Log.v(__CLASSNAME__, getMethodName() + ":" + index + "[" + uri.getScheme() + "]" + "[" + "w:" + w + ", h:" + h + "]" + uri);
             GlideApp.with(getContext())
                     .applyDefaultRequestOptions(options)
                     .load(model)
@@ -127,7 +126,7 @@ class ImageView2 extends ImageView implements _CContent, _DEF {
         try {
             if (index > -1 && index < path.size()) {
                 Uri uri = Uri.parse(path.get(index));
-                Log.i(__CLASSNAME__, getMethodName() + ":" + index + "->" + uri);
+                //Log.i(__CLASSNAME__, getMethodName() + ":" + index + "->" + uri);
                 open(uri);
             } else {
                 setVisibility(View.INVISIBLE);
@@ -162,7 +161,8 @@ class ImageView2 extends ImageView implements _CContent, _DEF {
     private Runnable complete = new Runnable() {
         @Override
         public void run() {
-            if (mCOnListener != null) mCOnListener.onCompletion((__CContent) getParent(), ImageView2.this);
+            if (mCOnListener != null)
+                mCOnListener.onCompletion((__CContent) getParent(), ImageView2.this);
         }
     };
 

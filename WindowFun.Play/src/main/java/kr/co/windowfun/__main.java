@@ -10,9 +10,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -25,8 +22,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import kr.co.windowfun.widget._CContentListener;
-import kr.co.windowfun.widget.__CContent;
 import kr.co.windowfun.widget.__ImageView;
 import kr.co.windowfun.widget.__TextView;
 import kr.co.windowfun.widget.__VideoView;

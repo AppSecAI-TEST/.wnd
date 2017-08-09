@@ -9,8 +9,8 @@ public interface __API extends _DEF {
     String URI_HTTPS = "https";
     String URI_1COLON = ":";
     String URI_2SLASH = "//";
-    String URI_SCHEME_HTTP = URI_HTTP + URI_1COLON + URI_2SLASH ;
-    String URI_SCHEME_HTTPS = URI_HTTPS + URI_1COLON + URI_2SLASH ;
+    String URI_SCHEME_HTTP = URI_HTTP + URI_1COLON + URI_2SLASH;
+    String URI_SCHEME_HTTPS = URI_HTTPS + URI_1COLON + URI_2SLASH;
     String API_HOST = "windowfun.co.kr";
     String API_PORT = "80";
     String API_PATH = "/Manager/API/";

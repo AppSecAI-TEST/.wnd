@@ -70,7 +70,7 @@ class HtmlView3 extends HtmlView2 implements View.OnTouchListener, View.OnClickL
         //float h = v.getHeight();
         float x = event.getX();
         //float y = event.getY();
-        //Log.wtf(__CLASSNAME__, getMethodName()/* + ":" + v + "\t"*/ + ":w:" + v.getWidth() + "\t" + "x:" + (int) x + "\t" + "(" + (int) (w * 1.0f / 3.0f) + " - " + (int) (w * 2.0f / 3.0f) + ")" + "\t" + event);
+        //Log.wtf(__CLASSNAME__, getMethodName()/* + ":" + v + "\t"*/ + ":w:" + v.getWidth() + "\t" + "x:" + (int) x + "\t" + "[" + (int) (w * 1.0f / 3.0f) + " - " + (int) (w * 2.0f / 3.0f) + "]" + "\t" + event);
         if (x < (w * 1.0f / 3.0f)) {
             prev();
         } else if (x > (w * 2.0f / 3.0f)) {
@@ -94,7 +94,7 @@ class HtmlView3 extends HtmlView2 implements View.OnTouchListener, View.OnClickL
         //float h = v.getHeight();
         float x = event != null ? event.getX() : w / 2.0f;
         //float y = event.getY();
-        //Log.wtf(__CLASSNAME__, getMethodName()/* + ":" + v + "\t"*/ + ":w:" + v.getWidth() + "\t" + "x:" + (int) x + "\t" + "(" + (int) (w * 1.0f / 3.0f) + " - " + (int) (w * 2.0f / 3.0f) + ")" + "\t" + event);
+        //Log.wtf(__CLASSNAME__, getMethodName()/* + ":" + v + "\t"*/ + ":w:" + v.getWidth() + "\t" + "x:" + (int) x + "\t" + "[" + (int) (w * 1.0f / 3.0f) + " - " + (int) (w * 2.0f / 3.0f) + "]" + "\t" + event);
         if (x < (w * 1.0f / 3.0f)) {
             prev();
         } else if (x > (w * 2.0f / 3.0f)) {
@@ -111,7 +111,7 @@ class HtmlView3 extends HtmlView2 implements View.OnTouchListener, View.OnClickL
         //float h = v.getHeight();
         float x = event != null ? event.getX() : w / 2.0f;
         //float y = event.getY();
-        //Log.wtf(__CLASSNAME__, getMethodName()/* + ":" + v + "\t"*/ + ":w:" + v.getWidth() + "\t" + "x:" + (int) x + "\t" + "(" + (int) (w * 1.0f / 3.0f) + " - " + (int) (w * 2.0f / 3.0f) + ")" + "\t" + event);
+        //Log.wtf(__CLASSNAME__, getMethodName()/* + ":" + v + "\t"*/ + ":w:" + v.getWidth() + "\t" + "x:" + (int) x + "\t" + "[" + (int) (w * 1.0f / 3.0f) + " - " + (int) (w * 2.0f / 3.0f) + "]" + "\t" + event);
         if (mOnLongClickListener != null) {
             mOnLongClickListener.onLongClick(v);
         }

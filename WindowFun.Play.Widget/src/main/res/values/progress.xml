@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--DreaminginCodeZH/MaterialProgressBar-->
 <resources>
+
     <style name="Widget.MaterialProgressBar.ProgressBar.Horizontal" parent="android:Widget.ProgressBar.Horizontal">
         <!--
         Disabled for correct behavior on Android 4.x, see
