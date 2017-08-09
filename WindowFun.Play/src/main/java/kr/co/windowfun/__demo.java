@@ -42,7 +42,7 @@ class __demo extends __main2 {
     public void onError(__CContent c, View v) {
         Log.wtf(__CLASSNAME__, "onError()" + ":" + getResourceEntryName(c.getId()) + ":" + getResourceEntryName(v.getId()));
         super.onError(c, v);
-        rand(); //test
+        //rand(); //test
     }
 
     @Override
