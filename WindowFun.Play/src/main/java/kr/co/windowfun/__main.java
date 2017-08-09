@@ -219,26 +219,6 @@ class __main extends _Activity {
         mHandler.postDelayed(hideMenu, TIMER_OPEN_SHORT);
     }
 
-    protected void _banner() {
-        WebView webView = (WebView) findViewById(R.id.banner_long);
-        webView.setWebViewClient(new WebViewClient()); // 이걸 안해주면 새창이 뜸
-        webView.getSettings().setJavaScriptEnabled(true);
-        //webView.setBackgroundColor(0);  투명
-
-        webView.clearCache(true);
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webView.loadUrl("http://windowfun.co.kr/type/index2.html");
-
-        //isyoon
-        webView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
-            }
-        });
-    }
-
     private void images() {
         for (final __ImageView i : images) {
             i.setOnTouchListener(new View.OnTouchListener() {

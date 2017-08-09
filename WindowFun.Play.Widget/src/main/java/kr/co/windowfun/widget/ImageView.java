@@ -2,6 +2,7 @@ package kr.co.windowfun.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 
 /**
  * Created by isyoon on 2017-07-19.
@@ -12,15 +13,15 @@ class ImageView extends android.support.v7.widget.AppCompatImageView implements 
     protected String __CLASSNAME__;
 
     protected String getMethodName() {
-        ////Log.wtf(__CLASSNAME__, "[[getMethodName()]]");
+        //Log.wtf(__CLASSNAME__, "[[getMethodName()]]");
         final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
         int idx = 0;
         for (int i = 0; i < ste.length; i++) {
             StackTraceElement item = ste[i];
-            ////Log.i(_CLASSNAME_, "" + item.getClassName());
+            Log.i(_CLASSNAME_, "" + item.getClassName());
             if (item.getClassName().contains(_CLASSNAME_)) {
                 idx = i;
-                //Log.v(__CLASSNAME__, "" + item);
+                Log.w(__CLASSNAME__, "" + item);
             }
         }
         return ste[idx].toString();
@@ -45,6 +46,7 @@ class ImageView extends android.support.v7.widget.AppCompatImageView implements 
     }
 
     _CContentListener mCOnListener;
+
     @Override
     public void setConListener(_CContentListener l) {
         mCOnListener = l;

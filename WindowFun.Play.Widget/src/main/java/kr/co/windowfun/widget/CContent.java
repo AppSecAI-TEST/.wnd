@@ -16,6 +16,7 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -37,7 +38,6 @@ import kr.co.windowfun.util.TextUtil;
 class CContent extends RelativeLayout implements _CContent, _DEF, _ENUM, _JSON {
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
-    private JSONArray contents;
 
     protected String getMethodName() {
         ////Log.wtf(__CLASSNAME__, "[[getMethodName()]]");
@@ -111,6 +111,16 @@ class CContent extends RelativeLayout implements _CContent, _DEF, _ENUM, _JSON {
         ((__HtmlView) findViewById(R.id.html)).show();
     }
 
+    private JSONArray contents;
+
+    public void setContents(JSONArray contents) {
+        //Log.wtf(__CLASSNAME__, getMethodName() + "\n[contents]\n" + toString(contents, 2));
+        this.contents = contents;
+        index = 0;
+        //start();
+        //rand(); //test
+    }
+
     @Deprecated
     @Override
     final public void open(final Uri uri) {
@@ -156,8 +166,10 @@ class CContent extends RelativeLayout implements _CContent, _DEF, _ENUM, _JSON {
      * top|center|bottom
      */
     String _text_valign = text_valign.center.toString(); //default
-    String _text_color = "#ffffffff"; //default
-    String _text_backcolor = "#55ff00ff"; //default
+    //String _text_color = "#ffffffff"; //default
+    //String _text_backcolor = "#55ff00ff"; //default
+    int _text_color = Color.parseColor("#ffffffff"); //default
+    int _text_backcolor = Color.parseColor("#55ff00ff"); //default
     //play...
     String _play_effect = null;
     String _play_length = null;
@@ -197,37 +209,65 @@ class CContent extends RelativeLayout implements _CContent, _DEF, _ENUM, _JSON {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        if (!(index < (contents != null ? contents.length() : 0))) return;
+
         try {
-            if (index < (contents != null ? contents.length() : 0)) {
-                item = new JSONObject2(contents.getJSONObject(index).toString());
-                _type = !item.isNullString(result_c.type) ? item.getString(result_c.type) : _type;
-                _text = !item.isNullString(result_c.text) ? item.getString(result_c.text) : _text;
-                //text_...
-                _text_effect = text_effect.rainbow.toString(); //default
-                _text_font = "font:TBD"; //default
-                _text_line = "false"; //default
-                _text_size = text_size.xxlarge.toString(); //default
-                _text_valign = text_valign.bottom.toString(); //default
-                _text_color = "#ffffffff"; //default
-                _text_backcolor = "#55ff00ff"; //default
-                //text_...
-                _text_effect = !item.isNullString(result_c.text_effect) ? item.getString(result_c.text_effect) : _text_effect;
-                _text_font = !item.isNullString(result_c.text_font) ? item.getString(result_c.text_font) : _text_font;
-                _text_line = !item.isNullString(result_c.text_line) ? item.getString(result_c.text_line) : _text_line;
-                _text_size = !item.isNullString(result_c.text_size) ? item.getString(result_c.text_size) : _text_size;
-                _text_valign = !item.isNullString(result_c.text_valign) ? item.getString(result_c.text_valign) : _text_valign;
-                _text_color = !item.isNullString(result_c.text_color) ? item.getString(result_c.text_color) : _text_color;
-                _text_backcolor = !item.isNullString(result_c.text_backcolor) ? item.getString(result_c.text_backcolor) : _text_backcolor;
-                //play_...
-                _play_effect = !item.isNullString(result_c.play_effect) ? item.getString(result_c.play_effect) : _play_effect;
-                _play_length = !item.isNullString(result_c.play_length) ? item.getString(result_c.play_length) : _play_length;
-                //file_name
-                file_name = !item.isNullString(result_c.file_name) ? item.getString(result_c.file_name) : file_name;
-                //uri
-                Uri uri = Uri.parse(file_name);
-                //Log.w(__CLASSNAME__, getMethodName() + ":" + index + "->" + _type + ":" + _text + ":" + file_name + ":" + uri);
-                _open(uri);
-            }
+            item = new JSONObject2(contents.getJSONObject(index).toString());
+            _type = !item.isNullString(result_c.type) ? item.getString(result_c.type) : _type;
+            _text = !item.isNullString(result_c.text) ? item.getString(result_c.text) : _text;
+        } catch (Exception e) {
+            Log.wtf(__CLASSNAME__, getMethodName() + Log.getStackTraceString(e));
+            //e.printStackTrace();
+        }
+        try {
+            //text_...
+            _text_effect = text_effect.rainbow.toString(); //default
+            _text_font = "font:TBD"; //default
+            _text_line = "false"; //default
+            _text_size = text_size.xxlarge.toString(); //default
+            _text_valign = text_valign.bottom.toString(); //default
+            _text_color = Color.parseColor("#ffffffff"); //default
+            _text_backcolor = Color.parseColor("#55ff00ff"); //default
+            //text_...
+            _text_effect = !item.isNullString(result_c.text_effect) ? item.getString(result_c.text_effect) : _text_effect;
+            _text_font = !item.isNullString(result_c.text_font) ? item.getString(result_c.text_font) : _text_font;
+            _text_line = !item.isNullString(result_c.text_line) ? item.getString(result_c.text_line) : _text_line;
+            _text_size = !item.isNullString(result_c.text_size) ? item.getString(result_c.text_size) : _text_size;
+            _text_valign = !item.isNullString(result_c.text_valign) ? item.getString(result_c.text_valign) : _text_valign;
+            //_text_color = !item.isNullString(result_c.text_color) ? item.getString(result_c.text_color) : _text_color;
+            //_text_backcolor = !item.isNullString(result_c.text_backcolor) ? item.getString(result_c.text_backcolor) : _text_backcolor;
+            String __text_color = String.format("#%08x", /*0xFFFFFFFF & */_text_color);
+            String __text_backcolor = String.format("#%08x", /*0xFFFFFFFF & */_text_backcolor);
+            _text_color = Color.parseColor(!item.isNullString(result_c.text_color) ? item.getString(result_c.text_color) : __text_color);
+            _text_backcolor = Color.parseColor(!item.isNullString(result_c.text_backcolor) ? item.getString(result_c.text_backcolor) : __text_backcolor);
+            String msg = "";
+            msg += "\n[text_effect]" + _text_effect;
+            msg += "\n[text_font]" + _text_font;
+            msg += "\n[text_line]" + _text_line;
+            msg += "\n[text_size]" + _text_size;
+            msg += "\n[text_valign]" + _text_valign;
+            msg += "\n[text_color]" + _text_color + ":" + __text_color;
+            msg += "\n[text_backcolor]" + _text_backcolor + ":" + __text_backcolor;
+            Log.i(__CLASSNAME__, getMethodName() + msg);
+        } catch (Exception e) {
+            Log.wtf(__CLASSNAME__, getMethodName() + Log.getStackTraceString(e));
+            //e.printStackTrace();
+        }
+        try {
+            //play_...
+            _play_effect = !item.isNullString(result_c.play_effect) ? item.getString(result_c.play_effect) : _play_effect;
+            _play_length = !item.isNullString(result_c.play_length) ? item.getString(result_c.play_length) : _play_length;
+        } catch (Exception e) {
+            Log.wtf(__CLASSNAME__, getMethodName() + Log.getStackTraceString(e));
+            //e.printStackTrace();
+        }
+        try {
+            //file_name
+            file_name = !item.isNullString(result_c.file_name) ? item.getString(result_c.file_name) : file_name;
+            //uri
+            Uri uri = Uri.parse(file_name);
+            //Log.w(__CLASSNAME__, getMethodName() + ":" + index + "->" + _type + ":" + _text + ":" + file_name + ":" + uri);
+            _open(uri);
         } catch (Exception e) {
             Log.wtf(__CLASSNAME__, getMethodName() + Log.getStackTraceString(e));
             //e.printStackTrace();
@@ -241,8 +281,8 @@ class CContent extends RelativeLayout implements _CContent, _DEF, _ENUM, _JSON {
             ((__TextView) findViewById(R.id.text)).textLine(Boolean.parseBoolean(_text_line));
             ((__TextView) findViewById(R.id.text)).textSize(text_size.valueOf(_text_size));
             ((__TextView) findViewById(R.id.text)).textVAlign(text_valign.valueOf(_text_valign));
-            ((__TextView) findViewById(R.id.text)).textColor(Color.parseColor(_text_color));
-            ((__TextView) findViewById(R.id.text)).textBackColor(Color.parseColor(_text_backcolor));
+            ((__TextView) findViewById(R.id.text)).textColor(_text_color);
+            ((__TextView) findViewById(R.id.text)).textBackColor(_text_backcolor);
         } catch (IllegalArgumentException e) {
             Log.wtf(__CLASSNAME__, getMethodName() + Log.getStackTraceString(e));
         }
@@ -261,14 +301,6 @@ class CContent extends RelativeLayout implements _CContent, _DEF, _ENUM, _JSON {
     @Override
     public void path(String path) {
         this.path = new ArrayList<>(Arrays.asList(new String[]{path}));
-    }
-
-    public void setContents(JSONArray contents) {
-        //Log.wtf(__CLASSNAME__, getMethodName() + "\n[contents]\n" + toString(contents, 2));
-        this.contents = contents;
-        index = 0;
-        //start();
-        //rand(); //test
     }
 
     Uri uri;

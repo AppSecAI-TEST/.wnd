@@ -21,7 +21,6 @@ class __main2 extends __main implements _CContentListener {
     protected void init() {
         super.init();
         _contents();
-        _banner();
         start();
     }
 
