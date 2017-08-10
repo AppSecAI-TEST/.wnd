@@ -51,11 +51,6 @@ class TextView3 extends TextView2 {
         }
     }
 
-    @Override
-    protected void setText(String text) {
-        super.setText(text);
-    }
-
     /**
      * TODO:_text_font
      */

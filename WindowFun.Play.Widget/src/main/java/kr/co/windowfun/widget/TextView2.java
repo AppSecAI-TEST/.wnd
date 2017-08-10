@@ -82,18 +82,18 @@ class TextView2 extends TextView implements _CContent, _DEF, _ENUM {
 
     @Override
     public Uri uri() {
-        return Uri.parse(this.text);
+        return Uri.parse(this._text);
     }
 
     @Deprecated
     @Override
     final public void open(final Uri uri) {/*안써*/}
 
-    String text;
+    String _text;
     text_effect type = text_effect.rainbow;
 
     public void text(String text, String type) {
-        this.text = text;
+        this._text = text;
         this.type = text_effect.valueOf(type);
         this.path = new ArrayList<>(Arrays.asList(new String[]{text}));
         try {
@@ -130,12 +130,11 @@ class TextView2 extends TextView implements _CContent, _DEF, _ENUM {
         ////blank
         String blank = getResources().getString(R.string.text_default_text);
         ////for (int i = 0; i < _text.length(); i++) blank += "\t ";
-        setText(blank);
+        _text(blank);
+        text();
     }
 
-    @Override
-    protected void setText(String text) {
-        super.setText(text);
+    private void _text(String text) {
         try {
             if (textView == null) return;
             //param(width)
@@ -153,6 +152,18 @@ class TextView2 extends TextView implements _CContent, _DEF, _ENUM {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private Runnable text = new Runnable() {
+        @Override
+        public void run() {
+            _text(_text);
+        }
+    };
+
+    private void text() {
+        mHandler.removeCallbacks(text);
+        mHandler.postDelayed(text, TIMER_MSEC_1H);
     }
 
     /**
@@ -202,17 +213,16 @@ class TextView2 extends TextView implements _CContent, _DEF, _ENUM {
     Runnable animate = new Runnable() {
         @Override
         public void run() {
-            setText(text);
             mHandler.removeCallbacks(animate);
             mHandler.postDelayed(animate, TIMER_MSEC_5H);
         }
     };
 
-    @Override
     public ViewPropertyAnimator animate() {
+        super.animate();
         mHandler.removeCallbacks(animate);
         mHandler.postDelayed(animate, 0);
-        return super.animate();
+        return null;
     }
 
     int length = -1;
@@ -253,6 +263,7 @@ class TextView2 extends TextView implements _CContent, _DEF, _ENUM {
 
         mHandler.removeCallbacks(animate);
         mHandler.removeCallbacks(marquee);
+        mHandler.removeCallbacks(text);
 
         stopMarquee();
     }

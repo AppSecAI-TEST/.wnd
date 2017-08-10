@@ -3,6 +3,7 @@ package kr.co.windowfun.widget;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.ViewPropertyAnimator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.HorizontalScrollView;
@@ -64,7 +65,7 @@ class TextView extends HorizontalScrollView implements _CListener {
 
     Animation animation;
 
-    protected void setText(String text) {
+    public ViewPropertyAnimator animate() {
         //animation
         this.animation = new TranslateAnimation(
                 Animation.RELATIVE_TO_SELF, 0.0f,
@@ -74,6 +75,7 @@ class TextView extends HorizontalScrollView implements _CListener {
         );
         this.animation.setRepeatCount(Animation.INFINITE);
         this.animation.setRepeatMode(Animation.RESTART);
+        return null;
     }
 
     int durationMillis;

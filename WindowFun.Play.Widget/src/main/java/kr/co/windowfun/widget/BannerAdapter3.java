@@ -17,22 +17,22 @@ class BannerAdapter3 extends BannerAdapter2 {
         super(context, items);
     }
 
-    private YoYo.YoYoString rope;
+    //private YoYo.YoYoString rope;
 
     @Override
     public void onBindViewHolder(__BannerViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         //if (rope != null) rope.stop(true);
-        /*rope = */YoYo.with(Techniques.valueOf(_play_effect))
-                .duration(TIMER_MSEC_3T)
-                .repeat(-1)
-                .onEnd(new YoYo.AnimatorCallback() {
-                    @Override
-                    public void call(Animator animator) {
-                        //Log.wtf(__CLASSNAME__, "YoYo.onEnd()" + ":" + _type + ":" + _text_effect + ":" + _play_effect + ":" + uri + ":" + path);
-                    }
-                })
-                .playOn(holder.text);
+        //rope = YoYo.with(Techniques.valueOf(_play_effect))
+        //        .duration(TIMER_MSEC_3T)
+        //        .repeat(-1)
+        //        .onEnd(new YoYo.AnimatorCallback() {
+        //            @Override
+        //            public void call(Animator animator) {
+        //                //Log.wtf(__CLASSNAME__, "YoYo.onEnd()" + ":" + _type + ":" + _text_effect + ":" + _play_effect + ":" + uri + ":" + path);
+        //            }
+        //        })
+        //        .playOn(holder.text);
     }
 
     @Override
