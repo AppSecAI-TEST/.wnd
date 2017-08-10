@@ -8,6 +8,12 @@
     android:background="@android:color/black"
     tools:ignore="HardcodedText">
 
+    <kr.co.windowfun.widget.__View
+        android:id="@+id/view"
+        style="@style/contents_view"
+        android:background="@android:color/transparent"
+        android:visibility="visible"/>
+
     <kr.co.windowfun.widget.__HtmlView
         android:id="@+id/html"
         style="@style/contents_view"

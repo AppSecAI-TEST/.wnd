@@ -12,7 +12,7 @@ import kr.co.windowfun.widget.__CContent;
 import kr.co.windowfun.widget.__VideoView;
 
 /**
- * 컨텐츠오류처리
+ * 컨텐츠이벤트처리
  * Created by isyuun on 2017-08-08.
  */
 
@@ -96,7 +96,7 @@ class __main2 extends __main implements _CContentListener {
     @Override
     public void onPrepared(__CContent c, View v) {
         Log.e(__CLASSNAME__, getMethodName()/* + "onPrepared()"*/ + ":" + getResourceEntryName(c.getId()) + ":" + getResourceEntryName(v.getId()));
-        //show(c.getId());
+        //show(c.getId());    //test
     }
 
     @Override
@@ -107,10 +107,10 @@ class __main2 extends __main implements _CContentListener {
             Log.wtf(__CLASSNAME__, getMethodName()/* + "onError()"*/ + ":" + getResourceEntryName(c.getId()) + ":" + getResourceEntryName(v.getId()));
             restart();
         } else {
-            //c.gone();
-            //c.next();
+            //c.gone(); //test
+            //c.next();   //test
         }
-        //hide(c.getId());
+        //hide(c.getId());    //test
     }
 
     @Override

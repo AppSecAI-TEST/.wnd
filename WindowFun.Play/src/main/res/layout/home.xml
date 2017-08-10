@@ -124,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:src="@drawable/wf_icon_logo"
-            android:background="@android:color/transparent"
+            android:background="?android:attr/selectableItemBackground"
             app:srcCompat="@drawable/wf_icon_logo"/>
 
     </RelativeLayout>

@@ -1,20 +1,19 @@
 package kr.co.windowfun.widget;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 /**
  * Created by isyuun on 2017-08-04.
  */
 
-class CContent3 extends CContent2 implements View.OnTouchListener, View.OnClickListener, View.OnLongClickListener {
+class CContent3 extends CContent2 implements _CContentListener {
     public CContent3(Context context) {
         super(context);
     }
@@ -35,111 +34,58 @@ class CContent3 extends CContent2 implements View.OnTouchListener, View.OnClickL
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        //OnTouchListener
-        ((__VideoView) findViewById(R.id.video)).setOnTouchListener(this);
-        ((__ImageView) findViewById(R.id.image)).setOnTouchListener(this);
-        ((__TextView) findViewById(R.id.text)).setOnTouchListener(this); //don't touch
-        ((__HtmlView) findViewById(R.id.html)).setOnTouchListener(this);
-        //OnClickListener
-        ((__VideoView) findViewById(R.id.video)).setOnClickListener(this);
-        ((__ImageView) findViewById(R.id.image)).setOnClickListener(this);
-        ((__TextView) findViewById(R.id.text)).setOnClickListener(this);
-        ((__HtmlView) findViewById(R.id.html)).setOnClickListener(this);
-        //OnClickListener
-        ((__VideoView) findViewById(R.id.video)).setOnLongClickListener(this);
-        ((__ImageView) findViewById(R.id.image)).setOnLongClickListener(this);
-        ((__TextView) findViewById(R.id.text)).setOnLongClickListener(this);
-        ((__HtmlView) findViewById(R.id.html)).setOnLongClickListener(this);
+        //CListener
+        ((__VideoView) findViewById(R.id.video)).setConListener(this);
+        ((__ImageView) findViewById(R.id.image)).setConListener(this);
+        ((__TextView) findViewById(R.id.text)).setConListener(this);
+        ((__HtmlView) findViewById(R.id.html)).setConListener(this);
+    }
+
+    _CContentListener mCOnListener;
+
+    public void setCListener(_CContentListener l) {
+        this.mCOnListener = l;
     }
 
     @Override
-    public void _open(Uri uri) {
-        //Log.wtf(__CLASSNAME__, getMethodName() + uri.toString());
-        super._open(uri);
-        //marqee
-        ((__TextView) findViewById(R.id.text)).setOnTouchListener(this); //don't touch
+    public void onPrepared(__CContent c, View v) {
+        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + v);
+        if (mCOnListener != null) mCOnListener.onPrepared(c, v);
     }
 
     @Override
-    protected void _showTexting() {
-        super._showTexting();
-        //scroll
-        ((__TextView) findViewById(R.id.text)).setOnTouchListener(null); //don't touch
-    }
-
-    OnTouchListener mOnTouchListener;
-    MotionEvent event;
-
-    @Override
-    public void setOnTouchListener(OnTouchListener l) {
-        //super.setOnTouchListener(l);
-        mOnTouchListener = l;
-    }
-
-    OnClickListener mOnClickListener;
-
-    @Override
-    public void setOnClickListener(@Nullable OnClickListener l) {
-        //super.setOnClickListener(l);
-        this.mOnClickListener = l;
-    }
-
-    OnLongClickListener mOnLongClickListener;
-
-    @Override
-    public void setOnLongClickListener(@Nullable OnLongClickListener l) {
-        //super.setOnLongClickListener(l);
-        this.mOnLongClickListener = l;
+    public void onError(__CContent c, View v) {
+        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + v);
+        if (mCOnListener != null) mCOnListener.onError(c, v);
     }
 
     @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        this.event = event;
-        float w = v.getWidth();
-        //float h = v.getHeight();
-        float x = event.getX();
-        //float y = event.getY();
-        Log.wtf(__CLASSNAME__, getMethodName() + ":" + v + "\t" + ":w:" + v.getWidth() + "\t" + "x:" + (int) x + "\t" + "[" + (int) (w * 1.0f / 3.0f) + " - " + (int) (w * 2.0f / 3.0f) + "]" + "\t" + event);
-        if (x < (w * 1.0f / 3.0f)) {
-            prev();
-        } else if (x > (w * 2.0f / 3.0f)) {
-            next();
-        } else {
-            if (paused()) {
-                pause();
-            } else {
-                resume();
-            }
+    public void onCompletion(__CContent c, View v) {
+        //Log.wtf(__CLASSNAME__, getMethodName() + ":" + v);
+        if (mCOnListener != null) mCOnListener.onCompletion(c, v);
+    }
+
+    private ArrayList<View> getAllChildren(View v) {
+
+        if (!(v instanceof ViewGroup)) {
+            ArrayList<View> viewArrayList = new ArrayList<View>();
+            viewArrayList.add(v);
+            return viewArrayList;
         }
-        if (mOnTouchListener != null) {
-            mOnTouchListener.onTouch(v, event);
-        }
-        return false;
-    }
 
-    @Override
-    public void onClick(View v) {
-        float w = v.getWidth();
-        //float h = v.getHeight();
-        float x = event != null ? event.getX() : w / 2.0f;
-        //float y = event.getY();
-        Log.wtf(__CLASSNAME__, getMethodName() + ":" + v + "\t" + ":w:" + v.getWidth() + "\t" + "x:" + (int) x + "\t" + "[" + (int) (w * 1.0f / 3.0f) + " - " + (int) (w * 2.0f / 3.0f) + "]" + "\t" + event);
-        if (x < (w * 1.0f / 3.0f)) {
-            prev();
-        } else if (x > (w * 2.0f / 3.0f)) {
-            next();
-        }
-        if (mOnClickListener != null) {
-            mOnClickListener.onClick(v);
-        }
-    }
+        ArrayList<View> result = new ArrayList<View>();
 
-    @Override
-    public boolean onLongClick(View v) {
-        Log.wtf(__CLASSNAME__, getMethodName() + ":" + v + "," + event);
-        if (mOnLongClickListener != null) {
-            mOnLongClickListener.onLongClick(v);
+        ViewGroup viewGroup = (ViewGroup) v;
+        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+
+            View child = viewGroup.getChildAt(i);
+
+            ArrayList<View> viewArrayList = new ArrayList<View>();
+            viewArrayList.add(v);
+            viewArrayList.addAll(getAllChildren(child));
+
+            result.addAll(viewArrayList);
         }
-        return false;
+        return result;
     }
 }

@@ -4,13 +4,12 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
-import android.widget.RelativeLayout;
 
 /**
  * Created by isyuun on 2017-08-10.
  */
 
-public class CContent extends RelativeLayout {
+class View extends android.view.View {
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
 
@@ -33,26 +32,26 @@ public class CContent extends RelativeLayout {
         return "" + item;
     }
 
-    public CContent(Context context) {
+    public View(Context context) {
         super(context);
         _CLASSNAME_ = this.getClass().getName();
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
     }
 
-    public CContent(Context context, AttributeSet attrs) {
+    public View(Context context, AttributeSet attrs) {
         super(context, attrs);
         _CLASSNAME_ = this.getClass().getName();
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
     }
 
-    public CContent(Context context, AttributeSet attrs, int defStyleAttr) {
+    public View(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         _CLASSNAME_ = this.getClass().getName();
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public CContent(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public View(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         _CLASSNAME_ = this.getClass().getName();
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";

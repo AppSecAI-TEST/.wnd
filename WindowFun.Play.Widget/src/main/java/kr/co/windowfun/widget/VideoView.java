@@ -50,7 +50,6 @@ class VideoView extends android.widget.VideoView implements _CListener {
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
     }
 
-    //@TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public VideoView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);

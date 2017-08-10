@@ -107,10 +107,9 @@ class TextView2 extends TextView implements _CContent, _DEF, _ENUM {
         //remove
         stopMarquee();
         removeAllViews();
-        //if (textView != null)  removeView(textView);
         //make
-        textView = CText.valueOf(this.type.toString()).with(getContext());
-        //textView = CText.valueOf(this.type.toString()).with(getContext(), null, R.style.text_view);
+        //textView = CText.valueOf(this.type.toString()).with(getContext());
+        textView = CText.valueOf(this.type.toString()).with(getContext(), null, R.style.text_view);
         //Log.wtf(__CLASSNAME__, getMethodName() + ":" + getResources().getResourceEntryName(this.getId()) + ":" + this.type + ":" + textView + ":" + uri);
         //param(width)
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
@@ -122,7 +121,6 @@ class TextView2 extends TextView implements _CContent, _DEF, _ENUM {
         } else {
             textView.setTextAppearance(R.style.text_view);
         }
-        //textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, ContextCompat.getDimensionPixelSize(R.dimen.text_size_tiny));
         //shadow
         if (!isInEditMode()) textView.setShadowLayer(1.5f, -1, 1, Color.LTGRAY);
         //gravity
@@ -130,9 +128,9 @@ class TextView2 extends TextView implements _CContent, _DEF, _ENUM {
         //add
         addView(textView);
         ////blank
-        //String blank = getResources().getString(R.string.text_default_text);
+        String blank = getResources().getString(R.string.text_default_text);
         ////for (int i = 0; i < _text.length(); i++) blank += "\t ";
-        //setText(blank);
+        setText(blank);
     }
 
     @Override

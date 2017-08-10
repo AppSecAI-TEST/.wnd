@@ -160,10 +160,6 @@ class VideoView2 extends VideoView implements _CContent, _DEF {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
                 Log.e(__CLASSNAME__, getMethodName()/* + "MediaPlayer.OnError"*/ + "[" + what + ", " + extra + "]" + ":" + index + "->" + Uri.decode(uri.toString()));
-                ////Toast.makeText(getContext(), getMethodName() + "[" + what + "," + extra + "]" + extra, Toast.LENGTH_SHORT).show();
-                //if (mOnErrorListener != null) {
-                //    mOnErrorListener.onError(mp, what, extra);
-                //}
                 if (mCOnListener != null)
                     mCOnListener.onError((__CContent) getParent(), VideoView2.this);
                 return true;
@@ -176,9 +172,6 @@ class VideoView2 extends VideoView implements _CContent, _DEF {
                 setDimension(getWidth(), getHeight());
                 VideoView2.this.mp = mp;
                 mute(mute);
-                //if (mOnPreparedListener != null) {
-                //    mOnPreparedListener.onPrepared(mp);
-                //}
                 if (mCOnListener != null)
                     mCOnListener.onPrepared((__CContent) getParent(), VideoView2.this);
             }
@@ -187,9 +180,6 @@ class VideoView2 extends VideoView implements _CContent, _DEF {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 Log.e(__CLASSNAME__, getMethodName()/* + "MediaPlayer.onCompletion()"*/ + "[" + "w:" + getWidth() + ",h:" + getHeight() + "]" + ":" + index + "->" + Uri.decode(uri.toString()));
-                //if (mOnCompletionListener != null) {
-                //    mOnCompletionListener.onCompletion(mp);
-                //}
                 if (mCOnListener != null)
                     mCOnListener.onCompletion((__CContent) getParent(), VideoView2.this);
             }

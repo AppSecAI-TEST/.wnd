@@ -1,6 +1,7 @@
 package kr.co.windowfun.widget;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -32,8 +33,8 @@ class TextView3 extends TextView2 {
     private boolean line = false;
     private text_valign valign = text_valign.top;
     private text_size size = text_size.xxxlarge;
-    private int color = ContextCompat.getColor(getContext(), android.R.color.white);
-    private int backcolor = ContextCompat.getColor(getContext(), R.color.text_test_background);
+    private int color = Color.parseColor("#ffffffff");  //default:R.color.text_default_color;
+    private int backcolor = Color.parseColor("#55ff00ff");  //default:R.color.test_default_backcolor);
 
     @Override
     public void text(String text, String type) {
@@ -48,6 +49,11 @@ class TextView3 extends TextView2 {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void setText(String text) {
+        super.setText(text);
     }
 
     /**

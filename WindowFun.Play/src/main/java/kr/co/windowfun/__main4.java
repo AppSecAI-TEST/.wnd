@@ -13,6 +13,8 @@ import kr.co.windowfun.widget.__BannerView;
 
 class __main4 extends __main3 {
 
+    __BannerView banner;
+
     @Override
     protected void init() {
         super.init();
@@ -47,32 +49,43 @@ class __main4 extends __main3 {
         findViewById(id).setVisibility(View.VISIBLE);
 
         //banner start
-        __BannerView banner = (__BannerView) findViewById(id);
+        banner = (__BannerView) findViewById(id);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         banner.setHasFixedSize(true);
 
         // use a linear layout manager
-        //mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false) {
-        //    @Override
-        //    public void smoothScrollToPosition(RecyclerView recyclerView,RecyclerView.State state, int position) {
-        //        LinearSmoothScroller smoothScroller = new LinearSmoothScroller(__main4.this) {
-        //            private static final float SPEED = 4000f;// Change this value (default=25f)
-        //            @Override
-        //            protected float calculateSpeedPerPixel(DisplayMetrics displayMetrics) {
-        //                return SPEED / displayMetrics.densityDpi;
-        //            }
-        //        };
-        //        smoothScroller.setTargetPosition(position);
-        //        startSmoothScroll(smoothScroller);
-        //    }
-        //};
-        //mRecyclerView.setLayoutManager(mLayoutManager);
         banner.setLayoutManager(10.0f);
 
         // specify an adapter (see also next example)
         banner.setAdapter(new _BannerAdpater(getBaseContext(), getApp().result_banner));
-        banner.marquee();
+
+        //marquee
+        marquee();
+    }
+
+    private Runnable marquee = new Runnable() {
+        @Override
+        public void run() {
+            banner.marquee();
+        }
+    };
+
+    private void marquee() {
+        mHandler.removeCallbacks(marquee);
+        mHandler.postDelayed(marquee, TIMER_OPEN_NORMAL);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        marquee();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (banner != null) banner.stop();
     }
 }

@@ -74,7 +74,7 @@
         style="@style/banner_bar"
         android:visibility="gone"/>
 
-    <com.hitomi.cmlibrary.CircleMenu
+    <com.hitomi.cmlibrary.CircleMenu2
         android:id="@+id/menu"
         style="@style/circle_menu"
         android:layout_centerInParent="true"

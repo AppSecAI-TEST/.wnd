@@ -6,25 +6,24 @@ import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 
 /**
- * 수퍼마켓클래스
- * Created by isyuun on 8/2/2017.
+ * Created by isyuun on 2017-08-10.
  */
 
-public class __CContent extends CContent4 {
-    public __CContent(Context context) {
+class View2 extends View {
+    public View2(Context context) {
         super(context);
     }
 
-    public __CContent(Context context, AttributeSet attrs) {
+    public View2(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public __CContent(Context context, AttributeSet attrs, int defStyleAttr) {
+    public View2(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public __CContent(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public View2(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 }

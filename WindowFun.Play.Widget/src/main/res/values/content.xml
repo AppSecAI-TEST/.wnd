@@ -32,7 +32,7 @@
         <item name="android:text">@string/text_default_text</item>
         <item name="android:textSize">@dimen/text_size_xxxlarge</item>
         <item name="android:textColor">@color/text_default_color</item>
-        <item name="android:background">@color/text_default_background</item>
+        <item name="android:background">@color/text_default_backcolor</item>
         <!--text marquee:FUCK-->
         <!--<item name="android:singleLine">true</item>-->
         <!--<item name="android:maxLines">1</item>-->

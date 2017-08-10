@@ -43,7 +43,7 @@ class home extends _Activity {
             e.printStackTrace();
         }
 
-        findViewById(R.id.admin).setVisibility(View.INVISIBLE); //test
+        findViewById(R.id.admin).setVisibility(View.INVISIBLE);
     }
 
     private View.OnClickListener mOnClickListener = new View.OnClickListener() {

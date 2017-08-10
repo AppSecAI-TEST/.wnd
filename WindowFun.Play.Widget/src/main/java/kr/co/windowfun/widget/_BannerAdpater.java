@@ -91,7 +91,7 @@ public class _BannerAdpater extends RecyclerView.Adapter<_BannerAdpater.ViewHold
      * plane|line|fade|typer|rainbow|scale|evaporate|fall
      */
     String _text_effect = text_effect.rainbow.toString(); //default
-    String _text_font = "font:TBD"; //default
+    String _text_font = "font1"; //default
     String _text_line = "false"; //default
     /**
      * xxxlarge|xxlarge|xlarge|large|normal|small|xsmall|xxsmall|xxxsmall
@@ -101,8 +101,8 @@ public class _BannerAdpater extends RecyclerView.Adapter<_BannerAdpater.ViewHold
      * top|center|bottom
      */
     String _text_valign = text_valign.center.toString(); //default
-    int _text_color = Color.parseColor("#ff000000"); //default
-    int _text_backcolor = Color.parseColor("#55ff00ff"); //default
+    int _text_color = Color.parseColor("#ffffffff");  //default:R.color.text_default_color;
+    int _text_backcolor = Color.parseColor("#55ff00ff");  //default:R.color.test_default_backcolor);
     //play...
     String _play_effect = Techniques.FlipInX.toString();
     String _play_length = null;
@@ -129,7 +129,7 @@ public class _BannerAdpater extends RecyclerView.Adapter<_BannerAdpater.ViewHold
         try {
             //text_...
             _text_effect = text_effect.fall.toString(); //default
-            _text_font = "font:TBD"; //default
+            _text_font = "font1"; //default
             _text_line = "false"; //default
             _text_size = text_size.small.toString(); //default
             _text_valign = text_valign.center.toString(); //default
@@ -153,7 +153,7 @@ public class _BannerAdpater extends RecyclerView.Adapter<_BannerAdpater.ViewHold
             //msg += "\n[text_valign]" + _text_valign;
             //msg += "\n[text_color]" + _text_color + ":" + __text_color;
             //msg += "\n[text_backcolor]" + _text_backcolor + ":" + __text_backcolor;
-            //Log.i(__CLASSNAME__, getMethodName() + msg);
+            //Log.w(__CLASSNAME__, getMethodName() + msg);
         } catch (Exception e) {
             Log.wtf(__CLASSNAME__, getMethodName() + Log.getStackTraceString(e));
             //e.printStackTrace();
@@ -215,16 +215,16 @@ public class _BannerAdpater extends RecyclerView.Adapter<_BannerAdpater.ViewHold
             holder.banner_text.textBackColor(_text_backcolor);
             holder.banner_text.play();
         }
-        YoYo.with(Techniques.valueOf(_play_effect))
-                .duration(1000)
-                .repeat(TIMER_ANI_LONG)
-                .onEnd(new YoYo.AnimatorCallback() {
-                    @Override
-                    public void call(Animator animator) {
-                        //Log.wtf(__CLASSNAME__, "YoYo.onEnd()" + ":" + _type + ":" + _text_effect + ":" + _play_effect + ":" + uri + ":" + path);
-                    }
-                })
-                .playOn(holder.text);
+        //YoYo.with(Techniques.valueOf(_play_effect))
+        //        .duration(1000)
+        //        .repeat(TIMER_ANI_LONG)
+        //        .onEnd(new YoYo.AnimatorCallback() {
+        //            @Override
+        //            public void call(Animator animator) {
+        //                //Log.wtf(__CLASSNAME__, "YoYo.onEnd()" + ":" + _type + ":" + _text_effect + ":" + _play_effect + ":" + uri + ":" + path);
+        //            }
+        //        })
+        //        .playOn(holder.text);
     }
 
     @Override

@@ -13,7 +13,7 @@ import android.view.View;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.hitomi.cmlibrary.CircleMenu;
+import com.hitomi.cmlibrary.CircleMenu2;
 import com.hitomi.cmlibrary.OnMenuSelectedListener;
 import com.hitomi.cmlibrary.OnMenuStatusChangeListener;
 
@@ -30,7 +30,7 @@ import kr.co.windowfun.widget.__VideoView;
  * Created by isyoon on 2017-07-03.
  */
 
-class __main extends _Activity {
+class __main extends _Activity implements View.OnTouchListener{
     protected ArrayList<__TextView> texts = new ArrayList<>();
     protected ArrayList<String> txt = new ArrayList<>();
     protected ArrayList<__ImageView> images = new ArrayList<>();
@@ -53,7 +53,8 @@ class __main extends _Activity {
         }
     }
 
-    CircleMenu menu;
+    CircleMenu2 menu;
+
     private ArrayList<Map<Integer, Object[]>> menus = new ArrayList<>();
 
     private Map<Integer, Object[]> getMenu(int index) {
@@ -155,7 +156,7 @@ class __main extends _Activity {
 
     private void menus() {
         //isyoon:Hitomis/CircleMenu
-        menu = (CircleMenu) findViewById(R.id.menu);
+        menu = (CircleMenu2) findViewById(R.id.menu);
         ////Log.i(__CLASSNAME__, getMethodName() + "\t" + circleMenu);
 
         menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_event, new Object[]{"#258CFF", "html", "http://windowfun.co.kr/type/typea/"});}});
@@ -211,7 +212,14 @@ class __main extends _Activity {
             }
         }
 
+        menu.setOnTouchListener(this);
+
         mHandler.postDelayed(hideMenu, TIMER_OPEN_SHORT);
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return false;
     }
 
     private void images() {

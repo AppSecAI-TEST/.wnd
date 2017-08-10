@@ -60,20 +60,26 @@ class BannerView extends RecyclerView implements _DEF {
         //super.setLayoutManager(layout);
     }
 
-    public void marquee() {
-        final int speedScroll = 0;
-        final Runnable runnable = new Runnable() {
-            int count = 0;
+    private Runnable marquee = new Runnable() {
+        int count = 0;
 
-            @Override
-            public void run() {
-                if (count == getAdapter().getItemCount()) count = 0;
-                if (count < getAdapter().getItemCount()) {
-                    smoothScrollToPosition(++count);
-                    mHandler.postDelayed(this, speedScroll);
-                }
+        @Override
+        public void run() {
+            if (count == getAdapter().getItemCount()) count = 0;
+            if (count < getAdapter().getItemCount()) {
+                smoothScrollToPosition(++count);
+                mHandler.removeCallbacks(marquee);
+                mHandler.postDelayed(this, 0);
             }
-        };
-        mHandler.postDelayed(runnable, speedScroll);
+        }
+    };
+
+    public void marquee() {
+        mHandler.removeCallbacks(marquee);
+        mHandler.postDelayed(marquee, 0);
+    }
+
+    public void stop() {
+        mHandler.removeCallbacks(marquee);
     }
 }
