@@ -9,16 +9,4 @@
     <dimen name="size_large">96dp</dimen>
     <dimen name="size_normal">48dp</dimen>
     <dimen name="size_small">36dp</dimen>
-    <!--isyoon:TextSize-->
-    <dimen name="text_default_width">1000dp</dimen>
-    <dimen name="text_size_xxxlarge">112sp</dimen>
-    <!--<dimen name="text_size_xxlarge">56sp</dimen>-->
-    <dimen name="text_size_xxlarge">90sp</dimen>
-    <dimen name="text_size_xlarge">45sp</dimen>
-    <dimen name="text_size_large">34sp</dimen>
-    <dimen name="text_size_normal">24sp</dimen>
-    <dimen name="text_size_small">20sp</dimen>
-    <dimen name="text_size_xsmall">16sp</dimen>
-    <dimen name="text_size_xxsmall">14sp</dimen>
-    <dimen name="text_size_xxxsmall">12sp</dimen>
 </resources>

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="DarkActionBarColor">#333333</color>
-    <color name="text_default_color">#ffffffff</color>
-    <color name="text_default_backcolor">@android:color/transparent</color>
     <color name="test_default_color">#ffff0000</color>
     <color name="test_default_backcolor">#55ff00ff</color>
 </resources>
