@@ -1,7 +1,7 @@
 package kr.co.windowfun.app;
 
 /**
- * Created by isyoon on 2017-07-17.
+ * Created by isyuun on 2017-07-17.
  */
 
 class Application extends android.app.Application {
@@ -9,7 +9,7 @@ class Application extends android.app.Application {
     protected String __CLASSNAME__;
 
     protected String getMethodName() {
-        //Log.wtf(__CLASSNAME__, "[[getMethodName()]]");
+        //Log.wtf(__CLASSNAME__, "[[getMethodName()]][ST]");
         final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
         String reg = "[^A-Za-z0-9.]";
         int i;
@@ -24,6 +24,7 @@ class Application extends android.app.Application {
                 break;
             }
         }
+        //Log.wtf(__CLASSNAME__, "[[getMethodName()]][ED]");
         return "" + item;
     }
 

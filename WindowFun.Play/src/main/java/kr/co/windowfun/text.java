@@ -11,7 +11,7 @@ import android.view.WindowManager;
 import com.hanks.htextview.base.HTextView;
 
 /**
- * Created by isyoon on 2017-07-11.
+ * Created by isyuun on 2017-07-11.
  */
 
 public class text extends _Activity {

@@ -7,7 +7,7 @@ import android.util.Log;
 
 /**
  * 로그인처리
- * Created by isyoon on 2017-07-25.
+ * Created by isyuun on 2017-07-25.
  */
 
 class Activity2 extends Activity {

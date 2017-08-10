@@ -7,7 +7,7 @@ import java.io.File;
 import kr.co.windowfun._DEF;
 
 /**
- * Created by isyoon on 2017-07-25.
+ * Created by isyuun on 2017-07-25.
  */
 
 public class TextUtil implements _DEF {

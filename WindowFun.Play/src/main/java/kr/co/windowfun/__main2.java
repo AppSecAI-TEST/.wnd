@@ -85,7 +85,7 @@ class __main2 extends __main implements _CContentListener {
     private void show(int id) {
         cc.put(id, true);
         mHandler.removeCallbacks(show);
-        mHandler.postDelayed(show, TIMER_OPEN_NORMAL);
+        mHandler.postDelayed(show, TIMER_MSEC_5H);
     }
 
     private void hide(int id) {

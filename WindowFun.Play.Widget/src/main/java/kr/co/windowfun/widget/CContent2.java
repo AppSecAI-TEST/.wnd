@@ -30,7 +30,7 @@ import kr.co.windowfun.util.TextUtil;
 
 /**
  * 컨텐츠레이아웃<br>
- * Created by isyoon on 2017-07-19.
+ * Created by isyuun on 2017-07-19.
  */
 
 class CContent2 extends CContent implements _CContent, _DEF, _ENUM, _JSON {
@@ -132,7 +132,7 @@ class CContent2 extends CContent implements _CContent, _DEF, _ENUM, _JSON {
 
     private void showTexting() {
         mHandler.removeCallbacks(showTexting);
-        mHandler.postDelayed(showTexting, TIMER_OPEN_NORMAL);
+        mHandler.postDelayed(showTexting, TIMER_MSEC_5H);
     }
 
     private Runnable showTexting = new Runnable() {
@@ -429,7 +429,7 @@ class CContent2 extends CContent implements _CContent, _DEF, _ENUM, _JSON {
     @Override
     public void rand() {
         mHandler.removeCallbacks(rand);
-        mHandler.postDelayed(rand, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(rand, TIMER_MSEC_1H);
     }
 
     private Runnable prev = new Runnable() {
@@ -447,7 +447,7 @@ class CContent2 extends CContent implements _CContent, _DEF, _ENUM, _JSON {
     @Override
     public void prev() {
         mHandler.removeCallbacks(prev);
-        mHandler.postDelayed(prev, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(prev, TIMER_MSEC_1H);
     }
 
     private Runnable next = new Runnable() {
@@ -465,7 +465,7 @@ class CContent2 extends CContent implements _CContent, _DEF, _ENUM, _JSON {
     @Override
     public void next() {
         mHandler.removeCallbacks(next);
-        mHandler.postDelayed(next, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(next, TIMER_MSEC_1H);
     }
 
     @Override

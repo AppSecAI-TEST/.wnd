@@ -23,7 +23,7 @@ import kr.co.windowfun._DEF;
 import kr.co.windowfun._ENUM;
 
 /**
- * Created by isyoon on 2017-07-13.
+ * Created by isyuun on 2017-07-13.
  */
 
 class TextView2 extends TextView implements _CContent, _DEF, _ENUM {
@@ -163,7 +163,7 @@ class TextView2 extends TextView implements _CContent, _DEF, _ENUM {
         public void run() {
             try {
                 //layout marquee
-                setDuration(TIMER_ANI_NORMAL);
+                setDuration(TIMER_MSEC_10T);
                 startMarquee();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -173,7 +173,7 @@ class TextView2 extends TextView implements _CContent, _DEF, _ENUM {
 
     private void marquee() {
         mHandler.removeCallbacks(marquee);
-        mHandler.postDelayed(marquee, TIMER_OPEN_LONG);
+        mHandler.postDelayed(marquee, TIMER_MSEC_1T);
     }
 
     private void open() {
@@ -204,7 +204,7 @@ class TextView2 extends TextView implements _CContent, _DEF, _ENUM {
         public void run() {
             setText(text);
             mHandler.removeCallbacks(animate);
-            mHandler.postDelayed(animate, TIMER_ANI_NORMAL);
+            mHandler.postDelayed(animate, TIMER_MSEC_5H);
         }
     };
 
@@ -232,14 +232,14 @@ class TextView2 extends TextView implements _CContent, _DEF, _ENUM {
     @Override
     public void play() {
         mHandler.removeCallbacks(play);
-        mHandler.postDelayed(play, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(play, TIMER_MSEC_1H);
     }
 
     @Override
     public void play(int length) {
         this.length = length;
         mHandler.removeCallbacks(play);
-        mHandler.postDelayed(play, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(play, TIMER_MSEC_1H);
     }
 
     @Override
@@ -284,7 +284,7 @@ class TextView2 extends TextView implements _CContent, _DEF, _ENUM {
     @Override
     public void rand() {
         mHandler.removeCallbacks(rand);
-        mHandler.postDelayed(rand, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(rand, TIMER_MSEC_1H);
     }
 
     private Runnable prev = new Runnable() {
@@ -303,7 +303,7 @@ class TextView2 extends TextView implements _CContent, _DEF, _ENUM {
     @Override
     public void prev() {
         mHandler.removeCallbacks(prev);
-        mHandler.postDelayed(prev, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(prev, TIMER_MSEC_1H);
     }
 
     @Override
@@ -327,7 +327,7 @@ class TextView2 extends TextView implements _CContent, _DEF, _ENUM {
     @Override
     public void next() {
         mHandler.removeCallbacks(next);
-        mHandler.postDelayed(next, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(next, TIMER_MSEC_1H);
     }
 
     @Override

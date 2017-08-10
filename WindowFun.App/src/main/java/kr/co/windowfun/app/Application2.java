@@ -5,7 +5,7 @@ import java.util.Locale;
 import cz.msebera.android.httpclient.Header;
 
 /**
- * Created by isyoon on 2017-07-28.
+ * Created by isyuun on 2017-07-28.
  */
 
 class Application2 extends Application {

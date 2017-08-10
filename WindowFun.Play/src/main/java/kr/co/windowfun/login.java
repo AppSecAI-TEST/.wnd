@@ -19,7 +19,7 @@ import org.json.JSONObject;
 import cz.msebera.android.httpclient.Header;
 
 /**
- * Created by isyoon on 2017-07-18.
+ * Created by isyuun on 2017-07-18.
  */
 
 public class login extends _Activity implements __API {

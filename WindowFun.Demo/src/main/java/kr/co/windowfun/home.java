@@ -9,7 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 /**
- * Created by isyoon on 2017-07-12.
+ * Created by isyuun on 2017-07-12.
  */
 
 public class home extends _Activity {

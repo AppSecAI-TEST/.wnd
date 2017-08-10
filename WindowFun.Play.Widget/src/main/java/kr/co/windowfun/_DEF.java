@@ -29,14 +29,11 @@ public interface _DEF {
     int _RESULT_LOGIN = Activity.RESULT_FIRST_USER;
 
     //TIMER
-    int TIMER_RESET_SHORT = 3000;
-    int TIMER_RESET_LONG = 5000;
-    int TIMER_OPEN_SHORT = 100;
-    int TIMER_OPEN_NORMAL = 500;
-    int TIMER_OPEN_LONG = 1000;
-    int TIMER_IMG_SHORT = 3000;
-    int TIMER_IMG_LONG = 5000;
-    int TIMER_ANI_SHORT = 5000;
-    int TIMER_ANI_NORMAL = 10000;
-    int TIMER_ANI_LONG = 30000;
+    int TIMER_MSEC_1H = 100;
+    int TIMER_MSEC_5H = 500;
+    int TIMER_MSEC_1T = 1000;
+    int TIMER_MSEC_3T = 3000;
+    int TIMER_MSEC_5T = 5000;
+    int TIMER_MSEC_10T = 10000;
+    int TIMER_MSEC_30T = 30000;
 }

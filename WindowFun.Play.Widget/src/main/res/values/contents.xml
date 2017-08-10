@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--isyoon:contents_view-->
+    <!--isyuun:contents_view-->
     <style name="contents_view">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -10,11 +10,11 @@
         <item name="android:longClickable">true</item>
         <item name="android:visibility">visible</item>
     </style>
-    <!--isyoon:contents_image-->
+    <!--isyuun:contents_image-->
     <style name="contents_image" parent="contents_view">
         <item name="android:scaleType">fitXY</item>
     </style>
-    <!--isyoon:contents_text-->
+    <!--isyuun:contents_text-->
     <style name="contents_text" parent="contents_view">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -23,12 +23,12 @@
         <item name="android:layout_centerVertical">true</item>
         <item name="android:scrollbars">none</item>
     </style>
-    <!--isyoon:text_view-->
+    <!--isyuun:text_view-->
     <style name="text_view">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center_vertical</item>
-        <!--isyoon:default.text-->
+        <!--isyuun:default.text-->
         <item name="android:text">@string/text_default_text</item>
         <item name="android:textSize">@dimen/text_size_xxxlarge</item>
         <item name="android:textColor">@color/text_default_color</item>
@@ -43,7 +43,7 @@
         <!--<item name="android:focusableInTouchMode">true</item>-->
         <!--<item name="android:freezesText">true</item>-->
     </style>
-    <!--isyoon:contents_text-->
+    <!--isyuun:contents_text-->
     <style name="contents_label" parent="contents_view">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentLeft">true</item>

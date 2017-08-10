@@ -16,7 +16,7 @@ import java.util.Random;
 import kr.co.windowfun._DEF;
 
 /**
- * Created by isyoon on 2017-07-04.
+ * Created by isyuun on 2017-07-04.
  */
 
 class VideoView2 extends VideoView implements _CContent, _DEF {
@@ -96,7 +96,7 @@ class VideoView2 extends VideoView implements _CContent, _DEF {
     }
 
     /**
-     * isyoon:쓰지마!!!
+     * isyuun:쓰지마!!!
      */
     @Deprecated
     final public void setVideoURI(Uri uri) {/*super.setVideoURI(uri)*/ }
@@ -196,7 +196,7 @@ class VideoView2 extends VideoView implements _CContent, _DEF {
 
     private void prepare() {
         mHandler.removeCallbacks(prepare);
-        mHandler.postDelayed(prepare, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(prepare, TIMER_MSEC_1H);
     }
 
     private void open() {
@@ -242,7 +242,7 @@ class VideoView2 extends VideoView implements _CContent, _DEF {
     @Override
     public void play() {
         mHandler.removeCallbacks(play);
-        mHandler.postDelayed(play, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(play, TIMER_MSEC_1H);
     }
 
     @Override
@@ -290,7 +290,7 @@ class VideoView2 extends VideoView implements _CContent, _DEF {
     @Override
     public void rand() {
         mHandler.removeCallbacks(rand);
-        mHandler.postDelayed(rand, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(rand, TIMER_MSEC_1H);
     }
 
     private Runnable prev = new Runnable() {
@@ -309,7 +309,7 @@ class VideoView2 extends VideoView implements _CContent, _DEF {
     @Override
     public void prev() {
         mHandler.removeCallbacks(prev);
-        mHandler.postDelayed(prev, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(prev, TIMER_MSEC_1H);
     }
 
     private Runnable next = new Runnable() {
@@ -328,7 +328,7 @@ class VideoView2 extends VideoView implements _CContent, _DEF {
     @Override
     public void next() {
         mHandler.removeCallbacks(next);
-        mHandler.postDelayed(next, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(next, TIMER_MSEC_1H);
     }
 
     @Override
@@ -350,7 +350,7 @@ class VideoView2 extends VideoView implements _CContent, _DEF {
     @Override
     public void pause() {
         mHandler.removeCallbacks(pause);
-        mHandler.postDelayed(pause, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(pause, TIMER_MSEC_1H);
     }
 
     private Runnable resume = new Runnable() {
@@ -365,7 +365,7 @@ class VideoView2 extends VideoView implements _CContent, _DEF {
     @Override
     public void resume() {
         mHandler.removeCallbacks(resume);
-        mHandler.postDelayed(resume, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(resume, TIMER_MSEC_1H);
     }
 
     @Override

@@ -3,7 +3,7 @@ package kr.co.windowfun.widget;
 import android.net.Uri;
 
 /**
- * Created by isyoon on 2017-07-19.
+ * Created by isyuun on 2017-07-19.
  */
 
 interface _CContent {

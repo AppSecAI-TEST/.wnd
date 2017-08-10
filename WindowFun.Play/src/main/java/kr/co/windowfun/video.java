@@ -15,7 +15,7 @@ import android.widget.MediaController;
 import kr.co.windowfun.widget.__VideoView;
 
 /**
- * Created by isyoon on 2017-07-10.
+ * Created by isyuun on 2017-07-10.
  */
 
 public class video extends _Activity {

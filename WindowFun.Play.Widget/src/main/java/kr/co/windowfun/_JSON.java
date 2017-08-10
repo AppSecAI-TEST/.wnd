@@ -1,7 +1,7 @@
 package kr.co.windowfun;
 
 /**
- * Created by isyoon on 2017-07-19.
+ * Created by isyuun on 2017-07-19.
  */
 
 public interface _JSON {

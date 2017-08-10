@@ -15,7 +15,7 @@ public class CContent extends RelativeLayout {
     protected String __CLASSNAME__;
 
     protected String getMethodName() {
-        //Log.wtf(__CLASSNAME__, "[[getMethodName()]]");
+        //Log.wtf(__CLASSNAME__, "[[getMethodName()]][ST]");
         final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
         String reg = "[^A-Za-z0-9.]";
         int i;
@@ -30,6 +30,7 @@ public class CContent extends RelativeLayout {
                 break;
             }
         }
+        //Log.wtf(__CLASSNAME__, "[[getMethodName()]][ED]");
         return "" + item;
     }
 

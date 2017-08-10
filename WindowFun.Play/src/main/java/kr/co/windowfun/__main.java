@@ -27,7 +27,7 @@ import kr.co.windowfun.widget.__TextView;
 import kr.co.windowfun.widget.__VideoView;
 
 /**
- * Created by isyoon on 2017-07-03.
+ * Created by isyuun on 2017-07-03.
  */
 
 class __main extends _Activity implements View.OnTouchListener{
@@ -134,7 +134,7 @@ class __main extends _Activity implements View.OnTouchListener{
     @Override
     protected void onStart() {
         super.onStart();
-        mHandler.postDelayed(init, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(init, TIMER_MSEC_1H);
     }
 
     private Runnable init = new Runnable() {
@@ -155,7 +155,7 @@ class __main extends _Activity implements View.OnTouchListener{
     }
 
     private void menus() {
-        //isyoon:Hitomis/CircleMenu
+        //isyuun:Hitomis/CircleMenu
         menu = (CircleMenu2) findViewById(R.id.menu);
         ////Log.i(__CLASSNAME__, getMethodName() + "\t" + circleMenu);
 
@@ -214,7 +214,7 @@ class __main extends _Activity implements View.OnTouchListener{
 
         menu.setOnTouchListener(this);
 
-        mHandler.postDelayed(hideMenu, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(hideMenu, TIMER_MSEC_1H);
     }
 
     @Override
@@ -294,7 +294,7 @@ class __main extends _Activity implements View.OnTouchListener{
         @Override
         protected Integer doInBackground(String... params) {
             try {
-                Thread.sleep(TIMER_OPEN_LONG);
+                Thread.sleep(TIMER_MSEC_1T);
                 openHTML(params[0]);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -316,7 +316,7 @@ class __main extends _Activity implements View.OnTouchListener{
         @Override
         protected Integer doInBackground(String... params) {
             try {
-                Thread.sleep(TIMER_OPEN_LONG);
+                Thread.sleep(TIMER_MSEC_1T);
                 openVIDEO(params[0]);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -339,7 +339,7 @@ class __main extends _Activity implements View.OnTouchListener{
         @Override
         protected Intent doInBackground(Intent... params) {
             try {
-                Thread.sleep(TIMER_OPEN_LONG);
+                Thread.sleep(TIMER_MSEC_1T);
                 startActivity(params[0]);
             } catch (Exception e) {
                 e.printStackTrace();

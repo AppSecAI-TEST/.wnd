@@ -6,7 +6,7 @@ import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 
 /**
- * Created by isyoon on 2017-07-19.
+ * Created by isyuun on 2017-07-19.
  */
 
 class VideoView extends android.widget.VideoView implements _CListener {
@@ -14,7 +14,7 @@ class VideoView extends android.widget.VideoView implements _CListener {
     protected String __CLASSNAME__;
 
     protected String getMethodName() {
-        //Log.wtf(__CLASSNAME__, "[[getMethodName()]]");
+        //Log.wtf(__CLASSNAME__, "[[getMethodName()]][ST]");
         final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
         String reg = "[^A-Za-z0-9.]";
         int i;
@@ -29,6 +29,7 @@ class VideoView extends android.widget.VideoView implements _CListener {
                 break;
             }
         }
+        //Log.wtf(__CLASSNAME__, "[[getMethodName()]][ED]");
         return "" + item;
     }
 

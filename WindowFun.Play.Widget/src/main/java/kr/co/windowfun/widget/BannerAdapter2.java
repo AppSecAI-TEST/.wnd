@@ -3,13 +3,9 @@ package kr.co.windowfun.widget;
 import android.animation.Animator;
 import android.content.Context;
 import android.graphics.Color;
-import android.net.Uri;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.daimajia.androidanimations.library.Techniques;
@@ -23,67 +19,23 @@ import kr.co.windowfun._JSON;
 import kr.co.windowfun.api.JSONObject2;
 
 /**
- * Created by isyuun on 2017-08-08.
+ * Created by isyuun on 2017-08-10.
  */
 
-public class _BannerAdpater extends RecyclerView.Adapter<_BannerAdpater.ViewHolder> implements _DEF, _ENUM, _JSON {
-    private String _CLASSNAME_;
-    protected String __CLASSNAME__;
-
-    protected String getMethodName() {
-        //Log.wtf(__CLASSNAME__, "[[getMethodName()]]");
-        final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
-        String reg = "[^A-Za-z0-9.]";
-        int i;
-        StackTraceElement item = null;
-        for (i = 0; i < ste.length; i++) {
-            item = ste[i];
-            if (item.getMethodName().equalsIgnoreCase("getMethodName")) continue;
-            if (item.getMethodName().contains("access$")) continue;
-            //Log.v(_CLASSNAME_.replaceAll(reg, ""), item.getClassName().replaceAll(reg, "") + ":" + item.getMethodName() + "(" + item.getFileName() + ":" + item.getLineNumber() + ")");
-            if (item.getClassName().replaceAll(reg, "").contains(_CLASSNAME_.replaceAll(reg, ""))) {
-                //Log.i(_CLASSNAME_, item.getClassName() + ":" + item.getMethodName() + "(" + item.getFileName() + ":" + item.getLineNumber() + ")");
-                break;
-            }
-        }
-        return "" + item;
-    }
-
+class BannerAdapter2 extends BannerAdapter implements _DEF, _ENUM, _JSON {
     Context context;
     JSONArray items;
 
-    // Provide a suitable constructor (depends on the kind of dataset)
-    public _BannerAdpater(Context context, JSONArray items) {
+    public BannerAdapter2(Context context, JSONArray items) {
+        super();
         this.context = context;
         this.items = items;
-        _CLASSNAME_ = this.getClass().getName();
-        __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
-    }
-
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
-        protected __ImageView icon;
-        protected android.widget.TextView title;
-        protected android.widget.TextView text;
-        protected __TextView banner_title;
-        protected __TextView banner_text;
-
-        public ViewHolder(View v) {
-            super(v);
-            this.icon = (__ImageView) v.findViewById(R.id.icon);
-            this.banner_text = (__TextView) v.findViewById(R.id.banner_text);
-            this.title = (android.widget.TextView) v.findViewById(R.id.title);
-            this.text = (android.widget.TextView) v.findViewById(R.id.text);
-        }
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.banner, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
+    public __BannerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        android.view.View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.banner, parent, false);
+        __BannerViewHolder viewHolder = new __BannerViewHolder(view);
         return viewHolder;
     }
 
@@ -110,7 +62,7 @@ public class _BannerAdpater extends RecyclerView.Adapter<_BannerAdpater.ViewHold
     String file_name = null;
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(__BannerViewHolder holder, int position) {
         JSONObject2 item = null;
         String icon = null;
         String title = null;
@@ -205,7 +157,7 @@ public class _BannerAdpater extends RecyclerView.Adapter<_BannerAdpater.ViewHold
         //holder.text.textColor(Color.parseColor(_text_color));
         //holder.text.textBackColor(Color.parseColor(_text_backcolor));
         //banner
-        if (holder.banner_text.getVisibility() == View.VISIBLE) {
+        if (holder.banner_text.getVisibility() == android.view.View.VISIBLE) {
             holder.banner_text.text(text, _text_effect);
             holder.banner_text.textFont(_text_font);
             holder.banner_text.textLine(Boolean.parseBoolean(_text_line));
@@ -215,16 +167,6 @@ public class _BannerAdpater extends RecyclerView.Adapter<_BannerAdpater.ViewHold
             holder.banner_text.textBackColor(_text_backcolor);
             holder.banner_text.play();
         }
-        //YoYo.with(Techniques.valueOf(_play_effect))
-        //        .duration(1000)
-        //        .repeat(TIMER_ANI_LONG)
-        //        .onEnd(new YoYo.AnimatorCallback() {
-        //            @Override
-        //            public void call(Animator animator) {
-        //                //Log.wtf(__CLASSNAME__, "YoYo.onEnd()" + ":" + _type + ":" + _text_effect + ":" + _play_effect + ":" + uri + ":" + path);
-        //            }
-        //        })
-        //        .playOn(holder.text);
     }
 
     @Override

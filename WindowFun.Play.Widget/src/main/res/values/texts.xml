@@ -2,11 +2,11 @@
 <resources>
     <string name="text_default_text">window Fun Fun Fun Fun Fun Fun Fun</string>
     <string name="text_test_text">[TEST]window Fun Fun Fun Fun Fun Fun Fun[TEST]</string>
-    <!--isyoon:text_color-->
+    <!--isyuun:text_color-->
     <color name="text_default_color">#ffffffff</color>
-    <!--isyoon:text_backcolor-->
+    <!--isyuun:text_backcolor-->
     <color name="text_default_backcolor">@android:color/transparent</color>
-    <!--isyoon:text_size-->
+    <!--isyuun:text_size-->
     <dimen name="text_size_xxxlarge">112sp</dimen>
     <dimen name="text_size_xxlarge">90sp</dimen>
     <dimen name="text_size_xlarge">45sp</dimen>

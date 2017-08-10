@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import java.io.File;
 
 /**
- * Created by isyoon on 2017-07-25.
+ * Created by isyuun on 2017-07-25.
  */
 
 public class CFile /*implements _JSON */ {
@@ -13,7 +13,7 @@ public class CFile /*implements _JSON */ {
     protected String __CLASSNAME__;
 
     protected String getMethodName() {
-        //Log.wtf(__CLASSNAME__, "[[getMethodName()]]");
+        //Log.wtf(__CLASSNAME__, "[[getMethodName()]][ST]");
         final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
         String reg = "[^A-Za-z0-9.]";
         int i;
@@ -28,6 +28,7 @@ public class CFile /*implements _JSON */ {
                 break;
             }
         }
+        //Log.wtf(__CLASSNAME__, "[[getMethodName()]][ED]");
         return "" + item;
     }
 

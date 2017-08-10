@@ -16,7 +16,7 @@ import java.util.Random;
 import kr.co.windowfun._DEF;
 
 /**
- * Created by isyoon on 2017-07-13.
+ * Created by isyuun on 2017-07-13.
  */
 
 class ImageView2 extends ImageView implements _CContent, _DEF {
@@ -148,13 +148,13 @@ class ImageView2 extends ImageView implements _CContent, _DEF {
         @Override
         public void run() {
             mHandler.removeCallbacks(complete);
-            int r = ImageView2.this.r.nextInt(TIMER_IMG_LONG - TIMER_IMG_SHORT + 1) + TIMER_IMG_SHORT;
+            int r = ImageView2.this.r.nextInt(TIMER_MSEC_5T - TIMER_MSEC_1T + 1) + TIMER_MSEC_1T;
             if (index > -1 && index < path.size()) {
                 Uri uri = Uri.parse(path.get(index));
                 if (uri.toString().contains((".gif"))) {
                     //Log.wtf(__CLASSNAME__, getMethodName() + ":" + index + "->" + uri);
-                    r = TIMER_ANI_NORMAL;
-                    r = TIMER_ANI_LONG;
+                    r = TIMER_MSEC_10T;
+                    r = TIMER_MSEC_30T;
                 }
             }
             if (length < 0) {
@@ -176,14 +176,14 @@ class ImageView2 extends ImageView implements _CContent, _DEF {
     @Override
     public void play() {
         mHandler.removeCallbacks(play);
-        mHandler.postDelayed(play, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(play, TIMER_MSEC_1H);
     }
 
     @Override
     public void play(int length) {
         this.length = length;
         mHandler.removeCallbacks(play);
-        mHandler.postDelayed(play, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(play, TIMER_MSEC_1H);
     }
 
     @Override
@@ -223,7 +223,7 @@ class ImageView2 extends ImageView implements _CContent, _DEF {
     @Override
     public void rand() {
         mHandler.removeCallbacks(rand);
-        mHandler.postDelayed(rand, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(rand, TIMER_MSEC_1H);
     }
 
     private Runnable prev = new Runnable() {
@@ -241,7 +241,7 @@ class ImageView2 extends ImageView implements _CContent, _DEF {
 
     public void prev() {
         mHandler.removeCallbacks(prev);
-        mHandler.postDelayed(prev, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(prev, TIMER_MSEC_1H);
     }
 
     private Runnable next = new Runnable() {
@@ -259,7 +259,7 @@ class ImageView2 extends ImageView implements _CContent, _DEF {
 
     public void next() {
         mHandler.removeCallbacks(next);
-        mHandler.postDelayed(next, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(next, TIMER_MSEC_1H);
     }
 
     private Runnable pause = new Runnable() {
@@ -277,7 +277,7 @@ class ImageView2 extends ImageView implements _CContent, _DEF {
     @Override
     public void pause() {
         mHandler.removeCallbacks(pause);
-        mHandler.postDelayed(pause, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(pause, TIMER_MSEC_1H);
     }
 
     private Runnable resume = new Runnable() {
@@ -290,7 +290,7 @@ class ImageView2 extends ImageView implements _CContent, _DEF {
     @Override
     public void resume() {
         mHandler.removeCallbacks(resume);
-        mHandler.postDelayed(resume, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(resume, TIMER_MSEC_1H);
     }
 
     @Override

@@ -20,7 +20,7 @@ import cz.msebera.android.httpclient.Header;
 
 /**
  * 관리자기능
- * Created by isyoon on 2017-07-27.
+ * Created by isyuun on 2017-07-27.
  */
 
 class home extends _Activity {
@@ -79,7 +79,7 @@ class home extends _Activity {
 
     private void hide() {
         mHandler.removeCallbacks(hide);
-        mHandler.postDelayed(hide, TIMER_RESET_SHORT);
+        mHandler.postDelayed(hide, TIMER_MSEC_1T);
     }
 
     private Runnable shows = new Runnable() {

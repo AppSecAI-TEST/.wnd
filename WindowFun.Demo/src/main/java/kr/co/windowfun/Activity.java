@@ -9,7 +9,7 @@ import kr.co.windowfun.app.__Activity;
 
 /**
  * JSON데이터처리
- * Created by isyoon on 2017-07-25.
+ * Created by isyuun on 2017-07-25.
  */
 
 class Activity extends __Activity implements _DEF, _JSON {

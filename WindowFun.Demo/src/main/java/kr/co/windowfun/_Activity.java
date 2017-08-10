@@ -7,7 +7,7 @@ import android.util.Log;
 
 /**
  * 수퍼액티비티
- * Created by isyoon on 2017-07-18.
+ * Created by isyuun on 2017-07-18.
  */
 
 class _Activity extends Activity2 {

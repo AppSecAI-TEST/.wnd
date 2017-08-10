@@ -34,7 +34,7 @@
 
         <kr.co.windowfun.widget.__TextView
             android:id="@+id/banner_title"
-            style="@style/banner_text"
+            style="@style/banner_title"
             android:layout_width="match_parent"
             android:layout_toRightOf="@+id/icon"
             android:visibility="gone"/>

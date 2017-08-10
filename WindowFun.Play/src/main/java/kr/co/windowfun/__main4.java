@@ -3,7 +3,7 @@ package kr.co.windowfun;
 import android.view.View;
 
 import kr.co.windowfun.api.JSONObject2;
-import kr.co.windowfun.widget._BannerAdpater;
+import kr.co.windowfun.widget.__BannerAdapter;
 import kr.co.windowfun.widget.__BannerView;
 
 /**
@@ -59,7 +59,7 @@ class __main4 extends __main3 {
         banner.setLayoutManager(10.0f);
 
         // specify an adapter (see also next example)
-        banner.setAdapter(new _BannerAdpater(getBaseContext(), getApp().result_banner));
+        banner.setAdapter(new __BannerAdapter(getBaseContext(), getApp().result_banner));
 
         //marquee
         marquee();
@@ -74,7 +74,7 @@ class __main4 extends __main3 {
 
     private void marquee() {
         mHandler.removeCallbacks(marquee);
-        mHandler.postDelayed(marquee, TIMER_OPEN_NORMAL);
+        mHandler.postDelayed(marquee, TIMER_MSEC_5H);
     }
 
     @Override

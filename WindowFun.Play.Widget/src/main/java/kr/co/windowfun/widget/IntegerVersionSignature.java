@@ -5,7 +5,7 @@ import com.bumptech.glide.load.Key;
 import java.security.MessageDigest;
 
 /**
- * Created by isyoon on 2017-07-21.
+ * Created by isyuun on 2017-07-21.
  */
 @Deprecated
 final public class IntegerVersionSignature implements Key {

@@ -4,7 +4,7 @@ import android.view.View;
 
 /**
  * 컨텐츠리스너<br>
- * Created by isyoon on 2017-07-24.
+ * Created by isyuun on 2017-07-24.
  */
 
 public interface _CContentListener {

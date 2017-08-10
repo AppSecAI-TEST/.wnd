@@ -11,7 +11,7 @@ import cz.msebera.android.httpclient.Header;
 
 /**
  * 다운로드
- * Created by isyoon on 2017-07-26.
+ * Created by isyuun on 2017-07-26.
  */
 
 class Application4 extends Application3 {

@@ -29,7 +29,7 @@ import kr.co.windowfun.widget.ProgressBar;
 
 /**
  * 로그인/조회/다운
- * Created by isyoon on 2017-07-12.
+ * Created by isyuun on 2017-07-12.
  */
 
 class home2 extends home implements __API {
@@ -143,7 +143,7 @@ class home2 extends home implements __API {
 
     private void init() {
         mHandler.removeCallbacks(init);
-        mHandler.postDelayed(init, TIMER_OPEN_LONG);
+        mHandler.postDelayed(init, TIMER_MSEC_1T);
     }
 
     @Override
@@ -212,7 +212,7 @@ class home2 extends home implements __API {
     private void send() {
         clear();
         mHandler.removeCallbacks(send);
-        mHandler.postDelayed(send, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(send, TIMER_MSEC_1H);
     }
 
     Runnable send = new Runnable() {
@@ -240,7 +240,7 @@ class home2 extends home implements __API {
 
     private void open() {
         mHandler.removeCallbacks(open);
-        mHandler.postDelayed(open, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(open, TIMER_MSEC_1H);
     }
 
     @Override
@@ -364,7 +364,7 @@ class home2 extends home implements __API {
 
     private void down() {
         mHandler.removeCallbacks(down);
-        mHandler.postDelayed(down, TIMER_OPEN_SHORT);
+        mHandler.postDelayed(down, TIMER_MSEC_1H);
     }
 
     private Runnable complete = new Runnable() {

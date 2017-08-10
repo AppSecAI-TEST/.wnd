@@ -1,14 +1,16 @@
-package kr.co.windowfun.app;
+package kr.co.windowfun.widget;
 
-import android.content.Intent;
-import android.content.res.Resources;
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.ViewGroup;
+
+import org.json.JSONArray;
 
 /**
- * 기본액티비티
- * Created by isyuun on 2017-07-06.
+ * Created by isyuun on 2017-08-08.
  */
 
-class Activity extends android.app.Activity {
+class BannerAdapter extends RecyclerView.Adapter<__BannerViewHolder> {
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
 
@@ -32,22 +34,24 @@ class Activity extends android.app.Activity {
         return "" + item;
     }
 
-    public Activity() {
-        super();
+    // Provide a suitable constructor (depends on the kind of dataset)
+    public BannerAdapter() {
         _CLASSNAME_ = this.getClass().getName();
         __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
     }
 
-    protected boolean isACTIONMAIN() {
-        return Intent.ACTION_MAIN.equalsIgnoreCase(getIntent().getAction());
+    @Override
+    public __BannerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return null;
     }
 
-    public String getResourceEntryName(int resid) {
-        try {
-            return getResources().getResourceEntryName(resid);
-        } catch (Resources.NotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
+    @Override
+    public void onBindViewHolder(__BannerViewHolder holder, int position) {
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return 0;
     }
 }

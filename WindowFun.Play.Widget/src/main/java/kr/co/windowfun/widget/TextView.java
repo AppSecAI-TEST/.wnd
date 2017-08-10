@@ -8,7 +8,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.HorizontalScrollView;
 
 /**
- * Created by isyoon on 2017-07-19.
+ * Created by isyuun on 2017-07-19.
  */
 
 class TextView extends HorizontalScrollView implements _CListener {
@@ -16,7 +16,7 @@ class TextView extends HorizontalScrollView implements _CListener {
     protected String __CLASSNAME__;
 
     protected String getMethodName() {
-        //Log.wtf(__CLASSNAME__, "[[getMethodName()]]");
+        //Log.wtf(__CLASSNAME__, "[[getMethodName()]][ST]");
         final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
         String reg = "[^A-Za-z0-9.]";
         int i;
@@ -31,6 +31,7 @@ class TextView extends HorizontalScrollView implements _CListener {
                 break;
             }
         }
+        //Log.wtf(__CLASSNAME__, "[[getMethodName()]][ED]");
         return "" + item;
     }
 

@@ -13,7 +13,7 @@ import kr.co.windowfun.api.JsonHttpResponseHandler2;
 
 /**
  * JSON전송
- * Created by isyoon on 2017-07-17.
+ * Created by isyuun on 2017-07-17.
  */
 
 class Activity3 extends Activity2 {

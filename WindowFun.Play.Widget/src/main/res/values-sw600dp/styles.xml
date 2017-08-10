@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--isyoon:circle_menu-->
+    <!--isyuun:circle_menu-->
     <style name="circle_menu">
         <item name="android:layout_width">480dp</item>
         <item name="android:layout_height">480dp</item>
         <item name="android:layout_margin">0dp</item>
     </style>
-    <!--isyoon:action_button-->
+    <!--isyuun:action_button-->
     <style name="action_button">
         <item name="android:layout_width">80dp</item>
         <item name="android:layout_height">80dp</item>
         <item name="android:layout_margin">@dimen/margin_normal</item>
     </style>
-    <!--isyoon:hidden_button-->
+    <!--isyuun:hidden_button-->
     <style name="hidden_button">
         <item name="android:layout_width">80dp</item>
         <item name="android:layout_height">80dp</item>

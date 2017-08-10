@@ -9,7 +9,7 @@ import org.json.JSONArray;
 import kr.co.windowfun.app.__Application;
 
 /**
- * Created by isyoon on 2017-07-26.
+ * Created by isyuun on 2017-07-26.
  */
 
 public class Application extends __Application implements _DEF {

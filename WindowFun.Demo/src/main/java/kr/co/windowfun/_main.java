@@ -170,7 +170,7 @@ public class _main extends _Activity {
         webSettings.setJavaScriptEnabled(true);
         webView.loadUrl("http://windowfun.co.kr/type/index2.html");
 
-        //isyoon
+        //isyuun
         webView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -249,7 +249,7 @@ public class _main extends _Activity {
     }
 
     private void manus() {
-        //isyoon:Hitomis/CircleMenu
+        //isyuun:Hitomis/CircleMenu
         menu = (CircleMenu) findViewById(R.id.menu);
         ////Log.i(__CLASSNAME__, getMethodName() + "\t" + circleMenu);
 

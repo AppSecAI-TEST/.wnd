@@ -1,7 +1,7 @@
 package kr.co.windowfun.api;
 
 /**
- * Created by isyoon on 2017-07-18.
+ * Created by isyuun on 2017-07-18.
  */
 
 public class JsonHttpResponseHandler extends com.loopj.android.http.JsonHttpResponseHandler {
@@ -9,7 +9,7 @@ public class JsonHttpResponseHandler extends com.loopj.android.http.JsonHttpResp
     protected String __CLASSNAME__;
 
     protected String getMethodName() {
-        //Log.wtf(__CLASSNAME__, "[[getMethodName()]]");
+        //Log.wtf(__CLASSNAME__, "[[getMethodName()]][ST]");
         final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
         String reg = "[^A-Za-z0-9.]";
         int i;
@@ -24,6 +24,7 @@ public class JsonHttpResponseHandler extends com.loopj.android.http.JsonHttpResp
                 break;
             }
         }
+        //Log.wtf(__CLASSNAME__, "[[getMethodName()]][ED]");
         return "" + item;
     }
 

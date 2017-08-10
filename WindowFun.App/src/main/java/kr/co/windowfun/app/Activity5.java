@@ -8,7 +8,7 @@ import android.support.v4.content.ContextCompat;
 
 /**
  * TODO:마시멜로.권한설정
- * Created by isyoon on 2017-07-28.
+ * Created by isyuun on 2017-07-28.
  */
 
 class Activity5 extends Activity4 {
