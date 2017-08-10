@@ -107,7 +107,6 @@ class ImageView2 extends ImageView implements _CContent, _DEF {
             //Glide.get(getContext()).clearDiskCache(); //test
             //bumptech/glide:option
             RequestOptions options = new RequestOptions()
-                    //.diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                     .override(w, h)
                     .lock();
             //bumptech/glide:GlideApp
