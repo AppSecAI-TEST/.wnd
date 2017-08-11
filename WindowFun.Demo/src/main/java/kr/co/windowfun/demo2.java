@@ -10,7 +10,7 @@ import kr.co.windowfun.widget.__VideoView;
  * Created by isyuun on 2017-07-12.
  */
 
-public class demo2 extends _main {
+public class demo2 extends _demo {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

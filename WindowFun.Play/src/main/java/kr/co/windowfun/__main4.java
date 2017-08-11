@@ -2,90 +2,63 @@ package kr.co.windowfun;
 
 import android.view.View;
 
-import kr.co.windowfun.api.JSONObject2;
-import kr.co.windowfun.widget.__BannerAdapter;
-import kr.co.windowfun.widget.__BannerView;
-
 /**
- * result_banner...
- * Created by isyuun on 2017-08-08.
+ * result_type._c_type
+ * Created by isyuun on 2017-08-07.
  */
 
-class __main4 extends __main3 {
-
-    __BannerView banner;
+class __main4 extends __main3 implements _ENUM {
+    c_type _c_type = c_type.C;
 
     @Override
-    protected void init() {
-        super.init();
-        _banner();
+    protected void _contents() {
+        super._contents();
+        _c_type();
     }
 
-    private void _banner() {
+    private void _c_type() {
         try {
-            //Log.wtf(__CLASSNAME__, "_banner()" + ":" + getApp().result_banner.toString(2));
-            for (int i = 0; i < getApp().result_banner.length(); i++) {
-                JSONObject2 item = new JSONObject2(getApp().result_banner.get(i).toString());
-                //Log.wtf(__CLASSNAME__, "_banner()" + ":" + item.toString(2));
-            }
+            _c_type = _c_type.valueOf(getApp().result_type.getString(result_type.c_type));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        int id = 0;
+        //content
         switch (_c_type) {
             case A:
+                findViewById(R.id.banner_short).setVisibility(View.GONE);
+                findViewById(R.id.banner_long).setVisibility(View.VISIBLE);
+                findViewById(R.id.cs).setVisibility(View.GONE);
+                findViewById(R.id.c3).setVisibility(View.GONE);
+                findViewById(R.id.c4).setVisibility(View.GONE);
+                findViewById(R.id.c5).setVisibility(View.GONE);
+                break;
             case B:
+                findViewById(R.id.banner_short).setVisibility(View.GONE);
+                findViewById(R.id.banner_long).setVisibility(View.VISIBLE);
+                findViewById(R.id.c5).setVisibility(View.GONE);
+                break;
             case C:
-                id = R.id.banner_long;
+                findViewById(R.id.banner_short).setVisibility(View.GONE);
+                findViewById(R.id.banner_long).setVisibility(View.VISIBLE);
                 break;
             case D:
+                findViewById(R.id.banner_short).setVisibility(View.VISIBLE);
+                findViewById(R.id.banner_long).setVisibility(View.GONE);
+                findViewById(R.id.c5).setVisibility(View.GONE);
+                break;
             case E:
-                id = R.id.banner_short;
+                findViewById(R.id.banner_short).setVisibility(View.VISIBLE);
+                findViewById(R.id.banner_long).setVisibility(View.GONE);
                 break;
             case F:
+                findViewById(R.id.banner_short).setVisibility(View.GONE);
+                findViewById(R.id.banner_long).setVisibility(View.GONE);
+                findViewById(R.id.cs).setVisibility(View.GONE);
+                findViewById(R.id.c3).setVisibility(View.GONE);
+                findViewById(R.id.c4).setVisibility(View.GONE);
+                findViewById(R.id.c5).setVisibility(View.GONE);
                 break;
         }
-        if (id < 1) return;
-        findViewById(id).setVisibility(View.VISIBLE);
-
-        //banner start
-        banner = (__BannerView) findViewById(id);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        banner.setHasFixedSize(true);
-
-        // use a linear layout manager
-        banner.setLayoutManager(10.0f);
-
-        // specify an adapter (see also next example)
-        banner.setAdapter(new __BannerAdapter(getBaseContext(), getApp().result_banner));
-
-        //marquee
-        marquee();
     }
 
-    private Runnable marquee = new Runnable() {
-        @Override
-        public void run() {
-            banner.marquee();
-        }
-    };
-
-    private void marquee() {
-        mHandler.removeCallbacks(marquee);
-        mHandler.postDelayed(marquee, TIMER_MSEC_5H);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        marquee();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (banner != null) banner.stop();
-    }
 }

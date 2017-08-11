@@ -32,7 +32,7 @@ import kr.co.windowfun.widget.__ImageView;
 import kr.co.windowfun.widget.__TextView;
 import kr.co.windowfun.widget.__VideoView;
 
-public class _main extends _Activity {
+class _demo extends _Activity {
     protected final int DELAY_TIME_OPEN = 100;
 
     private Handler mHandler = new Handler();
@@ -193,13 +193,6 @@ public class _main extends _Activity {
                         ((__ImageView) i).prev();
                     } else if (x > w / 2) {
                         ((__ImageView) i).next();
-                    }
-                    for (__VideoView video : videos) {
-                        if (i == video) {
-                            video.mute(false);
-                        } else {
-                            video.mute(true);
-                        }
                     }
                     mHandler.post(showMenu);
                     return false;
