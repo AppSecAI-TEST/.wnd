@@ -1,8 +1,11 @@
 package kr.co.windowfun;
 
+import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import kr.co.windowfun.widget._CContentListener;
 import kr.co.windowfun.widget.__CContent;
@@ -14,6 +17,14 @@ import kr.co.windowfun.widget.__VideoView;
  */
 
 class __demo extends __main implements _CContentListener, View.OnTouchListener {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.main);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
 
     @Override
     protected void init() {
