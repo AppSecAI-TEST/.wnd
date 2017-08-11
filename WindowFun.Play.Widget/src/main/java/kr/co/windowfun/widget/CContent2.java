@@ -83,11 +83,11 @@ class CContent2 extends CContent implements _CContent, _DEF, _ENUM, _JSON {
         ((__HtmlView) findViewById(R.id.html)).show();
     }
 
-    private JSONArray contents;
+    private JSONArray items;
 
-    public void setContents(JSONArray contents) {
-        //Log.wtf(__CLASSNAME__, getMethodName() + "\n[contents]\n" + toString(contents, 2));
-        this.contents = contents;
+    public void items(JSONArray items) {
+        //Log.wtf(__CLASSNAME__, getMethodName() + "\n[items]\n" + toString(items, 2));
+        this.items = items;
         index = 0;
         //start();
         //rand(); //test
@@ -193,11 +193,11 @@ class CContent2 extends CContent implements _CContent, _DEF, _ENUM, _JSON {
      */
     private void _open() {
         try {
-            Log.i(__CLASSNAME__, getMethodName() + ":" + CContent2.this.index + "\n" + ((JSONObject) CContent2.this.contents.get(index)).toString(2));
+            Log.i(__CLASSNAME__, getMethodName() + ":" + CContent2.this.index + "\n" + ((JSONObject) CContent2.this.items.get(index)).toString(2));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (!(index < (contents != null ? contents.length() : 0))) return;
+        if (!(index < (items != null ? items.length() : 0))) return;
 
         //reset
         item = null;
@@ -205,7 +205,7 @@ class CContent2 extends CContent implements _CContent, _DEF, _ENUM, _JSON {
         _text = null;
 
         try {
-            item = new JSONObject2(contents.getJSONObject(index).toString());
+            item = new JSONObject2(items.getJSONObject(index).toString());
             _type = !item.isNullString(result_c.type) ? item.getString(result_c.type) : _type;
             _text = !item.isNullString(result_c.text) ? item.getString(result_c.text) : _text;
         } catch (Exception e) {
@@ -384,8 +384,12 @@ class CContent2 extends CContent implements _CContent, _DEF, _ENUM, _JSON {
     }
 
     public void start() {
-        _open();
-        _play();
+        try {
+            _open();
+            _play();
+        } catch (Exception e) {
+            Log.wtf(__CLASSNAME__, getMethodName() + Log.getStackTraceString(e));
+        }
     }
 
     @Override
@@ -409,13 +413,13 @@ class CContent2 extends CContent implements _CContent, _DEF, _ENUM, _JSON {
         @Override
         public void run() {
             int min = 0;
-            int max = (contents != null ? contents.length() : 0) - 1;
+            int max = (items != null ? items.length() : 0) - 1;
             int idx;
             try {
                 idx = r.nextInt(max - min) + min;
-                if (idx > -1 && idx < contents.length()) {
+                if (idx > -1 && idx < items.length()) {
                     index = idx;
-                    Log.wtf(__CLASSNAME__, getMethodName() + ":" + idx + ":" + contents.get(idx));
+                    Log.wtf(__CLASSNAME__, getMethodName() + ":" + idx + ":" + items.get(idx));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -437,7 +441,7 @@ class CContent2 extends CContent implements _CContent, _DEF, _ENUM, _JSON {
         public void run() {
             index--;
             if (index < 0) {
-                index = (contents != null ? contents.length() : 0) - 1;
+                index = (items != null ? items.length() : 0) - 1;
             }
             //Log.i(__CLASSNAME__, getMethodName() + ":" + index);
             start();
@@ -454,7 +458,7 @@ class CContent2 extends CContent implements _CContent, _DEF, _ENUM, _JSON {
         @Override
         public void run() {
             index++;
-            if (index > (contents != null ? contents.length() : 0) - 1) {
+            if (index > (items != null ? items.length() : 0) - 1) {
                 index = 0;
             }
             //Log.i(__CLASSNAME__, getMethodName() + ":" + index);

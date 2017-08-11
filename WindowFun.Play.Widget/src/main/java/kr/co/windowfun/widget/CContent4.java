@@ -1,7 +1,6 @@
 package kr.co.windowfun.widget;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;

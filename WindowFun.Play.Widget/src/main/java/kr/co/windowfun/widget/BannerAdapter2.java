@@ -1,6 +1,5 @@
 package kr.co.windowfun.widget;
 
-import android.animation.Animator;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
@@ -9,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 
 import org.json.JSONArray;
 

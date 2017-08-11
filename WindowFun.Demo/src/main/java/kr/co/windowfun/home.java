@@ -26,28 +26,28 @@ public class home extends _Activity {
         findViewById(R.id.main_typea).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(home.this, demo.class));
+                startActivity(new Intent(getBaseContext(), demo.class));
             }
         });
 
         findViewById(R.id.main_typeb1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(home.this, demo2.class));
+                startActivity(new Intent(getBaseContext(), demo2.class));
             }
         });
 
         findViewById(R.id.main_typeb2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(home.this, demo3.class));
+                startActivity(new Intent(getBaseContext(), demo3.class));
             }
         });
 
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(home.this, demo2.class));
+                startActivity(new Intent(getBaseContext(), demo2.class));
             }
         }, 300);
     }

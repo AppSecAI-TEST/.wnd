@@ -122,7 +122,6 @@ class ImageView2 extends ImageView implements _CContent, _DEF {
                     .load(model)
                     .into(this);
         } catch (Exception e) {
-            //Log.wtf(__CLASSNAME__, getMethodName() + ":" + Log.getStackTraceString(e));
             e.printStackTrace();
         }
     }

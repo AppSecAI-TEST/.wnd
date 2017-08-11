@@ -21,7 +21,7 @@ class Activity2 extends Activity {
         @Override
         public void run() {
             Log.d(__CLASSNAME__, getMethodName() + ":" + getApp().token);
-            Intent intent = new Intent(Activity2.this, login.class);
+            Intent intent = new Intent(getBaseContext(), login.class);
             startActivityForResult(intent, _RESULT_LOGIN);
         }
     };

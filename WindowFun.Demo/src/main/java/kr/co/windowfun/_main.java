@@ -51,15 +51,15 @@ public class _main extends _Activity {
         if (!requestForPermission()) {
             return;
         }
-        Log.wtf(__CLASSNAME__, "List: " + root_mp4);
+        Log.wtf(__CLASSNAME__, getMethodName() + ":" + "List: " + root_mp4);
         File directory = new File(root_mp4);
         File[] files = directory.listFiles();
-        Log.wtf(__CLASSNAME__, "List: " + files);
+        Log.wtf(__CLASSNAME__, getMethodName() + ":" + "List: " + files);
         if (files != null) {
-            ////Log.d(__CLASSNAME__, "Size: "+ files.length);
+            ////Log.d(__CLASSNAME__, getMethodName() + ":" + "Size: "+ files.length);
             for (int i = 0; i < files.length; i++) {
-                //Log.d(__CLASSNAME__, "FileName:" + files[i].getName());
-                Log.d(__CLASSNAME__, "PathName:" + files[i].getPath());
+                //Log.d(__CLASSNAME__, getMethodName() + ":" + "FileName:" + files[i].getName());
+                Log.d(__CLASSNAME__, getMethodName() + ":" + "PathName:" + files[i].getPath());
                 if (files[i].isFile()) mp4.add(files[i].getPath());
             }
         }
@@ -253,15 +253,33 @@ public class _main extends _Activity {
         menu = (CircleMenu) findViewById(R.id.menu);
         ////Log.i(__CLASSNAME__, getMethodName() + "\t" + circleMenu);
 
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_event, new Object[]{"#258CFF", "html", "http://windowfun.co.kr/type/typea/"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_member, new Object[]{"#30A400", "html", "http://windowfun.co.kr/type/typeb/"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_point, new Object[]{"#FF4B32", "html", "http://windowfun.co.kr/type/typec/"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_retrieval, new Object[]{"#8A39FF", "html", "http://windowfun.co.kr/type/typed/"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_store, new Object[]{"#FF6A00", "html", "http://windowfun.co.kr/type/typee/"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_home, new Object[]{"#258CFF", "html", "http://drive.google.com/viewerng/viewer?embedded=true&url=http://windowfun.co.kr/type/windowfun.pdf"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_search, new Object[]{"#30A400", "video", root_mp4 + File.separator + "c" + File.separator + "c1.mp4"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_game, new Object[]{"#FF4B32", "html", "http://windowfun.co.kr/game/"});}});
-        menus.add(new HashMap<Integer, Object[]>() {{put(R.drawable.wf_menu_setup, new Object[]{"#8A39FF", "html", "http://to-day.co.kr"});}});
+        menus.add(new HashMap<Integer, Object[]>() {{
+            put(R.drawable.wf_menu_event, new Object[]{"#258CFF", "html", "http://windowfun.co.kr/type/typea/"});
+        }});
+        menus.add(new HashMap<Integer, Object[]>() {{
+            put(R.drawable.wf_menu_member, new Object[]{"#30A400", "html", "http://windowfun.co.kr/type/typeb/"});
+        }});
+        menus.add(new HashMap<Integer, Object[]>() {{
+            put(R.drawable.wf_menu_point, new Object[]{"#FF4B32", "html", "http://windowfun.co.kr/type/typec/"});
+        }});
+        menus.add(new HashMap<Integer, Object[]>() {{
+            put(R.drawable.wf_menu_retrieval, new Object[]{"#8A39FF", "html", "http://windowfun.co.kr/type/typed/"});
+        }});
+        menus.add(new HashMap<Integer, Object[]>() {{
+            put(R.drawable.wf_menu_store, new Object[]{"#FF6A00", "html", "http://windowfun.co.kr/type/typee/"});
+        }});
+        menus.add(new HashMap<Integer, Object[]>() {{
+            put(R.drawable.wf_menu_home, new Object[]{"#258CFF", "html", "http://drive.google.com/viewerng/viewer?embedded=true&url=http://windowfun.co.kr/type/windowfun.pdf"});
+        }});
+        menus.add(new HashMap<Integer, Object[]>() {{
+            put(R.drawable.wf_menu_search, new Object[]{"#30A400", "video", root_mp4 + File.separator + "c" + File.separator + "c1.mp4"});
+        }});
+        menus.add(new HashMap<Integer, Object[]>() {{
+            put(R.drawable.wf_menu_game, new Object[]{"#FF4B32", "html", "http://windowfun.co.kr/game/"});
+        }});
+        menus.add(new HashMap<Integer, Object[]>() {{
+            put(R.drawable.wf_menu_setup, new Object[]{"#8A39FF", "html", "http://to-day.co.kr"});
+        }});
 
         menu.setMainMenu(ContextCompat.getColor(this, android.R.color.holo_red_dark),
                 R.drawable.wf_icon_menu,
@@ -354,7 +372,7 @@ public class _main extends _Activity {
     private void openHTML(String url) {
         //Log.w(__CLASSNAME__, getMethodName() + ":" + url);
         if (!TextUtils.isEmpty(url)) {
-            Intent intent = new Intent(_main.this, html.class);
+            Intent intent = new Intent(getBaseContext(), html.class);
             intent.putExtra("url", url);
             startActivity(intent);
         }
@@ -376,7 +394,7 @@ public class _main extends _Activity {
     private void openVIDEO(String url) {
         //Log.w(__CLASSNAME__, getMethodName() + ":" + url);
         if (!TextUtils.isEmpty(url)) {
-            Intent intent = new Intent(_main.this, video.class);
+            Intent intent = new Intent(getBaseContext(), video.class);
             intent.putExtra("url", url);
             startActivity(intent);
         }

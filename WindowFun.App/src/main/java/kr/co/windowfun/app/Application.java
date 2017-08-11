@@ -8,6 +8,12 @@ class Application extends android.app.Application {
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
 
+    public Application() {
+        super();
+        _CLASSNAME_ = this.getClass().getName();
+        __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
+    }
+
     protected String getMethodName() {
         //Log.wtf(__CLASSNAME__, "[[getMethodName()]][ST]");
         final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
@@ -26,11 +32,5 @@ class Application extends android.app.Application {
         }
         //Log.wtf(__CLASSNAME__, "[[getMethodName()]][ED]");
         return "" + item;
-    }
-
-    public Application() {
-        super();
-        _CLASSNAME_ = this.getClass().getName();
-        __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
     }
 }

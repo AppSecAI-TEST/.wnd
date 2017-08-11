@@ -42,21 +42,21 @@ class home2 extends home implements __API {
             findViewById(R.id.demo).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(home2.this, demo.class));
+                    startActivity(new Intent(getBaseContext(), demo.class));
                 }
             });
 
             findViewById(R.id.demo2).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(home2.this, demo2.class));
+                    startActivity(new Intent(getBaseContext(), demo2.class));
                 }
             });
 
             findViewById(R.id.demo3).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(home2.this, demo3.class));
+                    startActivity(new Intent(getBaseContext(), demo3.class));
                 }
             });
 
@@ -234,7 +234,7 @@ class home2 extends home implements __API {
     private Runnable open = new Runnable() {
         @Override
         public void run() {
-            startActivity(new Intent(home2.this, main.class));
+            startActivity(new Intent(getBaseContext(), main.class));
         }
     };
 

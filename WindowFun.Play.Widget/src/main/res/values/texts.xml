@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="text_default_text">window Fun Fun Fun Fun Fun Fun Fun</string>
-    <string name="text_test_text">[TEST]window Fun Fun Fun Fun Fun Fun Fun[TEST]</string>
+    <string name="text_default_text">window Fun Play Fun Play Fun Play Fun Play</string>
+    <string name="text_test_text">[TEST]window Fun Play Fun Play Fun Play Fun Play[TEST]</string>
     <!--isyuun:text_color-->
     <color name="text_default_color">#ffffffff</color>
     <!--isyuun:text_backcolor-->

@@ -1,10 +1,7 @@
 package kr.co.windowfun.widget;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
-
-import org.json.JSONArray;
 
 /**
  * Created by isyuun on 2017-08-08.
@@ -13,6 +10,13 @@ import org.json.JSONArray;
 class BannerAdapter extends RecyclerView.Adapter<__BannerViewHolder> {
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
+
+    // Provide a suitable constructor (depends on the kind of dataset)
+    public BannerAdapter() {
+        super();
+        _CLASSNAME_ = this.getClass().getName();
+        __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
+    }
 
     protected String getMethodName() {
         //Log.wtf(__CLASSNAME__, "[[getMethodName()]][ST]");
@@ -32,12 +36,6 @@ class BannerAdapter extends RecyclerView.Adapter<__BannerViewHolder> {
         }
         //Log.wtf(__CLASSNAME__, "[[getMethodName()]][ED]");
         return "" + item;
-    }
-
-    // Provide a suitable constructor (depends on the kind of dataset)
-    public BannerAdapter() {
-        _CLASSNAME_ = this.getClass().getName();
-        __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
     }
 
     @Override

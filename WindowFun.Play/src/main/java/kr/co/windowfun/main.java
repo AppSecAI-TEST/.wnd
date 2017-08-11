@@ -8,7 +8,7 @@ import android.view.WindowManager;
  * Created by isyuun on 2017-07-12.
  */
 
-public class main extends __main4 {
+public class main extends __main5 {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         //Log.w(__CLASSNAME__, getMethodName());

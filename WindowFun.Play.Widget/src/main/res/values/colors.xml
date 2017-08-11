@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <!--isyuun-->
+    <color name="black">@android:color/black</color>
+    <color name="transparent">@android:color/transparent</color>
     <color name="DarkActionBarColor">#333333</color>
     <color name="test_default_color">#ffff0000</color>
     <color name="test_default_backcolor">#55ff00ff</color>

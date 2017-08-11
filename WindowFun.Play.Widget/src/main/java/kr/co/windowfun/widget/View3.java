@@ -29,6 +29,7 @@ class View3 extends View2 implements android.view.View.OnTouchListener, android.
     public View3(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();

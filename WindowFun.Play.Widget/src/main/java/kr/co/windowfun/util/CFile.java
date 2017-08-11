@@ -12,6 +12,12 @@ public class CFile /*implements _JSON */ {
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
 
+    public CFile() {
+        super();
+        _CLASSNAME_ = this.getClass().getName();
+        __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
+    }
+
     protected String getMethodName() {
         //Log.wtf(__CLASSNAME__, "[[getMethodName()]][ST]");
         final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
@@ -30,12 +36,6 @@ public class CFile /*implements _JSON */ {
         }
         //Log.wtf(__CLASSNAME__, "[[getMethodName()]][ED]");
         return "" + item;
-    }
-
-    public CFile() {
-        super();
-        _CLASSNAME_ = this.getClass().getName();
-        __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
     }
 
     public String file_name;

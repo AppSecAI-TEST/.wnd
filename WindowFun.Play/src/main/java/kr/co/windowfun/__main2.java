@@ -12,7 +12,7 @@ import kr.co.windowfun.widget.__CContent;
 import kr.co.windowfun.widget.__VideoView;
 
 /**
- * 컨텐츠이벤트처리
+ * result_c1/result_c3/result_c4/result_c5
  * Created by isyuun on 2017-08-08.
  */
 
@@ -30,10 +30,10 @@ class __main2 extends __main implements _CContentListener {
     protected void _contents() {
         ((__VideoView) findViewById(R.id.c1).findViewById(R.id.video)).mute(false);
 
-        ((__CContent) findViewById(R.id.c1)).setContents(getApp().result_c1);
-        ((__CContent) findViewById(R.id.c3)).setContents(getApp().result_c3);
-        ((__CContent) findViewById(R.id.c4)).setContents(getApp().result_c4);
-        ((__CContent) findViewById(R.id.c5)).setContents(getApp().result_c5);
+        ((__CContent) findViewById(R.id.c1)).items(getApp().result_c1);
+        ((__CContent) findViewById(R.id.c3)).items(getApp().result_c3);
+        ((__CContent) findViewById(R.id.c4)).items(getApp().result_c4);
+        ((__CContent) findViewById(R.id.c5)).items(getApp().result_c5);
 
         contents = new __CContent[]{
                 (__CContent) findViewById(R.id.c1),
@@ -44,13 +44,6 @@ class __main2 extends __main implements _CContentListener {
 
         for (__CContent c : contents) {
             c.setCListener(this);
-            c.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    setShowMenu();
-                    return false;
-                }
-            });
         }
     }
 

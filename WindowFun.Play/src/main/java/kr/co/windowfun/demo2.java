@@ -32,6 +32,5 @@ public class demo2 extends __demo {
         ((__VideoView) findViewById(R.id.c4).findViewById(R.id.video)).path(mp4);
         ((__VideoView) findViewById(R.id.c5).findViewById(R.id.video)).path(mp4);
         super.init();
-        rand(); //test
     }
 }

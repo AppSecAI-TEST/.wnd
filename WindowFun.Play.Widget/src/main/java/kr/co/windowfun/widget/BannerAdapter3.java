@@ -1,10 +1,6 @@
 package kr.co.windowfun.widget;
 
-import android.animation.Animator;
 import android.content.Context;
-
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 
 import org.json.JSONArray;
 

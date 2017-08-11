@@ -8,6 +8,15 @@ public class JsonHttpResponseHandler extends com.loopj.android.http.JsonHttpResp
     private String _CLASSNAME_;
     protected String __CLASSNAME__;
 
+    /**
+     * Creates new JsonHttpResponseHandler, with JSON String encoding UTF-8
+     */
+    public JsonHttpResponseHandler() {
+        super();
+        _CLASSNAME_ = this.getClass().getName();
+        __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
+    }
+
     protected String getMethodName() {
         //Log.wtf(__CLASSNAME__, "[[getMethodName()]][ST]");
         final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
@@ -26,16 +35,6 @@ public class JsonHttpResponseHandler extends com.loopj.android.http.JsonHttpResp
         }
         //Log.wtf(__CLASSNAME__, "[[getMethodName()]][ED]");
         return "" + item;
-    }
-
-
-    /**
-     * Creates new JsonHttpResponseHandler, with JSON String encoding UTF-8
-     */
-    public JsonHttpResponseHandler() {
-        super();
-        _CLASSNAME_ = this.getClass().getName();
-        __CLASSNAME__ = "[[" + this.getClass().getName() + "]]";
     }
 
 }
